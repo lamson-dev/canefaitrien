@@ -4,17 +4,40 @@ Team CaNeFaitRien
 What you need to do for now:
 
 http://try.github.com/levels/1/challenges/1
+  
+https://help.github.com/categories/54/articles  
 
 I recommend working through this tutorial to get a hang of git. While you working through it, be sure to read the instructions & advices, very helpful. This should not take you long to learn this tool. You're gonna love it, trust me!  
 
   
 Below is just the summary of some useful git command  
+  
+  
+// setting up git
+$ git config --global user.name "Your Name"  
+$ git config --global user.email "Your Email"  
+$ git config --global color.ui true  
+  
+// then do password caching (different on each OS, please check out GitHub bootcamp)  
 
+    
+// clone the repository onto your computer  
 $ cd [directory]  
 $ mkdir canefaitrien  
 $ cd canefaitrien  
 $ git clone https://github.com/lamson6592/canefaitrien.git  
   
+OR  
+  
+get on GitHub, click "Clone to my Mac" (for Mac), or download the zip file
+  
+// create a remote named 'origin' pointing at the repo on GitHub  
+$ git remote add origin https://github.com/lamson6592/canefaitrien.git    
+  
+
+
+  
+DAILY TASKS:  
   
 After you modified files  
 // to check what's changed since last commit    
@@ -61,7 +84,4 @@ $ git push -u origin master
 $ git push  
 
 // change back to how a file was at the last commit  
-$ git checkout -- <target>  
-
-
-$ git branch clean_up
+$ git checkout -- [target]
