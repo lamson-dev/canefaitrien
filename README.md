@@ -3,7 +3,7 @@ Team CaNeFaitRien
 
 What you need to do for now:
 
-$ cd <directory>
+$ cd [directory]
 
 $ mkdir canefaitrien
 
@@ -17,7 +17,7 @@ After you modified files
 $ git status
 
 // add each modified file 
-$ git add <file-name> 
+$ git add [file-name]
 
 // when happy with your job and added all modified files
 $ git commit -m "message goes here"
@@ -26,13 +26,18 @@ $ git commit -m "message goes here"
 
 
 // will demo these later
-$ git checkout -b <branch> [create new branch & switch to that branch]
+// create new branch & switch to that branch
+$ git checkout -b [branch]
 
-$ git branch [show list of branches]
+// show list of branches
+$ git branch
 
-$ git checkout <branch> [switch to branch]
+// switch to branch
+$ git checkout [branch] 
 
-*go to master branch when ready to merge 
+
+// when ready to merge branch, switch to master branch
+$ git checkout master
 
 // pull latest version
 $ git pull
