@@ -13,7 +13,7 @@ I recommend working through this tutorial to get a hang of git. While you workin
 Below is just the summary of some useful git command  
   
   
-// setting up git
+// setting up git  
 $ git config --global user.name "Your Name"  
 $ git config --global user.email "Your Email"  
 $ git config --global color.ui true  
@@ -36,7 +36,7 @@ $ git remote add origin https://github.com/lamson6592/canefaitrien.git
   
 
 
-  
+
 DAILY TASKS:  
   
 After you modified files  
