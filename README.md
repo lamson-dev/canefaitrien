@@ -10,11 +10,14 @@ $ git clone https://github.com/lamson6592/canefaitrien.git
   
   
 After you modified files  
-// check status, list of modified files  
-$ git status
+// to check what's changed since last commit    
+$ git status  
   
 // add each modified file   
 $ git add [file-name]  
+
+// add all new or modified files  
+$ git add --all  
   
 // when happy with your job and added all modified files  
 $ git commit -m "message goes here"  
