@@ -3,6 +3,13 @@ Team CaNeFaitRien
 
 What you need to do for now:
 
+http://try.github.com/levels/1/challenges/1
+
+I recommend working through this tutorial to get a hang of git. While you working through it, be sure to read the instructions & advices, very helpful. This should not take you long to learn this tool. You're gonna love it, trust me!  
+
+  
+Below is just the summary of some useful git command  
+
 $ cd [directory]  
 $ mkdir canefaitrien  
 $ cd canefaitrien  
@@ -44,5 +51,17 @@ $ git pull
 // merge branch to master in local repository  
 $ git merge [branch]  
   
-// push to master   
+// delete a branch  
+$ git branch -d [branch]
+ 
+// push to master  
+// only do once so next time can use "git push"  
+$ git push -u origin master  
+   
 $ git push  
+
+// change back to how a file was at the last commit  
+$ git checkout -- <target>  
+
+
+$ git branch clean_up
