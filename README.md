@@ -3,6 +3,8 @@ Team CaNeFaitRien
 
 What you need to do for now:
 
+http://gitreal.codeschool.com/levels/1
+
 http://try.github.com/levels/1/challenges/1
   
 https://help.github.com/categories/54/articles  
