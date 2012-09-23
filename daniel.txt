@@ -1,0 +1,12 @@
+After you modified files
+// to check what's changed since last commit
+$ git status
+
+// add each modified file
+$ git add [file-name]
+
+// add all new or modified files
+$ git add --all
+
+// when happy with your job and added all modified files
+$ git commit -m "
