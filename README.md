@@ -9,19 +9,14 @@ http://try.github.com/levels/1/challenges/1
   
 https://help.github.com/categories/54/articles  
 
-I recommend working through this tutorial to get a hang of git. While you working through it, be sure to read the instructions & advices, very helpful. This should not take you long to learn this tool. You're gonna love it, trust me!  
-
+  YouTube: Git Tutorial: http://www.youtube.com/watch?v=vaNGbk6HN9Y&list=UU3pzbTVgo01qT-maRchkbIg&index=8&feature=plcp  
+  
+Work through github bootcamp to setup git! link here:  
+https://help.github.com/categories/54/articles  
+  
   
 Below is just the summary of some useful git command  
   
-  
-// setting up git  
-$ git config --global user.name "Your Name"  
-$ git config --global user.email "Your Email"  
-$ git config --global color.ui true  
-  
-// then do password caching (different on each OS, please check out GitHub bootcamp)  
-
     
 // clone the repository onto your computer  
 $ cd [directory]  
@@ -36,7 +31,6 @@ get on GitHub, click "Clone to my Mac" (for Mac), or download the zip file
 // create a remote named 'origin' pointing at the repo on GitHub  
 $ git remote add origin https://github.com/lamson6592/canefaitrien.git    
   
-
 
 
 DAILY TASKS:  
@@ -58,13 +52,13 @@ NOTE: commit often is good!
   
   
 // create new branch & switch to that branch  
-$ git checkout -b [branch]  
+$ git checkout -b [newbranch]  
   
 // show list of branches  
-$ git branch  
+$ git branch  -a
   
 // switch to branch  
-$ git checkout [branch] 
+$ git checkout [newbranch] 
   
   
 // when ready to merge branch, switch to master branch  
@@ -74,16 +68,53 @@ $ git checkout master
 $ git pull  
   
 // merge branch to master in local repository  
-$ git merge [branch]  
+$ git merge [newbranch]  
   
 // delete a branch  
 $ git branch -d [branch]
  
 // push to master  
 // only do once so next time can use "git push"  
-$ git push -u origin master  
+$ git push origin master  
    
+   OR
+
 $ git push  
 
 // change back to how a file was at the last commit  
 $ git checkout -- [target]
+
+
+-------
+git log  
+git reflog  
+git show  
+gitk  
+  
+git checkout [filename]		return the previously committed file  
+  
+git commit -am "message"		add + commit together, save time  
+  
+--- reset  
+git reflog 					then pick a commit with the [commit] id  
+git reset --hard [commit]		move that commit HEAD to top  
+git push --force				force update  
+  
+git reset HEAD [filename] 		unstage  
+  
+git mergetool				UI window pops up, edit, save  
+vim [filename]				merge manually  
+  
+  
+  BRANCHING  
+git branch -a    
+git checkout -b [newfeature branch]		create & switch to new branch  
+  
+git push origin [newfeature branch]		create branch on github then push  
+  
+git checkout master					switch back to master branch  
+git merge [newfeature branch]			merge [newfeature branch] to master  
+  
+git branch -d [newfeature branch]			delete branch on local  
+git push origin :[newfeature branch]		delete branch on github  
+  
