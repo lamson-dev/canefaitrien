@@ -43,6 +43,10 @@ public class Person3 {
 	 */
 	private String calc(String input) {
 	  //Person 3 put your implementation here
-	  return null;
+	  // AN PHAM arian.pham@gatech.edu
+	  String result="";
+	  for (int i = input.length() -1; input >=0; input --)
+		 result += input.charAt(i);
+	  return result;
 	}
 }
