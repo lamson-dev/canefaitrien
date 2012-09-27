@@ -74,7 +74,6 @@ $ git merge [newbranch]
 $ git branch -d [branch]
  
 // push to master  
-// only do once so next time can use "git push"  
 $ git push origin master  
    
    OR
