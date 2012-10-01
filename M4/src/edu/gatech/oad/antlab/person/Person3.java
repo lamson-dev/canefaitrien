@@ -45,7 +45,7 @@ public class Person3 {
 	  //Person 3 put your implementation here
 	  // AN PHAM arian.pham@gatech.edu
 	  String result="";
-	  for (int i = input.length() -1; input >=0; input --)
+	  for (int i = input.length()-1; i >=0; i--)
 		 result += input.charAt(i);
 	  return result;
 	}
