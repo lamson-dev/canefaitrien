@@ -1,3 +1,6 @@
+<!-- Son Nguyen
+snguyen44 -->
+
 <!-- All our projects begin with the project tag -->
 <project name="M4" basedir="." default="all">
 
@@ -18,6 +21,7 @@
     <target name="clean" depends="init" >
 
         <delete dir="${build.dir}" />
+        <delete dir="${apidoc.dir}" />
 
     </target>
 
@@ -40,12 +44,11 @@
 
     </target>
 
+    <!-- create javadoc files -->
     <target name="javadoc">
-      
-        <javadoc sourcepath="${src.dir}" access="public" destdir="${apidoc.dir}"
-            packagenames="edu.gatech.oad.antlab">
 
-            <!-- <excludepackage name="edu.gt.cs2340.lab2.test.*"/> -->
+        <javadoc sourcepath="${src.dir}" access="public" destdir="${apidoc.dir}"
+            packagenames="edu.gatech.oad.antlab" classpath="${class-path}">
 
             <fileset dir="${src.dir}">
                 <include name="**/*.java" />
@@ -59,15 +62,18 @@
     </target>
 
     <!-- make jar -->
-    <target name="jar" depends="compile">
+    <target name="jar" depends="compile, javadoc">
 
         <mkdir dir="${jar.dir}"/>
 
         <jar destfile="${jar.dir}/${ant.project.name}.jar" basedir="${classes.dir}">
 
+            <zipfileset includes="**/*.class" src="${class-path}"/>
+            <!-- <include name="edu/gatech/oad/antlab/**/*.class"/> -->
+
             <manifest>
                 <attribute name="Main-Class" value="${main-class}"/>
-                <attribute name="Class-Path" value="${class-path}" />
+                <!-- <attribute name="Class-Path" value="${class-path}" /> -->
             </manifest>
 
         </jar>
