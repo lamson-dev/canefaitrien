@@ -40,3 +40,5 @@ Thumbs.db
 # Eclipse #
 .metadata
 .metadata/*
+apidoc
+apidoc/*
