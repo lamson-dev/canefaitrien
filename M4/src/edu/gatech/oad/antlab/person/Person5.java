@@ -30,8 +30,19 @@ public class Person5 {
 	 * @return the modified string
 	 */
 	private String calc(String input) {
-	  //Person 5 put your implementation here
-	  return null;
+	  String output = "";
+	  if(!input.equals(null)) {
+		  if(input.length() < 3){
+			  if(input.length() == 2){
+				  output = input.charAt(1) + "" + input.charAt(0);
+			  } else {
+				  output = input;
+			  }
+		  } else {
+			  output = input.substring(3) + input.substring(0, 3);
+		  }
+	  }
+	  return output;
 	}
 	
 	/**

@@ -58,9 +58,4 @@ public class Person2 {
 	  return name + calc(input);
 	}
 	
-	
-	public static void main(String[] args) {
-		Person2 per = new Person2("Andrew");
-		System.out.println(per.calc("Andrew"));
-	}
 }
