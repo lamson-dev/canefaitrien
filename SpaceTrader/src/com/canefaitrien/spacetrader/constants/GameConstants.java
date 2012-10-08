@@ -7,6 +7,6 @@ public interface GameConstants {
 	public final String LEVEL_HARD = "Hard";
 	public final String LEVEL_MEDIUM = "Medium";
 	
-	public final int NUM_MAX_SKILL_POINTS = 15;
+	public final int NUM_MAX_SKILL_POINTS = 16;
 	public final int NUM_MAX_INITIAL_POINTS = 10;
 }

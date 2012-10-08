@@ -185,7 +185,11 @@ public class ConfigurationActivity extends AbstractActivity implements
 		name = String.valueOf(editName.getText());
 
 		Button btnStart = (Button) findViewById(R.id.btn_start);
-		btnStart.setText(name);
+
+		if (usedPts != totalPts)
+			btnStart.setText("Allocate your points, dudeee!");
+		else
+			btnStart.setText(name);
 
 		// Do something in response to button
 		// Intent intent = new Intent(this, DisplayMessageActivity.class);
