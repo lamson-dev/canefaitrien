@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="m32dp">32dp</dimen>
+    <dimen name="m30dp">30dp</dimen>
+    <dimen name="m25dp">25dp</dimen>
+    <dimen name="m20dp">20dp</dimen>
+    <dimen name="m5dp">5dp</dimen>
+    <dimen name="m2dp">2dp</dimen>
+    <dimen name="m15dp">15dp</dimen>
+    <dimen name="m10dp">10dp</dimen>
+    
+</resources>
