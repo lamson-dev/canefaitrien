@@ -19,6 +19,7 @@
 *.rar
 *.tar
 *.zip
+*.apk
 
 # Logs and databases #
 ######################
@@ -42,3 +43,7 @@ Thumbs.db
 .metadata/*
 apidoc
 apidoc/*
+
+classes.dex
+resources.ap_
+SpaceTrader.apk
