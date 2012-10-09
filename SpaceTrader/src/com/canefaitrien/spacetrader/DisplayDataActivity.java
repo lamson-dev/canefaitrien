@@ -1,6 +1,6 @@
 package com.canefaitrien.spacetrader;
 
-import com.canefaitrient.spacetrader.utils.AbstractActivity;
+import com.canefaitrien.spacetrader.utils.AbstractActivity;
 
 import android.content.Intent;
 import android.os.Bundle;

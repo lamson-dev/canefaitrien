@@ -9,7 +9,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.canefaitrien.spacetrader.constants.GameConstants;
-import com.canefaitrient.spacetrader.utils.AbstractActivity;
+import com.canefaitrien.spacetrader.utils.AbstractActivity;
 
 public class ConfigurationActivity extends AbstractActivity implements
 		GameConstants {
