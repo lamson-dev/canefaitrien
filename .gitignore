@@ -1,3 +1,17 @@
+
+# Custom #
+apidoc
+apidoc/*
+
+classes.dex
+resources.ap_
+SpaceTrader.apk
+BuildConfig.java
+R.java
+M3 - SpaceTrader.vpp
+
+
+
 # Compiled source #
 ###################
 *.com
@@ -19,6 +33,7 @@
 *.tar
 *.zip
 *.apk
+*.jar
 
 # Logs and databases #
 ######################
@@ -40,9 +55,3 @@ Thumbs.db
 # Eclipse #
 .metadata
 .metadata/*
-apidoc
-apidoc/*
-
-classes.dex
-resources.ap_
-SpaceTrader.apk
