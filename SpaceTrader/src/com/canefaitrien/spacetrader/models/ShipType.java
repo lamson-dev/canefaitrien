@@ -1,3 +1,5 @@
+package com.canefaitrien.spacetrader.models;
+
 public enum ShipType {
 	// Gnat 
 	// speed of 14 parsecs, 1 weapon, 1 gadget, 15 cargo hold

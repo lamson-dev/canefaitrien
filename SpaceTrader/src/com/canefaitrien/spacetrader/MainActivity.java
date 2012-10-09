@@ -1,7 +1,8 @@
 package com.canefaitrien.spacetrader;
 
+import com.canefaitrien.spacetrader.utils.AbstractActivity;
+
 import android.os.Bundle;
-import android.app.Activity;
 import android.view.Menu;
 
 public class MainActivity extends AbstractActivity {

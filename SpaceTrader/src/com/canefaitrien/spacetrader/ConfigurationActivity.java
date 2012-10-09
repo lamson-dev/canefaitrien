@@ -1,5 +1,6 @@
 package com.canefaitrien.spacetrader;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -8,6 +9,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.canefaitrien.spacetrader.constants.GameConstants;
+import com.canefaitrien.spacetrader.utils.AbstractActivity;
 
 public class ConfigurationActivity extends AbstractActivity implements
 		GameConstants {
@@ -178,24 +180,24 @@ public class ConfigurationActivity extends AbstractActivity implements
 		}
 	}
 
+	public final static String EXTRA_MESSAGE = "com.canefaitrient.spacetrader.MESSAGE";
+
 	/** Called when the user clicks the START button */
 	public void startGame(View view) {
 
 		EditText editName = (EditText) findViewById(R.id.edit_name);
-		name = String.valueOf(editName.getText());
-
-		Button btnStart = (Button) findViewById(R.id.btn_start);
-
-		if (usedPts != totalPts)
-			btnStart.setText("Allocate your points, dudeee!");
-		else
-			btnStart.setText(name);
+		name = editName.getText().toString();
 
 		// Do something in response to button
-		// Intent intent = new Intent(this, DisplayMessageActivity.class);
-		// EditText editText = (EditText) findViewById(R.id.edit_message);
-		// String message = editText.getText().toString();
-		// intent.putExtra(EXTRA_MESSAGE,message);
-		// startActivity(intent);
+		Intent intent = new Intent(this, DisplayDataActivity.class);
+
+		String message = "Allocate your points, dudeee!";
+
+		if (usedPts != totalPts)
+			intent.putExtra(EXTRA_MESSAGE, message);
+		else
+			intent.putExtra(EXTRA_MESSAGE, name);
+
+		startActivity(intent);
 	}
 }
