@@ -32,9 +32,13 @@ public final class R {
         public static final int btn_minus=0x7f080003;
         public static final int btn_plus=0x7f080005;
         public static final int btn_start=0x7f080015;
+        public static final int button1=0x7f080016;
         public static final int edit_name=0x7f080001;
         public static final int menu_settings=0x7f080017;
+<<<<<<< HEAD
         public static final int newGame=0x7f080016;
+=======
+>>>>>>> 3b211b3dc141a5e1a1e6b6f8924885e6de32f1aa
         public static final int pt_engineer=0x7f080012;
         public static final int pt_fighter=0x7f08000c;
         public static final int pt_pilot=0x7f080009;
