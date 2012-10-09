@@ -1,3 +1,5 @@
+package com.canefaitrien.spacetrader.models;
+
 public class Ship {
 	
 	private ShipType type;
