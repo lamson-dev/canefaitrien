@@ -32,7 +32,7 @@ public enum ShipType {
 	Termite,
 	// Wasp
 	// Utimalte private ship, strong hull, 3 weapons, 2 shield, 2 gadget, 3 crew, 14/tank, 35 cargo
-	Wasp(14, 300, 3, 2, 2, 35, 3, 0),
+	Wasp(14, 300, 3, 2, 2, 35, 3, 0, "Wasp"),
 	// Canefaitrien
 	Canefaitrien // Ultimate fighting, trading ship
 	;
@@ -46,6 +46,7 @@ public enum ShipType {
 	private int maxCrew;
 	private int maxMercernary;
 	private int maxHullStrength;
+	private String type;
 	
 	ShipType() {	
 	}
@@ -53,7 +54,7 @@ public enum ShipType {
 	ShipType (	int maxDistance, int maxHullStrength,
 				int maxWeaponSlots, int maxGadgetSlots, int maxShieldSlots,
 				int maxCargoHold,
-				int maxCrewMembers, int maxMercernary) {
+				int maxCrewMembers, int maxMercernary, String type) {
 		
 		this.maxDistance = maxDistance;
 		this.maxWeaponSlots = maxWeaponSlots;
@@ -63,6 +64,7 @@ public enum ShipType {
 		this.maxHullStrength = maxHullStrength;
 		this.maxMercernary = maxMercernary;
 		this.maxShieldSlots = maxShieldSlots;
+		this.type = type;
 	}
 	
 
@@ -100,35 +102,7 @@ public enum ShipType {
 	}
 	
 	public String getType() {
-		
-		switch (this) {
-		
-		case Gnat:
-			return "Gnat";
-		case Wasp:
-			return "Wasp";
-		case Beetle:
-			return "Beetle";
-		case Bumblebee:
-			return "Bumblebee";
-		case Canefaitrien:
-			return "Canefaitrien";
-		case Firefly:
-			return "Firefly";
-		case Flea:
-			return "Flea";
-		case Grasshopper:
-			return "Grasshopper";
-		case Hornet:
-			return "Hornet";
-		case Mosquito:
-			return "Mosquito";
-		case Termite:
-			return "Termite";
-		default:
-			return "Canefaitrien";
-		}
-		
+		return type;		
 	}
 
 }
