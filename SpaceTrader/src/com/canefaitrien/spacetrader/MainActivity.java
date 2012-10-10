@@ -1,12 +1,15 @@
 package com.canefaitrien.spacetrader;
 
-import com.canefaitrien.spacetrader.utils.AbstractActivity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+
+import com.canefaitrien.spacetrader.utils.AbstractActivity;
 
 public class MainActivity extends AbstractActivity {
 
@@ -16,6 +19,10 @@ public class MainActivity extends AbstractActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         addListenerOnButton();
+        
+        TextView txt = (TextView) findViewById(R.id.txtview_app_name);
+        Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Street Corner.ttf");  
+        txt.setTypeface(font);
     }
 
     @Override
@@ -27,7 +34,7 @@ public class MainActivity extends AbstractActivity {
     public void addListenerOnButton() {
     	final Context context = this;
     	
-    	button = (Button) findViewById(R.id.newGame);
+    	button = (Button) findViewById(R.id.btn_newgame);
     	
     	button.setOnClickListener(new View.OnClickListener() {
 			
