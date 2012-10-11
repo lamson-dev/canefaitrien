@@ -1,5 +1,6 @@
 package com.canefaitrien.spacetrader.utils;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -9,7 +10,8 @@ public abstract class AbstractActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
+//		ActionBar actionBar = getActionBar();
+//		actionBar.hide();
 		// Make sure we're running on Honeycomb or higher to use ActionBar APIs
 		// if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
 		// For the main activity, make sure the app icon in the action bar
