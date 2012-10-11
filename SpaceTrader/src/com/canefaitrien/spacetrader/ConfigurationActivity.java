@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.canefaitrien.spacetrader.constants.GameConstants;
 import com.canefaitrien.spacetrader.utils.AbstractActivity;
+import com.canefaitrien.spacetrader.models.Character;
 
 public class ConfigurationActivity extends AbstractActivity implements
 		GameConstants {
@@ -196,7 +197,7 @@ public class ConfigurationActivity extends AbstractActivity implements
 		if (usedPts != totalPts)
 			intent.putExtra(EXTRA_MESSAGE, message);
 		else
-			SpaceTraderApplication.setCharacter(new Character(//name, points, difficulty));
+			SpaceTraderApplication.setCharacter(new Character(name, barPilot.getProgress(), barFighter.getProgress(), barTrader.getProgress(), barEngineer.getProgress(), difficultyLevel));
 			intent.putExtra(EXTRA_MESSAGE, SpaceTraderApplication.getCharacter().toString());
 
 		startActivity(intent);

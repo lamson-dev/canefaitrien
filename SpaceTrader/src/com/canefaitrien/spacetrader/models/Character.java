@@ -1,6 +1,6 @@
 package com.canefaitrien.spacetrader.models;
 
-public abstract class Character {
+public class Character {
 
 	private String name;
 	private int pilotPts;
@@ -8,14 +8,17 @@ public abstract class Character {
 	private int traderPts;
 	private int engineerPts;
 	private Ship ship;
+	private int difficulty;
 	
 	public Character(String name, int pilotPts, int fighterPts, int traderPts,
-			int engineerPts) {
+			int engineerPts, int difficulty) {
 		this.name = name;
 		this.pilotPts = pilotPts;
 		this.fighterPts = fighterPts;
 		this.traderPts = traderPts;
 		this.engineerPts = engineerPts;
+		ship = new Ship(ShipType.Gnat);
+		this.difficulty = difficulty;
 	}
 
 	public String getName() {
@@ -56,6 +59,10 @@ public abstract class Character {
 
 	public void setEngineerPts(int engineerPts) {
 		this.engineerPts = engineerPts;
+	}
+	
+	public String toString() {
+		return "Name: " + name + "Engineer: " + engineerPts + "Pilot: " + pilotPts + "Trader: " + traderPts + "Fighter: " + fighterPts + "Difficulty: " + difficulty;
 	}
 
 }

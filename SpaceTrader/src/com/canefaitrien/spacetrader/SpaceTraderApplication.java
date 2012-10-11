@@ -1,6 +1,7 @@
 package com.canefaitrien.spacetrader;
 
 import android.app.Application;
+import com.canefaitrien.spacetrader.models.Character;
 
 public class SpaceTraderApplication extends Application {
 	private static Character character;
