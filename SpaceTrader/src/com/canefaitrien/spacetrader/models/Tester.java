@@ -3,6 +3,9 @@
  * @author ARIAN PHAM
  *
  */
+
+package com.canefaitrien.spacetrader.models;
+
 public class Tester {
 	public static void main (String[] arg) {
 		PlanetGenerator plan = new PlanetGenerator(150, 200);

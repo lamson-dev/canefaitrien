@@ -5,6 +5,9 @@
  * @author AN PHAM
  * Date 10/11/2012
  */
+
+package com.canefaitrien.spacetrader.models;
+
 public class PlanetGenerator {
 	
 	// Instance variables

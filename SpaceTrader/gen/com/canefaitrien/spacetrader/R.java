@@ -35,8 +35,9 @@ public final class R {
         public static final int btn_newgame=0x7f080017;
         public static final int btn_plus=0x7f080005;
         public static final int btn_start=0x7f080015;
+        public static final int button1=0x7f080018;
         public static final int edit_name=0x7f080001;
-        public static final int menu_settings=0x7f080018;
+        public static final int menu_settings=0x7f080019;
         public static final int pt_engineer=0x7f080012;
         public static final int pt_fighter=0x7f08000c;
         public static final int pt_pilot=0x7f080009;
@@ -57,6 +58,7 @@ public final class R {
         public static final int activity_config=0x7f030000;
         public static final int activity_display_data=0x7f030001;
         public static final int activity_main=0x7f030002;
+        public static final int activity_test=0x7f030003;
     }
     public static final class menu {
         public static final int activity_display_data=0x7f070000;
@@ -68,6 +70,7 @@ public final class R {
         public static final int btn_minus=0x7f05000b;
         public static final int btn_plus=0x7f05000a;
         public static final int btn_start=0x7f05000c;
+        public static final int btn_test=0x7f050014;
         public static final int difficulty_default=0x7f05000d;
         public static final int hello_world=0x7f050002;
         public static final int hint_name=0x7f050006;

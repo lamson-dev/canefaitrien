@@ -23,5 +23,7 @@
     <string name="skill_engineer">Engineer</string>
     <string name="skill_trader">Trader</string>
     <string name="pt_default">0</string>
+    
+    <string name="btn_test">Test</string>
 
 </resources>

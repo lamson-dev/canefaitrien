@@ -9,7 +9,7 @@ public class Character {
 	private int engineerPts;
 	private Ship ship;
 	private int difficulty;
-	
+
 	public Character(String name, int pilotPts, int fighterPts, int traderPts,
 			int engineerPts, int difficulty) {
 		this.name = name;
@@ -44,7 +44,7 @@ public class Character {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	public void setPilotPts(int pilotPts) {
 		this.pilotPts = pilotPts;
 	}
@@ -60,9 +60,11 @@ public class Character {
 	public void setEngineerPts(int engineerPts) {
 		this.engineerPts = engineerPts;
 	}
-	
+
 	public String toString() {
-		return "Name: " + name + "Engineer: " + engineerPts + "Pilot: " + pilotPts + "Trader: " + traderPts + "Fighter: " + fighterPts + "Difficulty: " + difficulty;
+		return "Name: " + name + "\nEngineer: " + engineerPts + "\nPilot: "
+				+ pilotPts + "\nTrader: " + traderPts + "\nFighter: "
+				+ fighterPts + "\nDifficulty: " + difficulty;
 	}
 
 }
