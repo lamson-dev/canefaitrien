@@ -4,21 +4,11 @@
     android:layout_height="match_parent" >
 
     <Button
-<<<<<<< HEAD
         android:id="@+id/newGame"
-=======
-        android:id="@+id/button1"
->>>>>>> 3b211b3dc141a5e1a1e6b6f8924885e6de32f1aa
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-<<<<<<< HEAD
         android:layout_centerVertical="true"
         android:text="New Game" />
-=======
-        android:layout_marginTop="184dp"
-        android:text="Button" />
->>>>>>> 3b211b3dc141a5e1a1e6b6f8924885e6de32f1aa
 
 </RelativeLayout>
