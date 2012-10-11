@@ -196,7 +196,8 @@ public class ConfigurationActivity extends AbstractActivity implements
 		if (usedPts != totalPts)
 			intent.putExtra(EXTRA_MESSAGE, message);
 		else
-			intent.putExtra(EXTRA_MESSAGE, name);
+			SpaceTraderApplication.setCharacter(new Character(//name, points, difficulty));
+			intent.putExtra(EXTRA_MESSAGE, SpaceTraderApplication.getCharacter().toString());
 
 		startActivity(intent);
 	}

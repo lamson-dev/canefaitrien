@@ -3,13 +3,13 @@ package com.canefaitrien.spacetrader;
 import android.app.Application;
 
 public class SpaceTraderApplication extends Application {
-	public Character character;
+	private static Character character;
 	
-	public Character getCharacter() {
+	public static Character getCharacter() {
 		return character;
 	}
 	
-	public void setCharacter(Character character) {
-		this.character = character;
+	public static void setCharacter(Character charac) {
+		character = charac;
 	}
 }
