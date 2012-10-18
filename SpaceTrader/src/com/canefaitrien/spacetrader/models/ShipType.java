@@ -1,5 +1,9 @@
-package com.canefaitrien.spacetrader.models;
-
+/**
+ * Create Ship type
+ * @author apham9
+ * @date 10/10/2012
+ *
+ */
 public enum ShipType {
 	// Gnat 
 	// speed of 14 parsecs, 1 weapon, 1 gadget, 15 cargo hold
