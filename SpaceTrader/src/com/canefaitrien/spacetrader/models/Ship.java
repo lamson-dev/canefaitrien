@@ -1,3 +1,10 @@
+package com.canefaitrien.spacetrader.models;
+/**
+ * Create Ship model
+ * @author apham9
+ * @date 10/10/2012
+ *
+ */
 public class Ship {
 	
 	private ShipType type;
