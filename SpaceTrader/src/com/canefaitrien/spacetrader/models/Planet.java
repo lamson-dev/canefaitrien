@@ -2,7 +2,7 @@
  * Class Planet
  * Information holder for planet
  * @author AN PHAM
- * Date 10/11/2012
+ * @version 10/11/2012
  */
 
 package com.canefaitrien.spacetrader.models;
@@ -10,17 +10,19 @@ package com.canefaitrien.spacetrader.models;
 public class Planet {
 	// Instance variables
 	private String name;
-	private int X = 0;
-	private int Y = 0;
+	private int x = 0;
+	private int y = 0;
+	private TechLevel level;
 	
 	// Constructor
 	public Planet(String name) {
 		this.name = name;
 	}
-	public Planet(String name, int x, int y) {
+	public Planet(String name, int x, int y, TechLevel level) {
 		this.name = name;
-		this.X = x;
-		this.Y = y;
+		this.x = x;
+		this.y = y;
+		this.level = level;
 	}
 	
 	// Accessor
@@ -30,18 +32,18 @@ public class Planet {
 	// Return coordinate x, y in an array[x,y]
 	public int[] getCoordinate() {
 		int[] ret = new int[2];
-		ret[0] = X;
-		ret[1] = Y;
+		ret[0] = x;
+		ret[1] = y;
 		return ret;
 	}
 	public int getX() {
-		return X;
+		return x;
 	}
 	public int getY() {
-		return Y;
+		return y;
 	}
 	// For testing purpose
-	public String dump() {
-		return "Planet "+name+" at X = "+X+" Y = "+Y+"\n";
+	public String toString() {
+		return "Planet "+name + "TL" + level+" at X = "+x+" Y = "+y+"\n";
 	}
 }

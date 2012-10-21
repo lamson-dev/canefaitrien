@@ -1,3 +1,5 @@
+package com.canefaitrien.spacetrader.models;
+
 /**
  * Create Ship type
  * @author apham9

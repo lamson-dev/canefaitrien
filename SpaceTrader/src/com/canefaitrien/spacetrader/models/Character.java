@@ -7,9 +7,10 @@ public class Character {
 	private int fighterPts;
 	private int traderPts;
 	private int engineerPts;
-	private Ship ship;
 	private int difficulty;
-
+	private Ship ship;
+	private Universe universe;
+	
 	public Character(String name, int pilotPts, int fighterPts, int traderPts,
 			int engineerPts, int difficulty) {
 		this.name = name;
@@ -17,8 +18,9 @@ public class Character {
 		this.fighterPts = fighterPts;
 		this.traderPts = traderPts;
 		this.engineerPts = engineerPts;
-		ship = new Ship(ShipType.Gnat);
 		this.difficulty = difficulty;
+		ship = new Ship(ShipType.Gnat);
+		universe = new Universe();
 	}
 
 	public String getName() {
@@ -60,11 +62,18 @@ public class Character {
 	public void setEngineerPts(int engineerPts) {
 		this.engineerPts = engineerPts;
 	}
+	
+	public Universe getUniverse() {
+		return universe;
+	}
+
+	public void setUniverse(Universe universe) {
+		this.universe = universe;
+	}
 
 	public String toString() {
-		return "Name: " + name + "\nEngineer: " + engineerPts + "\nPilot: "
-				+ pilotPts + "\nTrader: " + traderPts + "\nFighter: "
-				+ fighterPts + "\nDifficulty: " + difficulty;
+		return "Name: " + name + "\nPilot: " + pilotPts + "\nTrader: " + traderPts + "\nFighter: "
+				+ fighterPts + "\nEngineer: " + engineerPts + "\nDifficulty: " + difficulty;
 	}
 
 }
