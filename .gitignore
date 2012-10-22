@@ -3,13 +3,15 @@
 apidoc
 apidoc/*
 
+M4/*
+
 classes.dex
 resources.ap_
 SpaceTrader.apk
 BuildConfig.java
 R.java
 M3 - SpaceTrader.vpp
-
+SpaceTrader/gen/com/canefaitrien/spacetrader/R.java
 
 
 # Compiled source #
