@@ -5,6 +5,7 @@ import com.canefaitrien.spacetrader.utils.AbstractActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.text.method.ScrollingMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -20,13 +21,15 @@ public class DisplayDataActivity extends AbstractActivity {
 		String message = intent
 				.getStringExtra(ConfigurationActivity.EXTRA_MESSAGE);
 
-		// Create the text view
-		TextView textView = new TextView(this);
-		textView.setTextSize(40);
-		textView.setText(message);
+		setContentView(R.layout.activity_display_data);
+		TextView textView = (TextView) findViewById(R.id.tv_data);
 
+		// Create the text view
+		// TextView textView = new TextView(this);
+		textView.setTextSize(20);
+		textView.setText(message);
 		// Set the text view as the activity layout
-		setContentView(textView);
+		// setContentView(textView);
 
 	}
 
