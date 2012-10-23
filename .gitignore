@@ -12,7 +12,7 @@ BuildConfig.java
 R.java
 M3 - SpaceTrader.vpp
 SpaceTrader/gen/com/canefaitrien/spacetrader/R.java
-
+SpaceTrader/gen/*
 
 # Compiled source #
 ###################
