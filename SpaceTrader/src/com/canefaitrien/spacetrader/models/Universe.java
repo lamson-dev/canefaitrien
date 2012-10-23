@@ -10,6 +10,8 @@ package com.canefaitrien.spacetrader.models;
 
 import java.util.Random;
 
+import com.canefaitrien.spacetrader.models.Planet.TechLevel;
+
 public class Universe {
 	
 	// Instance variables
@@ -52,7 +54,7 @@ public class Universe {
 	// Initiate the universe with planet names and random coordinates 
 	private void generate() {
 		int x, y;
-		TechLevel[] levels = TechLevel.values();
+		TechLevel[] levels = Planet.TechLevel.values();
 		Random rand = new Random();
 		for (int i = 0; i<planetNames.length; i++){
 			x = ((i+2)%width);

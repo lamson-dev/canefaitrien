@@ -1,3 +1,5 @@
+package com.canefaitrien.spacetrader.models;
+
 /**
  * Create expensive event
  * @author apham9

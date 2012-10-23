@@ -1,3 +1,5 @@
+package com.canefaitrien.spacetrader.models;
+
 /**
  * Create increase event
  * @author apham9

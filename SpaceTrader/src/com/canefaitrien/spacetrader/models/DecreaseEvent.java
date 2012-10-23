@@ -1,3 +1,5 @@
+package com.canefaitrien.spacetrader.models;
+
 /**
  * Create decrease event
  * @author apham9

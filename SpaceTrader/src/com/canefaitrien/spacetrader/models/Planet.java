@@ -14,6 +14,9 @@ public class Planet {
 	private int y = 0;
 	private TechLevel level;
 	
+	public static enum TechLevel {PreAgricultural, Agricultural, Medieval, Renaissance, 
+		EarlyIndustrial, Industrial, PostIndustrial, HiTech}
+	
 	// Constructor
 	public Planet(String name) {
 		this.name = name;
@@ -44,6 +47,6 @@ public class Planet {
 	}
 	// For testing purpose
 	public String toString() {
-		return "Planet "+name + "TL" + level+" at X = "+x+" Y = "+y+"\n";
+		return "Planet "+name + " TL " + level+" at X = "+ x +" Y = "+ y +"\n";
 	}
 }
