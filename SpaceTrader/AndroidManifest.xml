@@ -8,27 +8,45 @@
         android:targetSdkVersion="15" />
 
     <application
+        android:name="SpaceTraderApplication"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" 
-        android:name="SpaceTraderApplication">
+        android:theme="@style/AppTheme" >
         <activity
-            android:name=".MainActivity"
+            android:name=".MainMenuActivity"
             android:label="@string/title_activity_main" >
-            
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            
-		</activity>
+        </activity>
         <activity
             android:name=".ConfigurationActivity"
             android:label="@string/title_activity_config" >
+            <intent-filter>
+                <action android:name="com.cainefaitrient.spacetrader.CONFIGURATION" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
-        
         <activity android:name=".DisplayDataActivity" >
+        </activity>
+        <activity android:name=".LoadGameActivity" >
+            android:label="@string/title_activity_loadgame" >
+            <intent-filter>
+                <action android:name="com.cainefaitrient.spacetrader.LOADGAME" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".MainScreenActivity" >
+            android:label="@string/title_activity_mainscreen" >
+            <intent-filter>
+                <action android:name="com.cainefaitrient.spacetrader.MAINSCREEN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
     </application>
 

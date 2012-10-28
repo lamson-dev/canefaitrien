@@ -14,7 +14,7 @@
         android:layout_marginTop="68dp"
         android:text="@string/app_name_main"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="80px"
+        android:textSize="70dp"
         android:typeface="normal"
         android:textColor="#CCDDE6" />
 
@@ -27,5 +27,24 @@
         android:layout_marginTop="79dp"
         android:background="@drawable/button_newgame_neutral" />
 
+    <Button
+        android:id="@+id/btn_resume"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/btn_newgame"
+        android:layout_marginTop="23dp"
+        android:background="@drawable/button_newgame_pressed" />
+
+    <Button
+        android:id="@+id/btn_loadgame"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="38dp"
+        android:layout_marginRight="24dp"
+        android:text="Load" />
 
 </RelativeLayout>

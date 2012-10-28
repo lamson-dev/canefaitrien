@@ -1,5 +1,8 @@
 package com.canefaitrien.spacetrader;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,8 +12,9 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.canefaitrien.spacetrader.constants.GameConstants;
-import com.canefaitrien.spacetrader.utils.AbstractActivity;
 import com.canefaitrien.spacetrader.models.Character;
+import com.canefaitrien.spacetrader.utils.AbstractActivity;
+import com.canefaitrien.spacetrader.utils.DbAdapter;
 
 public class ConfigurationActivity extends AbstractActivity implements
 		GameConstants {
@@ -186,21 +190,62 @@ public class ConfigurationActivity extends AbstractActivity implements
 	/** Called when the user clicks the START button */
 	public void startGame(View view) {
 
+		boolean isGoodInput = true;
+
+		DbAdapter mDbHelper = new DbAdapter(ConfigurationActivity.this);
+		mDbHelper.open();
+
 		EditText editName = (EditText) findViewById(R.id.edit_name);
+
+		String message = "Hell yeahhh\n";
+
 		name = editName.getText().toString();
-
-		// Do something in response to button
-		Intent intent = new Intent(this, DisplayDataActivity.class);
-
-		String message = "Allocate your points, dudeee!";
-
-		if (usedPts != totalPts)
-			intent.putExtra(EXTRA_MESSAGE, message);
-		else {
-			SpaceTraderApplication.setCharacter(new Character(name, barPilot.getProgress(), barFighter.getProgress(), barTrader.getProgress(), barEngineer.getProgress(), difficultyLevel));
-			intent.putExtra(EXTRA_MESSAGE, SpaceTraderApplication.getCharacter().getUniverse().toString());
+		if (name.equals("")) {
+			isGoodInput = false;
+			message += "What's your name?\n";
 		}
 
+		if (usedPts != totalPts) {
+			isGoodInput = false;
+			message += "Allocate your points, dudeee!";
+		}
+
+		// intent.putExtra(EXTRA_MESSAGE, message);
+
+		AlertDialog.Builder popup = new AlertDialog.Builder(this);
+		popup.setTitle("Heyyy!");
+		popup.setMessage(message);
+
+		popup.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int which) {
+				// dismiss the dialog
+			}
+		});
+		popup.setCancelable(true);
+		popup.create().show();
+
+		if (!isGoodInput)
+			return;
+
+		// Do something in response to button
+		// Intent intent = new Intent(this, DisplayDataActivity.class);
+
+		Character charac = new Character(name, barPilot.getProgress(),
+				barFighter.getProgress(), barTrader.getProgress(),
+				barEngineer.getProgress(), difficultyLevel);
+
+		SpaceTraderApplication.setCharacter(charac);
+		SpaceTraderApplication.setUniverse(charac.getUniverse());
+
+		long charId = mDbHelper.createCharacter(charac);
+		
+		mDbHelper.close();
+
+		Intent intent = new Intent(ConfigurationActivity.this,
+				MainScreenActivity.class);
+		intent.putExtra(EXTRA_MESSAGE, SpaceTraderApplication.getCharacter()
+				.getUniverse().toString());
+		intent.putExtra(DbAdapter.CHAR_KEY_ROWID, charId);
 		startActivity(intent);
 	}
 }

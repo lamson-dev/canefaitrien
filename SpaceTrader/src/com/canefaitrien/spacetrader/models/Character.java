@@ -8,9 +8,11 @@ public class Character {
 	private int traderPts;
 	private int engineerPts;
 	private int difficulty;
+	private int money;
 	private Ship ship;
 	private Universe universe;
-	
+	private String date;
+
 	public Character(String name, int pilotPts, int fighterPts, int traderPts,
 			int engineerPts, int difficulty) {
 		this.name = name;
@@ -21,6 +23,7 @@ public class Character {
 		this.difficulty = difficulty;
 		ship = new Ship(ShipType.Gnat);
 		universe = new Universe();
+		setDate("today");
 	}
 
 	public String getName() {
@@ -62,7 +65,7 @@ public class Character {
 	public void setEngineerPts(int engineerPts) {
 		this.engineerPts = engineerPts;
 	}
-	
+
 	public Universe getUniverse() {
 		return universe;
 	}
@@ -72,8 +75,32 @@ public class Character {
 	}
 
 	public String toString() {
-		return "Name: " + name + "\nPilot: " + pilotPts + "\nTrader: " + traderPts + "\nFighter: "
-				+ fighterPts + "\nEngineer: " + engineerPts + "\nDifficulty: " + difficulty;
+		return "Name: " + name + "\nPilot: " + pilotPts + "\nTrader: "
+				+ traderPts + "\nFighter: " + fighterPts + "\nEngineer: "
+				+ engineerPts + "\nDifficulty: " + difficulty;
 	}
 
+	public int getMoney() {
+		return money;
+	}
+
+	public void setMoney(int money) {
+		this.money = money;
+	}
+
+	public int getDifficulty() {
+		return difficulty;
+	}
+
+	public void setDifficulty(int difficulty) {
+		this.difficulty = difficulty;
+	}
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
 }
