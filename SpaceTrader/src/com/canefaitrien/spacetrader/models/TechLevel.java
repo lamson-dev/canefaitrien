@@ -1,0 +1,5 @@
+package com.canefaitrien.spacetrader.models;
+
+public enum TechLevel {
+	PRE_AGRICULTURAL, AGRICULTURAL, MEDIEVAL, RENAISSANCE, EARLY_INDUSTRIAL, INDUSTRIAL, POST_INDUSTRIAL, HI_TECH
+}

@@ -48,18 +48,18 @@ public enum TradeGood{
 	;
 	
 	//private instance variables
-	private int minTechLevelProduce;
-	private int minTechLevelUse;
-	private int techLevelTopProduce;
-	private int basePrice;
-	private int increasePerTechLevel;
-	private int variance;
-	private Situation increaseSituation;
-	private Situation decreaseSituation;
-	private Situation expensiveSituation;
-	private int minTradePrice;
-	private int maxTradePrice;
-	private String name;
+	public final int minTechLevelProduce;
+	public final int minTechLevelUse;
+	public final int techLevelTopProduce;
+	public final int basePrice;
+	public final int increasePerTechLevel;
+	public final int variance;
+	public final Situation increaseSituation;
+	public final Situation decreaseSituation;
+	public final Situation expensiveSituation;
+	public final int minTradePrice;
+	public final int maxTradePrice;
+	public final String name;
 	
 	/**
 	 * Constructor
@@ -91,53 +91,4 @@ public enum TradeGood{
 		this.maxTradePrice = maxTradePrice;
 		this.name = name;
 	}
-
-	public int getMinTechLevelProduce() {
-		return minTechLevelProduce;
-	}
-
-	public int getMinTechLevelUse() {
-		return minTechLevelUse;
-	}
-
-	public int getTechLevelTopProduce() {
-		return techLevelTopProduce;
-	}
-
-	public int getBasePrice() {
-		return basePrice;
-	}
-
-	public int getIncreasePerTechLevel() {
-		return increasePerTechLevel;
-	}
-
-	public int getVariance() {
-		return variance;
-	}
-
-	public Situation getIncreaseSituation() {
-		return increaseSituation;
-	}
-
-	public Situation getDecreaseSituation() {
-		return decreaseSituation;
-	}
-
-	public Situation getExpensiveSituation() {
-		return expensiveSituation;
-	}
-
-	public int getMinTradePrice() {
-		return minTradePrice;
-	}
-
-	public int getMaxTradePrice() {
-		return maxTradePrice;
-	}
-
-	public String getName() {
-		return name;
-	}
-
 }

@@ -1,52 +1,72 @@
+
+package com.canefaitrien.spacetrader.models;
+
+import android.graphics.Point;
+
 /**
  * Class Planet
  * Information holder for planet
+ * 
  * @author AN PHAM
  * @version 10/11/2012
  */
 
-package com.canefaitrien.spacetrader.models;
-
 public class Planet {
 	// Instance variables
 	private String name;
-	private int x = 0;
-	private int y = 0;
+	private Point location;
 	private TechLevel level;
+	private Situation situation;
 	
-	public static enum TechLevel {PreAgricultural, Agricultural, Medieval, Renaissance, 
-		EarlyIndustrial, Industrial, PostIndustrial, HiTech}
 	
-	// Constructor
-	public Planet(String name) {
+	/**
+	 * Costructor for planet
+	 */
+	public Planet(String name, int x, int y, TechLevel level, Situation situation) {
 		this.name = name;
-	}
-	public Planet(String name, int x, int y, TechLevel level) {
-		this.name = name;
-		this.x = x;
-		this.y = y;
+		location = new Point(x, y);
 		this.level = level;
+		this.situation = situation;
 	}
 	
-	// Accessor
+	/**
+	 * Distance between planets
+	 */
+	public double distance(Planet planet) {
+		int dx, dy;
+		Point other = planet.getLocation();
+		dx = location.x - other.x;
+		dy = location.y - other.y;
+		return Math.sqrt(dx*dx + dy*dy);
+	}
+	/**
+	 * Getters and setters
+	 */	
+	public Point getLocation() {
+		return location;
+	}
+	
+	public void setLocation(Point location) {
+		this.location = location;
+	}
 	public String getName() {
 		return name;
 	}
-	// Return coordinate x, y in an array[x,y]
-	public int[] getCoordinate() {
-		int[] ret = new int[2];
-		ret[0] = x;
-		ret[1] = y;
-		return ret;
+	
+	public Situation getSituation() {
+		return situation;
 	}
-	public int getX() {
-		return x;
+
+	public void setSituation(Situation situation) {
+		this.situation = situation;
 	}
-	public int getY() {
-		return y;
-	}
+
 	// For testing purpose
 	public String toString() {
-		return "Planet "+name + " TL " + level+" at X = "+ x +" Y = "+ y +"\n";
+		return "Planet " + name + " TL " + level + " at X = " + location.x + " Y = " + location.y
+				+ "\n";
 	}
 }
+
+
+
