@@ -1,3 +1,4 @@
+package com.canefaitrien.spacetrader.models;
 
 import java.util.Random;
 
