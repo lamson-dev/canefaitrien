@@ -1,10 +1,10 @@
-package com.canefaitrien.spacetrader.models;
 
 import java.util.Random;
 
 public class Marketplace {
-
-	private static final int STOCK_REFRESH_TIME = 0;
+	
+	
+	private static final int STOCK_REFRESH_TIME = 5;			// Time to recreate market place, in turn
 	private static final int MIN_NUM_GOODS = 5, VARIANCE = 5;
 	private static TradeGood[] goods = TradeGood.values();
 	private int turnCreated;
@@ -93,5 +93,22 @@ public class Marketplace {
 			ret += i + " ";
 		}
 		return ret + "\b]\n";
+	}
+	/**
+	 * Extra method for selling and buying trade good
+	 * Added by apham9 on October 29th, 2012
+	 * 
+	 */
+	public void buyGood(TradeGood good){
+		if (itemStock[good.ordinal()] == 0) {
+			// This is not in stock
+			// Throw exceptions
+		}
+		else {
+			itemStock[good.ordinal()]--;
+		}
+	}
+	public void sellGood(TradeGood good){
+			itemStock[good.ordinal()]++;
 	}
 }
