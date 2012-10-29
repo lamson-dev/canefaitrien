@@ -27,7 +27,7 @@ public class DisplayDataActivity extends AbstractActivity {
 		// Create the text view
 		// TextView textView = new TextView(this);
 		textView.setTextSize(20);
-		textView.setText(message);
+		textView.setText(SpaceTraderApplication.testString);
 		// Set the text view as the activity layout
 		// setContentView(textView);
 
