@@ -1,5 +1,8 @@
 package com.canefaitrien.spacetrader;
 
+import com.canefaitrien.spacetrader.models.Marketplace;
+import com.canefaitrien.spacetrader.models.Situation;
+import com.canefaitrien.spacetrader.models.TechLevel;
 import com.canefaitrien.spacetrader.utils.AbstractActivity;
 
 import android.content.Intent;
@@ -27,7 +30,8 @@ public class DisplayDataActivity extends AbstractActivity {
 		// Create the text view
 		// TextView textView = new TextView(this);
 		textView.setTextSize(20);
-		textView.setText(SpaceTraderApplication.testString);
+		Marketplace mp  =new Marketplace(0, TechLevel.HI_TECH, Situation.ARTISTIC);
+		textView.setText(mp.toString());
 		// Set the text view as the activity layout
 		// setContentView(textView);
 

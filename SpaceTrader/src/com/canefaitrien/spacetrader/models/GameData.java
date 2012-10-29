@@ -37,8 +37,9 @@ public class GameData {
 	/** 
 	 * Constructor for new game
 	 */
-	public GameData(Character player, Universe universe, Difficulty difficulty) {
-		this(player, new Ship(ShipType.GNAT), universe.getPlanets()[0], STARTING_MONEY, universe, difficulty, 0);
+	public GameData(Character player, Difficulty difficulty) {
+		this(player, new Ship(ShipType.GNAT), null, STARTING_MONEY, new Universe(), difficulty, 0);
+		location = universe.getPlanets()[0];
 	}
 	
 	/**
