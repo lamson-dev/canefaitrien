@@ -73,5 +73,4 @@ public class Ship {
 		Ship test = new Ship(ShipType.WASP);
 		System.out.println(test.getType());
 	}
-
 }

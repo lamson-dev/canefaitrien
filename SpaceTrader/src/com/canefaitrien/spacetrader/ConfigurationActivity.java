@@ -13,6 +13,9 @@ import android.widget.TextView;
 
 import com.canefaitrien.spacetrader.constants.GameConstants;
 import com.canefaitrien.spacetrader.models.Character;
+import com.canefaitrien.spacetrader.models.GameData;
+import com.canefaitrien.spacetrader.models.GameData.Difficulty;
+import com.canefaitrien.spacetrader.models.Universe;
 import com.canefaitrien.spacetrader.utils.AbstractActivity;
 import com.canefaitrien.spacetrader.utils.DbAdapter;
 
@@ -20,7 +23,7 @@ public class ConfigurationActivity extends AbstractActivity implements
 		GameConstants {
 
 	private String name;
-	private int difficultyLevel = MIN_DIFFICULTY_LEVEL;
+	private int difficultyLevel = 0;
 	private int totalPts = NUM_MAX_SKILL_POINTS;
 	private int usedPts = 0;
 
@@ -29,6 +32,7 @@ public class ConfigurationActivity extends AbstractActivity implements
 	private SeekBar barFighter;
 	private SeekBar barTrader;
 	private SeekBar barEngineer;
+	private Difficulty[] difficulties = Difficulty.values();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +48,7 @@ public class ConfigurationActivity extends AbstractActivity implements
 
 		btnPlus.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view) {
-				if (difficultyLevel < MAX_DIFFICULTY_LEVEL)
+				if (difficultyLevel < difficulties.length - 1)
 					setDifficultyLevel(++difficultyLevel);
 			}
 
@@ -52,7 +56,7 @@ public class ConfigurationActivity extends AbstractActivity implements
 
 		btnMinus.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view) {
-				if (difficultyLevel > MIN_DIFFICULTY_LEVEL)
+				if (difficultyLevel > 0)
 					setDifficultyLevel(--difficultyLevel);
 			}
 		});
@@ -172,17 +176,7 @@ public class ConfigurationActivity extends AbstractActivity implements
 
 	private void setDifficultyLevel(int lvl) {
 		TextView level = (TextView) findViewById(R.id.txtview_level);
-		switch (lvl) {
-		case 1:
-			level.setText(LEVEL_EASY);
-			break;
-		case 2:
-			level.setText(LEVEL_MEDIUM);
-			break;
-		case 3:
-			level.setText(LEVEL_HARD);
-			break;
-		}
+		level.setText(difficulties[lvl].toString());
 	}
 
 	public final static String EXTRA_MESSAGE = "com.canefaitrient.spacetrader.MESSAGE";
@@ -232,10 +226,10 @@ public class ConfigurationActivity extends AbstractActivity implements
 
 		Character charac = new Character(name, barPilot.getProgress(),
 				barFighter.getProgress(), barTrader.getProgress(),
-				barEngineer.getProgress(), difficultyLevel);
+				barEngineer.getProgress());
+		GameData data = new GameData(charac, new Universe(), difficulties[difficultyLevel]);
 
-		SpaceTraderApplication.setCharacter(charac);
-		SpaceTraderApplication.setUniverse(charac.getUniverse());
+		SpaceTraderApplication.setData(data);
 
 		long charId = mDbHelper.createCharacter(charac);
 		
@@ -243,8 +237,7 @@ public class ConfigurationActivity extends AbstractActivity implements
 
 		Intent intent = new Intent(ConfigurationActivity.this,
 				MainScreenActivity.class);
-		intent.putExtra(EXTRA_MESSAGE, SpaceTraderApplication.getCharacter()
-				.getUniverse().toString());
+		intent.putExtra(EXTRA_MESSAGE, SpaceTraderApplication.getData().getUniverse().toString());
 		intent.putExtra(DbAdapter.CHAR_KEY_ROWID, charId);
 		startActivity(intent);
 	}

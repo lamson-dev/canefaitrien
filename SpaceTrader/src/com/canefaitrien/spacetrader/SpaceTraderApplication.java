@@ -1,27 +1,18 @@
 package com.canefaitrien.spacetrader;
 
 import android.app.Application;
-
-import com.canefaitrien.spacetrader.models.Character;
-import com.canefaitrien.spacetrader.models.Universe;
+import com.canefaitrien.spacetrader.models.GameData;
 
 public class SpaceTraderApplication extends Application {
-	private static Character character;
-	private static Universe universe;
+	private static GameData data;
 
-	public static Character getCharacter() {
-		return character;
+
+	public static void setData(GameData data) {
+		SpaceTraderApplication.data = data;
 	}
-
-	public static void setCharacter(Character charac) {
-		character = charac;
-	}
-
-	public static Universe getUniverse() {
-		return universe;
-	}
-
-	public static void setUniverse(Universe universe) {
-		SpaceTraderApplication.universe = universe;
+	
+	public static GameData getData() {
+		return data;
 	}
 }
+

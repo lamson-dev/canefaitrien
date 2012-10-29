@@ -1,5 +1,16 @@
 package com.canefaitrien.spacetrader.models;
 
 public enum TechLevel {
-	PRE_AGRICULTURAL, AGRICULTURAL, MEDIEVAL, RENAISSANCE, EARLY_INDUSTRIAL, INDUSTRIAL, POST_INDUSTRIAL, HI_TECH
+	PRE_AGRICULTURAL("PreAgricultural"), AGRICULTURAL("Agricultural"), MEDIEVAL("Medieval"), RENAISSANCE("Renaissance"),
+	EARLY_INDUSTRIAL("Early Industrial"), INDUSTRIAL("Industrial"), POST_INDUSTRIAL("Post Industrial"), HI_TECH("HiTech");
+	
+	private String name;
+	
+	private TechLevel(String name) {
+		this.name = name;
+	}
+	
+	public String toString() {
+		return name;
+	}
 }

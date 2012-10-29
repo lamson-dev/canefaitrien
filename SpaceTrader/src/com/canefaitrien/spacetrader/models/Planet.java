@@ -63,7 +63,7 @@ public class Planet {
 
 	// For testing purpose
 	public String toString() {
-		return "Planet " + name + " TL " + level + " at X = " + location.x + " Y = " + location.y
+		return "Planet " + name + " TL " + level + " Sit " + situation + " at X = " + location.x + " Y = " + location.y
 				+ "\n";
 	}
 }

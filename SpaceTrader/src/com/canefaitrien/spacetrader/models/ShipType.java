@@ -51,15 +51,11 @@ public enum ShipType {
 	public final int MAX_CREW;
 	public final int MAX_MERCENARY;
 	public final int MAX_HULL_STRENGTH;
-	public final String TYPE;
+	public final String NAME;
 	
-	/**
-	 * Constructor for ShipType
-	 * 
-	 */
-	ShipType (int maxWeaponSlots, int maxGadgetSlots, int maxShieldSlots,
-				int maxDistance, int maxCargoHold, int maxHullStrength,
-				int maxCrewMembers, int maxMercernary, String type) {
+	ShipType (int maxDistance, int maxHullStrength, 
+			int maxWeaponSlots, int maxGadgetSlots, int maxShieldSlots,
+			int maxCargoHold, int maxCrewMembers, int maxMercernary, String name) {
 		
 		MAX_WEAPONS_SLOTS = maxWeaponSlots;
 		MAX_GADGETS_SLOTS = maxGadgetSlots;
@@ -69,6 +65,10 @@ public enum ShipType {
 		MAX_CREW = maxCrewMembers;
 		MAX_MERCENARY = maxMercernary;
 		MAX_HULL_STRENGTH = maxHullStrength;
-		TYPE = type;
+		NAME = name;
+	}
+	
+	public String toString() {
+		return NAME;
 	}
 }

@@ -16,7 +16,7 @@ import android.graphics.Point;
 public class Universe {
 	
 	// Constants
-	public static final int WIDTH = 720, HEIGHT = 1280, BORDER = 10, MIN_DISTANCE = 10;
+	public static final int WIDTH = 2000, HEIGHT = 2000, BORDER = 10, MIN_DISTANCE = 10;
 	public static final int TOTAL_PLANETS = 100;
 	// Array of planet names
 	private static final String PLANET_NAMES[] = 
@@ -57,7 +57,7 @@ public class Universe {
 	private void shuffle(String[] planets) {
 		int ind1, ind2;
 		String temp;
-		for(int i = 0; i < 10000; i++) {
+		for(int i = 0; i < 1000; i++) {
 			ind1 = rand.nextInt(PLANET_NAMES.length);
 			ind2 = rand.nextInt(PLANET_NAMES.length);
 			temp = planets[ind1];
@@ -82,7 +82,7 @@ public class Universe {
 			planets[i] = new Planet(PLANET_NAMES[i], x, y, levels[rand.nextInt(levels.length)], situations[rand.nextInt(situations.length)]);
 		}
 		
-		//validate();
+		validate();
 	}
 	
 	/**
@@ -134,6 +134,11 @@ public class Universe {
 			ret += planets[i].toString();
 		}
 		return ret;
+	}
+	
+	public static void main(String[] agrs) {
+		Universe un = new Universe();
+		System.out.println(un.toString());
 	}
 	
 }
