@@ -58,14 +58,24 @@ public class LoadGameActivity extends ListActivity {
 
 		// Create an array to specify the fields we want to display in the list
 		// (only TITLE)
+//		String[] from = new String[] { DbAdapter.CHAR_KEY_ROWID,
+//				DbAdapter.CHAR_KEY_DIFFICULTY, DbAdapter.CHAR_KEY_NAME,
+//				DbAdapter.CHAR_KEY_MONEY, DbAdapter.CHAR_KEY_DATE };
 		String[] from = new String[] { DbAdapter.CHAR_KEY_ROWID,
-				DbAdapter.CHAR_KEY_DIFFICULTY, DbAdapter.CHAR_KEY_NAME,
-				DbAdapter.CHAR_KEY_MONEY, DbAdapter.CHAR_KEY_DATE };
+				DbAdapter.CHAR_KEY_NAME,
+				DbAdapter.CHAR_KEY_PILOT_PTS,
+				DbAdapter.CHAR_KEY_FIGHTER_PTS,
+				DbAdapter.CHAR_KEY_TRADER_PTS,
+				DbAdapter.CHAR_KEY_ENGINEER_PTS};
 
 		// and an array of the fields we want to bind those fields to (in this
 		// case just text1)
-		int[] to = new int[] { R.id.tv_entry_id, R.id.tv_entry_difficulty,
-				R.id.tv_entry_name, R.id.tv_entry_money, R.id.tv_entry_date };
+		int[] to = new int[] { R.id.tv_entry_id, 
+				R.id.tv_entry_name,
+				R.id.tv_entry_pilot,
+				R.id.tv_entry_fighter,
+				R.id.tv_entry_trader,
+				R.id.tv_entry_engineer};
 
 		// Now create a simple cursor adapter and set it to display
 		SimpleCursorAdapter saves = new SimpleCursorAdapter(this,

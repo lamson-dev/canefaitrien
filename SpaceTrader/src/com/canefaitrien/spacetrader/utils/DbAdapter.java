@@ -48,11 +48,6 @@ public class DbAdapter {
 	public static final String CHAR_KEY_FIGHTER_PTS = "fighter_pts";
 	public static final String CHAR_KEY_DATE = "date";
 
-	// public static final String STATS_KEY_ROWID = "_id";
-	// public static final String STATS_KEY_CHARID = "char_id";
-	// public static final String STATS_KEY_NAME = "name";
-	// public static final String STATS_KEY_POINTS = "points";
-
 	private static final String TAG = "DbAdapter";
 	private DatabaseHelper mDbHelper;
 	private SQLiteDatabase mDb;
@@ -60,7 +55,6 @@ public class DbAdapter {
 
 	private static final String DB_NAME = "spacetrader";
 	private static final String TABLE_CHARACTER = "character";
-	private static final String TABLE_STATS = "stats";
 	private static final int DB_VERSION = 2;
 
 	/**
@@ -70,14 +64,14 @@ public class DbAdapter {
 	private static final String DB_CREATE_CHAR = "CREATE TABLE "
 			+ TABLE_CHARACTER + "(" 
 			+ CHAR_KEY_ROWID + " INTEGER PRIMARY KEY AUTOINCREMENT, " 
-			+ CHAR_KEY_DIFFICULTY + " INTEGER, " 
+//			+ CHAR_KEY_DIFFICULTY + " INTEGER, " 
 			+ CHAR_KEY_NAME + " TEXT NOT NULL, "
-			+ CHAR_KEY_MONEY + " INTEGER, " 
+//			+ CHAR_KEY_MONEY + " INTEGER, " 
 			+ CHAR_KEY_PILOT_PTS + " INTEGER, "
 			+ CHAR_KEY_TRADER_PTS + " INTEGER, " 
 			+ CHAR_KEY_FIGHTER_PTS + " INTEGER, " 
-			+ CHAR_KEY_ENGINEER_PTS + " INTEGER, "
-			+ CHAR_KEY_DATE + " TEXT NOT NULL);";
+			+ CHAR_KEY_ENGINEER_PTS + " INTEGER);";
+//			+ CHAR_KEY_DATE + " TEXT NOT NULL);";
 
 	private static class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -144,13 +138,13 @@ public class DbAdapter {
 		ContentValues initialValues = new ContentValues();
 		
 		initialValues.put(CHAR_KEY_NAME, c.getName());
-		initialValues.put(CHAR_KEY_DIFFICULTY, c.getDifficulty());
-		initialValues.put(CHAR_KEY_MONEY, c.getMoney());
+//		initialValues.put(CHAR_KEY_DIFFICULTY, c.getDifficulty());
+//		initialValues.put(CHAR_KEY_MONEY, c.getMoney());
 		initialValues.put(CHAR_KEY_PILOT_PTS, c.getPilotPts());
 		initialValues.put(CHAR_KEY_TRADER_PTS, c.getTraderPts());
 		initialValues.put(CHAR_KEY_FIGHTER_PTS, c.getFighterPts());
 		initialValues.put(CHAR_KEY_ENGINEER_PTS, c.getEngineerPts());
-		initialValues.put(CHAR_KEY_DATE, c.getDate());
+//		initialValues.put(CHAR_KEY_DATE, c.getDate());
 
 		return mDb.insert(TABLE_CHARACTER, null, initialValues);
 	}
@@ -173,8 +167,17 @@ public class DbAdapter {
 	 */
 	public Cursor fetchAllSaves() {
 
-		String[] columns = new String[] { CHAR_KEY_ROWID, CHAR_KEY_DIFFICULTY,
-				CHAR_KEY_NAME, CHAR_KEY_MONEY, CHAR_KEY_DATE };
+//		String[] columns = new String[] { CHAR_KEY_ROWID, CHAR_KEY_DIFFICULTY,
+//				CHAR_KEY_NAME, CHAR_KEY_MONEY, CHAR_KEY_DATE };
+			String[] columns = new String[] { CHAR_KEY_ROWID, 
+//					CHAR_KEY_DIFFICULTY,
+					CHAR_KEY_NAME, 
+//					CHAR_KEY_MONEY,
+					CHAR_KEY_PILOT_PTS,
+					CHAR_KEY_FIGHTER_PTS,
+					CHAR_KEY_ENGINEER_PTS,
+					CHAR_KEY_TRADER_PTS};
+//					CHAR_KEY_DATE };
 
 		return mDb
 				.query(TABLE_CHARACTER, columns, null, null, null, null, null);
@@ -191,14 +194,14 @@ public class DbAdapter {
 	 */
 	public Cursor fetchSave(long rowId) throws SQLException {
 		String[] columns = new String[] { CHAR_KEY_ROWID, 
-				CHAR_KEY_DIFFICULTY,
+//				CHAR_KEY_DIFFICULTY,
 				CHAR_KEY_NAME, 
-				CHAR_KEY_MONEY,
+//				CHAR_KEY_MONEY,
 				CHAR_KEY_PILOT_PTS,
 				CHAR_KEY_FIGHTER_PTS,
 				CHAR_KEY_ENGINEER_PTS,
-				CHAR_KEY_TRADER_PTS,
-				CHAR_KEY_DATE };
+				CHAR_KEY_TRADER_PTS};
+//				CHAR_KEY_DATE };
 
 		Cursor mCursor = mDb.query(true, TABLE_CHARACTER, columns,
 				CHAR_KEY_ROWID + "=" + rowId, null, null, null, null, null);
@@ -225,12 +228,13 @@ public class DbAdapter {
 	public boolean updateCharacter(long rowId, Character c) {
 		ContentValues cv = new ContentValues();
 		cv.put(CHAR_KEY_NAME, c.getName());
-		cv.put(CHAR_KEY_DIFFICULTY, c.getDifficulty());
-		cv.put(CHAR_KEY_MONEY, c.getMoney());
+//		cv.put(CHAR_KEY_DIFFICULTY, c.getDifficulty());
+//		cv.put(CHAR_KEY_MONEY, c.getMoney());
+		cv.put(CHAR_KEY_PILOT_PTS, c.getPilotPts());
 		cv.put(CHAR_KEY_TRADER_PTS, c.getTraderPts());
 		cv.put(CHAR_KEY_FIGHTER_PTS, c.getFighterPts());
 		cv.put(CHAR_KEY_ENGINEER_PTS, c.getEngineerPts());
-		cv.put(CHAR_KEY_DATE, c.getDate());
+//		cv.put(CHAR_KEY_DATE, c.getDate());
 
 		return mDb.update(TABLE_CHARACTER, cv, CHAR_KEY_ROWID + "=" + rowId,
 				null) > 0;

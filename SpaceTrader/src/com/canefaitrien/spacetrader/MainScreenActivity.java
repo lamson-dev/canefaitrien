@@ -13,6 +13,11 @@ import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
 
 import com.canefaitrien.spacetrader.models.Character;
+import com.canefaitrien.spacetrader.models.GameData;
+import com.canefaitrien.spacetrader.models.Planet;
+import com.canefaitrien.spacetrader.models.Ship;
+import com.canefaitrien.spacetrader.models.Universe;
+import com.canefaitrien.spacetrader.models.GameData.Difficulty;
 import com.canefaitrien.spacetrader.utils.AbstractActivity;
 import com.canefaitrien.spacetrader.utils.DbAdapter;
 
@@ -76,10 +81,10 @@ public class MainScreenActivity extends AbstractActivity {
 
 		String name = save.getString(save
 				.getColumnIndexOrThrow(DbAdapter.CHAR_KEY_NAME));
-		String level = save.getString(save
-				.getColumnIndexOrThrow(DbAdapter.CHAR_KEY_DIFFICULTY));
-		String money = save.getString(save
-				.getColumnIndexOrThrow(DbAdapter.CHAR_KEY_MONEY));
+		// String level = save.getString(save
+		// .getColumnIndexOrThrow(DbAdapter.CHAR_KEY_DIFFICULTY));
+		// String money = save.getString(save
+		// .getColumnIndexOrThrow(DbAdapter.CHAR_KEY_MONEY));
 
 		int engineerPts = Integer.valueOf(save.getString(save
 				.getColumnIndexOrThrow(DbAdapter.CHAR_KEY_ENGINEER_PTS)));
@@ -90,9 +95,19 @@ public class MainScreenActivity extends AbstractActivity {
 		int traderPts = Integer.valueOf(save.getString(save
 				.getColumnIndexOrThrow(DbAdapter.CHAR_KEY_TRADER_PTS)));
 
-		Character charac = new Character(name, pilotPts, fighterPts, traderPts,
-				engineerPts, Integer.valueOf(level));
-		SpaceTraderApplication.setCharacter(charac);
+		Character player = new Character(name, pilotPts, fighterPts, traderPts,
+				engineerPts);
+
+		Ship ship = null;
+		Planet location = null;
+		int money = 100;
+		Universe universe = null;
+		Difficulty difficulty = null;
+		int turn = 1;
+
+		GameData data = new GameData(player, ship, location, money, universe,
+				difficulty, turn);
+		SpaceTraderApplication.setData(data);
 
 	}
 
@@ -124,7 +139,8 @@ public class MainScreenActivity extends AbstractActivity {
 	}
 
 	private void setInfoTab() {
-		String info = SpaceTraderApplication.getCharacter().toString();
+		GameData data = SpaceTraderApplication.getData();
+		String info = data.getPlayer().toString();
 		ViewGroup parentView = (RelativeLayout) findViewById(R.id.tab_info_content);
 
 		inflater.inflate(R.layout.content_info, parentView);

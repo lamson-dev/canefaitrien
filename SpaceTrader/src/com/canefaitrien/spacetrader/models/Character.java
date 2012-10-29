@@ -6,27 +6,28 @@ package com.canefaitrien.spacetrader.models;
  */
 
 public class Character {
-	
+
 	private String name;
 	private int pilotPts, fighterPts, traderPts, engineerPts;
-	
-	/** 
+
+	/**
 	 * Constructor for loading
 	 */
-	public Character(String name, int pilotPts, int fighterPts, int traderPts,int engineerPts) {
+	public Character(String name, int pilotPts, int fighterPts, int traderPts,
+			int engineerPts) {
 		this.name = name;
 		this.pilotPts = pilotPts;
 		this.fighterPts = fighterPts;
 		this.traderPts = traderPts;
 		this.engineerPts = engineerPts;
 	}
-	
+
 	public String toString() {
-		return "Name: " + name + "\nPilot: " + pilotPts + "\nTrader: "
-				+ traderPts + "\nFighter: " + fighterPts + "\nEngineer: "
+		return "Name: " + name + "\nPilot: " + pilotPts + "\nFighter: "
+				+ fighterPts + "\nTrader: " + traderPts + "\nEngineer: "
 				+ engineerPts;
 	}
-	
+
 	/**
 	 * getters and setters
 	 */
