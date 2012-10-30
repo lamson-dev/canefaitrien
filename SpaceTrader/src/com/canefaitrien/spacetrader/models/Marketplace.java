@@ -2,12 +2,17 @@ package com.canefaitrien.spacetrader.models;
 
 import java.util.Random;
 
+/**
+* Marketplace 
+* An intermediate to generate the market on each planet
+* In charge of keeping track of trade goods and perform sell/buy good
+*/
 public class Marketplace {
 	
 	
 	private static final int STOCK_REFRESH_TIME = 5;			// Time to recreate market place, in turn
 	private static final int MIN_NUM_GOODS = 5, VARIANCE = 5;
-	private static TradeGood[] goods = TradeGood.values();
+	private static TradeGood[] goods = TradeGood.values();		// Array of all trade goods
 	private int turnCreated;
 	private int[] itemStock;
 	private int[] itemBuyPrices;
