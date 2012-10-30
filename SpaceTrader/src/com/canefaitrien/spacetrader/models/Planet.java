@@ -2,6 +2,7 @@
 package com.canefaitrien.spacetrader.models;
 
 import android.graphics.Point;
+import android.util.Log;
 
 /**
  * Class Planet

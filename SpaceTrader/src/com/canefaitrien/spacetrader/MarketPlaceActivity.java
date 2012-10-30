@@ -5,11 +5,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.canefaitrien.spacetrader.models.GameData;
-import com.canefaitrien.spacetrader.models.Marketplace;
-import com.canefaitrien.spacetrader.models.Planet;
 import com.canefaitrien.spacetrader.utils.AbstractActivity;
 
 public class MarketPlaceActivity extends AbstractActivity {
@@ -27,15 +24,18 @@ public class MarketPlaceActivity extends AbstractActivity {
 
 		String[] myStringArray = new String[] { "a", "b", "c" };
 		GameData data = SpaceTraderApplication.getData();
-		Log.d(TAG, "data loaded");
-		Planet p = data.getLocation();
-		Log.d(TAG, "planet loaded");
-		Marketplace mp = p.getMarketplace();
-//		Log.d(TAG, "market loaded");
-//		Log.d(TAG, mp.getBuyView().toString());
+		Log.d(TAG, SpaceTraderApplication.getData().toString());
+		if (data.getLocation() == null) {
+			Log.d(TAG, "planet is nulll");
+		}
+		Log.d(TAG, SpaceTraderApplication.getData().getLocation().toString());
+		Log.d(TAG, SpaceTraderApplication.getData().getLocation()
+				.getMarketplace().toString());
+		// Log.d(TAG,
+		// SpaceTraderApplication.getData().getLocation().getMarketplace().getBuyView()[0]);
 
-//		String[] myStringArray = data.getLocation().getMarketplace()
-//				.getBuyView();
+		// String[] myStringArray = data.getLocation().getMarketplace()
+		// .getBuyView();
 
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
 				android.R.layout.simple_list_item_1, myStringArray);

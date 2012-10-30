@@ -234,51 +234,58 @@ public class ConfigurationActivity extends AbstractActivity implements
 
 		SpaceTraderApplication.setData(data);
 
+		// Log.d(TAG,
+		// SpaceTraderApplication.getData().getLocation().toString());
+		// Log.d(TAG,
+		// SpaceTraderApplication.getData().getLocation().getMarketplace().toString());
+		// Log.d(TAG,
+		// SpaceTraderApplication.getData().getLocation().getMarketplace().getBuyView()[0]);
+
 		long charId = mDbHelper.createCharacter(charac);
 
 		mDbHelper.close();
 
 		Intent intent = new Intent(ConfigurationActivity.this,
-				MainScreenActivity.class);
+				MarketPlaceActivity.class);
 		intent.putExtra(EXTRA_MESSAGE, SpaceTraderApplication.getData()
 				.getUniverse().toString());
 		intent.putExtra(DbAdapter.CHAR_KEY_ROWID, charId);
 		startActivity(intent);
 	}
 
-	@Override
-	protected void onStart() {
-		super.onStart();
-		Log.d(TAG, "onStart called.");
-	}
-
-	@Override
-	protected void onPause() {
-		super.onPause();
-		Log.d(TAG, "onPause called.");
-	}
-
-	@Override
-	protected void onResume() {
-		super.onResume();
-		Log.d(TAG, "onResume called.");
-	}
-
-	@Override
-	protected void onStop() {
-		super.onStop();
-		Log.d(TAG, "onStop called.");
-	}
-
-	@Override
-	protected void onRestart() {
-		super.onRestart();
-		Log.d(TAG, "onRestart called.");
-	}
-
-	@Override
-	protected void onDestroy() {
-		super.onDestroy();
-	}
+	// @Override
+	// protected void onStart() {
+	// super.onStart();
+	// Log.d(TAG, "onStart called.");
+	// }
+	//
+	// @Override
+	// protected void onPause() {
+	// super.onPause();
+	// Log.d(TAG, "onPause called.");
+	// }
+	//
+	// @Override
+	// protected void onResume() {
+	// super.onResume();
+	// Log.d(TAG, "onResume called.");
+	// }
+	//
+	// @Override
+	// protected void onStop() {
+	// super.onStop();
+	// Log.d(TAG, "onStop called.");
+	// }
+	//
+	// @Override
+	// protected void onRestart() {
+	// super.onRestart();
+	// Log.d(TAG, "onRestart called.");
+	// }
+	//
+	// @Override
+	// protected void onDestroy() {
+	// super.onDestroy();
+	// }
 
 }
