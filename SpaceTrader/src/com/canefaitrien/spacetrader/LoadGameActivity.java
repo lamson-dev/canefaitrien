@@ -32,6 +32,8 @@ import android.widget.SimpleCursorAdapter;
 import com.canefaitrien.spacetrader.utils.DbAdapter;
 
 public class LoadGameActivity extends ListActivity {
+	
+	private static final String TAG = "LoadGame";
 	private static final int ACTIVITY_LOAD = 1;
 
 	private static final int DELETE_ID = Menu.FIRST;

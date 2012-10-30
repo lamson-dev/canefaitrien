@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,6 +23,7 @@ import com.canefaitrien.spacetrader.utils.DbAdapter;
 public class ConfigurationActivity extends AbstractActivity implements
 		GameConstants {
 
+	private static final String TAG = "Configuration";
 	private String name;
 	private int difficultyLevel = 0;
 	private int totalPts = NUM_MAX_SKILL_POINTS;
@@ -227,18 +229,56 @@ public class ConfigurationActivity extends AbstractActivity implements
 		Character charac = new Character(name, barPilot.getProgress(),
 				barFighter.getProgress(), barTrader.getProgress(),
 				barEngineer.getProgress());
-		GameData data = new GameData(charac, new Universe(), difficulties[difficultyLevel]);
+		GameData data = new GameData(charac, new Universe(),
+				difficulties[difficultyLevel]);
 
 		SpaceTraderApplication.setData(data);
 
 		long charId = mDbHelper.createCharacter(charac);
-		
+
 		mDbHelper.close();
 
 		Intent intent = new Intent(ConfigurationActivity.this,
 				MainScreenActivity.class);
-		intent.putExtra(EXTRA_MESSAGE, SpaceTraderApplication.getData().getUniverse().toString());
+		intent.putExtra(EXTRA_MESSAGE, SpaceTraderApplication.getData()
+				.getUniverse().toString());
 		intent.putExtra(DbAdapter.CHAR_KEY_ROWID, charId);
 		startActivity(intent);
 	}
+
+	@Override
+	protected void onStart() {
+		super.onStart();
+		Log.d(TAG, "onStart called.");
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		Log.d(TAG, "onPause called.");
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		Log.d(TAG, "onResume called.");
+	}
+
+	@Override
+	protected void onStop() {
+		super.onStop();
+		Log.d(TAG, "onStop called.");
+	}
+
+	@Override
+	protected void onRestart() {
+		super.onRestart();
+		Log.d(TAG, "onRestart called.");
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+	}
+
 }

@@ -3,8 +3,10 @@ package com.canefaitrien.spacetrader;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.v4.widget.SimpleCursorAdapter;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
@@ -14,16 +16,23 @@ import android.widget.TextView;
 
 import com.canefaitrien.spacetrader.models.Character;
 import com.canefaitrien.spacetrader.models.GameData;
+import com.canefaitrien.spacetrader.models.GameData.Difficulty;
 import com.canefaitrien.spacetrader.models.Planet;
 import com.canefaitrien.spacetrader.models.Ship;
 import com.canefaitrien.spacetrader.models.Universe;
-import com.canefaitrien.spacetrader.models.GameData.Difficulty;
 import com.canefaitrien.spacetrader.utils.AbstractActivity;
 import com.canefaitrien.spacetrader.utils.DbAdapter;
 
 public class MainScreenActivity extends AbstractActivity {
 
+	// This is the Adapter being used to display the list's data
+	SimpleCursorAdapter mAdapter;
+
+	private static final String TAG = "MainScreen";
 	LayoutInflater inflater;
+
+	TabHost th;
+	TabSpec specs;
 	private Long mRowId;
 
 	private DbAdapter mDbHelper;
@@ -51,8 +60,11 @@ public class MainScreenActivity extends AbstractActivity {
 		init();
 		loadGame(savedInstanceState);
 
-		setHubTab();
+		setMapTab();
 		setInfoTab();
+		setMarketTab();
+		setHubTab();
+		th.setCurrentTab(1);
 
 	}
 
@@ -115,9 +127,19 @@ public class MainScreenActivity extends AbstractActivity {
 		inflater = (LayoutInflater) getApplicationContext().getSystemService(
 				Context.LAYOUT_INFLATER_SERVICE);
 
-		TabHost th = (TabHost) findViewById(R.id.tabhost);
+		this.th = (TabHost) findViewById(R.id.tabhost);
 		th.setup();
-		TabSpec specs = th.newTabSpec("tag1");
+
+		Intent intentMarket = new Intent().setClass(MainScreenActivity.this,
+				MarketPlaceActivity.class);
+//		specs = th.newTabSpec("tag3");
+//		// specs.setIndicator("",R.drawable.tab_market);
+//		specs.setIndicator("Market");
+//		specs.setContent(intentMarket);
+//		// specs.setContent(R.id.tab_market);
+//		th.addTab(specs);
+
+		specs = th.newTabSpec("tag1");
 		specs.setContent(R.id.tab_map);
 		specs.setIndicator("Map");
 		th.addTab(specs);
@@ -127,15 +149,6 @@ public class MainScreenActivity extends AbstractActivity {
 		specs.setIndicator("Info");
 		th.addTab(specs);
 
-		specs = th.newTabSpec("tag3");
-		specs.setContent(R.id.tab_market);
-		specs.setIndicator("Market");
-		th.addTab(specs);
-
-		specs = th.newTabSpec("tag4");
-		specs.setContent(R.id.tab_hub);
-		specs.setIndicator("Hub");
-		th.addTab(specs);
 	}
 
 	private void setInfoTab() {
@@ -152,9 +165,18 @@ public class MainScreenActivity extends AbstractActivity {
 	private void setHubTab() {
 		ViewGroup parentView = (RelativeLayout) findViewById(R.id.tab_hub_content);
 		inflater.inflate(R.layout.content_hub, parentView);
+
+		specs = th.newTabSpec("tag4");
+		specs.setContent(R.id.tab_hub);
+		specs.setIndicator("Hub");
+		th.addTab(specs);
 	}
 
 	private void setMapTab() {
+
+	}
+
+	private void setMarketTab() {
 
 	}
 
