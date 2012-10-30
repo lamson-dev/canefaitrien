@@ -39,7 +39,7 @@ public final class R {
         public static final int btn_resume=0x7f090020;
         public static final int btn_start=0x7f090015;
         public static final int edit_name=0x7f090001;
-        public static final int listView1=0x7f09002b;
+        public static final int lv_market=0x7f09002c;
         public static final int menu_settings=0x7f09002f;
         public static final int pt_engineer=0x7f090012;
         public static final int pt_fighter=0x7f09000c;
@@ -66,9 +66,9 @@ public final class R {
         public static final int tv_entry_name=0x7f090019;
         public static final int tv_entry_pilot=0x7f09001a;
         public static final int tv_entry_trader=0x7f09001c;
-        public static final int tv_info_content=0x7f09002c;
-        public static final int tv_map_content=0x7f09002d;
-        public static final int tv_market=0x7f09002e;
+        public static final int tv_info_content=0x7f09002d;
+        public static final int tv_map_content=0x7f09002e;
+        public static final int tv_market=0x7f09002b;
         public static final int txtview_app_name=0x7f09001e;
         public static final int txtview_engineer=0x7f090010;
         public static final int txtview_fighter=0x7f09000a;
@@ -88,7 +88,6 @@ public final class R {
         public static final int content_hub=0x7f030007;
         public static final int content_info=0x7f030008;
         public static final int content_map=0x7f030009;
-        public static final int content_market=0x7f03000a;
     }
     public static final class menu {
         public static final int activity_display_data=0x7f080000;

@@ -229,7 +229,7 @@ public class ConfigurationActivity extends AbstractActivity implements
 		Character charac = new Character(name, barPilot.getProgress(),
 				barFighter.getProgress(), barTrader.getProgress(),
 				barEngineer.getProgress());
-		
+
 		GameData data = new GameData(charac, difficulties[difficultyLevel]);
 
 		SpaceTraderApplication.setData(data);

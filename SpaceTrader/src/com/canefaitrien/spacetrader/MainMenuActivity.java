@@ -14,7 +14,7 @@ import android.widget.TextView;
 import com.canefaitrien.spacetrader.utils.AbstractActivity;
 
 public class MainMenuActivity extends AbstractActivity {
-	
+
 	private static final String TAG = "MainMenu";
 	private Button button;
 
