@@ -21,7 +21,7 @@ import com.canefaitrien.spacetrader.utils.DbAdapter;
 
 public class ConfigurationActivity extends AbstractActivity implements
 		GameConstants {
-
+	//private enum Difficulty{Easy, Medium, Hard};
 	private String name;
 	private int difficultyLevel = 0;
 	private int totalPts = NUM_MAX_SKILL_POINTS;
