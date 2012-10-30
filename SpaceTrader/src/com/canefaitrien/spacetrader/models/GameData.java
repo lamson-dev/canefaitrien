@@ -1,7 +1,5 @@
 package com.canefaitrien.spacetrader.models;
 
-import com.canefaitrien.spacetrader.exceptions.*;
-
 /**
  * 
  * 
@@ -10,8 +8,8 @@ import com.canefaitrien.spacetrader.exceptions.*;
 public class GameData {
 	
 	// Game info
-	public static enum Difficulty {Easy, Medium, Hard};
-	private static final int STARTING_MONEY = 100;
+	public enum Difficulty {Easy, Medium, Hard};
+	private static final int STARTING_MONEY = 500;
 	private Character player;
 	private Ship ship;
 	private Planet location;
@@ -37,29 +35,38 @@ public class GameData {
 	/** 
 	 * Constructor for new game
 	 */
-	public GameData(Character player, Universe universe, Difficulty difficulty) {
-		this(player, new Ship(ShipType.GNAT), universe.getPlanets()[0], STARTING_MONEY, universe, difficulty, 0);
+	public GameData(Character player, Difficulty difficulty) {
+		this(player, new Ship(ShipType.GNAT), null, STARTING_MONEY, new Universe(), difficulty, 0);
+		location = universe.getPlanets()[0];
 	}
 	
 	/**
 	 * Buy a good
 	 */
-	public void buyGood(TradeGood good, int price) throws NotEnoughMoneyException, CargoHullFullException {
-		if(price > money) {
-			throw new NotEnoughMoneyException("We don't have enough money, captain!");
-		} else {
-			ship.addGood(good);
-			money -= price; // if exception is thrown, this line shouldn't execute
-		}	
-	}
-	
-	/**
-	 * Sell a good
-	 */
-	public void sellGood(TradeGood good, int price) throws NoTradeGoodException {
-		ship.removeGood(good);
-		money += price; // if exception is thrown, this line shouldn't execute
-	}
+//	public void buyGood(TradeGood good, int price) throws NotEnoughMoneyException, CargoHullFullException, NoTradeGoodException {
+//		if(price > money) {
+//			throw new NotEnoughMoneyException("We don't have enough money, captain!");
+//		} else if(location.getMarketplace().getItemStock()[good.ordinal()] == 0) {
+//			throw new NoTradeGoodException("They don't have that good, captain!", good);
+//		} else {
+//			ship.addGood(good);
+//			location.getMarketplace().buyGood(good);
+//			money -= price; // if exception is thrown, this line shouldn't execute
+//		}	
+//	}
+//	
+//	/**
+//	 * Sell a good
+//	 */
+//	public void sellGood(TradeGood good, int price) throws NoTradeGoodException {
+//		if(location.getMarketplace().getItemSellPrices()[good.ordinal()] == 0) {
+//			throw new NoTradeGoodException("", good);
+//		} else {
+//			ship.removeGood(good);
+//			location.getMarketplace().sellGood(good);
+//			money += price; // if exception is thrown, this line shouldn't execute
+//		}
+//	}
 
 	public Character getPlayer() {
 		return player;
@@ -86,5 +93,9 @@ public class GameData {
 	
 	public int getTurn() {
 		return turn;
+	}
+	
+	public void setMoney(int money) {
+		this.money = money;
 	}
 }

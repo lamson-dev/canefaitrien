@@ -1,5 +1,9 @@
 package com.canefaitrien.spacetrader.models;
 
+/**
+* Contains all the situations related to planets
+*
+*/
 public enum Situation {
 	LOTS_OF_WATER("Lots of Water"), RICH_FAUNA("Rich Fauna"), RICH_SOIL("Rich Soil"), MINERAL_RICH("Mineral_Rich"), 
 	ARTISTIC("Artistic"), WARLIKE("Warlike"), LOTS_OF_HERBS("Lots of Herbs"), NEVER("Never"), WEIRD_MUSHROOMS("Weird Mushrooms"), 
