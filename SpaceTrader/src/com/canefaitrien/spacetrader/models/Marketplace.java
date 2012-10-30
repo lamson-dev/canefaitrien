@@ -6,6 +6,11 @@ import com.canefaitrien.spacetrader.exceptions.CargoHullFullException;
 import com.canefaitrien.spacetrader.exceptions.NoTradeGoodException;
 import com.canefaitrien.spacetrader.exceptions.NotEnoughMoneyException;
 
+/**
+* Marketplace 
+* An intermediate to generate the market on each planet
+* In charge of keeping track of trade goods and perform sell/buy good
+*/
 public class Marketplace {
 	
 	
