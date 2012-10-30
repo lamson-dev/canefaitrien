@@ -22,7 +22,7 @@ public class MarketPlaceActivity extends AbstractActivity {
 		// textView.setTextSize(20);
 		// textView.setText("this THE market place");
 
-		String[] myStringArray = new String[] { "a", "b", "c" };
+		// String[] myStringArray = new String[] { "a", "b", "c" };
 		GameData data = SpaceTraderApplication.getData();
 		Log.d(TAG, SpaceTraderApplication.getData().toString());
 		if (data.getLocation() == null) {
@@ -34,8 +34,8 @@ public class MarketPlaceActivity extends AbstractActivity {
 		// Log.d(TAG,
 		// SpaceTraderApplication.getData().getLocation().getMarketplace().getBuyView()[0]);
 
-		// String[] myStringArray = data.getLocation().getMarketplace()
-		// .getBuyView();
+		String[] myStringArray = data.getLocation().getMarketplace()
+				.getBuyView(data.getShip());
 
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
 				android.R.layout.simple_list_item_1, myStringArray);

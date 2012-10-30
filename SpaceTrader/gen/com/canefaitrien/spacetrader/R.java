@@ -88,7 +88,6 @@ public final class R {
         public static final int content_hub=0x7f030007;
         public static final int content_info=0x7f030008;
         public static final int content_map=0x7f030009;
-        public static final int content_market=0x7f03000a;
     }
     public static final class menu {
         public static final int activity_display_data=0x7f080000;
