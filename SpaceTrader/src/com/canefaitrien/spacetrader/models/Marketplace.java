@@ -22,7 +22,6 @@ public class Marketplace {
 	private int[] itemSellPrices;
 	private TechLevel level;
 	private Situation situation;
-	private GameData gd;
 	private static Random rand = new Random();
 
 	public Marketplace(int lastDock, int[] itemStock, int[] itemBuyPrices,
@@ -98,9 +97,9 @@ public class Marketplace {
 		return itemSellPrices;
 	}
 
-	public String[] getBuyView() {
+	public String[] getBuyView(Ship ship) {
 		String[] ret = new String[itemStock.length];
-		int[] cargo = gd.getShip().getCargo();
+		int[] cargo = ship.getCargo();
 		for (int i = 0; i < itemStock.length; i++) {
 			ret[i] = goods[i].toString() + ": Price " + itemBuyPrices[i]
 					+ ", Available:" + itemStock[i] + ", In Cargo " + cargo[i];
@@ -108,9 +107,9 @@ public class Marketplace {
 		return ret;
 	}
 
-	public String[] getSellView() {
+	public String[] getSellView(Ship ship) {
 		String[] ret = new String[itemStock.length];
-		int[] cargo = gd.getShip().getCargo();
+		int[] cargo = ship.getCargo();
 		for (int i = 0; i < itemStock.length; i++) {
 			ret[i] = goods[i].toString() + ": Price " + itemSellPrices[i]
 					+ ", Available:" + itemStock[i] + ", In Cargo " + cargo[i];
@@ -144,32 +143,32 @@ public class Marketplace {
 	// itemStock[good.ordinal()]++;
 	// }
 
-	public void buyGood(TradeGood good) throws NotEnoughMoneyException,
+	public int buyGood(TradeGood good, Ship ship, int money) throws NotEnoughMoneyException,
 			CargoHullFullException, NoTradeGoodException {
-		if (itemBuyPrices[good.ordinal()] > gd.getMoney()) {
+		if (itemBuyPrices[good.ordinal()] > money) {
 			throw new NotEnoughMoneyException(
 					"We don't have enough money, captain!");
 		} else if (itemStock[good.ordinal()] == 0) {
 			throw new NoTradeGoodException(
 					"They don't have that good, captain!", good);
 		} else {
-			gd.getShip().addGood(good);// throw cargo full exception
+			ship.addGood(good);// throw cargo full exception
 			itemStock[good.ordinal()]--;
-			gd.setMoney(gd.getMoney() - itemBuyPrices[good.ordinal()]);
+			return money - itemBuyPrices[good.ordinal()];
 		}
 	}
 
 	/**
 	 * Sell a good
 	 */
-	public void sellGood(TradeGood good) throws NoTradeGoodException {
+	public int sellGood(TradeGood good, Ship ship, int money) throws NoTradeGoodException {
 		if (itemSellPrices[good.ordinal()] == 0) {
 			throw new NoTradeGoodException(
 					"They don't need that good, captain!", good);
 		} else {
-			gd.getShip().removeGood(good);
+			ship.removeGood(good);
 			itemStock[good.ordinal()]++;
-			gd.setMoney(gd.getMoney() + itemBuyPrices[good.ordinal()]); // if
+			return money + itemBuyPrices[good.ordinal()]; // if
 																		// exception
 																		// is
 																		// thrown,
