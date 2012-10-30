@@ -17,16 +17,22 @@ public class Planet {
 	private Point location;
 	private TechLevel level;
 	private Situation situation;
+	private Marketplace marketplace;
 	
 	
 	/**
 	 * Costructor for planet
 	 */
-	public Planet(String name, int x, int y, TechLevel level, Situation situation) {
+	public Planet(String name, int x, int y, TechLevel level, Situation situation, Marketplace marketplace) {
 		this.name = name;
 		location = new Point(x, y);
 		this.level = level;
 		this.situation = situation;
+		this.marketplace = marketplace;
+	}
+	
+	public Planet(String name, int x, int y, TechLevel level, Situation situation) {
+		this(name, x, y, level, situation, new Marketplace(0, level, situation));
 	}
 	
 	/**
@@ -59,6 +65,10 @@ public class Planet {
 
 	public void setSituation(Situation situation) {
 		this.situation = situation;
+	}
+	
+	public Marketplace getMarketplace() {
+		return marketplace;
 	}
 
 	// For testing purpose

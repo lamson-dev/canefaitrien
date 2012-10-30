@@ -14,7 +14,7 @@ public class Ship {
 	private ShipType type;
 	private int hullStrength;
 	private int currentCargoHold;
-	private int[] tradeGoods;
+	private int[] cargo;
 	
 	// private GadgetType gadget;
 	// etc...
@@ -26,7 +26,7 @@ public class Ship {
 	public Ship(ShipType type) {
 		this.type = type;
 		hullStrength = type.MAX_HULL_STRENGTH;
-		tradeGoods = new int[TradeGood.values().length];
+		cargo = new int[TradeGood.values().length];
 		currentCargoHold = 0;
 	}
 	
@@ -34,11 +34,11 @@ public class Ship {
 	 * Constructor for load Ship
 	 * 
 	 */
-	public Ship(ShipType type, int hullStrength, int currentCargoHold, int[] tradeGoods) {
+	public Ship(ShipType type, int hullStrength, int currentCargoHold, int[] cargo) {
 		this.type = type;
 		this.hullStrength = hullStrength;
 		this.currentCargoHold = currentCargoHold;
-		this.tradeGoods = tradeGoods;
+		this.cargo = cargo;
 	}
 	
 	/**
@@ -48,7 +48,7 @@ public class Ship {
 		if (currentCargoHold == type.MAX_CARGO_HOLD) {
 			throw new CargoHullFullException("No more room in the cargo, captain!");
 		} else {
-			tradeGoods[good.ordinal()]++;
+			cargo[good.ordinal()]++;
 			currentCargoHold++;
 		}
 	}
@@ -57,16 +57,20 @@ public class Ship {
 	 * Removing a good
 	 */
 	public void removeGood(TradeGood good) throws NoTradeGoodException {
-		if (tradeGoods[good.ordinal()] == 0) {
+		if (cargo[good.ordinal()] == 0) {
 			throw new NoTradeGoodException("No such item in the cargo, captain!", good);
 		} else {
-			tradeGoods[good.ordinal()]--;
+			cargo[good.ordinal()]--;
 			currentCargoHold--;
 		}
 	}
 	
 	public ShipType getType() {
 		return type;
+	}
+	
+	public int[] getCargo() {
+		return cargo;
 	}
 	
 	public static void main (String arg[]) {
