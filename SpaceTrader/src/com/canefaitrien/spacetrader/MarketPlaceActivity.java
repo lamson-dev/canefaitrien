@@ -1,5 +1,6 @@
 package com.canefaitrien.spacetrader;
 
+import android.app.ListActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -7,9 +8,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.canefaitrien.spacetrader.models.GameData;
-import com.canefaitrien.spacetrader.utils.AbstractActivity;
 
-public class MarketPlaceActivity extends AbstractActivity {
+public class MarketPlaceActivity extends ListActivity {
 
 	private final String TAG = "MarketPlace";
 
@@ -17,7 +17,7 @@ public class MarketPlaceActivity extends AbstractActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		setContentView(R.layout.activity_marketplace);
+		// setContentView(R.layout.activity_marketplace);
 		// TextView textView = (TextView) findViewById(R.id.tv_market);
 		// textView.setTextSize(20);
 		// textView.setText("this THE market place");
@@ -39,14 +39,16 @@ public class MarketPlaceActivity extends AbstractActivity {
 
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
 				android.R.layout.simple_list_item_1, myStringArray);
-
-		ListView listView = (ListView) findViewById(R.id.lv_market);
-		listView.setAdapter(adapter);
+		setListAdapter(adapter);
+		// ListView listView = (ListView) findViewById(R.id.lv_market);
+		// listView.setAdapter(adapter);
 
 	}
 
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		// Do something when a list item is clicked
+		super.onListItemClick(l, v, position, id);
+		Log.d(TAG, position + " " + id);
 	}
 
 }

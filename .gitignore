@@ -4,6 +4,8 @@ apidoc
 apidoc/*
 
 M4/*
+SpaceTrader/gen/*
+SpaceTrader/bin/*
 
 classes.dex
 resources.ap_
@@ -12,7 +14,7 @@ BuildConfig.java
 R.java
 M3 - SpaceTrader.vpp
 SpaceTrader/gen/com/canefaitrien/spacetrader/R.java
-SpaceTrader/gen/*
+
 
 # Compiled source #
 ###################
