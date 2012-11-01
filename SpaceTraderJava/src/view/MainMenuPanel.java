@@ -1,15 +1,14 @@
+package view;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import models.GameData;
-import models.GameData.Difficulty;
-import models.Character;
-
 
 public class MainMenuPanel extends JPanel {
+	
+	private static final long serialVersionUID = 3701450891814698277L;
 	
 	JPanel mainPanel;
 	public MainMenuPanel(JPanel panel) {

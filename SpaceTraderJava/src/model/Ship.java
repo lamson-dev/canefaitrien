@@ -1,27 +1,24 @@
-package models;
-
-import exceptions.CargoHullFullException;
-import exceptions.NoTradeGoodException;
+package model;
 
 /**
- * Create Ship model
+ * Ship class for holding info on the ship
  * 
  * @author apham9
- * @date 10/10/2012
+ * @version 1.0
  */
 public class Ship {
 	
+	// Ship info
 	private ShipType type;
 	private int hullStrength;
 	private int currentCargoHold;
 	private int[] cargo;
-	
-	// private GadgetType gadget;
-	// etc...
+//	private Weapons[] weapons;
+//	private Shield[] shields;
+//	private Gadget[] gadgets;
 	
 	/**
 	 * Constructor for new Ship
-	 * 
 	 */
 	public Ship(ShipType type) {
 		this.type = type;
@@ -32,7 +29,6 @@ public class Ship {
 	
 	/**
 	 * Constructor for load Ship
-	 * 
 	 */
 	public Ship(ShipType type, int hullStrength, int currentCargoHold, int[] cargo) {
 		this.type = type;
@@ -42,11 +38,14 @@ public class Ship {
 	}
 	
 	/**
-	 * Adding a good
+	 * Adds a good to the cargo
+	 * 
+	 * @param good good to add to cargo
+	 * @throws Exception if no room in cargo
 	 */
-	public void addGood(TradeGood good) throws CargoHullFullException {
+	public void addGood(TradeGood good) throws Exception {
 		if (currentCargoHold == type.MAX_CARGO_HOLD) {
-			throw new CargoHullFullException("No more room in the cargo, captain!");
+			throw new Exception("No more room in the cargo, captain!");
 		} else {
 			cargo[good.ordinal()]++;
 			currentCargoHold++;
@@ -54,11 +53,14 @@ public class Ship {
 	}
 	
 	/**
-	 * Removing a good
+	 * Removes a good from the cargo
+	 * 
+	 * @param good good to remove from cargo
+	 * @throws Exception if no good in cargo
 	 */
-	public void removeGood(TradeGood good) throws NoTradeGoodException {
+	public void removeGood(TradeGood good) throws Exception {
 		if (cargo[good.ordinal()] == 0) {
-			throw new NoTradeGoodException("No such item in the cargo, captain!", good);
+			throw new Exception("No such item in the cargo, captain!");
 		} else {
 			cargo[good.ordinal()]--;
 			currentCargoHold--;
@@ -71,10 +73,5 @@ public class Ship {
 	
 	public int[] getCargo() {
 		return cargo;
-	}
-	
-	public static void main (String arg[]) {
-		Ship test = new Ship(ShipType.WASP);
-		System.out.println(test.getType());
 	}
 }

@@ -1,16 +1,20 @@
+package view;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import models.GameData;
-import models.GameData.Difficulty;
-import models.Character;
+import controller.Controller;
+import controller.Controller.Difficulty;
+
+import model.Person;
 
 
 public class CharacterCreationPanel extends JPanel {
+	
+	private static final long serialVersionUID = 1227113222169913502L;
 	
 	JPanel mainPanel;
 	public CharacterCreationPanel(JPanel panel) {
@@ -24,7 +28,7 @@ public class CharacterCreationPanel extends JPanel {
 		
 		public void actionPerformed(ActionEvent e) {
 			mainPanel.removeAll();
-			mainPanel.add(new MarketplacePanel(new GameData(new Character("Bob", 0, 0, 0, 0), Difficulty.Easy)));
+			mainPanel.add(new MarketplacePanel(new Controller(new Person("Bob", 0, 0, 0, 0), Difficulty.Easy)));
 			mainPanel.revalidate();
 		}
 	}

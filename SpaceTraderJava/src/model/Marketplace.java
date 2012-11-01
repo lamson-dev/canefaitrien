@@ -1,29 +1,35 @@
-package models;
+package model;
 
 import java.util.Random;
 
-import exceptions.CargoHullFullException;
-import exceptions.NoTradeGoodException;
-import exceptions.NotEnoughMoneyException;
 
 /**
- * Marketplace An intermediate to generate the market on each planet In charge
- * of keeping track of trade goods and perform sell/buy good
+ * Class for handling the amounts and prices of goods a Planet's marketplace can have.  Also 
+ * handles buying and selling goods
+ * 
+ * @author Andrew Duda
+ * @version 1.0
  */
 public class Marketplace {
 
-	private static final int STOCK_REFRESH_TIME = 5; // Time to recreate market
-														// place, in turn
-	private static final int MIN_NUM_GOODS = 5, VARIANCE = 5;
+	// Marketplace constants
+	private static final int STOCK_REFRESH_TURNS = 5; // turns to recreate marketplace
+	private static final int MIN_NUM_GOODS = 5, VARIANCE = 5; // for inventory creation
+	public static enum MarketAction {BUY, SELL};
 	private static TradeGood[] goods = TradeGood.values();
+	private static Random rand = new Random();
+	
+	// Marketplace info
 	private int lastDock;
 	private int[] itemStock;
 	private int[] itemBuyPrices;
 	private int[] itemSellPrices;
 	private TechLevel level;
 	private Situation situation;
-	private static Random rand = new Random();
-
+	
+	/**
+	 * Marketplace constructor for loading
+	 */
 	public Marketplace(int lastDock, int[] itemStock, int[] itemBuyPrices,
 			int[] itemSellPrices, TechLevel level, Situation situation) {
 		this.lastDock = lastDock;
@@ -33,7 +39,10 @@ public class Marketplace {
 		this.level = level;
 		this.situation = situation;
 	}
-
+	
+	/**
+	 * Marketplace constructor for new Marketplace
+	 */
 	public Marketplace(int lastDock, TechLevel level, Situation situation) {
 		this(lastDock, new int[goods.length], new int[goods.length],
 				new int[goods.length], level, situation);
@@ -41,17 +50,19 @@ public class Marketplace {
 	}
 
 	/**
-	 * 
+	 * Dock method to be called by Planet upon traveling to that Planet
 	 */
 	public void dock(int turnDocked) {
-		if (turnDocked - lastDock > STOCK_REFRESH_TIME) {
+		if (turnDocked - lastDock > STOCK_REFRESH_TURNS) {
 			updateStock();
 			lastDock = turnDocked;
 		}
 	}
 
+	/**
+	 * Updates the good prices and the amount of goods
+	 */
 	public void updateStock() {
-
 		for (TradeGood good : goods) {
 			itemBuyPrices[good.ordinal()] = getBuyPrice(good);
 			// situation modify
@@ -64,13 +75,13 @@ public class Marketplace {
 		}
 
 	}
-
+	
 	private int getBuyPrice(TradeGood good) {
 		return getPrice(good, good.MIN_TL_PRODUCE);
 	}
 
 	private int getSellPrice(TradeGood good) {
-		return getPrice(good, good.MIN_TL_USE);
+		return (int)(0.9*getPrice(good, good.MIN_TL_USE)); // makes sell values less than buy values
 	}
 
 	private int getPrice(TradeGood good, int minTL) {
@@ -156,14 +167,11 @@ public class Marketplace {
 	// itemStock[good.ordinal()]++;
 	// }
 
-	public int buyGood(TradeGood good, Ship ship, int money) throws NotEnoughMoneyException,
-			CargoHullFullException, NoTradeGoodException {
+	public int buyGood(TradeGood good, Ship ship, int money) throws Exception {
 		if (itemBuyPrices[good.ordinal()] > money) {
-			throw new NotEnoughMoneyException(
-					"We don't have enough money, captain!");
+			throw new Exception ("We don't have enough money, captain!");
 		} else if (itemStock[good.ordinal()] == 0) {
-			throw new NoTradeGoodException(
-					"They don't have that good, captain!", good);
+			throw new Exception("They don't have that good, captain!");
 		} else {
 			ship.addGood(good);// throw cargo full exception
 			itemStock[good.ordinal()]--;
@@ -172,27 +180,15 @@ public class Marketplace {
 	}
 
 	/**
-	 * Sell a good
+	 * Sell a good 
 	 */
-	public int sellGood(TradeGood good, Ship ship, int money) throws NoTradeGoodException {
+	public int sellGood(TradeGood good, Ship ship, int money) throws Exception {
 		if (itemSellPrices[good.ordinal()] == 0) {
-			throw new NoTradeGoodException(
-					"They don't need that good, captain!", good);
+			throw new Exception("They don't need that good, captain!");
 		} else {
 			ship.removeGood(good);
 			itemStock[good.ordinal()]++;
-			return money + itemSellPrices[good.ordinal()]; // if
-																		// exception
-																		// is
-																		// thrown,
-																		// this
-																		// line
-																		// shouldn't
-																		// execute
+			return money + itemSellPrices[good.ordinal()];
 		}
-	}
-
-	public String toString() {
-		return "market place is here";
 	}
 }

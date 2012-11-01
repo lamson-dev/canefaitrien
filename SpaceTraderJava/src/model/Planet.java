@@ -1,9 +1,6 @@
-package models;
+package model;
 
 import java.awt.Point;
-
-
-
 
 /**
  * Class Planet
@@ -14,7 +11,8 @@ import java.awt.Point;
  */
 
 public class Planet {
-	// Instance variables
+	
+	// Planet data
 	private String name;
 	private Point location;
 	private TechLevel level;
@@ -23,29 +21,43 @@ public class Planet {
 	
 	
 	/**
-	 * Costructor for planet
+	 * Constructor for loading Planet
 	 */
-	public Planet(String name, int x, int y, TechLevel level, Situation situation, Marketplace marketplace) {
+	public Planet(String name, Point location, TechLevel level, Situation situation, Marketplace marketplace) {
 		this.name = name;
-		location = new Point(x, y);
+		this.location = location;
 		this.level = level;
 		this.situation = situation;
 		this.marketplace = marketplace;
 	}
 	
-	public Planet(String name, int x, int y, TechLevel level, Situation situation) {
-		this(name, x, y, level, situation, new Marketplace(0, level, situation));
+	/**
+	 * Constructor for a new Planet
+	 */
+	
+	public Planet(String name, Point location, TechLevel level, Situation situation) {
+		this(name, location, level, situation, new Marketplace(0, level, situation));
 	}
 	
 	/**
 	 * Distance between planets
 	 */
 	public double distance(Planet planet) {
+		return distance(planet.getLocation());
+	}
+	
+	/**
+	 * Distance between the planet and another point (like a click)
+	 */
+	public double distance(Point other) {
 		int dx, dy;
-		Point other = planet.getLocation();
 		dx = location.x - other.x;
 		dy = location.y - other.y;
 		return Math.sqrt(dx*dx + dy*dy);
+	}
+	
+	public void dock(int turn) {
+		marketplace.dock(turn);
 	}
 	/**
 	 * Getters and setters

@@ -1,3 +1,4 @@
+package view;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -5,20 +6,22 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import models.Character;
-import models.GameData;
-import models.TradeGood;
-import models.GameData.Difficulty;
+import controller.Controller;
+
+import model.TradeGood;
 
 
 public class MarketplacePanel extends JPanel {
 
-	private GameData data;
+	private static final long serialVersionUID = -455183452223286075L;
+	
+	private Controller data;
 	JLabel[][] labels;
 	JLabel nameLabel, moneyLabel;
-	public MarketplacePanel(GameData data) {
+	public MarketplacePanel(Controller data) {
 		this.data = data;
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(11, 7));
@@ -74,10 +77,10 @@ public class MarketplacePanel extends JPanel {
 		
 		public void actionPerformed(ActionEvent e) {
 			try {
-				data.setMoney(data.getLocation().getMarketplace().buyGood(good, data.getShip(), data.getMoney()));
+				data.buyGood(good);
 				updateGoods();
 			} catch (Exception ex) {
-				
+				JOptionPane.showMessageDialog(null, ex.getMessage());
 			}
 		}
 	}
@@ -92,7 +95,7 @@ public class MarketplacePanel extends JPanel {
 	
 	public void actionPerformed(ActionEvent e) {
 		try {
-			data.setMoney(data.getLocation().getMarketplace().sellGood(good, data.getShip(), data.getMoney()));
+			data.sellGood(good);
 			updateGoods();
 		} catch (Exception ex) {
 			
