@@ -13,6 +13,7 @@ public class Ship {
 	private int hullStrength;
 	private int currentCargoHold;
 	private int[] cargo;
+	private int fuel;
 //	private Weapons[] weapons;
 //	private Shield[] shields;
 //	private Gadget[] gadgets;
@@ -21,20 +22,18 @@ public class Ship {
 	 * Constructor for new Ship
 	 */
 	public Ship(ShipType type) {
-		this.type = type;
-		hullStrength = type.MAX_HULL_STRENGTH;
-		cargo = new int[TradeGood.values().length];
-		currentCargoHold = 0;
+		this(type, type.MAX_HULL_STRENGTH, 0, new int[TradeGood.values().length], type.MAX_DISTANCE);
 	}
 	
 	/**
 	 * Constructor for load Ship
 	 */
-	public Ship(ShipType type, int hullStrength, int currentCargoHold, int[] cargo) {
+	public Ship(ShipType type, int hullStrength, int currentCargoHold, int[] cargo, int fuel) {
 		this.type = type;
 		this.hullStrength = hullStrength;
 		this.currentCargoHold = currentCargoHold;
 		this.cargo = cargo;
+		this.fuel = fuel;
 	}
 	
 	/**
@@ -73,5 +72,13 @@ public class Ship {
 	
 	public int[] getCargo() {
 		return cargo;
+	}
+
+	public int getFuel() {
+		return fuel;
+	}
+
+	public void setFuel(int fuel) {
+		this.fuel = fuel;
 	}
 }

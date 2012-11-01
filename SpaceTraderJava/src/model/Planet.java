@@ -42,18 +42,18 @@ public class Planet {
 	/**
 	 * Distance between planets
 	 */
-	public double distance(Planet planet) {
+	public int distance(Planet planet) {
 		return distance(planet.getLocation());
 	}
 	
 	/**
 	 * Distance between the planet and another point (like a click)
 	 */
-	public double distance(Point other) {
+	public int distance(Point other) {
 		int dx, dy;
 		dx = location.x - other.x;
 		dy = location.y - other.y;
-		return Math.sqrt(dx*dx + dy*dy);
+		return (int)Math.sqrt(dx*dx + dy*dy);
 	}
 	
 	public void dock(int turn) {
