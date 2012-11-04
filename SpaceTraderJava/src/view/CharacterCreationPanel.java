@@ -18,7 +18,7 @@ public class CharacterCreationPanel extends JPanel {
 	Controller controller = new Controller(new Person("Bob", 0, 0, 0, 0), Difficulty.Easy);// This is added by An Pham on 11/04/12
 	JPanel mainPanel;
 	public CharacterCreationPanel(JPanel panel) {
-		JButton button = new JButton("Go To Marketplace");
+		JButton button = new JButton("Start");
 		this.mainPanel = panel;
 		button.addActionListener(new ButtonListener());
 		add(button);
