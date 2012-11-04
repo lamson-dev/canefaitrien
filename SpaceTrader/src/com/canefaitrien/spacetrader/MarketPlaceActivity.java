@@ -23,23 +23,23 @@ public class MarketPlaceActivity extends ListActivity {
 		// textView.setText("this THE market place");
 
 		// String[] myStringArray = new String[] { "a", "b", "c" };
-		GameData data = SpaceTraderApplication.getData();
-		Log.d(TAG, SpaceTraderApplication.getData().toString());
-		if (data.getLocation() == null) {
-			Log.d(TAG, "planet is nulll");
-		}
-		Log.d(TAG, SpaceTraderApplication.getData().getLocation().toString());
-		Log.d(TAG, SpaceTraderApplication.getData().getLocation()
-				.getMarketplace().toString());
-		// Log.d(TAG,
-		// SpaceTraderApplication.getData().getLocation().getMarketplace().getBuyView()[0]);
-
-		String[] myStringArray = data.getLocation().getMarketplace()
-				.getBuyView(data.getShip());
-
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-				android.R.layout.simple_list_item_1, myStringArray);
-		setListAdapter(adapter);
+//		GameData data = SpaceTraderApplication.getData();
+//		Log.d(TAG, SpaceTraderApplication.getData().toString());
+//		if (data.getLocation() == null) {
+//			Log.d(TAG, "planet is nulll");
+//		}
+//		Log.d(TAG, SpaceTraderApplication.getData().getLocation().toString());
+//		Log.d(TAG, SpaceTraderApplication.getData().getLocation()
+//				.getMarketplace().toString());
+//		// Log.d(TAG,
+//		// SpaceTraderApplication.getData().getLocation().getMarketplace().getBuyView()[0]);
+//
+//		String[] myStringArray = data.getLocation().getMarketplace()
+//				.getBuyView(data.getShip());
+//
+//		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+//				android.R.layout.simple_list_item_1, myStringArray);
+//		setListAdapter(adapter);
 		// ListView listView = (ListView) findViewById(R.id.lv_market);
 		// listView.setAdapter(adapter);
 

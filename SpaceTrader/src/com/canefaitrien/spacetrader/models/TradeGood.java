@@ -1,10 +1,10 @@
-package com.canefaitrien.spacetrader.models;
+package model;
 
 /**
- * Create Trade Goods
+ * TradeGoods to be bought and sold durring the game
+ * 
  * @author apham9
- * @date 10/18/2012
- *
+ * @version 1.0
  */
 
 public enum TradeGood{
@@ -14,7 +14,6 @@ public enum TradeGood{
 	 * Name(minTechLevelProduce|minTechLevelUse|techLevelTopProduce|basePrice|increasePerTechLevel|Var|increaseEvent|decreaseEventCR|
 	 * 	expensiveEvent|minTradePrice|maxTradePrice|name)
 	 */
-	
 	WATER(0, 0, 2, 30, 3, 4, Situation.DROUGHT, Situation.LOTS_OF_WATER, 
 			Situation.DESERT, 30, 50, "Water"),
 			
@@ -47,7 +46,7 @@ public enum TradeGood{
 	
 	;
 	
-	//private instance variables
+	// TradeGood info
 	public final int MIN_TL_PRODUCE;
 	public final int MIN_TL_USE;
 	public final int TL_TOP_PRODUCE;
@@ -62,21 +61,22 @@ public enum TradeGood{
 	public final String NAME;
 	
 	/**
-	 * Constructor
-	 *  minTechLevelProduce = Minimum Tech Level to Produce this resource (You can't buy on planets below this level)
-	 *	minTechLevelUse = Minimum Tech Level to Use this resource (You can't sell on planets below this level)
-     *	techLevelTopProduce = Tech Level which produces the most of this item
-     *	increasePerTechLevel = Price increase per tech level
-     *	Var = variance is the maximum percentage that the price can vary above or below the base
-     *	Situation IE when this even happens on a planet, the price may increase astronomically
-     * 	Situation CR = When this condition is present, the price of this resource is unusually low
-     * 	Situation ER = When this condition is present, the resource is expensive
-     *	minTradePrice = Min price offered in space trade with random trader (not on a planet)
-     *	maxTradePrice = Max price offered in space trade with random trader (not on a planet)
-     *	name of goods
+	 * Constructor for TradeGood
+	 * 
+	 * @param minTechLevelProduce Minimum Tech Level to Produce this resource (You can't buy on planets below this level)
+	 * @param minTechLevelUse Minimum Tech Level to Use this resource (You can't sell on planets below this level)
+     * @param techLevelTopProduce Tech Level which produces the most of this item
+     * @param increasePerTechLevel Price increase per tech level
+     * @param variance the maximum percentage that the price can vary above or below the base
+     * @param increaseSituation when this even happens on a planet, the price may increase astronomically
+     * @param decreaseSituation When this condition is present, the price of this resource is unusually low
+     * @param expensiveSituation When this condition is present, the resource is expensive
+     * @param minTradePrice Min price offered in space trade with random trader (not on a planet)
+     * @param maxTradePrice Max price offered in space trade with random trader (not on a planet)
+     * @param name name of goods
 	 */
 	
-	TradeGood(int minTechLevelProduce, int minTechLevelUse, int techLevelTopProduce, int basePrice, int increasePerTechLevel, int variance, 
+	private TradeGood(int minTechLevelProduce, int minTechLevelUse, int techLevelTopProduce, int basePrice, int increasePerTechLevel, int variance, 
 			Situation increaseSituation, Situation decreaseSituation, Situation expensiveSituation, int minTradePrice, int maxTradePrice, String name) {
 		MIN_TL_PRODUCE = minTechLevelProduce;
 		MIN_TL_USE = minTechLevelUse;

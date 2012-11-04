@@ -60,7 +60,7 @@ public class MainMenuActivity extends AbstractActivity {
 
 			public void onClick(View v) {
 				Intent intent = new Intent(MainMenuActivity.this,
-						MarketPlaceActivity.class);
+						MainScreenActivity.class);
 				startActivity(intent);
 			}
 		});

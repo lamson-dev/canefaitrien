@@ -242,8 +242,6 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/m20dp"
             android:text="@string/btn_start"
-            
-            android:onClick="startGame"
              />
 
     </LinearLayout>

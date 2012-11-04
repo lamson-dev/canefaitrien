@@ -1,12 +1,11 @@
 package com.canefaitrien.spacetrader;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
@@ -16,12 +15,12 @@ import com.canefaitrien.spacetrader.constants.GameConstants;
 import com.canefaitrien.spacetrader.models.Character;
 import com.canefaitrien.spacetrader.models.GameData;
 import com.canefaitrien.spacetrader.models.GameData.Difficulty;
-import com.canefaitrien.spacetrader.models.Universe;
 import com.canefaitrien.spacetrader.utils.AbstractActivity;
 import com.canefaitrien.spacetrader.utils.DbAdapter;
+import com.canefaitrien.spacetrader.utils.Tools;
 
 public class ConfigurationActivity extends AbstractActivity implements
-		GameConstants {
+		GameConstants, OnClickListener {
 
 	private static final String TAG = "Configuration";
 	private String name;
@@ -47,6 +46,8 @@ public class ConfigurationActivity extends AbstractActivity implements
 
 		Button btnPlus = (Button) findViewById(R.id.btn_plus);
 		Button btnMinus = (Button) findViewById(R.id.btn_minus);
+		Button btnStart = (Button) findViewById(R.id.btn_start);
+		btnStart.setOnClickListener(this);
 
 		btnPlus.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view) {
@@ -184,16 +185,11 @@ public class ConfigurationActivity extends AbstractActivity implements
 	public final static String EXTRA_MESSAGE = "com.canefaitrient.spacetrader.MESSAGE";
 
 	/** Called when the user clicks the START button */
-	public void startGame(View view) {
+	public void startGame() {
 
 		boolean isGoodInput = true;
-
-		DbAdapter mDbHelper = new DbAdapter(ConfigurationActivity.this);
-		mDbHelper.open();
-
 		EditText editName = (EditText) findViewById(R.id.edit_name);
-
-		String message = "Hell yeahhh\n";
+		String message = "";
 
 		name = editName.getText().toString();
 		if (name.equals("")) {
@@ -208,23 +204,32 @@ public class ConfigurationActivity extends AbstractActivity implements
 
 		// intent.putExtra(EXTRA_MESSAGE, message);
 
-		AlertDialog.Builder popup = new AlertDialog.Builder(this);
-		popup.setTitle("Heyyy!");
-		popup.setMessage(message);
-
-		popup.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface dialog, int which) {
-				// dismiss the dialog
-			}
-		});
-		popup.setCancelable(true);
-		popup.create().show();
-
-		if (!isGoodInput)
+		if (!isGoodInput) {
+			Tools.popUp(this, message);
 			return;
+		}
 
-		// Do something in response to button
-		// Intent intent = new Intent(this, DisplayDataActivity.class);
+		long charId = createCharacter();
+
+		// Log.d(TAG,
+		// SpaceTraderApplication.getData().getLocation().toString());
+		// Log.d(TAG,
+		// SpaceTraderApplication.getData().getLocation().getMarketplace().toString());
+		// Log.d(TAG,
+		// SpaceTraderApplication.getData().getLocation().getMarketplace().getBuyView()[0]);
+
+		Intent intent = new Intent(ConfigurationActivity.this,
+				MainScreenActivity.class);
+		intent.putExtra(EXTRA_MESSAGE, SpaceTraderApplication.getData()
+				.getUniverse().toString());
+		intent.putExtra(DbAdapter.CHAR_KEY_ROWID, charId);
+		startActivity(intent);
+
+	}
+
+	private long createCharacter() {
+		DbAdapter mDbHelper = new DbAdapter(ConfigurationActivity.this);
+		mDbHelper.open();
 
 		Character charac = new Character(name, barPilot.getProgress(),
 				barFighter.getProgress(), barTrader.getProgress(),
@@ -234,23 +239,22 @@ public class ConfigurationActivity extends AbstractActivity implements
 
 		SpaceTraderApplication.setData(data);
 
-		// Log.d(TAG,
-		// SpaceTraderApplication.getData().getLocation().toString());
-		// Log.d(TAG,
-		// SpaceTraderApplication.getData().getLocation().getMarketplace().toString());
-		// Log.d(TAG,
-		// SpaceTraderApplication.getData().getLocation().getMarketplace().getBuyView()[0]);
-
 		long charId = mDbHelper.createCharacter(charac);
 
 		mDbHelper.close();
+		return charId;
 
-		Intent intent = new Intent(ConfigurationActivity.this,
-				MarketPlaceActivity.class);
-		intent.putExtra(EXTRA_MESSAGE, SpaceTraderApplication.getData()
-				.getUniverse().toString());
-		intent.putExtra(DbAdapter.CHAR_KEY_ROWID, charId);
-		startActivity(intent);
+	}
+
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+
+		switch (v.getId()) {
+		case R.id.btn_start:
+			startGame();
+			break;
+		}
+
 	}
 
 	// @Override
