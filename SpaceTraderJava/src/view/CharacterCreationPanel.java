@@ -28,7 +28,7 @@ public class CharacterCreationPanel extends JPanel {
 		
 		public void actionPerformed(ActionEvent e) {
 			mainPanel.removeAll();
-			mainPanel.add(new MarketplacePanel(new Controller(new Person("Bob", 0, 0, 0, 0), Difficulty.Easy)));
+			mainPanel.add(new GamePanel(new Controller(new Person("Bob", 0, 0, 0, 0), Difficulty.Easy)));
 			mainPanel.revalidate();
 		}
 	}

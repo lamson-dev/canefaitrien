@@ -21,11 +21,12 @@ public class MarketplacePanel extends JPanel {
 	private Controller data;
 	JLabel[][] labels;
 	JLabel nameLabel, moneyLabel;
+	
 	public MarketplacePanel(Controller data) {
 		this.data = data;
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(11, 7));
-		setPreferredSize(new Dimension(600, 500));
+		setPreferredSize(new Dimension(600, 400));
 		
 		String[][] view = data.getLocation().getMarketplace().getView(data.getShip());
 		labels = new JLabel[view.length][view[0].length];
