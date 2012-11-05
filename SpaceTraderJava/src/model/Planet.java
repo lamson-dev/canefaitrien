@@ -1,5 +1,6 @@
 package model;
 
+import java.awt.Graphics;
 import java.awt.Point;
 
 /**
@@ -18,6 +19,8 @@ public class Planet {
 	private TechLevel level;
 	private Situation situation;
 	private Marketplace marketplace;
+	
+	private static final int radius = 5;
 	
 	
 	/**
@@ -59,6 +62,12 @@ public class Planet {
 	public void dock(int turn) {
 		marketplace.dock(turn);
 	}
+	
+	
+	public void draw(Graphics g) {
+		g.fillOval(location.x - radius, location.y - radius, 2*radius, 2*radius);
+	}
+	
 	/**
 	 * Getters and setters
 	 */	
