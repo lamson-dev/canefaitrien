@@ -25,6 +25,7 @@ public class TravelPanel extends JPanel {
 	
 	private Controller data;
 	JPanel panel = new JPanel(new BorderLayout());
+	JButton resetBtn = new JButton("Reset");
 	
 	public TravelPanel(Controller data) {
 
@@ -36,14 +37,14 @@ public class TravelPanel extends JPanel {
 		JButton travelButton = new JButton("Travel");
 		panel.add(travelButton);
 		travelButton.addActionListener(new TravelButtonListener());
+		resetBtn.addActionListener(new TravelButtonListener());
 		add(panel);
 	}
 	private class TravelButtonListener implements ActionListener {
 		
 		public void actionPerformed(ActionEvent e) {
 			EncounterType encounter = EncounterType.getEncounterType();
-			JButton resetBtn = new JButton("Reset");
-			resetBtn.addActionListener(new TravelButtonListener());
+			System.out.println(encounter);
 			switch (encounter) {
 			case POLICE:
 				JLabel police = new JLabel("Police Encounter");
@@ -63,7 +64,7 @@ public class TravelPanel extends JPanel {
 				
 				break;
 			case PIRATE:
-				JLabel pirate = new JLabel("Police Encounter");
+				JLabel pirate = new JLabel("Pirate Encounter");
 				JButton attackPirateButton = new JButton("Attack");
 				JButton fleePirateButton = new JButton("Flee");
 				JButton surrenderButton = new JButton("Surrender");
@@ -77,7 +78,7 @@ public class TravelPanel extends JPanel {
 				revalidate();
 				break;
 			case TRADER:
-				JLabel trader= new JLabel("Police Encounter");
+				JLabel trader= new JLabel("Trader Encounter");
 				JButton attackTraderButton = new JButton("Attack");
 				JButton ignoreButton = new JButton("Ignore");
 				JButton tradeButton = new JButton("Trade");
