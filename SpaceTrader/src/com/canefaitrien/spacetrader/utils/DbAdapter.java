@@ -24,7 +24,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.canefaitrien.spacetrader.models.Character;
+import com.canefaitrien.spacetrader.models.Person;
 
 /**
  * Simple notes database access helper class. Defines the basic CRUD operations
@@ -62,16 +62,18 @@ public class DbAdapter {
 	 */
 
 	private static final String DB_CREATE_CHAR = "CREATE TABLE "
-			+ TABLE_CHARACTER + "(" 
-			+ CHAR_KEY_ROWID + " INTEGER PRIMARY KEY AUTOINCREMENT, " 
-//			+ CHAR_KEY_DIFFICULTY + " INTEGER, " 
-			+ CHAR_KEY_NAME + " TEXT NOT NULL, "
-//			+ CHAR_KEY_MONEY + " INTEGER, " 
-			+ CHAR_KEY_PILOT_PTS + " INTEGER, "
-			+ CHAR_KEY_TRADER_PTS + " INTEGER, " 
-			+ CHAR_KEY_FIGHTER_PTS + " INTEGER, " 
+			+ TABLE_CHARACTER + "("
+			+ CHAR_KEY_ROWID
+			+ " INTEGER PRIMARY KEY AUTOINCREMENT, "
+			// + CHAR_KEY_DIFFICULTY + " INTEGER, "
+			+ CHAR_KEY_NAME
+			+ " TEXT NOT NULL, "
+			// + CHAR_KEY_MONEY + " INTEGER, "
+			+ CHAR_KEY_PILOT_PTS + " INTEGER, " + CHAR_KEY_TRADER_PTS
+			+ " INTEGER, " + CHAR_KEY_FIGHTER_PTS + " INTEGER, "
 			+ CHAR_KEY_ENGINEER_PTS + " INTEGER);";
-//			+ CHAR_KEY_DATE + " TEXT NOT NULL);";
+
+	// + CHAR_KEY_DATE + " TEXT NOT NULL);";
 
 	private static class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -106,9 +108,9 @@ public class DbAdapter {
 	}
 
 	/**
-	 * Open the spacetrader database. If it cannot be opened, try to create a new
-	 * instance of the database. If it cannot be created, throw an exception to
-	 * signal the failure
+	 * Open the spacetrader database. If it cannot be opened, try to create a
+	 * new instance of the database. If it cannot be created, throw an exception
+	 * to signal the failure
 	 * 
 	 * @return this (self reference, allowing this to be chained in an
 	 *         initialization call)
@@ -127,24 +129,24 @@ public class DbAdapter {
 
 	/**
 	 * Create a character using the info provided. If the character is
-	 * successfully created return the new rowId for that character, otherwise return
-	 * a -1 to indicate failure.
+	 * successfully created return the new rowId for that character, otherwise
+	 * return a -1 to indicate failure.
 	 * 
-	 * @param c
+	 * @param charac
 	 *            the character
 	 * @return rowId or -1 if failed
 	 */
-	public long createCharacter(Character c) {
+	public long createCharacter(Person charac) {
 		ContentValues initialValues = new ContentValues();
-		
-		initialValues.put(CHAR_KEY_NAME, c.getName());
-//		initialValues.put(CHAR_KEY_DIFFICULTY, c.getDifficulty());
-//		initialValues.put(CHAR_KEY_MONEY, c.getMoney());
-		initialValues.put(CHAR_KEY_PILOT_PTS, c.getPilotPts());
-		initialValues.put(CHAR_KEY_TRADER_PTS, c.getTraderPts());
-		initialValues.put(CHAR_KEY_FIGHTER_PTS, c.getFighterPts());
-		initialValues.put(CHAR_KEY_ENGINEER_PTS, c.getEngineerPts());
-//		initialValues.put(CHAR_KEY_DATE, c.getDate());
+
+		initialValues.put(CHAR_KEY_NAME, charac.getName());
+		// initialValues.put(CHAR_KEY_DIFFICULTY, c.getDifficulty());
+		// initialValues.put(CHAR_KEY_MONEY, c.getMoney());
+		initialValues.put(CHAR_KEY_PILOT_PTS, charac.getPilotPts());
+		initialValues.put(CHAR_KEY_TRADER_PTS, charac.getTraderPts());
+		initialValues.put(CHAR_KEY_FIGHTER_PTS, charac.getFighterPts());
+		initialValues.put(CHAR_KEY_ENGINEER_PTS, charac.getEngineerPts());
+		// initialValues.put(CHAR_KEY_DATE, c.getDate());
 
 		return mDb.insert(TABLE_CHARACTER, null, initialValues);
 	}
@@ -167,17 +169,16 @@ public class DbAdapter {
 	 */
 	public Cursor fetchAllSaves() {
 
-//		String[] columns = new String[] { CHAR_KEY_ROWID, CHAR_KEY_DIFFICULTY,
-//				CHAR_KEY_NAME, CHAR_KEY_MONEY, CHAR_KEY_DATE };
-			String[] columns = new String[] { CHAR_KEY_ROWID, 
-//					CHAR_KEY_DIFFICULTY,
-					CHAR_KEY_NAME, 
-//					CHAR_KEY_MONEY,
-					CHAR_KEY_PILOT_PTS,
-					CHAR_KEY_FIGHTER_PTS,
-					CHAR_KEY_ENGINEER_PTS,
-					CHAR_KEY_TRADER_PTS};
-//					CHAR_KEY_DATE };
+		// String[] columns = new String[] { CHAR_KEY_ROWID,
+		// CHAR_KEY_DIFFICULTY,
+		// CHAR_KEY_NAME, CHAR_KEY_MONEY, CHAR_KEY_DATE };
+		String[] columns = new String[] { CHAR_KEY_ROWID,
+				// CHAR_KEY_DIFFICULTY,
+				CHAR_KEY_NAME,
+				// CHAR_KEY_MONEY,
+				CHAR_KEY_PILOT_PTS, CHAR_KEY_FIGHTER_PTS,
+				CHAR_KEY_ENGINEER_PTS, CHAR_KEY_TRADER_PTS };
+		// CHAR_KEY_DATE };
 
 		return mDb
 				.query(TABLE_CHARACTER, columns, null, null, null, null, null);
@@ -193,15 +194,13 @@ public class DbAdapter {
 	 *             if note could not be found/retrieved
 	 */
 	public Cursor fetchSave(long rowId) throws SQLException {
-		String[] columns = new String[] { CHAR_KEY_ROWID, 
-//				CHAR_KEY_DIFFICULTY,
-				CHAR_KEY_NAME, 
-//				CHAR_KEY_MONEY,
-				CHAR_KEY_PILOT_PTS,
-				CHAR_KEY_FIGHTER_PTS,
-				CHAR_KEY_ENGINEER_PTS,
-				CHAR_KEY_TRADER_PTS};
-//				CHAR_KEY_DATE };
+		String[] columns = new String[] { CHAR_KEY_ROWID,
+				// CHAR_KEY_DIFFICULTY,
+				CHAR_KEY_NAME,
+				// CHAR_KEY_MONEY,
+				CHAR_KEY_PILOT_PTS, CHAR_KEY_FIGHTER_PTS,
+				CHAR_KEY_ENGINEER_PTS, CHAR_KEY_TRADER_PTS };
+		// CHAR_KEY_DATE };
 
 		Cursor mCursor = mDb.query(true, TABLE_CHARACTER, columns,
 				CHAR_KEY_ROWID + "=" + rowId, null, null, null, null, null);
@@ -214,27 +213,27 @@ public class DbAdapter {
 	}
 
 	/**
-	 * Update the character using the details provided. The character to be updated is
-	 * specified using the rowId, and it is altered to use the 
-	 * values passed in
+	 * Update the character using the details provided. The character to be
+	 * updated is specified using the rowId, and it is altered to use the values
+	 * passed in
 	 * 
 	 * @param rowId
 	 *            id of character to update
-	 *            
+	 * 
 	 * @param c
-	 * 			updated character
+	 *            updated character
 	 * @return true if the note was successfully updated, false otherwise
 	 */
-	public boolean updateCharacter(long rowId, Character c) {
+	public boolean updateCharacter(long rowId, Person c) {
 		ContentValues cv = new ContentValues();
 		cv.put(CHAR_KEY_NAME, c.getName());
-//		cv.put(CHAR_KEY_DIFFICULTY, c.getDifficulty());
-//		cv.put(CHAR_KEY_MONEY, c.getMoney());
+		// cv.put(CHAR_KEY_DIFFICULTY, c.getDifficulty());
+		// cv.put(CHAR_KEY_MONEY, c.getMoney());
 		cv.put(CHAR_KEY_PILOT_PTS, c.getPilotPts());
 		cv.put(CHAR_KEY_TRADER_PTS, c.getTraderPts());
 		cv.put(CHAR_KEY_FIGHTER_PTS, c.getFighterPts());
 		cv.put(CHAR_KEY_ENGINEER_PTS, c.getEngineerPts());
-//		cv.put(CHAR_KEY_DATE, c.getDate());
+		// cv.put(CHAR_KEY_DATE, c.getDate());
 
 		return mDb.update(TABLE_CHARACTER, cv, CHAR_KEY_ROWID + "=" + rowId,
 				null) > 0;

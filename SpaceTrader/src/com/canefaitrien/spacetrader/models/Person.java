@@ -1,4 +1,4 @@
-package model;
+package com.canefaitrien.spacetrader.models;
 
 /**
  * Person class for holding info on the Person
@@ -30,7 +30,7 @@ public class Person {
 				+ fighterPts + "\nTrader: " + traderPts + "\nEngineer: "
 				+ engineerPts;
 	}
-	
+
 	/**
 	 * getters and setters
 	 */

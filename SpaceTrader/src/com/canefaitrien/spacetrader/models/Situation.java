@@ -1,5 +1,4 @@
-package model;
-
+package com.canefaitrien.spacetrader.models;
 /**
  * Contains all the situations related to planets
  * 

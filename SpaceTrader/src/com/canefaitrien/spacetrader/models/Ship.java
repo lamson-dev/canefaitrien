@@ -1,5 +1,4 @@
-package model;
-
+package com.canefaitrien.spacetrader.models;
 /**
  * Ship class for holding info on the ship
  * 

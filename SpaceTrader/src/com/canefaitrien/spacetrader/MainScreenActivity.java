@@ -1,22 +1,16 @@
 package com.canefaitrien.spacetrader;
 
-import android.app.LocalActivityManager;
 import android.app.TabActivity;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.v4.widget.SimpleCursorAdapter;
-import android.view.LayoutInflater;
-import android.view.ViewGroup;
-import android.widget.RelativeLayout;
+import android.util.Log;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
-import android.widget.TextView;
 
-import com.canefaitrien.spacetrader.models.Character;
-import com.canefaitrien.spacetrader.models.GameData;
-import com.canefaitrien.spacetrader.models.GameData.Difficulty;
+import com.canefaitrien.spacetrader.models.Controller;
+import com.canefaitrien.spacetrader.models.Controller.Difficulty;
+import com.canefaitrien.spacetrader.models.Person;
 import com.canefaitrien.spacetrader.models.Planet;
 import com.canefaitrien.spacetrader.models.Ship;
 import com.canefaitrien.spacetrader.models.Universe;
@@ -25,16 +19,11 @@ import com.canefaitrien.spacetrader.utils.DbAdapter;
 @SuppressWarnings("deprecation")
 public class MainScreenActivity extends TabActivity {
 
-	// This is the Adapter being used to display the list's data
-	SimpleCursorAdapter mAdapter;
-	LocalActivityManager mlam;
-
 	private static final String TAG = "MainScreen";
-	LayoutInflater inflater;
 
-	private Long mRowId;
-
+	// This is the Adapter being used to display the list's data
 	private DbAdapter mDbHelper;
+	private Long mRowId;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -42,72 +31,30 @@ public class MainScreenActivity extends TabActivity {
 		setContentView(R.layout.activity_mainscreen);
 
 		init(savedInstanceState);
+
+		// need to put this method in presenter
 		loadGame(savedInstanceState);
 
 	}
 
-	@SuppressWarnings("deprecation")
 	private void init(Bundle savedInstanceState) {
-		inflater = (LayoutInflater) getApplicationContext().getSystemService(
-				Context.LAYOUT_INFLATER_SERVICE);
 
-		// mlam = new LocalActivityManager(this, false);
-		// mlam.dispatchCreate(savedInstanceState);
+		mDbHelper = new DbAdapter(this);
 
 		TabHost tabhost = getTabHost();
 
-		addMapTab(tabhost);
-		addInfoTab(tabhost);
-		addMarketTab(tabhost);
-		addHubTab(tabhost);
-
-		tabhost.setCurrentTab(1);
+		addTab("Map", MapActivity.class, tabhost);
+		addTab("Info", InfoActivity.class, tabhost);
+		addTab("Market", MarketPlaceActivity.class, tabhost);
+		addTab("Hub", HubActivity.class, tabhost);
 
 	}
 
-	private void addMapTab(TabHost th) {
-		TabSpec spec = th.newTabSpec("Map");
+	private void addTab(String tag, Class<?> c, TabHost th) {
+		TabSpec spec = th.newTabSpec(tag);
 		// specs.setIndicator("Market",R.drawable.tab_market);
-		spec.setIndicator("Map");
-		Intent intent = new Intent(MainScreenActivity.this, MapActivity.class);
-		spec.setContent(intent);
-		th.addTab(spec);
-	}
-
-	private void addInfoTab(TabHost th) {
-		TabSpec spec = th.newTabSpec("Info");
-		spec.setIndicator("Info");
-		Intent intent = new Intent(MainScreenActivity.this, InfoActivity.class);
-		spec.setContent(intent);
-		th.addTab(spec);
-
-		// GameData data = SpaceTraderApplication.getData();
-		// String info = data.getPlayer().toString();
-		// ViewGroup parentView = (RelativeLayout)
-		// findViewById(R.id.tab_info_content);
-		//
-		// inflater.inflate(R.layout.activity_info, parentView);
-		// TextView tv = (TextView) findViewById(R.id.tv_info_content);
-		// tv.setText(info);
-
-	}
-
-	private void addMarketTab(TabHost th) {
-
-		TabSpec spec = th.newTabSpec("Market");
-		// specs.setIndicator("Market",R.drawable.tab_market);
-		spec.setIndicator("Market");
-		Intent intent = new Intent(MainScreenActivity.this,
-				MarketPlaceActivity.class);
-		spec.setContent(intent);
-		th.addTab(spec);
-	}
-
-	private void addHubTab(TabHost th) {
-		TabSpec spec = th.newTabSpec("Hub");
-		// specs.setIndicator("Market",R.drawable.tab_market);
-		spec.setIndicator("Hub");
-		Intent intent = new Intent(MainScreenActivity.this, HubActivity.class);
+		spec.setIndicator(tag);
+		Intent intent = new Intent(MainScreenActivity.this, c);
 		spec.setContent(intent);
 		th.addTab(spec);
 	}
@@ -125,7 +72,8 @@ public class MainScreenActivity extends TabActivity {
 					: null;
 		}
 
-		populateData();
+		// for LoadGame
+		// populateData();
 
 	}
 
@@ -133,9 +81,10 @@ public class MainScreenActivity extends TabActivity {
 
 		if (mRowId == null)
 			return;
-		
-		mDbHelper = new DbAdapter(this);
+
 		mDbHelper.open();
+
+		Log.d(TAG, String.valueOf(mRowId));
 
 		Cursor save = mDbHelper.fetchSave(mRowId);
 		startManagingCursor(save);
@@ -147,6 +96,8 @@ public class MainScreenActivity extends TabActivity {
 		// String money = save.getString(save
 		// .getColumnIndexOrThrow(DbAdapter.CHAR_KEY_MONEY));
 
+		Log.d(TAG, name);
+
 		int engineerPts = Integer.valueOf(save.getString(save
 				.getColumnIndexOrThrow(DbAdapter.CHAR_KEY_ENGINEER_PTS)));
 		int fighterPts = Integer.valueOf(save.getString(save
@@ -156,7 +107,7 @@ public class MainScreenActivity extends TabActivity {
 		int traderPts = Integer.valueOf(save.getString(save
 				.getColumnIndexOrThrow(DbAdapter.CHAR_KEY_TRADER_PTS)));
 
-		Character player = new Character(name, pilotPts, fighterPts, traderPts,
+		Person player = new Person(name, pilotPts, fighterPts, traderPts,
 				engineerPts);
 
 		Ship ship = null;
@@ -166,9 +117,11 @@ public class MainScreenActivity extends TabActivity {
 		Difficulty difficulty = null;
 		int turn = 1;
 
-		GameData data = new GameData(player, ship, location, money, universe,
-				difficulty, turn);
+		Controller data = new Controller(player, ship, location, money,
+				universe, difficulty, turn);
 		SpaceTraderApplication.setData(data);
+
+		mDbHelper.close();
 
 	}
 	// @Override

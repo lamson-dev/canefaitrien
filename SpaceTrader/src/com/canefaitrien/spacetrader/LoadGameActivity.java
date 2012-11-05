@@ -32,7 +32,7 @@ import android.widget.SimpleCursorAdapter;
 import com.canefaitrien.spacetrader.utils.DbAdapter;
 
 public class LoadGameActivity extends ListActivity {
-	
+
 	private static final String TAG = "LoadGame";
 	private static final int ACTIVITY_LOAD = 1;
 
@@ -47,41 +47,37 @@ public class LoadGameActivity extends ListActivity {
 		setContentView(R.layout.activity_loadgame);
 
 		mDbHelper = new DbAdapter(this);
-		mDbHelper.open();
 
 		fillData();
 		registerForContextMenu(getListView());
 	}
 
 	private void fillData() {
+		mDbHelper.open();
+
 		// Get all of the rows from the database and create the item list
 		Cursor c = mDbHelper.fetchAllSaves();
 		startManagingCursor(c);
 
 		// Create an array to specify the fields we want to display in the list
 		// (only TITLE)
-//		String[] from = new String[] { DbAdapter.CHAR_KEY_ROWID,
-//				DbAdapter.CHAR_KEY_DIFFICULTY, DbAdapter.CHAR_KEY_NAME,
-//				DbAdapter.CHAR_KEY_MONEY, DbAdapter.CHAR_KEY_DATE };
+		// String[] from = new String[] { DbAdapter.CHAR_KEY_ROWID,
+		// DbAdapter.CHAR_KEY_DIFFICULTY, DbAdapter.CHAR_KEY_NAME,
+		// DbAdapter.CHAR_KEY_MONEY, DbAdapter.CHAR_KEY_DATE };
 		String[] from = new String[] { DbAdapter.CHAR_KEY_ROWID,
-				DbAdapter.CHAR_KEY_NAME,
-				DbAdapter.CHAR_KEY_PILOT_PTS,
-				DbAdapter.CHAR_KEY_FIGHTER_PTS,
-				DbAdapter.CHAR_KEY_TRADER_PTS,
-				DbAdapter.CHAR_KEY_ENGINEER_PTS};
+				DbAdapter.CHAR_KEY_NAME, DbAdapter.CHAR_KEY_PILOT_PTS,
+				DbAdapter.CHAR_KEY_FIGHTER_PTS, DbAdapter.CHAR_KEY_TRADER_PTS,
+				DbAdapter.CHAR_KEY_ENGINEER_PTS };
 
 		// and an array of the fields we want to bind those fields to (in this
 		// case just text1)
-		int[] to = new int[] { R.id.tv_entry_id, 
-				R.id.tv_entry_name,
-				R.id.tv_entry_pilot,
-				R.id.tv_entry_fighter,
-				R.id.tv_entry_trader,
-				R.id.tv_entry_engineer};
+		int[] to = new int[] { R.id.tv_entry_id, R.id.tv_entry_name,
+				R.id.tv_entry_pilot, R.id.tv_entry_fighter,
+				R.id.tv_entry_trader, R.id.tv_entry_engineer };
 
 		// Now create a simple cursor adapter and set it to display
 		SimpleCursorAdapter saves = new SimpleCursorAdapter(this,
-				R.layout.activity_loadgame_data, c, from, to, 0);
+				R.layout.list_loadgame_data, c, from, to, 0);
 		setListAdapter(saves);
 
 		// int iRow = c.getColumnIndex(DbAdapter.CHAR_KEY_ROWID);
@@ -92,6 +88,8 @@ public class LoadGameActivity extends ListActivity {
 		// result += c.getString(iRow) + " " + c.getString(iName) + " " +
 		// c.getString(iDate) + "\n";
 		// }
+
+		mDbHelper.close();
 
 	}
 
