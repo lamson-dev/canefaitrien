@@ -3,13 +3,11 @@ package com.canefaitrien.spacetrader;
 import com.canefaitrien.spacetrader.models.Planet;
 import android.app.Activity;
 import android.graphics.Color;
-import android.graphics.Point;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
-import android.widget.Button;
 import android.widget.LinearLayout;
 
 
@@ -17,9 +15,9 @@ import android.widget.LinearLayout;
 public class GalaxyMapMain extends Activity implements OnTouchListener{
 	
 	private GalaxyView galaxy;
-	private Planet[] planets;
+	/*private Planet[] planets;
 	private Button[] buttons;
-	private Button button;
+	private Button button;*/
 	float testx;
 	//
 	Thread ourThread = null;
@@ -39,7 +37,7 @@ public class GalaxyMapMain extends Activity implements OnTouchListener{
 		
 
 		// planet buttons
-		planets = galaxy.getPlanets().clone();
+		//planets = galaxy.getPlanets().clone(); //Can't do this twice for some reason?
 		Log.d("Galaxy", "Created Galaxy");
 
 	}

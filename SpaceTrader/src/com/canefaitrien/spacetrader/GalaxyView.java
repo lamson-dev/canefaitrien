@@ -33,7 +33,7 @@ public class GalaxyView extends View{
 	Thread ourThread = null;
 	boolean isRunning = false;
 	
-	public GalaxyView(Context context, Universe uni) {
+	public GalaxyView(Context context) {
 		super(context);
 		//
 		wordTest.setColor(Color.WHITE);
@@ -58,8 +58,8 @@ public class GalaxyView extends View{
 			canvas.drawText(planets[i].getName(), planets[i].getLocation().x, planets[i].getLocation().y, wordTest);
 			
 		}	
-		c.drawBitmap(planetIcon, x, y, paint);			
-		invalidate();
+		//c.drawBitmap(planetIcon, x, y, paint);			
+		//invalidate();
 	}
 	//getters and setters
 	public Planet[] getPlanets(){
