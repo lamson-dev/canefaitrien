@@ -31,7 +31,7 @@ public class UniversePanel extends JPanel {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		g.setColor(Color.gray);
-		for(Planet p : data.getUniverse().getPlanets()) {
+		for(Planet p : data.getUniverse()) {
 			p.draw(g);
 		}
 		g.setColor(Color.white);
@@ -42,9 +42,9 @@ public class UniversePanel extends JPanel {
 	private class PlanetListener extends MouseAdapter {
 		
 		public void mouseClicked(MouseEvent e) {
-			for(Planet p : data.getUniverse().getPlanets()) {
+			for(Planet p : data.getUniverse()) {
 				if(p.getRectangle().contains(e.getPoint())) {
-					System.out.println(p.getLocation().x + " " + p.getLocation().y);
+					System.out.println(p.getCoordinates().x + " " + p.getCoordinates().y);
 					switch(JOptionPane.showConfirmDialog(null, p.distance(data.getLocation()) + " light years away.", "Planet " + p.getName(), JOptionPane.YES_NO_OPTION)) {
 						case JOptionPane.YES_OPTION:
 							//travel

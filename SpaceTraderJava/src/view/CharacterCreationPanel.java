@@ -40,7 +40,7 @@ public class CharacterCreationPanel extends JPanel {
 		
 		public void actionPerformed(ActionEvent e) {
 			try {
-				controller.move(controller.getUniverse().getPlanets()[0]);
+				controller.move(controller.getUniverse()[0]);
 			} catch(Exception ex) {
 				
 			}

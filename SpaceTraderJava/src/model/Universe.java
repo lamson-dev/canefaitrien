@@ -37,26 +37,13 @@ public class Universe {
 	
 	// Universe info
 	private Planet[] planets = new Planet[TOTAL_PLANETS];
-	private Random rand = new Random();
+	private static Random rand = new Random();
 	
-	/**
-	 * Constructor for loading
-	 */
-	public Universe(Planet[] planets) {
-		this.planets = planets;
-	}
-	
-	/**
-	 * Constructor for new Universe
-	 */
-	public Universe() {
-		generate();
-	}
 	
 	/**
 	 * Shuffles planet names to create random planets
 	 */
-	private void shuffle(String[] planets) {
+	private static void shuffle(String[] planets) {
 		int ind1, ind2;
 		String temp;
 		for(int i = 0; i < SHUFFLE_AMT; i++) {
@@ -71,7 +58,8 @@ public class Universe {
 	/**
 	 * Generates all of the planets in the universe
 	 */
-	private void generate() {
+	public static Planet[] generate() {
+		Planet[] planets = new Planet[TOTAL_PLANETS];
 		int x, y;
 		TechLevel[] levels = TechLevel.values();
 		Situation[] situations = Situation.values();
@@ -85,13 +73,14 @@ public class Universe {
 					situations[rand.nextInt(situations.length)]);
 		}
 		// moves planets that are too close to each other
-		validate();
+		validate(planets);
+		return planets;
 	}
 	
 	/**
 	 * Checks to make sure no planets are too close, and moves them if they are
 	 */
-	public void validate() {
+	public static void validate(Planet[] planets) {
 		boolean isChecking = true, movedPlanet;
 		Planet current;
 		
@@ -104,7 +93,7 @@ public class Universe {
 				for(int j = i + 1; j < planets.length; j++) {
 					// if too close, create new location
 					if (current.distance(planets[j]) < MIN_DISTANCE) {
-						current.setLocation(new Point(rand.nextInt(WIDTH - 2*BORDER) + BORDER, rand.nextInt(HEIGHT - 2*BORDER) + BORDER));
+						current.setCoordinates(new Point(rand.nextInt(WIDTH - 2*BORDER) + BORDER, rand.nextInt(HEIGHT - 2*BORDER) + BORDER));
 						movedPlanet = true;
 						break;
 					}
@@ -122,11 +111,8 @@ public class Universe {
 	}
 	
 	// Accessors
-	public Planet[] getPlanets() {
-		return planets;
-	}
 	
-	public String toString() {
+	public static String toString(Planet[] planets) {
 		String ret = "";
 		for (int i = 0; i< planets.length; i++) {
 			ret += planets[i].toString();

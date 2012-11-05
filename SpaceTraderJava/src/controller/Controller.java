@@ -22,14 +22,14 @@ public class Controller {
 	private Planet location;
 	private int money; // might want to move this into Person? although it is easier to operate on in here
 	
-	private Universe universe;
+	private Planet[] universe;
 	private Difficulty difficulty;
 	private int turn;
 	
 	/** 
 	 * Constructor for loading game data
 	 */
-	public Controller(Person player, Ship ship, Planet location, int money, Universe universe, Difficulty difficulty, int turn) {
+	public Controller(Person player, Ship ship, Planet location, int money, Planet[] universe, Difficulty difficulty, int turn) {
 		this.player = player;
 		this.ship = ship;
 		this.location = location;
@@ -43,9 +43,9 @@ public class Controller {
 	 * Constructor for new game
 	 */
 	public Controller(Person player, Difficulty difficulty) {
-		this(player, new Ship(ShipType.GNAT), null, STARTING_MONEY, new Universe(), difficulty, 0);
+		this(player, new Ship(ShipType.GNAT), null, STARTING_MONEY, Universe.generate(), difficulty, 0);
 		// Planet must be set after this() because the universe has to be created before we can set the first location
-		location = universe.getPlanets()[0];
+		location = universe[0];
 	}
 	
 	/**
@@ -97,7 +97,7 @@ public class Controller {
 	public Planet getLocation() {
 		return location;
 	}
-	public Universe getUniverse() {
+	public Planet[] getUniverse() {
 		return universe;
 	}
 
