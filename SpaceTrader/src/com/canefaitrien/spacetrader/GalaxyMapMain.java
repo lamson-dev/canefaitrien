@@ -29,8 +29,7 @@ public class GalaxyMapMain extends Activity implements OnTouchListener {
 		super.onCreate(savedInstanceState);
 
 		// draw planets, done
-		galaxy = new GalaxyView(this, SpaceTraderApplication.getData()
-				.getUniverse());
+		galaxy = new GalaxyView(this);
 		galaxy.setOnTouchListener(this);
 
 		setContentView(galaxy);

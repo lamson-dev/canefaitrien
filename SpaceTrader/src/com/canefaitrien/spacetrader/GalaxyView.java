@@ -17,8 +17,7 @@ import com.canefaitrien.spacetrader.models.Universe;
 //Draws planets and creates a view
 public class GalaxyView extends View {
 
-	private Universe universe = new Universe();// note this is creating a new
-												// universe every time
+	private Universe universe = new Universe();// note this is creating a new universe every time
 	private Planet[] planets;
 	Paint paint = new Paint();// normal paint
 	Paint wordTest = new Paint(); // text paint
@@ -32,13 +31,8 @@ public class GalaxyView extends View {
 	//
 	Thread ourThread = null;
 	boolean isRunning = false;
-<<<<<<< HEAD
 	
 	public GalaxyView(Context context) {
-=======
-
-	public GalaxyView(Context context, Universe uni) {
->>>>>>> e29b34220ab597831c67c634220148a85987d73f
 		super(context);
 		//
 		wordTest.setColor(Color.WHITE);
@@ -63,22 +57,12 @@ public class GalaxyView extends View {
 					planetColor);
 
 			wordTest.setTextSize(planets[i].getSize());
-<<<<<<< HEAD
 			canvas.drawText(planets[i].getName(), planets[i].getLocation().x, planets[i].getLocation().y, wordTest);
 			
 		}	
 		//c.drawBitmap(planetIcon, x, y, paint);			
 		//invalidate();
-=======
-			canvas.drawText(planets[i].getName(), planets[i].getLocation().x,
-					planets[i].getLocation().y, wordTest);
-
 		}
-		c.drawBitmap(planetIcon, x, y, paint);
-		invalidate();
->>>>>>> e29b34220ab597831c67c634220148a85987d73f
-	}
-
 	// getters and setters
 	public Planet[] getPlanets() {
 		return planets;
