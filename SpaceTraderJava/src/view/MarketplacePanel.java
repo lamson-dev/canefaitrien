@@ -1,4 +1,5 @@
 package view;
+
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -12,7 +13,6 @@ import javax.swing.JPanel;
 import controller.Controller;
 
 import model.TradeGood;
-
 
 public class MarketplacePanel extends JPanel {
 
@@ -88,19 +88,19 @@ public class MarketplacePanel extends JPanel {
 
 	private class SellListener implements ActionListener {
 	
-	TradeGood good;
-	
-	public SellListener(TradeGood good) {
-		this.good = good;
-	}
-	
-	public void actionPerformed(ActionEvent e) {
-		try {
-			data.sellGood(good);
-			updateGoods();
-		} catch (Exception ex) {
-			
+		TradeGood good;
+		
+		public SellListener(TradeGood good) {
+			this.good = good;
+		}
+		
+		public void actionPerformed(ActionEvent e) {
+			try {
+				data.sellGood(good);
+				updateGoods();
+			} catch (Exception ex) {
+				JOptionPane.showMessageDialog(null, ex.getMessage());
+			}
 		}
 	}
-}
 }

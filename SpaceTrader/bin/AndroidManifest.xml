@@ -48,6 +48,22 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity android:name=".MapActivity" >
+            android:label="@string/title_activity_marketplace" >
+            <intent-filter>
+                <action android:name="com.cainefaitrient.spacetrader.MAP" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".InfoActivity" >
+            android:label="@string/title_activity_marketplace" >
+            <intent-filter>
+                <action android:name="com.cainefaitrient.spacetrader.Info" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity android:name=".MarketPlaceActivity" >
             android:label="@string/title_activity_marketplace" >
             <intent-filter>
@@ -56,14 +72,22 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity android:name=".HubActivity" >
+            android:label="@string/title_activity_marketplace" >
+            <intent-filter>
+                <action android:name="com.cainefaitrient.spacetrader.HUB" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity android:name=".GalaxyMapMain" >
             android:label="@string/title_activity_galaxyview" >
             <intent-filter>
                 <action android:name="com.cainefaitrient.spacetrader.GALAXYMAP" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-       
     </application>
 
 </manifest>

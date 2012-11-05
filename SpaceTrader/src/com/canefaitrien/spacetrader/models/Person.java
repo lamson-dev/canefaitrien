@@ -1,19 +1,22 @@
 package com.canefaitrien.spacetrader.models;
 
 /**
+ * Person class for holding info on the Person
  * 
- * 
+ * @author Andrew Duda
+ * @version 1.0
  */
 
-public class Character {
+public class Person {
 
+	// Person info
 	private String name;
 	private int pilotPts, fighterPts, traderPts, engineerPts;
 
 	/**
-	 * Constructor for loading
+	 * Constructor for loading/ creating a Person
 	 */
-	public Character(String name, int pilotPts, int fighterPts, int traderPts,
+	public Person(String name, int pilotPts, int fighterPts, int traderPts,
 			int engineerPts) {
 		this.name = name;
 		this.pilotPts = pilotPts;

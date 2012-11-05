@@ -1,18 +1,19 @@
 package com.canefaitrien.spacetrader;
 
 import android.app.Application;
-import com.canefaitrien.spacetrader.models.GameData;
+
+import com.canefaitrien.spacetrader.models.Controller;
 
 public class SpaceTraderApplication extends Application {
-	private static GameData data;
+	private static Controller data;
 	public static String testString;
 
 
-	public static void setData(GameData data) {
+	public static void setData(Controller data) {
 		SpaceTraderApplication.data = data;
 	}
 	
-	public static GameData getData() {
+	public static Controller getData() {
 		return data;
 	}
 	

@@ -1,86 +1,62 @@
 package com.canefaitrien.spacetrader;
 
-import android.app.AlertDialog;
-import android.app.LocalActivityManager;
-import android.content.Context;
-import android.content.DialogInterface;
+import android.app.TabActivity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.v4.widget.SimpleCursorAdapter;
-import android.view.LayoutInflater;
-import android.view.ViewGroup;
-import android.widget.RelativeLayout;
+import android.util.Log;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
-import android.widget.TextView;
 
-import com.canefaitrien.spacetrader.models.Character;
-import com.canefaitrien.spacetrader.models.GameData;
-import com.canefaitrien.spacetrader.models.GameData.Difficulty;
+import com.canefaitrien.spacetrader.models.Controller;
+import com.canefaitrien.spacetrader.models.Controller.Difficulty;
+import com.canefaitrien.spacetrader.models.Person;
 import com.canefaitrien.spacetrader.models.Planet;
 import com.canefaitrien.spacetrader.models.Ship;
 import com.canefaitrien.spacetrader.models.Universe;
-import com.canefaitrien.spacetrader.utils.AbstractActivity;
 import com.canefaitrien.spacetrader.utils.DbAdapter;
 
-public class MainScreenActivity extends AbstractActivity {
-
-	// This is the Adapter being used to display the list's data
-	SimpleCursorAdapter mAdapter;
-	@SuppressWarnings("deprecation")
-	LocalActivityManager mlam;
+@SuppressWarnings("deprecation")
+public class MainScreenActivity extends TabActivity {
 
 	private static final String TAG = "MainScreen";
-	LayoutInflater inflater;
 
-	TabHost th;
-	TabSpec specs;
-	private Long mRowId;
-
+	// This is the Adapter being used to display the list's data
 	private DbAdapter mDbHelper;
-
-	AlertDialog.Builder popup;
+	private Long mRowId;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_mainscreen);
 
-		mDbHelper = new DbAdapter(this);
-		mDbHelper.open();
-
-		popup = new AlertDialog.Builder(this);
-		popup.setTitle("Heyyyy!");
-		popup.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface dialog, int which) {
-				// dismiss the dialog
-			}
-		});
-
-		popup.setCancelable(true);
-
 		init(savedInstanceState);
+
+		// need to put this method in presenter
 		loadGame(savedInstanceState);
-
-		setMapTab();
-		setInfoTab();
-		setMarketTab();
-		setHubTab();
-
-		th.setCurrentTab(1);
 
 	}
 
-	@SuppressWarnings("deprecation")
 	private void init(Bundle savedInstanceState) {
-		inflater = (LayoutInflater) getApplicationContext().getSystemService(
-				Context.LAYOUT_INFLATER_SERVICE);
 
-		mlam = new LocalActivityManager(this, false);
-		mlam.dispatchCreate(savedInstanceState);
-		th = (TabHost) findViewById(R.id.tabhost);
-		th.setup(mlam);
+		mDbHelper = new DbAdapter(this);
+
+		TabHost tabhost = getTabHost();
+
+		addTab("Map", MapActivity.class, tabhost);
+		addTab("Info", InfoActivity.class, tabhost);
+		addTab("Market", MarketPlaceActivity.class, tabhost);
+		addTab("Hub", HubActivity.class, tabhost);
+		tabhost.setCurrentTab(3);
+	}
+
+	private void addTab(String tag, Class<?> c, TabHost th) {
+		TabSpec spec = th.newTabSpec(tag);
+		// specs.setIndicator("Market",R.drawable.tab_market);
+		spec.setIndicator(tag);
+		Intent intent = new Intent(MainScreenActivity.this, c);
+		spec.setContent(intent);
+		th.addTab(spec);
 	}
 
 	private void loadGame(Bundle savedInstanceState) {
@@ -96,14 +72,19 @@ public class MainScreenActivity extends AbstractActivity {
 					: null;
 		}
 
-		populateData();
+		// for LoadGame
+		// populateData();
 
 	}
 
-	@SuppressWarnings("deprecation")
 	private void populateData() {
+
 		if (mRowId == null)
 			return;
+
+		mDbHelper.open();
+
+		Log.d(TAG, String.valueOf(mRowId));
 
 		Cursor save = mDbHelper.fetchSave(mRowId);
 		startManagingCursor(save);
@@ -115,6 +96,8 @@ public class MainScreenActivity extends AbstractActivity {
 		// String money = save.getString(save
 		// .getColumnIndexOrThrow(DbAdapter.CHAR_KEY_MONEY));
 
+		Log.d(TAG, name);
+
 		int engineerPts = Integer.valueOf(save.getString(save
 				.getColumnIndexOrThrow(DbAdapter.CHAR_KEY_ENGINEER_PTS)));
 		int fighterPts = Integer.valueOf(save.getString(save
@@ -124,7 +107,7 @@ public class MainScreenActivity extends AbstractActivity {
 		int traderPts = Integer.valueOf(save.getString(save
 				.getColumnIndexOrThrow(DbAdapter.CHAR_KEY_TRADER_PTS)));
 
-		Character player = new Character(name, pilotPts, fighterPts, traderPts,
+		Person player = new Person(name, pilotPts, fighterPts, traderPts,
 				engineerPts);
 
 		Ship ship = null;
@@ -134,56 +117,13 @@ public class MainScreenActivity extends AbstractActivity {
 		Difficulty difficulty = null;
 		int turn = 1;
 
-		GameData data = new GameData(player, ship, location, money, universe,
-				difficulty, turn);
+		Controller data = new Controller(player, ship, location, money,
+				universe, difficulty, turn);
 		SpaceTraderApplication.setData(data);
 
-	}
-
-	private void setMapTab() {
-		specs = th.newTabSpec("tag1");
-		specs.setContent(R.id.tab_map);
-		specs.setIndicator("Map");
-		th.addTab(specs);
-	}
-
-	private void setInfoTab() {
-		specs = th.newTabSpec("tag2");
-		specs.setContent(R.id.tab_info);
-		specs.setIndicator("Info");
-		th.addTab(specs);
-
-		GameData data = SpaceTraderApplication.getData();
-		String info = data.getPlayer().toString();
-		ViewGroup parentView = (RelativeLayout) findViewById(R.id.tab_info_content);
-
-		inflater.inflate(R.layout.content_info, parentView);
-		TextView tv = (TextView) findViewById(R.id.tv_info_content);
-		tv.setText(info);
+		mDbHelper.close();
 
 	}
-
-	private void setMarketTab() {
-		Intent intentMarket = new Intent(MainScreenActivity.this,
-				MarketPlaceActivity.class);
-		specs = th.newTabSpec("tag3");
-		// specs.setIndicator("",R.drawable.tab_market);
-		specs.setIndicator("Market");
-		specs.setContent(intentMarket);
-		// specs.setContent(R.id.tab_market);
-		th.addTab(specs);
-	}
-
-	private void setHubTab() {
-		ViewGroup parentView = (RelativeLayout) findViewById(R.id.tab_hub_content);
-		inflater.inflate(R.layout.content_hub, parentView);
-
-		specs = th.newTabSpec("tag4");
-		specs.setContent(R.id.tab_hub);
-		specs.setIndicator("Hub");
-		th.addTab(specs);
-	}
-
 	// @Override
 	// protected void onPause() {
 	// super.onPause();
@@ -203,52 +143,52 @@ public class MainScreenActivity extends AbstractActivity {
 	// outState.putSerializable(DbAdapter.CHAR_KEY_ROWID, mRowId);
 	// }
 
-	private void saveState() {
-		// String title = mTitleText.getText().toString();
-		// String body = mBodyText.getText().toString();
-		//
-		// if (mRowId == null) {
-		// long id = mDbHelper.createNote(title, body);
-		// if (id > 0) {
-		// mRowId = id;
-		// }
-		// } else {
-		// mDbHelper.updateNote(mRowId, title, body);
-		// }
-	}
+	// private void saveState() {
+	// String title = mTitleText.getText().toString();
+	// String body = mBodyText.getText().toString();
+	//
+	// if (mRowId == null) {
+	// long id = mDbHelper.createNote(title, body);
+	// if (id > 0) {
+	// mRowId = id;
+	// }
+	// } else {
+	// mDbHelper.updateNote(mRowId, title, body);
+	// }
+	// }
 
-//	@Override
-//	protected void onStart() {
-//		super.onStart();
-//		Log.d(TAG, "onStart called.");
-//	}
-//
-//	@Override
-//	protected void onPause() {
-//		super.onPause();
-//		Log.d(TAG, "onPause called.");
-//	}
-//
-//	@Override
-//	protected void onResume() {
-//		super.onResume();
-//		Log.d(TAG, "onResume called.");
-//	}
-//
-//	@Override
-//	protected void onStop() {
-//		super.onStop();
-//		Log.d(TAG, "onStop called.");
-//	}
-//
-//	@Override
-//	protected void onRestart() {
-//		super.onRestart();
-//		Log.d(TAG, "onRestart called.");
-//	}
-//
-//	@Override
-//	protected void onDestroy() {
-//		super.onDestroy();
-//	}
+	// @Override
+	// protected void onStart() {
+	// super.onStart();
+	// Log.d(TAG, "onStart called.");
+	// }
+	//
+	// @Override
+	// protected void onPause() {
+	// super.onPause();
+	// Log.d(TAG, "onPause called.");
+	// }
+	//
+	// @Override
+	// protected void onResume() {
+	// super.onResume();
+	// Log.d(TAG, "onResume called.");
+	// }
+	//
+	// @Override
+	// protected void onStop() {
+	// super.onStop();
+	// Log.d(TAG, "onStop called.");
+	// }
+	//
+	// @Override
+	// protected void onRestart() {
+	// super.onRestart();
+	// Log.d(TAG, "onRestart called.");
+	// }
+	//
+	// @Override
+	// protected void onDestroy() {
+	// super.onDestroy();
+	// }
 }

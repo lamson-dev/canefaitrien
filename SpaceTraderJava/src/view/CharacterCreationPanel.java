@@ -11,7 +11,6 @@ import controller.Controller.Difficulty;
 
 import model.Person;
 
-
 public class CharacterCreationPanel extends JPanel {
 	
 	private static final long serialVersionUID = 1227113222169913502L;

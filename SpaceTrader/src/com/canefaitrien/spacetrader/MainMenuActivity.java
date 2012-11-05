@@ -18,8 +18,8 @@ public class MainMenuActivity extends AbstractActivity {
 	private static final String TAG = "MainMenu";
 	private Button button;
 	Typeface font;
-	MediaPlayer track; //background music
-	
+	MediaPlayer track; // background music
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -30,9 +30,9 @@ public class MainMenuActivity extends AbstractActivity {
 		addListenerDebugButton();
 
 		TextView txt = (TextView) findViewById(R.id.txtview_app_name);
-		font = Typeface.createFromAsset(getAssets(),"fonts/Street Corner.ttf");
+		font = Typeface.createFromAsset(getAssets(), "fonts/Street Corner.ttf");
 		txt.setTypeface(font);
-		
+
 	}
 
 	@Override
@@ -40,13 +40,15 @@ public class MainMenuActivity extends AbstractActivity {
 		getMenuInflater().inflate(R.menu.activity_main, menu);
 		return true;
 	}
-	//starts a new game, goes to Configuration Activity
+
+	// starts a new game, goes to Configuration Activity
 	private void addListenerNewGameButton() {
 		final Context context = this;
 
 		button = (Button) findViewById(R.id.btn_newgame);
-		button.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/Street Corner.ttf"));
-		
+		button.setTypeface(Typeface.createFromAsset(getAssets(),
+				"fonts/Street Corner.ttf"));
+
 		button.setOnClickListener(new View.OnClickListener() {
 
 			public void onClick(View v) {
@@ -58,7 +60,8 @@ public class MainMenuActivity extends AbstractActivity {
 			}
 		});
 	}
-	//opens the database to view saved games
+
+	// opens the database to view saved games
 	private void addListenerLoadGameButton() {
 		button = (Button) findViewById(R.id.btn_loadgame);
 		button.setTypeface(font);
@@ -73,16 +76,18 @@ public class MainMenuActivity extends AbstractActivity {
 			}
 		});
 	}
-	//Edit this to go to a specific class for Debugging
+
+	// Edit this to go to a specific class for Debugging
 	private void addListenerDebugButton() {
 
 		button = (Button) findViewById(R.id.btn_debugmode);
-		button.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/Street Corner.ttf"));
+		button.setTypeface(Typeface.createFromAsset(getAssets(),
+				"fonts/Street Corner.ttf"));
 
 		button.setOnClickListener(new View.OnClickListener() {
 
 			public void onClick(View v) {
-				//track.release();
+				// track.release();
 
 				Intent intent = new Intent(MainMenuActivity.this,
 						GalaxyMapMain.class);
@@ -90,13 +95,13 @@ public class MainMenuActivity extends AbstractActivity {
 			}
 		});
 	}
-	//Plays sound
+
+	// Plays sound
 	private void addSound() {
-		track = MediaPlayer.create(MainMenuActivity.this,
-				R.raw.silbruch);
+		track = MediaPlayer.create(MainMenuActivity.this, R.raw.silbruch);
 		track.start();
 	}
-	
+
 	protected void onStart() {
 		super.onStart();
 		Log.d(TAG, "onStart called.");
@@ -107,18 +112,22 @@ public class MainMenuActivity extends AbstractActivity {
 		track.release();
 		Log.d(TAG, "onPause called.");
 	}
+
 	protected void onResume() {
 		super.onResume();
 		Log.d(TAG, "onResume called.");
 	}
+
 	protected void onStop() {
 		super.onStop();
 		Log.d(TAG, "onStop called.");
 	}
+
 	protected void onRestart() {
 		super.onRestart();
 		Log.d(TAG, "onRestart called.");
 	}
+
 	protected void onDestroy() {
 		super.onDestroy();
 	}

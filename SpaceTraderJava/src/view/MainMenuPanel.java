@@ -1,29 +1,40 @@
 package view;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import model.Person;
+import controller.Controller;
+import controller.Controller.Difficulty;
 
 public class MainMenuPanel extends JPanel {
 	
 	private static final long serialVersionUID = 3701450891814698277L;
 	
-	JPanel mainPanel;
-	public MainMenuPanel(JPanel panel) {
+	JFrame frame;
+	public MainMenuPanel(JFrame frame) {
 		JButton button = new JButton("New Game");
-		this.mainPanel = panel;
-		button.addActionListener(new ButtonListener());
+		this.frame = frame;
+		button.addActionListener(new NewGameListener(this));
 		add(button);
 	}
 	
-	private class ButtonListener implements ActionListener {
+	private class NewGameListener implements ActionListener {
 		
+		private JPanel panel;
+		public NewGameListener(JPanel panel) {
+			this.panel = panel;
+		}
 		public void actionPerformed(ActionEvent e) {
-			mainPanel.removeAll();
-			mainPanel.add(new CharacterCreationPanel(mainPanel));
-			mainPanel.revalidate();
+			frame.remove(panel);
+			//mainPanel.add(new CharacterCreationPanel(mainPanel));
+			frame.add(new GamePanel(new Controller(new Person("Bob", 0, 0, 0, 0), Difficulty.Easy)));
+			frame.revalidate();
+			frame.pack();
 		}
 	}
 

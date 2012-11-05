@@ -9,7 +9,6 @@ import java.util.Random;
  * @author AN PHAM
  * @version
  */
-
 public class Universe {
 	
 	// Universe constants

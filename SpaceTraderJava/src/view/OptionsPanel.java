@@ -1,5 +1,7 @@
 package view;
 
+import java.awt.Dimension;
+
 import javax.swing.JPanel;
 
 import controller.Controller;
@@ -11,5 +13,6 @@ public class OptionsPanel extends JPanel {
 	
 	public OptionsPanel(Controller data) {
 		this.data = data;
+		setPreferredSize(new Dimension(600, 500));
 	}
 }
