@@ -58,7 +58,7 @@ public class GalaxyView extends View{
 			canvas.drawText(planets[i].getName(), planets[i].getLocation().x, planets[i].getLocation().y, wordTest);
 			
 		}	
-		c.drawBitmap(planetIcon, x, y, paint);			
+		//c.drawBitmap(planetIcon, x, y, paint);			
 		//invalidate();
 	}
 	//getters and setters
