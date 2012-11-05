@@ -12,8 +12,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
+import model.EncounterHandler;
 import model.EncounterType;
 
 
@@ -26,11 +30,12 @@ public class TravelPanel extends JPanel {
 	private Controller data;
 	JPanel panel = new JPanel(new BorderLayout());
 	JButton resetBtn = new JButton("Reset");
+	EncounterHandler encounter;
 	
 	public TravelPanel(Controller data) {
 
 		this.data = data;
-		
+		encounter = new EncounterHandler(data);
 
 		panel.setLayout(new GridLayout(11, 7));
 		setPreferredSize(new Dimension(600, 400));
@@ -49,7 +54,9 @@ public class TravelPanel extends JPanel {
 			case POLICE:
 				JLabel police = new JLabel("Police Encounter");
 				JButton bribeButton = new JButton("Bribe");
+				bribeButton.addActionListener(new bribeButtonListener());
 				JButton attackPoliceButton = new JButton("Attack");
+				
 				JButton fleePoliceButton = new JButton("Flee");
 				JButton submitButton = new JButton("Submit");
 				panel.removeAll();
@@ -94,6 +101,45 @@ public class TravelPanel extends JPanel {
 			default:
 				break;
 			}
+		}
+		private class bribeButtonListener implements ActionListener {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JFrame bribeFrame = new JFrame("Bad Bribe Money");
+				String text;
+				boolean isNumber = false;
+				int bribeAmount = 0;
+				do {
+					text = JOptionPane.showInputDialog(bribeFrame, "How much do you decide to bribe?");
+					try  
+					{  
+						bribeAmount = Integer.parseInt( text );  
+						isNumber = true;  
+					}  
+					catch( Exception ex)  
+					{  
+						isNumber = false;  
+					}  
+					
+					boolean success = encounter.bribePolice(bribeAmount);
+					if (success) {	
+						JOptionPane.showMessageDialog(bribeFrame, 
+								"Bribe Successful!. Your money now is " + data.getMoney());
+						break;
+					}
+					else {
+						JOptionPane.showMessageDialog(bribeFrame, 
+								"Bribe Failed!. Your money now is " + data.getMoney());
+						continue;
+					}
+
+				}while (isNumber == true);	
+				
+				panel.removeAll();
+				revalidate();
+			}
+			
 		}
 	}
 }

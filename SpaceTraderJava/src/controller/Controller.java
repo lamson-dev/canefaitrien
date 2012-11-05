@@ -112,4 +112,11 @@ public class Controller {
 	public int getTurn() {
 		return turn;
 	}
+
+	// This is added by An Pham on 05/11/12
+	// This method should only be called from EncounterHandler
+	// Do not call this method elsewhere.
+	public void setMoney(int money){
+		this.money = money;
+	}
 }
