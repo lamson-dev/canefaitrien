@@ -68,6 +68,11 @@ public class Planet {
 		g.fillOval(location.x - radius, location.y - radius, 2*radius, 2*radius);
 	}
 	
+	public void drawMain(Graphics g, int distance) {
+		g.fillOval(location.x - radius, location.y - radius, 2*radius, 2*radius);
+		g.drawOval(location.x - distance, location.y - distance, 2*distance, 2*distance);
+	}
+	
 	public Rectangle getRectangle() {
 		return new Rectangle(location.x, location.y, 2*radius, 2*radius);
 	}

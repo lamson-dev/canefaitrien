@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import model.Planet;
+import model.Ship;
 
 import controller.Controller;
 
@@ -34,7 +35,8 @@ public class UniversePanel extends JPanel {
 			p.draw(g);
 		}
 		g.setColor(Color.white);
-		data.getLocation().draw(g);
+		data.getLocation().drawMain(g, data.getShip().getFuel()*Ship.MPG);
+		
 	}
 	
 	private class PlanetListener extends MouseAdapter {

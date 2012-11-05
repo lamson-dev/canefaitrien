@@ -18,6 +18,8 @@ public class Ship {
 //	private Shield[] shields;
 //	private Gadget[] gadgets;
 	
+	public static final int MPG = 5;
+	
 	/**
 	 * Constructor for new Ship
 	 */
