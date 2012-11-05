@@ -74,7 +74,7 @@ public class Planet {
 	}
 	
 	public Rectangle getRectangle() {
-		return new Rectangle(location.x, location.y, 2*radius, 2*radius);
+		return new Rectangle(location.x - radius, location.y - radius, 2*radius, 2*radius);
 	}
 	
 	/**
