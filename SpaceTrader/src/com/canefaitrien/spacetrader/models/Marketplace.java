@@ -5,27 +5,21 @@ import java.util.Random;
 import com.canefaitrien.spacetrader.interfaces.IMarketPlaceModel;
 
 /**
- * Class for handling the amounts and prices of goods a Planet's marketplace can
- * have. Also handles buying and selling goods
+ * Class for handling the amounts and prices of goods a Planet's marketplace can have.  Also 
+ * handles buying and selling goods
  * 
  * @author Andrew Duda
  * @version 1.0
  */
-public class Marketplace implements IMarketPlaceModel {
+public class Marketplace {
 
 	// Marketplace constants
-	private static final int STOCK_REFRESH_TURNS = 5; // turns to recreate
-														// marketplace
-	private static final int MIN_NUM_GOODS = 5, VARIANCE = 5; // for inventory
-																// creation
-
-	public static enum MarketAction {
-		BUY, SELL
-	};
-
+	private static final int STOCK_REFRESH_TURNS = 5; // turns to recreate marketplace
+	private static final int MIN_NUM_GOODS = 5, VARIANCE = 5; // for inventory creation
+	public static enum MarketAction {BUY, SELL};
 	private static TradeGood[] goods = TradeGood.values();
 	private static Random rand = new Random();
-
+	
 	// Marketplace info
 	private int lastDock;
 	private int[] itemStock;
@@ -33,7 +27,7 @@ public class Marketplace implements IMarketPlaceModel {
 	private int[] itemSellPrices;
 	private TechLevel level;
 	private Situation situation;
-
+	
 	/**
 	 * Marketplace constructor for loading
 	 */
@@ -46,7 +40,7 @@ public class Marketplace implements IMarketPlaceModel {
 		this.level = level;
 		this.situation = situation;
 	}
-
+	
 	/**
 	 * Marketplace constructor for new Marketplace
 	 */
@@ -82,16 +76,13 @@ public class Marketplace implements IMarketPlaceModel {
 		}
 
 	}
-
+	
 	private int getBuyPrice(TradeGood good) {
 		return getPrice(good, good.MIN_TL_PRODUCE);
 	}
 
 	private int getSellPrice(TradeGood good) {
-		return (int) (0.9 * getPrice(good, good.MIN_TL_USE)); // makes sell
-																// values less
-																// than buy
-																// values
+		return (int)(0.9*getPrice(good, good.MIN_TL_USE)); // makes sell values less than buy values
 	}
 
 	private int getPrice(TradeGood good, int minTL) {
@@ -137,11 +128,11 @@ public class Marketplace implements IMarketPlaceModel {
 		}
 		return ret;
 	}
-
+	
 	public String[][] getView(Ship ship) {
 		String[][] ret = new String[itemStock.length][5];
 		int[] cargo = ship.getCargo();
-		for (int i = 0; i < ret.length; i++) {
+		for(int i = 0; i < ret.length; i++) {
 			ret[i][0] = goods[i].toString();
 			ret[i][1] = itemBuyPrices[i] + "";
 			ret[i][2] = itemSellPrices[i] + "";
@@ -179,7 +170,7 @@ public class Marketplace implements IMarketPlaceModel {
 
 	public int buyGood(TradeGood good, Ship ship, int money) throws Exception {
 		if (itemBuyPrices[good.ordinal()] > money) {
-			throw new Exception("We don't have enough money, captain!");
+			throw new Exception ("We don't have enough money, captain!");
 		} else if (itemStock[good.ordinal()] == 0) {
 			throw new Exception("They don't have that good, captain!");
 		} else {
@@ -190,7 +181,7 @@ public class Marketplace implements IMarketPlaceModel {
 	}
 
 	/**
-	 * Sell a good
+	 * Sell a good 
 	 */
 	public int sellGood(TradeGood good, Ship ship, int money) throws Exception {
 		if (itemSellPrices[good.ordinal()] == 0) {
@@ -202,3 +193,4 @@ public class Marketplace implements IMarketPlaceModel {
 		}
 	}
 }
+

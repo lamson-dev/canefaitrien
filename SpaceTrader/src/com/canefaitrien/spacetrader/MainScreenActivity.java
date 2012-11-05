@@ -113,7 +113,8 @@ public class MainScreenActivity extends TabActivity {
 		Ship ship = null;
 		Planet location = null;
 		int money = 100;
-		Universe universe = null;
+		//Universe universe = null;
+		Planet[] universe = null;
 		Difficulty difficulty = null;
 		int turn = 1;
 

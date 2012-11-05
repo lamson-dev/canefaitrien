@@ -14,7 +14,7 @@ public class Planet {
 	// Instance variables
 	private String name;
 	private int size;
-	private Point location;
+	private Point coordinates;
 	private TechLevel level;
 	private Situation situation;
 	private Marketplace marketplace;
@@ -34,7 +34,7 @@ public class Planet {
 		// randomly generate a size
 		// (radius)
 		this.name = name;
-		this.location = location;
+		this.coordinates = location;
 		this.level = level;
 		this.situation = situation;
 		this.marketplace = marketplace;
@@ -56,7 +56,7 @@ public class Planet {
 	 * Distance between planets
 	 */
 	public int distance(Planet planet) {
-		return distance(planet.getLocation());
+		return distance(planet.getCoordinates());
 	}
 
 	/**
@@ -64,8 +64,8 @@ public class Planet {
 	 */
 	public int distance(Point other) {
 		int dx, dy;
-		dx = location.x - other.x;
-		dy = location.y - other.y;
+		dx = coordinates.x - other.x;
+		dy = coordinates.y - other.y;
 		return (int) Math.sqrt(dx * dx + dy * dy);
 	}
 
@@ -76,12 +76,12 @@ public class Planet {
 	/**
 	 * Getters and setters
 	 */
-	public Point getLocation() {
-		return location;
+	public Point getCoordinates() {
+		return coordinates;
 	}
 
-	public void setLocation(Point location) {
-		this.location = location;
+	public void setCoordinates(Point location) {
+		this.coordinates = location;
 	}
 
 	public String getName() {
@@ -107,7 +107,7 @@ public class Planet {
 	// For testing purpose
 	public String toString() {
 		return "Planet " + name + " TL " + level + " Sit " + situation
-				+ " at X = " + location.x + " Y = " + location.y + " of Size "
+				+ " at X = " + coordinates.x + " Y = " + coordinates.y + " of Size "
 				+ size + "\n";
 	}
 }

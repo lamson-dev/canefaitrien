@@ -17,8 +17,8 @@ import com.canefaitrien.spacetrader.models.Universe;
 //Draws planets and creates a view
 public class GalaxyView extends View {
 
-	private Universe universe = new Universe();// note this is creating a new universe every time
-	private Planet[] planets;
+	
+	private Planet[] planets = Universe.generate();// note this is creating a new universe every time
 	Paint paint = new Paint();// normal paint
 	Paint wordTest = new Paint(); // text paint
 	// for create planets
@@ -47,17 +47,17 @@ public class GalaxyView extends View {
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
 		c = canvas;
-		planets = universe.getPlanets().clone();
+		//planets = universe.getPlanets().clone();
 		for (int i = 1; i < planets.length; i++) {
 
 			planetColor.setARGB(200, randomColor.nextInt(256),
 					randomColor.nextInt(256), randomColor.nextInt(256));
-			canvas.drawCircle(planets[i].getLocation().x,
-					planets[i].getLocation().y, planets[i].getSize(),
+			canvas.drawCircle(planets[i].getCoordinates().x,
+					planets[i].getCoordinates().y, planets[i].getSize(),
 					planetColor);
 
 			wordTest.setTextSize(planets[i].getSize());
-			canvas.drawText(planets[i].getName(), planets[i].getLocation().x, planets[i].getLocation().y, wordTest);
+			canvas.drawText(planets[i].getName(), planets[i].getCoordinates().x, planets[i].getCoordinates().y, wordTest);
 			
 		}	
 		//c.drawBitmap(planetIcon, x, y, paint);			
