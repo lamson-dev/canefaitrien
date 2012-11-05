@@ -47,7 +47,7 @@ public class MainScreenActivity extends TabActivity {
 		addTab("Info", InfoActivity.class, tabhost);
 		addTab("Market", MarketPlaceActivity.class, tabhost);
 		addTab("Hub", HubActivity.class, tabhost);
-
+		tabhost.setCurrentTab(3);
 	}
 
 	private void addTab(String tag, Class<?> c, TabHost th) {

@@ -14,6 +14,7 @@ public class Controller {
 	
 	// Controller constants
 	public static enum Difficulty {Easy, Medium, Hard};
+	public static final int MPG = 5;
 	private static final int STARTING_MONEY = 500;
 	
 	// Controller info
@@ -77,10 +78,10 @@ public class Controller {
 	public void move(Planet destination) throws Exception {
 		if(location.distance(destination) > ship.getType().MAX_DISTANCE) { // if planet is too far
 			throw new Exception("That planet is too far, captain!");
-		} else if(location.distance(destination) > ship.getFuel()) { // if not enough fuel
+		} else if(location.distance(destination) > ship.getFuel()*MPG) { // if not enough fuel
 			throw new Exception("We don't have enough fuel, captain!");
 		} else {
-			ship.setFuel(ship.getFuel() - location.distance(destination));
+			ship.setFuel(ship.getFuel() - location.distance(destination)/MPG);
 			location = destination;
 			location.dock(++turn); // update turn and dock to update marketplace
 		}

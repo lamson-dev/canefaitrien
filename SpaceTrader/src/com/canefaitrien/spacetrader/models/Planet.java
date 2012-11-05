@@ -9,31 +9,43 @@ import android.graphics.Point;
  * @version 10/11/2012
  */
 
+// Planet data
 public class Planet {
-
-	// Planet data
+	// Instance variables
 	private String name;
+	private int size;
 	private Point location;
 	private TechLevel level;
 	private Situation situation;
 	private Marketplace marketplace;
+	// Daniel doing testing
+	public int xOffset, yOffset;
 
+	/**
+	 * Constructor for loading Planet
+	 */
 	/**
 	 * Constructor for loading Planet
 	 */
 	public Planet(String name, Point location, TechLevel level,
 			Situation situation, Marketplace marketplace) {
+
+		this.size = (int) (Math.random() * 13) + 10;// for now each planet will
+		// randomly generate a size
+		// (radius)
 		this.name = name;
 		this.location = location;
 		this.level = level;
 		this.situation = situation;
 		this.marketplace = marketplace;
+		// daniel doing testing
+		xOffset = 0;
+		yOffset = 0;
 	}
 
 	/**
 	 * Constructor for a new Planet
 	 */
-
 	public Planet(String name, Point location, TechLevel level,
 			Situation situation) {
 		this(name, location, level, situation, new Marketplace(0, level,
@@ -76,6 +88,10 @@ public class Planet {
 		return name;
 	}
 
+	public int getSize() {
+		return size;
+	}
+
 	public Situation getSituation() {
 		return situation;
 	}
@@ -91,6 +107,7 @@ public class Planet {
 	// For testing purpose
 	public String toString() {
 		return "Planet " + name + " TL " + level + " Sit " + situation
-				+ " at X = " + location.x + " Y = " + location.y + "\n";
+				+ " at X = " + location.x + " Y = " + location.y + " of Size "
+				+ size + "\n";
 	}
 }

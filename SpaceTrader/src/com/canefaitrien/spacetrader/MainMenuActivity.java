@@ -17,19 +17,22 @@ public class MainMenuActivity extends AbstractActivity {
 
 	private static final String TAG = "MainMenu";
 	private Button button;
+	Typeface font;
+	MediaPlayer track; // background music
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_mainmenu);
-		// addSound();
+		addSound();
 		addListenerNewGameButton();
-		addListenerResumeButton();
 		addListenerLoadGameButton();
+		addListenerDebugButton();
+
 		TextView txt = (TextView) findViewById(R.id.txtview_app_name);
-		Typeface font = Typeface.createFromAsset(getAssets(),
-				"fonts/Street Corner.ttf");
+		font = Typeface.createFromAsset(getAssets(), "fonts/Street Corner.ttf");
 		txt.setTypeface(font);
+
 	}
 
 	@Override
@@ -38,14 +41,19 @@ public class MainMenuActivity extends AbstractActivity {
 		return true;
 	}
 
+	// starts a new game, goes to Configuration Activity
 	private void addListenerNewGameButton() {
 		final Context context = this;
 
 		button = (Button) findViewById(R.id.btn_newgame);
+		button.setTypeface(Typeface.createFromAsset(getAssets(),
+				"fonts/Street Corner.ttf"));
 
 		button.setOnClickListener(new View.OnClickListener() {
 
 			public void onClick(View v) {
+				track.release();
+
 				Intent intent = new Intent(context, ConfigurationActivity.class);
 				startActivity(intent);
 
@@ -53,25 +61,15 @@ public class MainMenuActivity extends AbstractActivity {
 		});
 	}
 
-	private void addListenerResumeButton() {
-
-		button = (Button) findViewById(R.id.btn_resume);
-		button.setOnClickListener(new View.OnClickListener() {
-
-			public void onClick(View v) {
-				Intent intent = new Intent(MainMenuActivity.this,
-						MainScreenActivity.class);
-				startActivity(intent);
-			}
-		});
-	}
-
+	// opens the database to view saved games
 	private void addListenerLoadGameButton() {
-		// TODO Auto-generated method stub
 		button = (Button) findViewById(R.id.btn_loadgame);
-		button.setOnClickListener(new View.OnClickListener() {
+		button.setTypeface(font);
 
+		button.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
+				track.release();
+
 				Intent intent = new Intent(MainMenuActivity.this,
 						LoadGameActivity.class);
 				startActivity(intent);
@@ -79,43 +77,57 @@ public class MainMenuActivity extends AbstractActivity {
 		});
 	}
 
+	// Edit this to go to a specific class for Debugging
+	private void addListenerDebugButton() {
+
+		button = (Button) findViewById(R.id.btn_debugmode);
+		button.setTypeface(Typeface.createFromAsset(getAssets(),
+				"fonts/Street Corner.ttf"));
+
+		button.setOnClickListener(new View.OnClickListener() {
+
+			public void onClick(View v) {
+				// track.release();
+
+				Intent intent = new Intent(MainMenuActivity.this,
+						GalaxyMapMain.class);
+				startActivity(intent);
+			}
+		});
+	}
+
+	// Plays sound
 	private void addSound() {
-		MediaPlayer track = MediaPlayer.create(MainMenuActivity.this,
-				R.raw.funny);
+		track = MediaPlayer.create(MainMenuActivity.this, R.raw.silbruch);
 		track.start();
 	}
 
-	@Override
 	protected void onStart() {
 		super.onStart();
 		Log.d(TAG, "onStart called.");
 	}
 
-	@Override
 	protected void onPause() {
 		super.onPause();
+		track.release();
 		Log.d(TAG, "onPause called.");
 	}
 
-	@Override
 	protected void onResume() {
 		super.onResume();
 		Log.d(TAG, "onResume called.");
 	}
 
-	@Override
 	protected void onStop() {
 		super.onStop();
 		Log.d(TAG, "onStop called.");
 	}
 
-	@Override
 	protected void onRestart() {
 		super.onRestart();
 		Log.d(TAG, "onRestart called.");
 	}
 
-	@Override
 	protected void onDestroy() {
 		super.onDestroy();
 	}

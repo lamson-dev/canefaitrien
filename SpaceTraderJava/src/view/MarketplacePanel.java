@@ -1,4 +1,5 @@
 package view;
+
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -13,7 +14,6 @@ import controller.Controller;
 
 import model.TradeGood;
 
-
 public class MarketplacePanel extends JPanel {
 
 	private static final long serialVersionUID = -455183452223286075L;
@@ -21,11 +21,12 @@ public class MarketplacePanel extends JPanel {
 	private Controller data;
 	JLabel[][] labels;
 	JLabel nameLabel, moneyLabel;
+	
 	public MarketplacePanel(Controller data) {
 		this.data = data;
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(11, 7));
-		setPreferredSize(new Dimension(600, 500));
+		setPreferredSize(new Dimension(600, 400));
 		
 		String[][] view = data.getLocation().getMarketplace().getView(data.getShip());
 		labels = new JLabel[view.length][view[0].length];
@@ -87,19 +88,19 @@ public class MarketplacePanel extends JPanel {
 
 	private class SellListener implements ActionListener {
 	
-	TradeGood good;
-	
-	public SellListener(TradeGood good) {
-		this.good = good;
-	}
-	
-	public void actionPerformed(ActionEvent e) {
-		try {
-			data.sellGood(good);
-			updateGoods();
-		} catch (Exception ex) {
-			
+		TradeGood good;
+		
+		public SellListener(TradeGood good) {
+			this.good = good;
+		}
+		
+		public void actionPerformed(ActionEvent e) {
+			try {
+				data.sellGood(good);
+				updateGoods();
+			} catch (Exception ex) {
+				JOptionPane.showMessageDialog(null, ex.getMessage());
+			}
 		}
 	}
-}
 }
