@@ -26,17 +26,20 @@ public final class R {
         public static final int button_newgame_pressed=0x7f020002;
         public static final int ic_action_search=0x7f020003;
         public static final int ic_launcher=0x7f020004;
+        public static final int menubutton_nuetral=0x7f020005;
+        public static final int menubutton_pressed=0x7f020006;
+        public static final int planet_button_test=0x7f020007;
     }
     public static final class id {
         public static final int bar_engineer=0x7f090011;
         public static final int bar_fighter=0x7f09000b;
         public static final int bar_pilot=0x7f090008;
         public static final int bar_trader=0x7f09000e;
-        public static final int btn_loadgame=0x7f090021;
+        public static final int btn_debugmode=0x7f090021;
+        public static final int btn_loadgame=0x7f090020;
         public static final int btn_minus=0x7f090003;
         public static final int btn_newgame=0x7f09001f;
         public static final int btn_plus=0x7f090005;
-        public static final int btn_resume=0x7f090020;
         public static final int btn_start=0x7f090015;
         public static final int edit_name=0x7f090001;
         public static final int lv_market=0x7f09002c;
@@ -88,6 +91,7 @@ public final class R {
         public static final int content_hub=0x7f030007;
         public static final int content_info=0x7f030008;
         public static final int content_map=0x7f030009;
+        public static final int galaxy_layout=0x7f03000a;
     }
     public static final class menu {
         public static final int activity_display_data=0x7f080000;
@@ -95,10 +99,14 @@ public final class R {
     }
     public static final class raw {
         public static final int funny=0x7f040000;
+        public static final int silbruch=0x7f040001;
     }
     public static final class string {
         public static final int app_name=0x7f060000;
         public static final int app_name_main=0x7f060001;
+        public static final int bt_debugmode=0x7f06001d;
+        public static final int bt_newgame=0x7f06001b;
+        public static final int bt_resumegame=0x7f06001c;
         public static final int btn_minus=0x7f06000b;
         public static final int btn_plus=0x7f06000a;
         public static final int btn_start=0x7f06000c;

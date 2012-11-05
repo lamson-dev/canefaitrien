@@ -11,40 +11,44 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="68dp"
+        android:layout_marginTop="30dp"
         android:text="@string/app_name_main"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="70dp"
-        android:typeface="normal"
         android:textColor="#CCDDE6" />
 
     <Button
         android:id="@+id/btn_newgame"
+        android:background="@drawable/menubutton_nuetral"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/txtview_app_name"
-        android:layout_marginTop="79dp"
-        android:background="@drawable/button_newgame_neutral" />
+        android:layout_marginTop="40dp"
+        android:text="@string/bt_newgame"
+        android:textSize="30dp"        
+         />
 
     <Button
-        android:id="@+id/btn_resume"
+        android:id="@+id/btn_loadgame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/btn_newgame"
-        android:layout_marginTop="23dp"
-        android:background="@drawable/button_newgame_pressed" />
-
-    <Button
-        android:id="@+id/btn_loadgame"
-        style="?android:attr/buttonStyleSmall"
+        android:layout_marginTop="20dp"
+        android:text="@string/bt_resumegame"
+        android:textSize="30dp"        
+        android:background="@drawable/menubutton_nuetral" />
+   <Button
+        android:id="@+id/btn_debugmode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="38dp"
-        android:layout_marginRight="24dp"
-        android:text="Load" />
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/btn_loadgame"
+        android:layout_marginTop="20dp"
+        android:text="@string/bt_debugmode"
+        android:textSize="30dp"        
+        android:background="@drawable/menubutton_nuetral" />
+  
 
 </RelativeLayout>

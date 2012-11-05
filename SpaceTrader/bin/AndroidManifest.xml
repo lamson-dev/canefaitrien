@@ -56,6 +56,14 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity android:name=".GalaxyMapMain" >
+            android:label="@string/title_activity_galaxyview" >
+            <intent-filter>
+                <action android:name="com.cainefaitrient.spacetrader.GALAXYMAP" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+       
     </application>
 
 </manifest>
