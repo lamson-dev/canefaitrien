@@ -1,10 +1,16 @@
 package view;
+
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-
+/**
+ * Java class to run the java game
+ * 
+ * @author andrew
+ *
+ */
 public class SpaceTrader {
 	boolean mainMenuVisible = false;
 	
@@ -12,10 +18,7 @@ public class SpaceTrader {
 		JFrame frame = new JFrame("Space Trader");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		JPanel panel = new JPanel();
-		panel.setPreferredSize(new Dimension(600, 500));
-		panel.add(new MainMenuPanel(panel));
-		frame.add(panel);
+		frame.add(new MainMenuPanel(frame));
 		
 		frame.pack();
 		frame.setVisible(true);
