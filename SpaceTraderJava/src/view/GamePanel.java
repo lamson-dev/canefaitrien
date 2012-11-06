@@ -18,10 +18,10 @@ public class GamePanel extends JTabbedPane {
 		this.data = data;
 		// tabs
 		//JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.BOTTOM);
-		
-		addTab("Universe", new UniversePanel(data));
+		MarketplacePanel mp = new MarketplacePanel(data);
+		addTab("Universe", new UniversePanel(data, mp));
 		addTab("Info", new InfoPanel(data));		
-		addTab("Marketplace", new MarketplacePanel(data));
+		addTab("Marketplace", mp);
 		addTab("Options", new OptionsPanel(data));
 		addTab("Travel", new TravelPanel(data));
 	}

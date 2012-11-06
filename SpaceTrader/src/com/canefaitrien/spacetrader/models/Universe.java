@@ -15,10 +15,11 @@ import android.graphics.Point;
 public class Universe {
 	
 	// Universe constants
-	public static final int WIDTH = 600, HEIGHT = 500, SHUFFLE_AMT = 1000;
+	public static final int WIDTH = 720, HEIGHT = 1280, SHUFFLE_AMT = 1000;
 	public static final int BORDER = 10; // Min distance from edge of screen
 	public static final int MIN_DISTANCE = 10; // Min distance planet must be from another planet
 	public static final int TOTAL_PLANETS = 100; // Total planets to create
+	private static Random rand = new Random();
 	
 	// Array of planet names
 	private static final String PLANET_NAMES[] = 
@@ -37,11 +38,6 @@ public class Universe {
 			"Tanuga","Tarchannen","Terosa","Thera",	"Titan","Torin","Triacus","Turkana",
 			"Tyrus","Umberlee",	"Utopia",	"Vadera","Vagra","Vandor","Ventax","Xenon",
 			"Xerxes","Yew","Yojimbo","Zalkon","Zuul" };
-	
-	// Universe info
-	private Planet[] planets = new Planet[TOTAL_PLANETS];
-	private static Random rand = new Random();
-	
 	
 	/**
 	 * Shuffles planet names to create random planets

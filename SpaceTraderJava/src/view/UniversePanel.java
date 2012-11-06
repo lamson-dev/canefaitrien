@@ -20,8 +20,9 @@ public class UniversePanel extends JPanel {
 
 	private static final long serialVersionUID = -2657666322078794773L;
 	private Controller data;
-	
-	public UniversePanel(Controller data) {
+	private MarketplacePanel mp;
+	public UniversePanel(Controller data, MarketplacePanel mp) {
+		this.mp = mp;
 		this.data = data;
 		setPreferredSize(new Dimension(600, 500));
 		setBackground(Color.black);
@@ -50,6 +51,7 @@ public class UniversePanel extends JPanel {
 							//travel
 							try {
 								data.move(p);
+								mp.changeMarketplace();
 								repaint();
 							} catch(Exception ex) {
 								JOptionPane.showMessageDialog(null, ex.getMessage());

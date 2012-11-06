@@ -51,8 +51,8 @@ public class MarketplacePanel extends JPanel {
 			button.addActionListener(new SellListener(goods[i]));
 			panel.add(button);
 		}
-		add(new JLabel("Planet " + data.getLocation().getName()));
-		add(new JLabel(data.getPlayer().getName()));
+		nameLabel = new JLabel("Planet " + data.getLocation().getName()+ "     " + data.getPlayer().getName());
+		add(nameLabel);
 		moneyLabel = new JLabel("$" + data.getMoney());
 		add(moneyLabel);
 		add(panel);
@@ -66,6 +66,11 @@ public class MarketplacePanel extends JPanel {
 			}
 		}
 		moneyLabel.setText("$" + data.getMoney());
+	}
+	
+	public void changeMarketplace() {
+		updateGoods();
+		nameLabel.setText("Planet " + data.getLocation().getName()+ "     " + data.getPlayer().getName());
 	}
 	
 	private class BuyListener implements ActionListener {
