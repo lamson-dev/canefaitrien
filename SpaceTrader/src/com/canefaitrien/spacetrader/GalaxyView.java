@@ -18,7 +18,7 @@ import com.canefaitrien.spacetrader.models.Universe;
 public class GalaxyView extends View {
 
 	
-	private Planet[] planets = Universe.generate();// note this is creating a new universe every time
+	private Planet[] planets;
 	Paint paint = new Paint();// normal paint
 	Paint wordTest = new Paint(); // text paint
 	// for create planets
@@ -32,9 +32,10 @@ public class GalaxyView extends View {
 	Thread ourThread = null;
 	boolean isRunning = false;
 	
-	public GalaxyView(Context context) {
+	public GalaxyView(Context context, Planet[] planets) {
 		super(context);
 		//
+		this.planets = planets;
 		wordTest.setColor(Color.WHITE);
 		wordTest.setTextAlign(Align.CENTER);
 

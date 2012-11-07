@@ -4,8 +4,8 @@
     <string name="app_name_main">Space\nTrader</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
-    <string name="title_activity_main">MainActivity</string>
-    <string name="title_activity_config">Config New Game</string>
+    <string name="title_activity_main">MainMenu</string>
+    <string name="title_activity_config">Configuration</string>
     <string name="hint_name">Your Name</string>
     <string name="txtview_name">Name</string>
     <string name="txtview_difficulty">Difficulty</string>

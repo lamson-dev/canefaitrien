@@ -12,7 +12,7 @@ import android.widget.LinearLayout;
 import com.canefaitrien.spacetrader.models.Planet;
 
 //This class should have the actions for clicking a planet
-public class GalaxyMapMain extends Activity implements OnTouchListener {
+public class GalaxyMapActivity extends Activity implements OnTouchListener {
 
 	private GalaxyView galaxy;
 	/*private Planet[] planets;
@@ -29,7 +29,7 @@ public class GalaxyMapMain extends Activity implements OnTouchListener {
 		super.onCreate(savedInstanceState);
 
 		// draw planets, done
-		galaxy = new GalaxyView(this);
+		galaxy = new GalaxyView(this, SpaceTraderApplication.getData().getUniverse());
 		galaxy.setOnTouchListener(this);
 
 		setContentView(galaxy);

@@ -90,7 +90,7 @@ public class MainMenuActivity extends AbstractActivity {
 				// track.release();
 
 				Intent intent = new Intent(MainMenuActivity.this,
-						GalaxyMapMain.class);
+						GalaxyMapActivity.class);
 				startActivity(intent);
 			}
 		});
