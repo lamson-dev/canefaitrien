@@ -59,6 +59,7 @@ public class TravelPanel extends JPanel {
 				
 				JButton fleePoliceButton = new JButton("Flee");
 				JButton submitButton = new JButton("Submit");
+				submitButton.addActionListener(new submitButtonListener());
 				panel.removeAll();
 				panel.add(police);
 				panel.add(bribeButton, BorderLayout.PAGE_END);
@@ -137,7 +138,18 @@ public class TravelPanel extends JPanel {
 				}while (isNumber == true);	
 				
 				panel.removeAll();
+				panel = new MarketplacePanel(data);
+				add(panel);
 				revalidate();
+			}
+			
+		}
+		private class submitButtonListener implements ActionListener{
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
 			}
 			
 		}

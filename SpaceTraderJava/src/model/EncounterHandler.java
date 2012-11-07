@@ -1,6 +1,5 @@
 package model;
-import java.util.Random;
-
+import other.PirateEncounter;
 import other.PoliceEncounter;
 
 /**
@@ -27,13 +26,8 @@ public class EncounterHandler {
 	 * @return true upon successful, false otherwise
 	 */
 	public boolean bribePolice(int amount) {
-		int currentMoney = data.getMoney();
-		int bribeMoney = new Random().nextInt(currentMoney/10);
-		if (amount < bribeMoney || amount > currentMoney) 
-			return false;
-		else
-			data.setMoney(currentMoney - amount);
-		return true;
+		PoliceEncounter police = new PoliceEncounter(data);
+		return police.bribePolice(amount);
 	}
 	
 	public void attack(EncounterType type){
@@ -62,8 +56,13 @@ public class EncounterHandler {
 			return true;
 		return false;
 	}
-	public void fleeFromPirate(){
-		
+	/**
+	 * Surrender to pirate
+	 * All goods in the cargo will be taken
+	 */
+	public void surrenderToPirate(){
+		PirateEncounter pirate = new PirateEncounter(data);
+		pirate.takeGoods();
 	}
 	
 }
