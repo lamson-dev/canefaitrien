@@ -24,13 +24,13 @@ import controller.Controller;
 public class TravelPanel extends JPanel {
 
 	private static final long serialVersionUID = -4315002591794574841L;
-	
+
 	private Controller data;
 	private MarketplacePanel mp;
 	JPanel panel = new JPanel(new BorderLayout());
 	JButton resetBtn = new JButton("Reset");
 	EncounterHandler encounter;
-	
+
 	public TravelPanel(Controller data, MarketplacePanel mp) {
 
 		this.data = data;
@@ -46,7 +46,7 @@ public class TravelPanel extends JPanel {
 		add(panel);
 	}
 	private class TravelButtonListener implements ActionListener {
-		
+
 		public void actionPerformed(ActionEvent e) {
 			EncounterType encounter = EncounterType.getEncounterType();
 			System.out.println(encounter);
@@ -61,7 +61,7 @@ public class TravelPanel extends JPanel {
 				fleePoliceButton.addActionListener(new fleePoliceButtonListener());
 				JButton submitButton = new JButton("Submit");
 				submitButton.addActionListener(new submitButtonListener());
-				
+
 				panel.removeAll();
 				panel.add(police);
 				panel.add(bribeButton, BorderLayout.PAGE_END);
@@ -69,9 +69,9 @@ public class TravelPanel extends JPanel {
 				panel.add(fleePoliceButton, BorderLayout.PAGE_END);
 				panel.add(submitButton, BorderLayout.PAGE_END);
 				panel.add(resetBtn);
-				
+
 				revalidate();
-				
+
 				break;
 			case PIRATE:
 				JLabel pirate = new JLabel("Pirate Encounter");
@@ -80,27 +80,31 @@ public class TravelPanel extends JPanel {
 				JButton fleePirateButton = new JButton("Flee");
 				fleePirateButton.addActionListener(new fleePirateButtonListener());
 				JButton surrenderButton = new JButton("Surrender");
+				surrenderButton.addActionListener(new surrenderPirateButtonListener());
 				panel.removeAll();
 				panel.add(pirate);
 				panel.add(attackPirateButton, BorderLayout.PAGE_END);
 				panel.add(fleePirateButton, BorderLayout.PAGE_END);
 				panel.add(surrenderButton, BorderLayout.PAGE_END);
 				panel.add(resetBtn);
-				
+
 				revalidate();
 				break;
 			case TRADER:
 				JLabel trader= new JLabel("Trader Encounter");
 				JButton attackTraderButton = new JButton("Attack");
+				attackTraderButton.addActionListener(new attackTraderButtonListener());
 				JButton ignoreButton = new JButton("Ignore");
+				ignoreButton.addActionListener(new ignoreTraderButtonListener());
 				JButton tradeButton = new JButton("Trade");
+				tradeButton.addActionListener(new tradeTraderButtonListener());
 				panel.removeAll();
 				panel.add(trader);
 				panel.add(attackTraderButton, BorderLayout.PAGE_END);
 				panel.add(ignoreButton, BorderLayout.PAGE_END);
 				panel.add(tradeButton, BorderLayout.PAGE_END);
 				panel.add(resetBtn);
-				
+
 				revalidate();
 				break;
 			default:
@@ -126,7 +130,7 @@ public class TravelPanel extends JPanel {
 					{  
 						isNumber = false;  
 					}  
-					
+
 					boolean success = encounter.bribePolice(bribeAmount);
 					if (success) {	
 						JOptionPane.showMessageDialog(bribeFrame, 
@@ -140,11 +144,11 @@ public class TravelPanel extends JPanel {
 					}
 
 				}while (isNumber == true);	
-				
+
 				mp.changeMarketplace();
 				mp.repaint();
 			}
-			
+
 		}
 		private class submitButtonListener implements ActionListener{
 
@@ -157,12 +161,12 @@ public class TravelPanel extends JPanel {
 				else
 					JOptionPane.showMessageDialog(
 							panel, "You have illegal goods in your cargo. A fine of "+ (currentCredit-data.getMoney())+
-									" has been charged to your bank account.\n");
-				
+							" has been charged to your bank account.\n");
+
 				mp.changeMarketplace();
 				mp.repaint();
 			}
-			
+
 		}
 		private class attackPoliceButtonListener implements ActionListener {
 
@@ -173,11 +177,11 @@ public class TravelPanel extends JPanel {
 							panel, "Congratulation, you have destroyed a police ship");
 				else
 					JOptionPane.showMessageDialog(
-						panel, "Sorry Game Over.");
+							panel, "Sorry Game Over.");
 				mp.changeMarketplace();
 				mp.repaint();
 			}
-			
+
 		}
 		private class fleePoliceButtonListener implements ActionListener {
 
@@ -196,13 +200,13 @@ public class TravelPanel extends JPanel {
 					else
 						JOptionPane.showMessageDialog(
 								panel, "You have illegal goods in your cargo. A fine of "+ (currentCredit-data.getMoney())+
-										" has been charged to your bank account.\n");
+								" has been charged to your bank account.\n");
 				}
 				mp.changeMarketplace();
 				mp.repaint();
-				
+
 			}
-			
+
 		}
 		private class fleePirateButtonListener implements ActionListener {
 
@@ -213,14 +217,14 @@ public class TravelPanel extends JPanel {
 							panel, "Congratulation, you have got a way from a pirate");
 				else {
 					JOptionPane.showMessageDialog(
-						panel, "Sorry pirate got you! All your goods will be taken!");
+							panel, "Sorry pirate got you! All your goods will be taken!");
 					encounter.surrenderToPirate();
 				}
 				mp.changeMarketplace();
 				mp.repaint();
-				
+
 			}
-			
+
 		}
 		private class attackPirateButtonListener implements ActionListener {
 
@@ -231,9 +235,54 @@ public class TravelPanel extends JPanel {
 							panel, "Congratulation, you have destroyed a pirate ship");
 				else
 					JOptionPane.showMessageDialog(
-						panel, "Sorry Game Over.");
+							panel, "Sorry Game Over.");
 				mp.changeMarketplace();
 				mp.repaint();
+
+			}
+
+		}
+		private class surrenderPirateButtonListener implements ActionListener {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				encounter.surrenderToPirate();
+				mp.changeMarketplace();
+				mp.repaint();
+
+			}
+
+		}
+		private class attackTraderButtonListener implements ActionListener {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (encounter.attackTrader()) 
+					JOptionPane.showMessageDialog(
+							panel, "Congratulation, you have destroyed a trader ship");
+				else
+					JOptionPane.showMessageDialog(
+							panel, "Sorry Game Over.");
+				mp.changeMarketplace();
+				mp.repaint();
+				
+			}
+			
+		}
+		private class ignoreTraderButtonListener implements ActionListener {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		}
+		private class tradeTraderButtonListener implements ActionListener {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
 				
 			}
 			

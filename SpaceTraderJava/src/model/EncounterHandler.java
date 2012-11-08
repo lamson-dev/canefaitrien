@@ -1,6 +1,7 @@
 package model;
 import other.PirateEncounter;
 import other.PoliceEncounter;
+import other.TraderEncounter;
 
 /**
  * Encounter Handler
@@ -29,19 +30,6 @@ public class EncounterHandler {
 		PoliceEncounter police = new PoliceEncounter(data);
 		return police.bribePolice(amount);
 	}
-	
-	public void attack(EncounterType type){
-		switch (type) {
-		case POLICE:
-			break;
-		case PIRATE:
-			break;
-		case TRADER:
-			break;
-		default:
-			break;
-		}
-	}
 	/**
 	 * This is a submission to police cargo check
 	 * If there is no Firearm or narcotics nothing happen
@@ -56,14 +44,6 @@ public class EncounterHandler {
 			return true;
 		return false;
 	}
-	/**
-	 * Surrender to pirate
-	 * All goods in the cargo will be taken
-	 */
-	public void surrenderToPirate(){
-		PirateEncounter pirate = new PirateEncounter(data);
-		pirate.takeGoods();
-	}
 	
 	public boolean attackPolice() {
 		PoliceEncounter police = new PoliceEncounter(data);
@@ -73,8 +53,29 @@ public class EncounterHandler {
 		PoliceEncounter police = new PoliceEncounter(data);
 		return (police.policeFlee());
 	}
+	/**
+	 * Surrender to pirate
+	 * All goods in the cargo will be taken
+	 */
+	public void surrenderToPirate(){
+		PirateEncounter pirate = new PirateEncounter(data);
+		pirate.takeGoods();
+	}
+	/**
+	 * Try to flee from pirate
+	 * @return true if get away
+	 * false otherwise
+	 */
 	public boolean fleePirate() {
 		PirateEncounter pirate = new PirateEncounter(data);
 		return (pirate.pirateFlee());
+	}
+	public boolean attackPirate() {
+		PirateEncounter pirate = new PirateEncounter(data);
+		return (pirate.pirateFlee());
+	}
+	public boolean attackTrader() {
+		TraderEncounter trader = new TraderEncounter(data);
+		return (trader.traderBattle());
 	}
 }
