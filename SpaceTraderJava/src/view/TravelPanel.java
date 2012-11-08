@@ -292,6 +292,13 @@ public class TravelPanel extends JPanel {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			frame.setVisible(false);
+			frame = new JFrame("Trade Options");
+			frame.setPreferredSize(new Dimension(600, 500));
+			TradePanel mp = new TradePanel(data);
+			frame.remove(panel);
+			frame.add(mp);
+			frame.pack();
+			frame.setVisible(true);
 		}
 
 	}
