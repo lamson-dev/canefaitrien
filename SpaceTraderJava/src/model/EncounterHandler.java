@@ -65,4 +65,8 @@ public class EncounterHandler {
 		pirate.takeGoods();
 	}
 	
+	public boolean attackPolice() {
+		PoliceEncounter police = new PoliceEncounter(data);
+		return (police.policeBattle());
+	}
 }

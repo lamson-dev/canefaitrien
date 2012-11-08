@@ -23,6 +23,6 @@ public class GamePanel extends JTabbedPane {
 		addTab("Info", new InfoPanel(data));		
 		addTab("Marketplace", mp);
 		addTab("Options", new OptionsPanel(data));
-		addTab("Travel", new TravelPanel(data));
+		addTab("Travel", new TravelPanel(data, mp));
 	}
 }

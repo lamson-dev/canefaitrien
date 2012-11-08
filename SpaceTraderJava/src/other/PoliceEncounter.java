@@ -8,10 +8,15 @@ package other;
 import java.util.Random;
 
 import controller.Controller;
+import model.Ship;
+import model.ShipType;
 import model.TradeGood;
 
 public class PoliceEncounter implements Encounter {
 	
+	//HORNET(16, 300, 3, 1, 2, 20, 0, 0, "Hornet"),
+	// 30 cargo/ 2 weapons, 2 shield, 3 gadget, 3 crew, 15/tank
+	private Ship policeShip = new Ship(ShipType.HORNET);
 	private TradeGood[] illegalTradeGood;
 	private Controller data;
 	
@@ -34,8 +39,11 @@ public class PoliceEncounter implements Encounter {
 		int[] goods = data.getShip().getCargo();
 		if (goods[TradeGood.NARCOTICS.ordinal()] == 0 && goods[TradeGood.FIREARMS.ordinal()] == 0) 
 			return data.getMoney();
-		else
+		else {
 			data.setMoney(data.getMoney() * 8 / 10);
+			goods[TradeGood.NARCOTICS.ordinal()] = 0;
+			goods[TradeGood.FIREARMS.ordinal()] = 0;
+		}
 		return data.getMoney();
 	}
 	/**
@@ -52,4 +60,11 @@ public class PoliceEncounter implements Encounter {
 			data.setMoney(currentMoney - amount);
 		return true;
 	}
-}
+	/**
+	 * @Return true if survive
+	 * false otherwise
+	 */
+	public boolean policeBattle() {
+		return ((data.getShip().getHullStrength() - policeShip.getHullStrength()) > 0);
+	}
+ }

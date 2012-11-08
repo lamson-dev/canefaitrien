@@ -19,8 +19,6 @@ import javax.swing.JPanel;
 
 import model.EncounterHandler;
 import model.EncounterType;
-
-
 import controller.Controller;
 
 public class TravelPanel extends JPanel {
@@ -28,13 +26,15 @@ public class TravelPanel extends JPanel {
 	private static final long serialVersionUID = -4315002591794574841L;
 	
 	private Controller data;
+	private MarketplacePanel mp;
 	JPanel panel = new JPanel(new BorderLayout());
 	JButton resetBtn = new JButton("Reset");
 	EncounterHandler encounter;
 	
-	public TravelPanel(Controller data) {
+	public TravelPanel(Controller data, MarketplacePanel mp) {
 
 		this.data = data;
+		this.mp = mp;
 		encounter = new EncounterHandler(data);
 
 		panel.setLayout(new GridLayout(11, 7));
@@ -56,6 +56,7 @@ public class TravelPanel extends JPanel {
 				JButton bribeButton = new JButton("Bribe");
 				bribeButton.addActionListener(new bribeButtonListener());
 				JButton attackPoliceButton = new JButton("Attack");
+				attackPoliceButton.addActionListener(new attackPoliceButtonListener());
 				
 				JButton fleePoliceButton = new JButton("Flee");
 				JButton submitButton = new JButton("Submit");
@@ -137,10 +138,8 @@ public class TravelPanel extends JPanel {
 
 				}while (isNumber == true);	
 				
-				panel.removeAll();
-				panel = new MarketplacePanel(data);
-				add(panel);
-				revalidate();
+				mp.changeMarketplace();
+				mp.repaint();
 			}
 			
 		}
@@ -148,8 +147,32 @@ public class TravelPanel extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				int currentCredit = data.getMoney();
+				if (encounter.submitPolice()) 
+					JOptionPane.showMessageDialog(
+							panel, "Sorry for wasting your time! You are free to go.");
+				else
+					JOptionPane.showMessageDialog(
+							panel, "You have illegal goods in your cargo. A fine of "+ (currentCredit-data.getMoney())+
+									" has been charged to your bank account.\n");
 				
+				mp.changeMarketplace();
+				mp.repaint();
+			}
+			
+		}
+		private class attackPoliceButtonListener implements ActionListener {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (encounter.attackPolice()) 
+					JOptionPane.showMessageDialog(
+							panel, "Congratulation, you have destroyed a police ship");
+				else
+					JOptionPane.showMessageDialog(
+						panel, "Sorry Game Over.");
+				mp.changeMarketplace();
+				mp.repaint();
 			}
 			
 		}
