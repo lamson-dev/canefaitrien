@@ -83,4 +83,11 @@ public class Ship {
 	public void setFuel(int fuel) {
 		this.fuel = fuel;
 	}
+	
+	public int getHullStrength() {
+		return hullStrength;
+	}
+	public int getMaxSpeed() {
+		return type.getMaxSpeed();
+	}
 }

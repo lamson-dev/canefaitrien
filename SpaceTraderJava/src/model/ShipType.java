@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Random;
+
 /**
  * Create Ship type
  * 
@@ -64,5 +66,16 @@ public enum ShipType {
 	
 	public String toString() {
 		return NAME;
+	}
+	
+	public int getMaxHullStrength() {
+		return MAX_HULL_STRENGTH;
+	}
+	public int getMaxSpeed() {
+		return MAX_DISTANCE;
+	}
+	public static ShipType getAShip() {
+		int pick = new Random().nextInt(ShipType.values().length);
+	    return ShipType.values()[pick];
 	}
 }

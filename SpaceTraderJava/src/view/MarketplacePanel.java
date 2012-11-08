@@ -55,6 +55,12 @@ public class MarketplacePanel extends JPanel {
 		add(nameLabel);
 		moneyLabel = new JLabel("$" + data.getMoney());
 		add(moneyLabel);
+		// This is added on 11/07/12 by An Pham
+		// This is for testing purpose
+		JButton refuelButton = new JButton("Refuel");
+		add(refuelButton);
+		refuelButton.addActionListener(new refuelBtnListener());
+		// End of An Pham's test
 		add(panel);
 	}
 	
@@ -107,5 +113,16 @@ public class MarketplacePanel extends JPanel {
 				JOptionPane.showMessageDialog(null, ex.getMessage());
 			}
 		}
+	}
+	private class refuelBtnListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			data.setMoney(data.getMoney() - 50);
+			updateGoods();
+			repaint();
+			data.getShip().setFuel(data.getShip().getType().MAX_DISTANCE);
+		}
+		
 	}
 }
