@@ -1,5 +1,9 @@
 package other;
-
+/**
+ * @author An Pham
+ * @Date 11/07/12
+ * @Version 1.0
+ */
 import model.ShipType;
 import controller.Controller;
 
@@ -12,7 +16,7 @@ public class TraderEncounter implements Encounter {
 		this.data = data;
 	}
 	
-	private void trade() {
+	public void trade() {
 		
 	}
 
