@@ -118,6 +118,10 @@ public class MarketplacePanel extends JPanel {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			if (data.getShip().getFuel() == data.getShip().getType().MAX_DISTANCE)
+				return;
+			if (data.getMoney() < 50)
+				return;
 			data.setMoney(data.getMoney() - 50);
 			updateGoods();
 			repaint();
