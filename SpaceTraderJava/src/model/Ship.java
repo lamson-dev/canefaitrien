@@ -87,4 +87,7 @@ public class Ship {
 	public int getHullStrength() {
 		return hullStrength;
 	}
+	public int getMaxSpeed() {
+		return type.getMaxSpeed();
+	}
 }

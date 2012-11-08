@@ -67,4 +67,11 @@ public class PoliceEncounter implements Encounter {
 	public boolean policeBattle() {
 		return ((data.getShip().getHullStrength() - policeShip.getHullStrength()) > 0);
 	}
+	/**
+	 * @Return true if get away
+	 * false otherwise
+	 */
+	public boolean policeFlee() {
+		return ((data.getShip().getMaxSpeed() - policeShip.getMaxSpeed()) > 0);
+	}
  }

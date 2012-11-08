@@ -56,11 +56,12 @@ public class TravelPanel extends JPanel {
 				JButton bribeButton = new JButton("Bribe");
 				bribeButton.addActionListener(new bribeButtonListener());
 				JButton attackPoliceButton = new JButton("Attack");
-				attackPoliceButton.addActionListener(new attackPoliceButtonListener());
-				
+				attackPoliceButton.addActionListener(new attackPoliceButtonListener());			
 				JButton fleePoliceButton = new JButton("Flee");
+				fleePoliceButton.addActionListener(new fleePoliceButtonListener());
 				JButton submitButton = new JButton("Submit");
 				submitButton.addActionListener(new submitButtonListener());
+				
 				panel.removeAll();
 				panel.add(police);
 				panel.add(bribeButton, BorderLayout.PAGE_END);
@@ -75,7 +76,9 @@ public class TravelPanel extends JPanel {
 			case PIRATE:
 				JLabel pirate = new JLabel("Pirate Encounter");
 				JButton attackPirateButton = new JButton("Attack");
+				attackPirateButton.addActionListener(new attackPirateButtonListener());
 				JButton fleePirateButton = new JButton("Flee");
+				fleePirateButton.addActionListener(new fleePirateButtonListener());
 				JButton surrenderButton = new JButton("Surrender");
 				panel.removeAll();
 				panel.add(pirate);
@@ -173,6 +176,65 @@ public class TravelPanel extends JPanel {
 						panel, "Sorry Game Over.");
 				mp.changeMarketplace();
 				mp.repaint();
+			}
+			
+		}
+		private class fleePoliceButtonListener implements ActionListener {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int currentCredit = data.getMoney();
+				if (encounter.fleePolice())
+					JOptionPane.showMessageDialog(
+							panel, "Congratulation, you have got away");
+				else {
+					JOptionPane.showMessageDialog(
+							panel, "You got pulled over for inspection!");
+					if (encounter.submitPolice()) 
+						JOptionPane.showMessageDialog(
+								panel, "Sorry for wasting your time! You are free to go.");
+					else
+						JOptionPane.showMessageDialog(
+								panel, "You have illegal goods in your cargo. A fine of "+ (currentCredit-data.getMoney())+
+										" has been charged to your bank account.\n");
+				}
+				mp.changeMarketplace();
+				mp.repaint();
+				
+			}
+			
+		}
+		private class fleePirateButtonListener implements ActionListener {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (encounter.fleePirate()) 
+					JOptionPane.showMessageDialog(
+							panel, "Congratulation, you have got a way from a pirate");
+				else {
+					JOptionPane.showMessageDialog(
+						panel, "Sorry pirate got you! All your goods will be taken!");
+					encounter.surrenderToPirate();
+				}
+				mp.changeMarketplace();
+				mp.repaint();
+				
+			}
+			
+		}
+		private class attackPirateButtonListener implements ActionListener {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (encounter.attackPirate()) 
+					JOptionPane.showMessageDialog(
+							panel, "Congratulation, you have destroyed a pirate ship");
+				else
+					JOptionPane.showMessageDialog(
+						panel, "Sorry Game Over.");
+				mp.changeMarketplace();
+				mp.repaint();
+				
 			}
 			
 		}
