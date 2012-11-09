@@ -77,6 +77,10 @@ public class Planet {
 		return new Rectangle(coordinates.x - radius, coordinates.y - radius, 2*radius, 2*radius);
 	}
 	
+	public boolean isClicked(Point point) {
+		return new Rectangle(coordinates.x - radius, coordinates.y - radius, 2*radius, 2*radius).contains(point);
+	}
+	
 	/**
 	 * Getters and setters
 	 */	

@@ -87,6 +87,17 @@ public class Planet {
 	public String getName() {
 		return name;
 	}
+	
+	
+	public boolean isClicked(Point point) {
+		// so it looks like android doesn't have that rectangle thing
+		// This is assuming size is the diameter. Correct this if I'm wrong
+		if(point.x > coordinates.x && point.x < coordinates.x + size &&
+				point.y > coordinates.y && point.y < coordinates.y + size) {
+			return true;
+		}
+		return false;
+	}
 
 	public int getSize() {
 		return size;
