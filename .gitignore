@@ -37,7 +37,6 @@ SpaceTrader/gen/com/canefaitrien/spacetrader/R.java
 *.tar
 *.zip
 *.apk
-*.jar
 
 # Logs and databases #
 ######################
