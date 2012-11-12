@@ -19,7 +19,9 @@ package com.canefaitrien.spacetrader;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
@@ -29,16 +31,21 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
+import com.canefaitrien.spacetrader.R;
+import com.canefaitrien.spacetrader.dao.DaoMaster;
+import com.canefaitrien.spacetrader.dao.DaoMaster.DevOpenHelper;
+import com.canefaitrien.spacetrader.dao.DaoSession;
+import com.canefaitrien.spacetrader.dao.GameDataDao;
 import com.canefaitrien.spacetrader.utils.DbAdapter;
 
 public class LoadGameActivity extends ListActivity {
 
 	private static final String TAG = "LoadGame";
 	private static final int ACTIVITY_LOAD = 1;
-
 	private static final int DELETE_ID = Menu.FIRST;
 
-	private DbAdapter mDbHelper;
+	private GameDataDao gameDataDao;
+	private Cursor cursor;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -46,51 +53,39 @@ public class LoadGameActivity extends ListActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_loadgame);
 
-		mDbHelper = new DbAdapter(this);
+		gameDataDao = SpaceTrader.daoSession.getGameDataDao();
 
 		fillData();
+
 		registerForContextMenu(getListView());
 	}
 
 	private void fillData() {
-		mDbHelper.open();
+		String idCol = GameDataDao.Properties.Id.columnName;
+		String nameCol = GameDataDao.Properties.Name.columnName;
+		String dateCol = GameDataDao.Properties.Date.columnName;
 
-		// Get all of the rows from the database and create the item list
-		Cursor c = mDbHelper.fetchAllSaves();
-		startManagingCursor(c);
+		cursor = SpaceTrader.db.query(gameDataDao.getTablename(),
+				gameDataDao.getAllColumns(), null, null, null, null, null);
 
-		// Create an array to specify the fields we want to display in the list
-		// (only TITLE)
-		// String[] from = new String[] { DbAdapter.CHAR_KEY_ROWID,
-		// DbAdapter.CHAR_KEY_DIFFICULTY, DbAdapter.CHAR_KEY_NAME,
-		// DbAdapter.CHAR_KEY_MONEY, DbAdapter.CHAR_KEY_DATE };
-		String[] from = new String[] { DbAdapter.CHAR_KEY_ROWID,
-				DbAdapter.CHAR_KEY_NAME, DbAdapter.CHAR_KEY_PILOT_PTS,
-				DbAdapter.CHAR_KEY_FIGHTER_PTS, DbAdapter.CHAR_KEY_TRADER_PTS,
-				DbAdapter.CHAR_KEY_ENGINEER_PTS };
+		String[] from = { idCol, nameCol, dateCol };
+		int[] to = { R.id.tv_entry_id, R.id.tv_entry_name, R.id.tv_entry_date };
 
-		// and an array of the fields we want to bind those fields to (in this
-		// case just text1)
-		int[] to = new int[] { R.id.tv_entry_id, R.id.tv_entry_name,
-				R.id.tv_entry_pilot, R.id.tv_entry_fighter,
-				R.id.tv_entry_trader, R.id.tv_entry_engineer };
+		SimpleCursorAdapter adapter = new SimpleCursorAdapter(this,
+				R.layout.list_loadgame_data, cursor, from, to, 0);
 
-		// Now create a simple cursor adapter and set it to display
-		SimpleCursorAdapter saves = new SimpleCursorAdapter(this,
-				R.layout.list_loadgame_data, c, from, to, 0);
-		setListAdapter(saves);
+		setListAdapter(adapter);
+	}
 
-		// int iRow = c.getColumnIndex(DbAdapter.CHAR_KEY_ROWID);
-		// int iName = c.getColumnIndex(DbAdapter.CHAR_KEY_NAME);
-		// int iDate = c.getColumnIndex(DbAdapter.CHAR_KEY_DATE);
-		//
-		// for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext()) {
-		// result += c.getString(iRow) + " " + c.getString(iName) + " " +
-		// c.getString(iDate) + "\n";
-		// }
+	@Override
+	protected void onListItemClick(ListView l, View v, int position, long id) {
+		super.onListItemClick(l, v, position, id);
 
-		mDbHelper.close();
-
+		Intent intent = new Intent(LoadGameActivity.this,
+				MainScreenActivity.class);
+		intent.putExtra(GameDataDao.Properties.Id.columnName, id);
+		intent.putExtra("New Game", false);
+		startActivityForResult(intent, ACTIVITY_LOAD);
 	}
 
 	@Override
@@ -106,30 +101,55 @@ public class LoadGameActivity extends ListActivity {
 		case DELETE_ID:
 			AdapterContextMenuInfo info = (AdapterContextMenuInfo) item
 					.getMenuInfo();
-			mDbHelper.deleteCharacter(info.id);
+			Log.d(TAG, "Delete row ID: " + String.valueOf(info.id));
+			gameDataDao.deleteByKey(info.id);
+			Log.d(TAG, "Deleted game data, ID: " + info.id);
+			cursor.requery();
 			fillData();
 			return true;
 		}
 		return super.onContextItemSelected(item);
 	}
 
-	private void loadGame(long rowId) {
-		Intent intent = new Intent(LoadGameActivity.this,
-				MainScreenActivity.class);
-		intent.putExtra(DbAdapter.CHAR_KEY_ROWID, rowId);
-		startActivityForResult(intent, ACTIVITY_LOAD);
-	}
-
-	@Override
-	protected void onListItemClick(ListView l, View v, int position, long id) {
-		super.onListItemClick(l, v, position, id);
-		loadGame(id);
-	}
-
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode,
 			Intent intent) {
 		super.onActivityResult(requestCode, resultCode, intent);
-		fillData();
+		cursor.requery();
 	}
+	@Override
+	protected void onStart() {
+		super.onStart();
+		Log.d(TAG, "onStart called.");
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		Log.d(TAG, "onPause called.");
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		Log.d(TAG, "onResume called.");
+	}
+
+	@Override
+	protected void onStop() {
+		super.onStop();
+		Log.d(TAG, "onStop called.");
+	}
+
+	@Override
+	protected void onRestart() {
+		super.onRestart();
+		Log.d(TAG, "onRestart called.");
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+	}
+
 }

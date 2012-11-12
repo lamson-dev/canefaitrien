@@ -1,7 +1,12 @@
 package com.canefaitrien.spacetrader;
 
+import java.util.Date;
+import java.util.List;
+
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -10,12 +15,17 @@ import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
-import com.canefaitrien.spacetrader.constants.GameConstants;
-import com.canefaitrien.spacetrader.models.Controller;
-import com.canefaitrien.spacetrader.models.Controller.Difficulty;
+import com.canefaitrien.spacetrader.Controller.Difficulty;
+import com.canefaitrien.spacetrader.dao.GameDataDao;
+import com.canefaitrien.spacetrader.dao.MarketplaceDao;
+import com.canefaitrien.spacetrader.dao.PersonDao;
+import com.canefaitrien.spacetrader.dao.PlanetDao;
+import com.canefaitrien.spacetrader.interfaces.GameConstants;
+import com.canefaitrien.spacetrader.models.GameData;
+import com.canefaitrien.spacetrader.models.Marketplace;
 import com.canefaitrien.spacetrader.models.Person;
+import com.canefaitrien.spacetrader.models.Planet;
 import com.canefaitrien.spacetrader.utils.AbstractActivity;
-import com.canefaitrien.spacetrader.utils.DbAdapter;
 import com.canefaitrien.spacetrader.utils.Tools;
 
 public class ConfigurationActivity extends AbstractActivity implements
@@ -28,7 +38,7 @@ public class ConfigurationActivity extends AbstractActivity implements
 	private SeekBar barFighter;
 	private SeekBar barTrader;
 	private SeekBar barEngineer;
-	private int difficultyLevel = 0;
+	private int level = 0;
 	private Difficulty[] difficulties = Difficulty.values();
 
 	private int totalPts = NUM_MAX_SKILL_POINTS;
@@ -80,6 +90,13 @@ public class ConfigurationActivity extends AbstractActivity implements
 
 	public final static String EXTRA_MESSAGE = "com.canefaitrient.spacetrader.MESSAGE";
 
+	private PersonDao personDao;
+	private PlanetDao planetDao;
+	private GameDataDao gameDataDao;
+	private Cursor cursor;
+
+	private MarketplaceDao marketplaceDao;
+
 	/** Called when the user clicks the START button */
 	public void startGame() {
 
@@ -103,31 +120,66 @@ public class ConfigurationActivity extends AbstractActivity implements
 			return;
 		}
 
-		long charId = createCharacter();
+		personDao = SpaceTrader.daoSession.getPersonDao();
+		planetDao = SpaceTrader.daoSession.getPlanetDao();
+		marketplaceDao = SpaceTrader.daoSession.getMarketplaceDao();
+		gameDataDao = SpaceTrader.daoSession.getGameDataDao();
+
+		Person person = new Person(null, name, barPilot.getProgress(),
+				barFighter.getProgress(), barTrader.getProgress(),
+				barEngineer.getProgress());
+		personDao.insert(person);
+		Log.d(TAG, "Inserted new Person, ID: " + person.getId());
+
+		Controller ctrl = new Controller(person, difficulties[level]);
+		GameData data = new GameData(null, name, ctrl.getDifficulty().name(),
+				ctrl.getMoney(), ctrl.getLocation().getName(), 0, new Date(),
+				person.getId());
+		gameDataDao.insert(data);
+		Log.d(TAG, "Inserted new GameData, ID: " + data.getId());
+
+		// for (Planet p : ctrl.getUniverse()) {
+		for (int i = 0; i < 10; i++) {
+			Planet p = ctrl.getUniverse()[i];
+
+			Marketplace mk = p.getMarketplace1();// p.getMarketplace1();
+
+			marketplaceDao.insert(mk);
+			Log.d(TAG, "Inserted new Marketplace, ID: " + mk.getId());
+			Log.d(TAG, mk.getStringItemStock());
+			Log.d(TAG, mk.getStringItemBuyPrices());
+
+			p.setMarketId(mk.getId());
+			p.setDataId(data.getId());
+			planetDao.insert(p);
+			
+			Log.d(TAG, "Inserted new Planet, ID: " + p.getId());
+			Log.d(TAG, "Inserted new Planet, data-ID: " + p.getDataId());
+			Log.d(TAG, "Inserted new Planet, market-ID: " + p.getMarketId());
+		}
+		
+		Log.d(TAG, "problematic");
+		List<Planet> p = data.getPlanets();
+		Log.d(TAG, String.valueOf(p.size()));
+		
+		GameData game = gameDataDao.loadByRowId(data.getId());
+		Log.d(TAG, "loaded game");
+		
+		Log.d(TAG, "problematic");
+		List<Planet> planets = game.getPlanets();
+		Log.d(TAG, String.valueOf(planets.size()));
+		
+		SpaceTrader.setController(ctrl);
+		SpaceTrader.setData(data);
+		
+		Log.d(TAG, "problematic");
+		planets = SpaceTrader.getData().getPlanets();
+		Log.d(TAG, String.valueOf(planets.size()));
 
 		Intent intent = new Intent(ConfigurationActivity.this,
 				MainScreenActivity.class);
-		intent.putExtra(DbAdapter.CHAR_KEY_ROWID, charId);
+		intent.putExtra("New Game", true);
 		startActivity(intent);
-
-	}
-
-	private long createCharacter() {
-		DbAdapter mDbHelper = new DbAdapter(ConfigurationActivity.this);
-		mDbHelper.open();
-
-		Person charac = new Person(name, barPilot.getProgress(),
-				barFighter.getProgress(), barTrader.getProgress(),
-				barEngineer.getProgress());
-
-		Controller data = new Controller(charac, difficulties[difficultyLevel]);
-
-		SpaceTraderApplication.setData(data);
-
-		long charId = mDbHelper.createCharacter(charac);
-
-		mDbHelper.close();
-		return charId;
 
 	}
 
@@ -138,12 +190,12 @@ public class ConfigurationActivity extends AbstractActivity implements
 			startGame();
 			break;
 		case R.id.btn_plus:
-			if (difficultyLevel < difficulties.length - 1)
-				setDifficultyLevel(++difficultyLevel);
+			if (level < difficulties.length - 1)
+				setDifficultyLevel(++level);
 			break;
 		case R.id.btn_minus:
-			if (difficultyLevel > 0)
-				setDifficultyLevel(--difficultyLevel);
+			if (level > 0)
+				setDifficultyLevel(--level);
 			break;
 		}
 
@@ -188,39 +240,39 @@ public class ConfigurationActivity extends AbstractActivity implements
 
 	}
 
-	// @Override
-	// protected void onStart() {
-	// super.onStart();
-	// Log.d(TAG, "onStart called.");
-	// }
-	//
-	// @Override
-	// protected void onPause() {
-	// super.onPause();
-	// Log.d(TAG, "onPause called.");
-	// }
-	//
-	// @Override
-	// protected void onResume() {
-	// super.onResume();
-	// Log.d(TAG, "onResume called.");
-	// }
-	//
-	// @Override
-	// protected void onStop() {
-	// super.onStop();
-	// Log.d(TAG, "onStop called.");
-	// }
-	//
-	// @Override
-	// protected void onRestart() {
-	// super.onRestart();
-	// Log.d(TAG, "onRestart called.");
-	// }
-	//
-	// @Override
-	// protected void onDestroy() {
-	// super.onDestroy();
-	// }
+	@Override
+	protected void onStart() {
+		super.onStart();
+		Log.d(TAG, "onStart called.");
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		Log.d(TAG, "onPause called.");
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		Log.d(TAG, "onResume called.");
+	}
+
+	@Override
+	protected void onStop() {
+		super.onStop();
+		Log.d(TAG, "onStop called.");
+	}
+
+	@Override
+	protected void onRestart() {
+		super.onRestart();
+		Log.d(TAG, "onRestart called.");
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+	}
 
 }

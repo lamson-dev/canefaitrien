@@ -1,45 +1,47 @@
 package com.canefaitrien.spacetrader;
 
+import java.util.List;
+
 import android.app.TabActivity;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 
-import com.canefaitrien.spacetrader.models.Controller;
-import com.canefaitrien.spacetrader.models.Controller.Difficulty;
-import com.canefaitrien.spacetrader.models.Person;
+import com.canefaitrien.spacetrader.R;
+import com.canefaitrien.spacetrader.dao.GameDataDao;
+import com.canefaitrien.spacetrader.interfaces.IMainScreenView;
 import com.canefaitrien.spacetrader.models.Planet;
 import com.canefaitrien.spacetrader.models.Ship;
-import com.canefaitrien.spacetrader.models.Universe;
+import com.canefaitrien.spacetrader.presenters.MainScreenPresenter;
 import com.canefaitrien.spacetrader.utils.DbAdapter;
 
 @SuppressWarnings("deprecation")
-public class MainScreenActivity extends TabActivity {
+public class MainScreenActivity extends TabActivity implements IMainScreenView {
 
 	private static final String TAG = "MainScreen";
+	MainScreenPresenter mPresenter;
 
-	// This is the Adapter being used to display the list's data
-	private DbAdapter mDbHelper;
 	private Long mRowId;
+
+	public MainScreenActivity() {
+		mPresenter = new MainScreenPresenter(this);
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_mainscreen);
 
-		init(savedInstanceState);
-
-		// need to put this method in presenter
-		loadGame(savedInstanceState);
-
+		if (!getIntent().getExtras().getBoolean("New Game"))
+			loadGame(savedInstanceState);
+		
+		init();
+		
 	}
 
-	private void init(Bundle savedInstanceState) {
-
-		mDbHelper = new DbAdapter(this);
+	private void init() {
 
 		TabHost tabhost = getTabHost();
 
@@ -47,7 +49,7 @@ public class MainScreenActivity extends TabActivity {
 		addTab("Info", InfoActivity.class, tabhost);
 		addTab("Market", MarketPlaceActivity.class, tabhost);
 		addTab("Hub", HubActivity.class, tabhost);
-//		tabhost.setCurrentTab(3);
+		tabhost.setCurrentTab(3);
 	}
 
 	private void addTab(String tag, Class<?> c, TabHost th) {
@@ -61,70 +63,24 @@ public class MainScreenActivity extends TabActivity {
 
 	private void loadGame(Bundle savedInstanceState) {
 
-		mRowId = (savedInstanceState == null) ? null
-				: (Long) savedInstanceState
-						.getSerializable(DbAdapter.CHAR_KEY_ROWID);
+		// mRowId = (savedInstanceState == null) ? null
+		// : (Long) savedInstanceState
+		// .getSerializable(GameDataDao.Properties.Id.columnName);
+		//
+		// if (mRowId == null) {
+		//
+		// Bundle extras = getIntent().getExtras();
+		// mRowId = extras != null ? extras
+		// .getLong(GameDataDao.Properties.Id.columnName) : null;
+		// }
 
-		if (mRowId == null) {
+		Bundle extras = getIntent().getExtras();
+		mRowId = extras.getLong(GameDataDao.Properties.Id.columnName);
 
-			Bundle extras = getIntent().getExtras();
-			mRowId = extras != null ? extras.getLong(DbAdapter.CHAR_KEY_ROWID)
-					: null;
-		}
-
-		// for LoadGame
-		// populateData();
-
-	}
-
-	private void populateData() {
-
-		if (mRowId == null)
-			return;
-
-		mDbHelper.open();
-
-		Log.d(TAG, String.valueOf(mRowId));
-
-		Cursor save = mDbHelper.fetchSave(mRowId);
-		startManagingCursor(save);
-
-		String name = save.getString(save
-				.getColumnIndexOrThrow(DbAdapter.CHAR_KEY_NAME));
-		// String level = save.getString(save
-		// .getColumnIndexOrThrow(DbAdapter.CHAR_KEY_DIFFICULTY));
-		// String money = save.getString(save
-		// .getColumnIndexOrThrow(DbAdapter.CHAR_KEY_MONEY));
-
-		Log.d(TAG, name);
-
-		int engineerPts = Integer.valueOf(save.getString(save
-				.getColumnIndexOrThrow(DbAdapter.CHAR_KEY_ENGINEER_PTS)));
-		int fighterPts = Integer.valueOf(save.getString(save
-				.getColumnIndexOrThrow(DbAdapter.CHAR_KEY_FIGHTER_PTS)));
-		int pilotPts = Integer.valueOf(save.getString(save
-				.getColumnIndexOrThrow(DbAdapter.CHAR_KEY_PILOT_PTS)));
-		int traderPts = Integer.valueOf(save.getString(save
-				.getColumnIndexOrThrow(DbAdapter.CHAR_KEY_TRADER_PTS)));
-
-		Person player = new Person(name, pilotPts, fighterPts, traderPts,
-				engineerPts);
-
-		Ship ship = null;
-		Planet location = null;
-		int money = 100;
-		//Universe universe = null;
-		Planet[] universe = null;
-		Difficulty difficulty = null;
-		int turn = 1;
-
-		Controller data = new Controller(player, ship, location, money,
-				universe, difficulty, turn);
-		SpaceTraderApplication.setData(data);
-
-		mDbHelper.close();
+		mPresenter.populateData(mRowId);
 
 	}
+
 	// @Override
 	// protected void onPause() {
 	// super.onPause();
@@ -158,38 +114,40 @@ public class MainScreenActivity extends TabActivity {
 	// }
 	// }
 
-	// @Override
-	// protected void onStart() {
-	// super.onStart();
-	// Log.d(TAG, "onStart called.");
-	// }
-	//
-	// @Override
-	// protected void onPause() {
-	// super.onPause();
-	// Log.d(TAG, "onPause called.");
-	// }
-	//
-	// @Override
-	// protected void onResume() {
-	// super.onResume();
-	// Log.d(TAG, "onResume called.");
-	// }
-	//
-	// @Override
-	// protected void onStop() {
-	// super.onStop();
-	// Log.d(TAG, "onStop called.");
-	// }
-	//
-	// @Override
-	// protected void onRestart() {
-	// super.onRestart();
-	// Log.d(TAG, "onRestart called.");
-	// }
-	//
-	// @Override
-	// protected void onDestroy() {
-	// super.onDestroy();
-	// }
+	@Override
+	protected void onStart() {
+		super.onStart();
+		Log.d(TAG, "onStart called.");
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		Log.d(TAG, "onPause called.");
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		Log.d(TAG, "onResume called.");
+	}
+
+	@Override
+	protected void onStop() {
+		SpaceTrader.getData().update();
+		super.onStop();
+		Log.d(TAG, "onStop called.");
+	}
+
+	@Override
+	protected void onRestart() {
+		super.onRestart();
+		Log.d(TAG, "onRestart called.");
+	}
+
+	@Override
+	protected void onDestroy() {
+		SpaceTrader.getData().update();
+		super.onDestroy();
+	}
 }

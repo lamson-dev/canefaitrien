@@ -11,6 +11,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.canefaitrien.spacetrader.R;
+import com.canefaitrien.spacetrader.dao.DaoMaster;
+import com.canefaitrien.spacetrader.dao.DaoMaster.DevOpenHelper;
 import com.canefaitrien.spacetrader.utils.AbstractActivity;
 
 public class MainMenuActivity extends AbstractActivity {
@@ -33,6 +36,11 @@ public class MainMenuActivity extends AbstractActivity {
 		font = Typeface.createFromAsset(getAssets(), "fonts/Street Corner.ttf");
 		txt.setTypeface(font);
 
+		DevOpenHelper helper = new DaoMaster.DevOpenHelper(this,
+				"spacetrader-db", null);
+		SpaceTrader.db = helper.getWritableDatabase();
+		SpaceTrader.daoMaster = new DaoMaster(SpaceTrader.db);
+		SpaceTrader.daoSession = SpaceTrader.daoMaster.newSession();
 	}
 
 	@Override

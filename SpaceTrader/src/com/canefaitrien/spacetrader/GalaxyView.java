@@ -11,6 +11,7 @@ import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.view.View;
 
+import com.canefaitrien.spacetrader.R;
 import com.canefaitrien.spacetrader.models.Planet;
 import com.canefaitrien.spacetrader.models.Universe;
 

@@ -5,7 +5,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 
-import com.canefaitrien.spacetrader.models.Controller;
+import com.canefaitrien.spacetrader.R;
+import com.canefaitrien.spacetrader.models.GameData;
 
 public class InfoActivity extends Activity {
 
@@ -19,13 +20,15 @@ public class InfoActivity extends Activity {
 		TextView tv = (TextView) findViewById(R.id.tv_info_content);
 		tv.setTextSize(20);
 
-		Controller data = SpaceTraderApplication.getData();
+		GameData data = SpaceTrader.getData();
 
 		Log.d(TAG, "loaded data");
-		String info = data.getPlayer().toString();
+		String info = data.getPerson().toString();
+		info += "\nMoney: " + data.getMoney();
+		info += "\nDifficulty: " + data.getDifficulty();
 
-		Log.d(TAG,"loaded info");
-		
+		Log.d(TAG, "loaded info");
+
 		tv.setText(info);
 	}
 

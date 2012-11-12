@@ -19,6 +19,7 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.canefaitrien.spacetrader.R;
 import com.canefaitrien.spacetrader.interfaces.IMarketPlaceView;
 import com.canefaitrien.spacetrader.models.TradeGood;
 import com.canefaitrien.spacetrader.presenters.MarketPlacePresenter;

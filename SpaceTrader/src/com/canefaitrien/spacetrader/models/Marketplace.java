@@ -1,25 +1,31 @@
 package com.canefaitrien.spacetrader.models;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
-import com.canefaitrien.spacetrader.interfaces.IMarketPlaceModel;
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import com.canefaitrien.spacetrader.interfaces.GameConstants;
 
 /**
- * Class for handling the amounts and prices of goods a Planet's marketplace can have.  Also 
- * handles buying and selling goods
+ * Class for handling the amounts and prices of goods a Planet's marketplace can
+ * have. Also handles buying and selling goods
  * 
  * @author Andrew Duda
  * @version 1.0
  */
-public class Marketplace {
+public class Marketplace implements GameConstants {
 
-	// Marketplace constants
-	private static final int STOCK_REFRESH_TURNS = 5; // turns to recreate marketplace
-	private static final int MIN_NUM_GOODS = 5, VARIANCE = 5; // for inventory creation
-	public static enum MarketAction {BUY, SELL};
+	public static enum MarketAction {
+		BUY, SELL
+	};
+
 	private static TradeGood[] goods = TradeGood.values();
 	private static Random rand = new Random();
-	
+
 	// Marketplace info
 	private int lastDock;
 	private int[] itemStock;
@@ -27,18 +33,34 @@ public class Marketplace {
 	private int[] itemSellPrices;
 	private TechLevel level;
 	private Situation situation;
-	
+
+	private Long id;
+
+	// private Integer lastDock;
+	// private String itemStock;
+	// private String itemBuyPrices;
+	// private String itemSellPrices;
+
+	public Marketplace() {
+	}
+
+	public Marketplace(Long id) {
+		this.id = id;
+	}
+
+
 	/**
 	 * Marketplace constructor for loading
 	 */
-	public Marketplace(int lastDock, int[] itemStock, int[] itemBuyPrices,
-			int[] itemSellPrices, TechLevel level, Situation situation) {
+	public Marketplace(Long id, Integer lastDock, String itemStock,
+			String itemBuyPrices, String itemSellPrices) throws JSONException {
+		this.id = id;
 		this.lastDock = lastDock;
-		this.itemStock = itemStock;
-		this.itemBuyPrices = itemBuyPrices;
-		this.itemSellPrices = itemSellPrices;
-		this.level = level;
-		this.situation = situation;
+		this.setItemStock(itemStock);
+		this.setItemBuyPrices(itemBuyPrices);
+		this.setItemSellPrices(itemSellPrices);
+		
+		// planets set techlevel + situation
 	}
 	
 	/**
@@ -49,6 +71,18 @@ public class Marketplace {
 				new int[goods.length], level, situation);
 		updateStock();
 	}
+	
+	public Marketplace(int lastDock, int[] itemStock, int[] itemBuyPrices,
+			int[] itemSellPrices, TechLevel level, Situation situation) {
+		this.lastDock = lastDock;
+		this.itemStock = itemStock;
+		this.itemBuyPrices = itemBuyPrices;
+		this.itemSellPrices = itemSellPrices;
+		this.level = level;
+		this.situation = situation;
+	}
+
+
 
 	/**
 	 * Dock method to be called by Planet upon traveling to that Planet
@@ -76,13 +110,16 @@ public class Marketplace {
 		}
 
 	}
-	
+
 	private int getBuyPrice(TradeGood good) {
 		return getPrice(good, good.MIN_TL_PRODUCE);
 	}
 
 	private int getSellPrice(TradeGood good) {
-		return (int)(0.9*getPrice(good, good.MIN_TL_USE)); // makes sell values less than buy values
+		return (int) (0.9 * getPrice(good, good.MIN_TL_USE)); // makes sell
+																// values less
+																// than buy
+																// values
 	}
 
 	private int getPrice(TradeGood good, int minTL) {
@@ -128,11 +165,11 @@ public class Marketplace {
 		}
 		return ret;
 	}
-	
+
 	public String[][] getView(Ship ship) {
 		String[][] ret = new String[itemStock.length][5];
 		int[] cargo = ship.getCargo();
-		for(int i = 0; i < ret.length; i++) {
+		for (int i = 0; i < ret.length; i++) {
 			ret[i][0] = goods[i].toString();
 			ret[i][1] = itemBuyPrices[i] + "";
 			ret[i][2] = itemSellPrices[i] + "";
@@ -170,7 +207,7 @@ public class Marketplace {
 
 	public int buyGood(TradeGood good, Ship ship, int money) throws Exception {
 		if (itemBuyPrices[good.ordinal()] > money) {
-			throw new Exception ("We don't have enough money, captain!");
+			throw new Exception("We don't have enough money, captain!");
 		} else if (itemStock[good.ordinal()] == 0) {
 			throw new Exception("They don't have that good, captain!");
 		} else {
@@ -181,7 +218,7 @@ public class Marketplace {
 	}
 
 	/**
-	 * Sell a good 
+	 * Sell a good
 	 */
 	public int sellGood(TradeGood good, Ship ship, int money) throws Exception {
 		if (itemSellPrices[good.ordinal()] == 0) {
@@ -192,5 +229,79 @@ public class Marketplace {
 			return money + itemSellPrices[good.ordinal()];
 		}
 	}
-}
 
+	
+	public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
+	public Integer getLastDock() {
+		return lastDock;
+	}
+
+	public void setLastDock(Integer lastDock) {
+		this.lastDock = lastDock;
+	}
+
+	public String getStringItemStock() {
+		List<Integer> list = new ArrayList<Integer>();
+		for (int item: this.getItemStock())
+			list.add(item);
+		JSONArray json = new JSONArray(list);
+		return json.toString();
+	}
+
+	public void setItemStock(String itemStock) throws JSONException {
+		JSONArray jsonArray = new JSONArray(itemStock);
+		if (jsonArray != null) {
+			int[] stock = new int[goods.length];
+			for (int i = 0; i < jsonArray.length(); i++) {
+				stock[i] = jsonArray.getInt(i);
+			}
+			this.itemStock = stock;
+		}
+	}
+
+	public String getStringItemBuyPrices() {
+		List<Integer> list = new ArrayList<Integer>();
+		for (int item: this.getItemBuyPrices())
+			list.add(item);
+		JSONArray json = new JSONArray(list);
+		return json.toString();
+	}
+
+	public void setItemBuyPrices(String itemBuyPrices) throws JSONException {
+		JSONArray jsonArray = new JSONArray(itemBuyPrices);
+		if (jsonArray != null) {
+			int[] buyPrices = new int[goods.length];
+			for (int i = 0; i < jsonArray.length(); i++) {
+				buyPrices[i] = jsonArray.getInt(i);
+			}
+			this.itemBuyPrices = buyPrices;
+		}
+	}
+
+	public String getStringItemSellPrices() {
+		List<Integer> list = new ArrayList<Integer>();
+		for (int item: this.getItemSellPrices())
+			list.add(item);
+		JSONArray json = new JSONArray(list);
+		return json.toString();
+	}
+
+	public void setItemSellPrices(String itemSellPrices) throws JSONException {
+		JSONArray jsonArray = new JSONArray(itemSellPrices);
+		if (jsonArray != null) {
+			int[] sellPrices = new int[goods.length];
+			for (int i = 0; i < jsonArray.length(); i++) {
+				sellPrices[i] = jsonArray.getInt(i);
+			}
+			this.itemSellPrices = sellPrices;
+		}
+	}
+
+}

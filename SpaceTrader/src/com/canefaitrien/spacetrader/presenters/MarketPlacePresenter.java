@@ -4,16 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import android.content.Context;
-import android.widget.LinearLayout;
-import android.widget.SimpleAdapter;
-import android.widget.TextView;
-
-import com.canefaitrien.spacetrader.R;
-import com.canefaitrien.spacetrader.SpaceTraderApplication;
-import com.canefaitrien.spacetrader.interfaces.IGameModel;
+import com.canefaitrien.spacetrader.Controller;
+import com.canefaitrien.spacetrader.SpaceTrader;
 import com.canefaitrien.spacetrader.interfaces.IMarketPlaceView;
-import com.canefaitrien.spacetrader.models.Controller;
+import com.canefaitrien.spacetrader.models.GameData;
 import com.canefaitrien.spacetrader.models.Marketplace;
 import com.canefaitrien.spacetrader.models.TradeGood;
 
@@ -22,12 +16,12 @@ public class MarketPlacePresenter {
 	private static final String TAG = "MarketPresenter";
 	private IMarketPlaceView mView;
 	private Marketplace mMarket;
-	private Controller data;
+	private Controller controller;
 
 	public MarketPlacePresenter(IMarketPlaceView view) {
 		mView = view;
-		data = SpaceTraderApplication.getData();
-		mMarket = data.getLocation().getMarketplace();
+		controller = SpaceTrader.getController();
+		mMarket = controller.getLocation().getMarketplace();
 	}
 
 	// public List<HashMap<String, String>> listStockItems(Context context,
@@ -93,7 +87,8 @@ public class MarketPlacePresenter {
 			temp.put("price", String.valueOf(mMarket.getItemBuyPrices()[i]));
 			temp.put("sellprice",
 					String.valueOf(mMarket.getItemSellPrices()[i]));
-			temp.put("owned", String.valueOf(data.getShip().getCargo()[i]));
+			temp.put("owned",
+					String.valueOf(controller.getShip().getCargo()[i]));
 			temp.put("stock", String.valueOf(mMarket.getItemStock()[i]));
 
 			list.add(temp);
@@ -103,13 +98,13 @@ public class MarketPlacePresenter {
 	}
 
 	public void buyItem(int pos) throws Exception {
-		data.buyGood(TradeGood.values()[pos]);
+		controller.buyGood(TradeGood.values()[pos]);
 		updateStockList(mView.getStockList());
 	}
 
 	public void sellItem(int pos) throws Exception {
 		// TODO Auto-generated method stub
-		data.sellGood(TradeGood.values()[pos]);
+		controller.sellGood(TradeGood.values()[pos]);
 		updateStockList(mView.getStockList());
 	}
 
@@ -118,8 +113,9 @@ public class MarketPlacePresenter {
 	}
 
 	public void showOtherInfo() {
-		mView.displayMoney(String.valueOf(data.getMoney()));
-		mView.displayCargo(String.valueOf(data.getShip().getCargo().length));
+		mView.displayMoney(String.valueOf(controller.getMoney()));
+		mView.displayCargo(String
+				.valueOf(controller.getShip().getCargo().length));
 	}
 
 	public class Item {
