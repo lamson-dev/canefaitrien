@@ -139,7 +139,7 @@ public class ConfigurationActivity extends AbstractActivity implements
 		Log.d(TAG, "Inserted new GameData, ID: " + data.getId());
 
 		// for (Planet p : ctrl.getUniverse()) {
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < ctrl.getUniverse().length; i++) {
 			Planet p = ctrl.getUniverse()[i];
 
 			Marketplace mk = p.getMarketplace1();// p.getMarketplace1();

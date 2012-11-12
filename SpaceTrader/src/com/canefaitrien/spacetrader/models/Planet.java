@@ -1,6 +1,7 @@
 package com.canefaitrien.spacetrader.models;
 
 import android.graphics.Point;
+import android.util.Log;
 
 import com.canefaitrien.spacetrader.dao.DaoSession;
 import com.canefaitrien.spacetrader.dao.MarketplaceDao;
@@ -33,10 +34,10 @@ public class Planet {
 	private Point coordinates;
 	private TechLevel level;
 	private Situation situation;
-	
+
 	private long dataId;
 	private Long marketId;
-	
+
 	// Daniel doing testing
 	public int xOffset, yOffset;
 
@@ -65,16 +66,15 @@ public class Planet {
 		this.id = id;
 		this.name = name;
 		this.size = size;
-		this.coordinates.x = xCoordinate;
-		this.coordinates.y = yCoordinate;
-		this.level = TechLevel.valueOf(techLevel);
-		this.situation = Situation.valueOf(situation);
+		this.coordinates = new Point(xCoordinate, yCoordinate);
+		this.level = TechLevel.fromString(techLevel);
+		this.situation = Situation.fromString(situation);
 		this.xOffset = xOffset;
 		this.yOffset = yOffset;
 		this.dataId = dataId;
 		this.marketId = marketId;
 	}
-	
+
 	/**
 	 * Constructor for a new Planet
 	 */
@@ -83,7 +83,7 @@ public class Planet {
 		this(name, location, level, situation, new Marketplace(0, level,
 				situation));
 	}
-	
+
 	public Planet(String name, Point location, TechLevel level,
 			Situation situation, Marketplace marketplace) {
 
@@ -94,7 +94,7 @@ public class Planet {
 		this.level = level;
 		this.situation = situation;
 		this.marketplace = marketplace;
-		
+
 		// daniel doing testing
 		xOffset = 0;
 		yOffset = 0;
@@ -139,37 +139,38 @@ public class Planet {
 	}
 
 	public Long getId() {
-        return id;
-    }
+		return id;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public Integer getSize() {
-        return size;
-    }
+	public Integer getSize() {
+		return size;
+	}
 
-    public void setSize(Integer size) {
-        this.size = size;
-    }
-    
-    public Point getCoordinates() {
+	public void setSize(Integer size) {
+		this.size = size;
+	}
+
+	public Point getCoordinates() {
 		return coordinates;
 	}
-    
-    public void setCoordinates(Point location) {
+
+	public void setCoordinates(Point location) {
 		this.coordinates = location;
 	}
-    public Integer getXCoordinate() {
+
+	public Integer getXCoordinate() {
 		return coordinates.x;
 	}
 
@@ -184,7 +185,7 @@ public class Planet {
 	public void setYCoordinate(Integer yCoordinate) {
 		this.coordinates.y = yCoordinate;
 	}
-	
+
 	public Situation getSituation() {
 		return situation;
 	}
@@ -198,13 +199,13 @@ public class Planet {
 	}
 
 	public void setSituation(String situation) {
-		this.situation = Situation.valueOf(situation);
+		this.situation = Situation.fromString(situation);
 	}
 
 	public void setTechLevel(String techLevel) {
-		this.level = TechLevel.valueOf(techLevel);
+		this.level = TechLevel.fromString(techLevel);
 	}
-	
+
 	public void setTechLevel(TechLevel level) {
 		this.level = level;
 	}
@@ -212,27 +213,27 @@ public class Planet {
 	public TechLevel getTechLevel() {
 		return level;
 	}
-	
+
 	public String getStringTechLevel() {
 		return level.NAME;
 	}
-	
+
 	public Long getDataId() {
-        return dataId;
-    }
+		return dataId;
+	}
 
-    public void setDataId(Long dataId) {
-        this.dataId = dataId;
-    }
+	public void setDataId(Long dataId) {
+		this.dataId = dataId;
+	}
 
-    public Long getMarketId() {
-        return marketId;
-    }
+	public Long getMarketId() {
+		return marketId;
+	}
 
-    public void setMarketId(Long marketId) {
-        this.marketId = marketId;
-    }
-	
+	public void setMarketId(Long marketId) {
+		this.marketId = marketId;
+	}
+
 	/** called by internal mechanisms, do not call yourself. */
 	public void __setDaoSession(DaoSession daoSession) {
 		this.daoSession = daoSession;
@@ -244,48 +245,58 @@ public class Planet {
 	}
 
 	/** To-one relationship, resolved on first access. */
-    public Marketplace getMarketplace() {
-        if (marketplace__resolvedKey == null || !marketplace__resolvedKey.equals(marketId)) {
-            if (daoSession == null) {
-                throw new DaoException("Entity is detached from DAO context");
-            }
-            MarketplaceDao targetDao = daoSession.getMarketplaceDao();
-            marketplace = targetDao.load(marketId);
-            marketplace__resolvedKey = marketId;
-        }
-        return marketplace;
-    }
+	public Marketplace getMarketplace() {
+		if (marketplace__resolvedKey == null
+				|| !marketplace__resolvedKey.equals(marketId)) {
+			if (daoSession == null) {
+				throw new DaoException("Entity is detached from DAO context");
+			}
+			MarketplaceDao targetDao = daoSession.getMarketplaceDao();
+			marketplace = targetDao.load(marketId);
+			marketplace__resolvedKey = marketId;
+		}
+		return marketplace;
+	}
 
-    public void setMarketplace(Marketplace marketplace) {
-        this.marketplace = marketplace;
-        marketId = marketplace == null ? null : marketplace.getId();
-        marketplace__resolvedKey = marketId;
-    }
+	public void setMarketplace(Marketplace marketplace) {
+		this.marketplace = marketplace;
+		marketId = marketplace == null ? null : marketplace.getId();
+		marketplace__resolvedKey = marketId;
+	}
 
-    /** Convenient call for {@link AbstractDao#delete(Object)}. Entity must attached to an entity context. */
-    public void delete() {
-        if (myDao == null) {
-            throw new DaoException("Entity is detached from DAO context");
-        }    
-        myDao.delete(this);
-    }
+	/**
+	 * Convenient call for {@link AbstractDao#delete(Object)}. Entity must
+	 * attached to an entity context.
+	 */
+	public void delete() {
+		if (myDao == null) {
+			throw new DaoException("Entity is detached from DAO context");
+		}
+		myDao.delete(this);
+	}
 
-    /** Convenient call for {@link AbstractDao#update(Object)}. Entity must attached to an entity context. */
-    public void update() {
-        if (myDao == null) {
-            throw new DaoException("Entity is detached from DAO context");
-        }    
-        myDao.update(this);
-    }
+	/**
+	 * Convenient call for {@link AbstractDao#update(Object)}. Entity must
+	 * attached to an entity context.
+	 */
+	public void update() {
+		if (myDao == null) {
+			throw new DaoException("Entity is detached from DAO context");
+		}
+		myDao.update(this);
+	}
 
-    /** Convenient call for {@link AbstractDao#refresh(Object)}. Entity must attached to an entity context. */
-    public void refresh() {
-        if (myDao == null) {
-            throw new DaoException("Entity is detached from DAO context");
-        }    
-        myDao.refresh(this);
-    }
-	
+	/**
+	 * Convenient call for {@link AbstractDao#refresh(Object)}. Entity must
+	 * attached to an entity context.
+	 */
+	public void refresh() {
+		if (myDao == null) {
+			throw new DaoException("Entity is detached from DAO context");
+		}
+		myDao.refresh(this);
+	}
+
 	public Integer getXOffset() {
 		return xOffset;
 	}

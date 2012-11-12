@@ -247,8 +247,6 @@ public class PlanetDao extends AbstractDao<Planet, Long> {
 			queryBuilder.where(Properties.DataId.eq(dataId));
 			gameData_PlanetsQuery = queryBuilder.build();
 
-			if (gameData_PlanetsQuery.list() == null)
-				Log.d(TAG, "fucking null");
 		} else {
 			gameData_PlanetsQuery.setParameter(0, dataId);
 		}

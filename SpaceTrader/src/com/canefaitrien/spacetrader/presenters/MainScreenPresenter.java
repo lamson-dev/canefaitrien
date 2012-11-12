@@ -23,9 +23,6 @@ public class MainScreenPresenter {
 	private static final String TAG = "MainScreenPresenter";
 	private IMainScreenView mView;
 	private GameDataDao gameDataDao;
-	private PlanetDao planetDao;
-	private PersonDao personDao;
-	private MarketplaceDao marketplaceDao;
 
 	private Cursor cursor;
 
@@ -40,56 +37,42 @@ public class MainScreenPresenter {
 		Log.d(TAG, "GameData ID is: " + String.valueOf(mRowId));
 
 		gameDataDao = SpaceTrader.daoSession.getGameDataDao();
-		planetDao = SpaceTrader.daoSession.getPlanetDao();
-		personDao = SpaceTrader.daoSession.getPersonDao();
-		marketplaceDao = SpaceTrader.daoSession.getMarketplaceDao();
 
-		cursor = SpaceTrader.db.query(gameDataDao.getTablename(),
-				gameDataDao.getAllColumns(), null, null, null, null, null);
+		// cursor = SpaceTrader.db.query(gameDataDao.getTablename(),
+		// gameDataDao.getAllColumns(), null, null, null, null, null);
 
 		GameData game = gameDataDao.loadByRowId(mRowId);
-		Log.d(TAG, "loaded game " + String.valueOf(game.getId()));
-		Log.d(TAG, "loaded game " + game.getDifficulty());
 		Log.d(TAG, "loaded game " + game.getName());
-		Log.d(TAG, "loaded game " + game.getStringCurrentPlanet());
 		Log.d(TAG, "loaded game " + game.getMoney());
+		Log.d(TAG, "current planet" + game.getStringCurrentPlanet());
 
 		Person player = game.getPerson();
-		Log.d(TAG, "loaded person" + player.toString());
+		Log.d(TAG, "loaded person" + player.getName());
+		int money = game.getMoney();
+		Log.d(TAG, "loaded money " + String.valueOf(money));
+		int turn = game.getTurn();
+		Log.d(TAG, "loaded turn " + String.valueOf(turn));
 
 		Ship ship = null;
 
 		Log.d(TAG, "problematic");
-		List<Planet> p = game.getPlanets();
-		Log.d(TAG, String.valueOf(p.size()));
-		// List<Planet> planets = game.getPlanets();
-		// Log.d(TAG, "you got here?");
-		// Log.d(TAG, String.valueOf(planets.size()));
-
-		// Planet[] universe = game.getUniverse();
-		// Log.d(TAG, "loaded universe  " + game.getPlanets().size());
-
-		// Planet currentPlanet = universe[game.getCurrentPlanetIndex()];
-		// Log.d(TAG, "loaded currentPlanet  " + game.getPlanets().size());
-		// Log.d(TAG, "loaded curPlanet location " +
-		// game.getCurrentPlanetIndex());
-
-		int money = game.getMoney();
-		Log.d(TAG, "loaded money " + String.valueOf(money));
+		List<Planet> planets = game.getPlanets();
+		//Log.d(TAG, "How many planet" + String.valueOf(planets.size()));
+		Log.d(TAG, "you got here?");
+		Planet[] universe = game.getUniverse();
+		
+		
+		Planet currentPlanet = universe[game.getCurrentPlanetIndex()];
+		Log.d(TAG, "loaded currentPlanet: " + currentPlanet.getName());
 
 		Log.d(TAG, "loaded difficulty " + game.getDifficulty());
 		Difficulty difficulty = Difficulty.valueOf(game.getDifficulty());
-		int turn = game.getTurn();
-		Log.d(TAG, "loaded turn " + String.valueOf(turn));
 
-		// Controller data = new Controller(player, ship, currentPlanet, money,
-		// universe, difficulty, turn);
-		Controller ctrl = new Controller(player, ship, null, money, null,
-				difficulty, turn);
+		Controller ctrl = new Controller(player, ship, currentPlanet, money,
+				universe, difficulty, turn);
 
 		SpaceTrader.setController(ctrl);
-
-		cursor.close();
+		SpaceTrader.setData(game);
 
 	}
 }

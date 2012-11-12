@@ -1,6 +1,5 @@
 package com.canefaitrien.spacetrader.models;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,161 +20,169 @@ import de.greenrobot.dao.DaoException;
 public class GameData {
 
 	private static final String TAG = "GameData";
-	
-    private Long id;
-    private String name;
-    private String difficulty;
-    private Integer money;
-    private String currentPlanet;
-    private Integer turn;
-    private java.util.Date date;
-    private Long personId;
 
-    /** Used to resolve relations */
-    private transient DaoSession daoSession;
+	private Long id;
+	private String name;
+	private String difficulty;
+	private Integer money;
+	private String currentPlanet;
+	private Integer turn;
+	private java.util.Date date;
+	private Long personId;
 
-    /** Used for active entity operations. */
-    private transient GameDataDao myDao;
+	/** Used to resolve relations */
+	private transient DaoSession daoSession;
 
-    private Person person;
-    private Long person__resolvedKey;
+	/** Used for active entity operations. */
+	private transient GameDataDao myDao;
 
-    private List<Planet> planets;
+	private Person person;
+	private Long person__resolvedKey;
 
-    public GameData() {
-    }
+	private List<Planet> planets;
 
-    public GameData(Long id) {
-        this.id = id;
-    }
+	public GameData() {
+	}
 
-    public GameData(Long id, String name, String difficulty, Integer money, String currentPlanet, Integer turn, java.util.Date date, Long personId) {
-        this.id = id;
-        this.name = name;
-        this.difficulty = difficulty;
-        this.money = money;
-        this.currentPlanet = currentPlanet;
-        this.turn = turn;
-        this.date = date;
-        this.personId = personId;
-    }
+	public GameData(Long id) {
+		this.id = id;
+	}
 
-    /** called by internal mechanisms, do not call yourself. */
-    public void __setDaoSession(DaoSession daoSession) {
-        this.daoSession = daoSession;
-        myDao = daoSession != null ? daoSession.getGameDataDao() : null;
-    }
+	public GameData(Long id, String name, String difficulty, Integer money,
+			String currentPlanet, Integer turn, java.util.Date date,
+			Long personId) {
+		this.id = id;
+		this.name = name;
+		this.difficulty = difficulty;
+		this.money = money;
+		this.currentPlanet = currentPlanet;
+		this.turn = turn;
+		this.date = date;
+		this.personId = personId;
+	}
 
-    public Long getId() {
-        return id;
-    }
+	/** called by internal mechanisms, do not call yourself. */
+	public void __setDaoSession(DaoSession daoSession) {
+		this.daoSession = daoSession;
+		myDao = daoSession != null ? daoSession.getGameDataDao() : null;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public String getDifficulty() {
-        return difficulty;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public void setDifficulty(String difficulty) {
-        this.difficulty = difficulty;
-    }
+	public String getDifficulty() {
+		return difficulty;
+	}
 
-    public Integer getMoney() {
-        return money;
-    }
+	public void setDifficulty(String difficulty) {
+		this.difficulty = difficulty;
+	}
 
-    public void setMoney(Integer money) {
-        this.money = money;
-    }
+	public Integer getMoney() {
+		return money;
+	}
 
-    public String getStringCurrentPlanet() {
-        return currentPlanet;
-    }
-    
-	public Planet getCurrentPlanet() {
-		int location = getPlanets().indexOf(currentPlanet);
-		return getPlanets().get(location);
+	public void setMoney(Integer money) {
+		this.money = money;
+	}
+
+	public String getStringCurrentPlanet() {
+		return currentPlanet;
 	}
 
 	public int getCurrentPlanetIndex() {
-		return getPlanets().indexOf(currentPlanet);
+		for (Planet p : this.getPlanets()) {
+			Log.d(TAG, p.getName());
+			if (p.getName().equals(currentPlanet))
+				return this.getPlanets().indexOf(p);
+		}
+		return -1;
 	}
-	
-    public void setCurrentPlanet(String currentPlanet) {
-        this.currentPlanet = currentPlanet;
-    }
 
-    public Integer getTurn() {
-        return turn;
-    }
+	public Planet getCurrentPlanet() {
+		return this.getPlanets().get(getCurrentPlanetIndex());
+	}
 
-    public void setTurn(Integer turn) {
-        this.turn = turn;
-    }
+	public void setCurrentPlanet(String currentPlanet) {
+		this.currentPlanet = currentPlanet;
+	}
 
-    public java.util.Date getDate() {
-        return date;
-    }
+	public Integer getTurn() {
+		return turn;
+	}
 
-    public void setDate(java.util.Date date) {
-        this.date = date;
-    }
+	public void setTurn(Integer turn) {
+		this.turn = turn;
+	}
 
-    public Long getPersonId() {
-        return personId;
-    }
+	public java.util.Date getDate() {
+		return date;
+	}
 
-    public void setPersonId(Long personId) {
-        this.personId = personId;
-    }
+	public void setDate(java.util.Date date) {
+		this.date = date;
+	}
 
-    /** To-one relationship, resolved on first access. */
-    public Person getPerson() {
-        if (person__resolvedKey == null || !person__resolvedKey.equals(personId)) {
-            if (daoSession == null) {
-                throw new DaoException("Entity is detached from DAO context");
-            }
-            PersonDao targetDao = daoSession.getPersonDao();
-            person = targetDao.load(personId);
-            person__resolvedKey = personId;
-        }
-        return person;
-    }
+	public Long getPersonId() {
+		return personId;
+	}
 
-    public void setPerson(Person person) {
-        this.person = person;
-        personId = person == null ? null : person.getId();
-        person__resolvedKey = personId;
-    }
+	public void setPersonId(Long personId) {
+		this.personId = personId;
+	}
 
-    /** To-many relationship, resolved on first access (and after reset). Changes to to-many relations are not persisted, make changes to the target entity. */
-    public synchronized List<Planet> getPlanets() {
-        if (planets == null) {
-            if (daoSession == null) {
-                throw new DaoException("Entity is detached from DAO context");
-            }
-            PlanetDao targetDao = daoSession.getPlanetDao();
-            planets = targetDao._queryGameData_Planets(id);
-            if (planets==null) {
-            	Log.d("GameData", "fucking null planets");
-            }
-            
-            if (planets instanceof ArrayList) 
-            	Log.d("GameData", "planets is arraylist");
-            
-        }
-        return planets;
-    }
+	/** To-one relationship, resolved on first access. */
+	public Person getPerson() {
+		if (person__resolvedKey == null
+				|| !person__resolvedKey.equals(personId)) {
+			if (daoSession == null) {
+				throw new DaoException("Entity is detached from DAO context");
+			}
+			PersonDao targetDao = daoSession.getPersonDao();
+			person = targetDao.load(personId);
+			person__resolvedKey = personId;
+		}
+		return person;
+	}
+
+	public void setPerson(Person person) {
+		this.person = person;
+		personId = person == null ? null : person.getId();
+		person__resolvedKey = personId;
+	}
+
+	/**
+	 * To-many relationship, resolved on first access (and after reset). Changes
+	 * to to-many relations are not persisted, make changes to the target
+	 * entity.
+	 */
+	public synchronized List<Planet> getPlanets() {
+		if (planets == null) {
+			if (daoSession == null) {
+				throw new DaoException("Entity is detached from DAO context");
+			}
+			PlanetDao targetDao = daoSession.getPlanetDao();
+			planets = targetDao._queryGameData_Planets(id);
+
+			if (planets instanceof ArrayList)
+				Log.d("GameData", "planets is arraylist");
+
+		}
+		return planets;
+	}
 
 	public Planet[] getUniverse() {
 		Planet[] universe;
@@ -184,38 +191,50 @@ public class GameData {
 		Log.d("GameData", "broke before getPlanets()");
 		for (int i = 0; i < universe.length; i++)
 			universe[i] = planets.get(i);
-		
+
 		return universe;
 
 	}
-	
-    /** Resets a to-many relationship, making the next get call to query for a fresh result. */
-    public synchronized void resetPlanets() {
-        planets = null;
-    }
 
-    /** Convenient call for {@link AbstractDao#delete(Object)}. Entity must attached to an entity context. */
-    public void delete() {
-        if (myDao == null) {
-            throw new DaoException("Entity is detached from DAO context");
-        }    
-        myDao.delete(this);
-    }
+	/**
+	 * Resets a to-many relationship, making the next get call to query for a
+	 * fresh result.
+	 */
+	public synchronized void resetPlanets() {
+		planets = null;
+	}
 
-    /** Convenient call for {@link AbstractDao#update(Object)}. Entity must attached to an entity context. */
-    public void update() {
-        if (myDao == null) {
-            throw new DaoException("Entity is detached from DAO context");
-        }    
-        myDao.update(this);
-    }
+	/**
+	 * Convenient call for {@link AbstractDao#delete(Object)}. Entity must
+	 * attached to an entity context.
+	 */
+	public void delete() {
+		if (myDao == null) {
+			throw new DaoException("Entity is detached from DAO context");
+		}
+		myDao.delete(this);
+	}
 
-    /** Convenient call for {@link AbstractDao#refresh(Object)}. Entity must attached to an entity context. */
-    public void refresh() {
-        if (myDao == null) {
-            throw new DaoException("Entity is detached from DAO context");
-        }    
-        myDao.refresh(this);
-    }
+	/**
+	 * Convenient call for {@link AbstractDao#update(Object)}. Entity must
+	 * attached to an entity context.
+	 */
+	public void update() {
+		if (myDao == null) {
+			throw new DaoException("Entity is detached from DAO context");
+		}
+		myDao.update(this);
+	}
+
+	/**
+	 * Convenient call for {@link AbstractDao#refresh(Object)}. Entity must
+	 * attached to an entity context.
+	 */
+	public void refresh() {
+		if (myDao == null) {
+			throw new DaoException("Entity is detached from DAO context");
+		}
+		myDao.refresh(this);
+	}
 
 }

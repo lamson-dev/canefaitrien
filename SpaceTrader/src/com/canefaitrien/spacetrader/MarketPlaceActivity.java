@@ -31,7 +31,7 @@ public class MarketPlaceActivity extends ListActivity implements
 	private final String TAG = "MarketPlace";
 	MarketPlacePresenter mPresenter;
 
-	private static List<HashMap<String, String>> stockList = new ArrayList<HashMap<String, String>>();
+	private List<HashMap<String, String>> stockList = new ArrayList<HashMap<String, String>>();
 
 	private int itemPos = 0;
 
@@ -86,7 +86,7 @@ public class MarketPlaceActivity extends ListActivity implements
 	}
 
 	public void setStockList(List<HashMap<String, String>> stockList) {
-		MarketPlaceActivity.stockList = stockList;
+		this.stockList = stockList;
 
 	}
 

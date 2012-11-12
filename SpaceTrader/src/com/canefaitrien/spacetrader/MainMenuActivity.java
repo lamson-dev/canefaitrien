@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.canefaitrien.spacetrader.R;
 import com.canefaitrien.spacetrader.dao.DaoMaster;
 import com.canefaitrien.spacetrader.dao.DaoMaster.DevOpenHelper;
 import com.canefaitrien.spacetrader.utils.AbstractActivity;

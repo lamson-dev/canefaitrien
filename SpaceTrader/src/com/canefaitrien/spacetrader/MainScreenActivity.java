@@ -1,7 +1,5 @@
 package com.canefaitrien.spacetrader;
 
-import java.util.List;
-
 import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,13 +7,9 @@ import android.util.Log;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 
-import com.canefaitrien.spacetrader.R;
 import com.canefaitrien.spacetrader.dao.GameDataDao;
 import com.canefaitrien.spacetrader.interfaces.IMainScreenView;
-import com.canefaitrien.spacetrader.models.Planet;
-import com.canefaitrien.spacetrader.models.Ship;
 import com.canefaitrien.spacetrader.presenters.MainScreenPresenter;
-import com.canefaitrien.spacetrader.utils.DbAdapter;
 
 @SuppressWarnings("deprecation")
 public class MainScreenActivity extends TabActivity implements IMainScreenView {
