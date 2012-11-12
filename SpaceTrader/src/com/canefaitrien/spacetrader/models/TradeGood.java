@@ -38,7 +38,7 @@ public enum TradeGood{
 				Situation.NEVER, 600, 800, "Machines"),
 				
 	NARCOTICS(5, 0, 5, 3500, -125, 150, Situation.BOREDOM, Situation.WEIRD_MUSHROOMS,
-				Situation.NEVER, 2000, 3000, "Narcostics"),
+				Situation.NEVER, 2000, 3000, "Narcotics"),
 				
 	ROBOTICS(6, 4, 7, 5000, -150, 100, Situation.LACK_OF_WORKERS, Situation.NEVER,
 				Situation.NEVER, 3500, 5000, "Robots")

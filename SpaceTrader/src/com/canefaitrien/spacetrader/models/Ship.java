@@ -82,4 +82,13 @@ public class Ship {
 	public void setFuel(int fuel) {
 		this.fuel = fuel;
 	}
+	
+	public String getCargoView() {
+		String ret = "";
+		TradeGood[] goods = TradeGood.values();
+		for(int i = 0; i < cargo.length; i++) {
+			ret += goods[i].toString() + ": " + cargo[i];
+		}
+		return ret;
+	}
 }

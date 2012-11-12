@@ -26,9 +26,11 @@ public class Person {
 	}
 
 	public String toString() {
-		return "Name: " + name + "\nPilot: " + pilotPts + "\nFighter: "
-				+ fighterPts + "\nTrader: " + traderPts + "\nEngineer: "
-				+ engineerPts;
+		return "Name: " + name + 
+				"\nPilot:    " + pilotPts + 
+				"\nFighter:  " + fighterPts + 
+				"\nTrader:   " + traderPts + 
+				"\nEngineer: " + engineerPts;
 	}
 
 	/**
