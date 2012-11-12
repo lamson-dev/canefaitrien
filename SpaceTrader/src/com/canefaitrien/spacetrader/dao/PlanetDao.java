@@ -184,9 +184,6 @@ public class PlanetDao extends AbstractDao<Planet, Long> {
 				cursor.isNull(offset + 9) ? null : cursor.getLong(offset + 9), // dataId
 				cursor.isNull(offset + 10) ? null : cursor.getLong(offset + 10) // marketId
 		);
-		if (entity == null)
-			Log.d("PlanetDao", "null entity");
-		Log.d("PlanetDao", entity.toString());
 		return entity;
 	}
 

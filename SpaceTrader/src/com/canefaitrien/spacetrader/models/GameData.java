@@ -170,9 +170,6 @@ public class GameData {
             	Log.d("GameData", "fucking null planets");
             }
             
-            if (planets.isEmpty()) 
-            	Log.d("GameData", "planets empty");
-            
             if (planets instanceof ArrayList) 
             	Log.d("GameData", "planets is arraylist");
             
