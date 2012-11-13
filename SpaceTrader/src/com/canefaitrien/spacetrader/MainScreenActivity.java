@@ -47,6 +47,23 @@ public class MainScreenActivity extends TabActivity implements IMainScreenView {
 		addTab("Market", MarketPlaceActivity.class, tabhost);
 		addTab("Hub", HubActivity.class, tabhost);
 		// tabhost.setCurrentTab(3);
+
+		// ActionBar
+		// ActionBar actionbar = getActionBar();
+		// actionbar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+		//
+		// ActionBar.Tab PlayerTab = actionbar.newTab().setText("Fragment A");
+		// ActionBar.Tab StationsTab = actionbar.newTab().setText("Fragment B");
+		//
+		// Fragment PlayerFragment = new AFragment();
+		// Fragment StationsFragment = new BFragment();
+		//
+		// PlayerTab.setTabListener(new MyTabsListener(PlayerFragment));
+		// StationsTab.setTabListener(new MyTabsListener(StationsFragment));
+		//
+		// actionbar.addTab(PlayerTab);
+		// actionbar.addTab(StationsTab);
+
 	}
 
 	private void addTab(String tag, Class<?> c, TabHost th) {
@@ -102,11 +119,36 @@ public class MainScreenActivity extends TabActivity implements IMainScreenView {
 	}
 
 	@Override
-	protected void onSaveInstanceState(Bundle outState) {
-		super.onSaveInstanceState(outState);
-		// saveState();
-		// outState.putSerializable(DbAdapter.CHAR_KEY_ROWID, mRowId);
+	protected void onStart() {
+		super.onStart();
+		Log.d(TAG, "onStart called.");
 	}
+
+	@Override
+	protected void onStop() {
+		mPresenter.saveData();
+		super.onStop();
+		Log.d(TAG, "onStop called.");
+	}
+
+	@Override
+	protected void onRestart() {
+		super.onRestart();
+		Log.d(TAG, "onRestart called.");
+	}
+
+	@Override
+	protected void onDestroy() {
+		mPresenter.saveData();
+		super.onDestroy();
+	}
+
+	// @Override
+	// protected void onSaveInstanceState(Bundle outState) {
+	// super.onSaveInstanceState(outState);
+	// saveState();
+	// outState.putSerializable(DbAdapter.CHAR_KEY_ROWID, mRowId);
+	// }
 
 	// private void saveState() {
 	// String title = mTitleText.getText().toString();
@@ -122,28 +164,25 @@ public class MainScreenActivity extends TabActivity implements IMainScreenView {
 	// }
 	// }
 
-	@Override
-	protected void onStart() {
-		super.onStart();
-		Log.d(TAG, "onStart called.");
-	}
-
-	@Override
-	protected void onStop() {
-		SpaceTrader.getData().update();
-		super.onStop();
-		Log.d(TAG, "onStop called.");
-	}
-
-	@Override
-	protected void onRestart() {
-		super.onRestart();
-		Log.d(TAG, "onRestart called.");
-	}
-
-	@Override
-	protected void onDestroy() {
-		SpaceTrader.getData().update();
-		super.onDestroy();
-	}
 }
+
+// class MyTabsListener implements TabListener {
+// public Fragment fragment;
+//
+// public MyTabsListener(Fragment fragment) {
+// this.fragment = fragment;
+// }
+//
+// public void onTabReselected(Tab tab, FragmentTransaction ft) {
+// Toast.makeText(StartActivity.appContext, "Reselected!",
+// Toast.LENGTH_LONG).show();
+// }
+//
+// public void onTabSelected(Tab tab, FragmentTransaction ft) {
+// ft.replace(R.id.fragment_container, fragment);
+// }
+//
+// public void onTabUnselected(Tab tab, FragmentTransaction ft) {
+// ft.remove(fragment);
+// }
+// }

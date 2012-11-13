@@ -29,7 +29,7 @@
     <string name="delete_save">Delete Saved Data</string>
     <string name="bt_newgame">new game</string>
     <string name="bt_resumegame">load game</string>
-    <string name="bt_debugmode">debug Mode</string>
+    <string name="bt_debugmode">debug mode</string>
     <string name="menu_save">Save Game</string>
     <string name="menu_load">Load Game</string>
 

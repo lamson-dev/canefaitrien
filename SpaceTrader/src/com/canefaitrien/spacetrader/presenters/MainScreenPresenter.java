@@ -74,17 +74,20 @@ public class MainScreenPresenter {
 	}
 
 	public void saveData() {
-
+		personDao = SpaceTrader.daoSession.getPersonDao();
+		shipDao = SpaceTrader.daoSession.getShipDao();
+		marketDao = SpaceTrader.daoSession.getMarketplaceDao();
+		
 		Controller ctrl = SpaceTrader.getController();
 		GameData data = SpaceTrader.getData();
-
+		
 		Person person = ctrl.getPlayer();
 		Ship ship = ctrl.getShip();
 		Planet currentPlanet = ctrl.getLocation();
 		int money = ctrl.getMoney();
 		int turn = ctrl.getTurn();
 		Date date = new Date();
-
+		
 		data.setPerson(person);
 		data.setShip(ship);
 		data.setCurrentPlanet(currentPlanet);
