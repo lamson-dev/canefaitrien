@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import com.canefaitrien.spacetrader.dao.DaoMaster;
 import com.canefaitrien.spacetrader.dao.DaoSession;
 import com.canefaitrien.spacetrader.dao.DaoMaster.DevOpenHelper;
+import com.canefaitrien.spacetrader.models.Controller;
 import com.canefaitrien.spacetrader.models.GameData;
 
 public class SpaceTrader extends Application {

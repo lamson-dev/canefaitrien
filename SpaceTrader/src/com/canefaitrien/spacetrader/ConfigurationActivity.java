@@ -1,7 +1,6 @@
 package com.canefaitrien.spacetrader;
 
 import java.util.Date;
-import java.util.List;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -15,16 +14,19 @@ import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
-import com.canefaitrien.spacetrader.Controller.Difficulty;
 import com.canefaitrien.spacetrader.dao.GameDataDao;
 import com.canefaitrien.spacetrader.dao.MarketplaceDao;
 import com.canefaitrien.spacetrader.dao.PersonDao;
 import com.canefaitrien.spacetrader.dao.PlanetDao;
+import com.canefaitrien.spacetrader.dao.ShipDao;
 import com.canefaitrien.spacetrader.interfaces.GameConstants;
+import com.canefaitrien.spacetrader.models.Controller;
+import com.canefaitrien.spacetrader.models.Controller.Difficulty;
 import com.canefaitrien.spacetrader.models.GameData;
 import com.canefaitrien.spacetrader.models.Marketplace;
 import com.canefaitrien.spacetrader.models.Person;
 import com.canefaitrien.spacetrader.models.Planet;
+import com.canefaitrien.spacetrader.models.Ship;
 import com.canefaitrien.spacetrader.utils.AbstractActivity;
 import com.canefaitrien.spacetrader.utils.Tools;
 
@@ -93,9 +95,8 @@ public class ConfigurationActivity extends AbstractActivity implements
 	private PersonDao personDao;
 	private PlanetDao planetDao;
 	private GameDataDao gameDataDao;
-	private Cursor cursor;
-
 	private MarketplaceDao marketplaceDao;
+	private ShipDao shipDao;
 
 	/** Called when the user clicks the START button */
 	public void startGame() {
@@ -124,17 +125,23 @@ public class ConfigurationActivity extends AbstractActivity implements
 		planetDao = SpaceTrader.daoSession.getPlanetDao();
 		marketplaceDao = SpaceTrader.daoSession.getMarketplaceDao();
 		gameDataDao = SpaceTrader.daoSession.getGameDataDao();
+		shipDao = SpaceTrader.daoSession.getShipDao();
 
 		Person person = new Person(null, name, barPilot.getProgress(),
 				barFighter.getProgress(), barTrader.getProgress(),
 				barEngineer.getProgress());
 		personDao.insert(person);
+
 		Log.d(TAG, "Inserted new Person, ID: " + person.getId());
 
 		Controller ctrl = new Controller(person, difficulties[level]);
+
+		Ship ship = ctrl.getShip();
+		shipDao.insert(ship);
+
 		GameData data = new GameData(null, name, ctrl.getDifficulty().name(),
 				ctrl.getMoney(), ctrl.getLocation().getName(), 0, new Date(),
-				person.getId());
+				person.getId(), ship.getId());
 		gameDataDao.insert(data);
 		Log.d(TAG, "Inserted new GameData, ID: " + data.getId());
 
@@ -146,35 +153,18 @@ public class ConfigurationActivity extends AbstractActivity implements
 
 			marketplaceDao.insert(mk);
 			Log.d(TAG, "Inserted new Marketplace, ID: " + mk.getId());
-			Log.d(TAG, mk.getStringItemStock());
-			Log.d(TAG, mk.getStringItemBuyPrices());
 
 			p.setMarketId(mk.getId());
 			p.setDataId(data.getId());
 			planetDao.insert(p);
-			
+
 			Log.d(TAG, "Inserted new Planet, ID: " + p.getId());
 			Log.d(TAG, "Inserted new Planet, data-ID: " + p.getDataId());
 			Log.d(TAG, "Inserted new Planet, market-ID: " + p.getMarketId());
 		}
-		
-		Log.d(TAG, "problematic");
-		List<Planet> p = data.getPlanets();
-		Log.d(TAG, String.valueOf(p.size()));
-		
-		GameData game = gameDataDao.loadByRowId(data.getId());
-		Log.d(TAG, "loaded game");
-		
-		Log.d(TAG, "problematic");
-		List<Planet> planets = game.getPlanets();
-		Log.d(TAG, String.valueOf(planets.size()));
-		
+
 		SpaceTrader.setController(ctrl);
 		SpaceTrader.setData(data);
-		
-		Log.d(TAG, "problematic");
-		planets = SpaceTrader.getData().getPlanets();
-		Log.d(TAG, String.valueOf(planets.size()));
 
 		Intent intent = new Intent(ConfigurationActivity.this,
 				MainScreenActivity.class);

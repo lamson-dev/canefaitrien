@@ -48,7 +48,6 @@ public class Marketplace implements GameConstants {
 		this.id = id;
 	}
 
-
 	/**
 	 * Marketplace constructor for loading
 	 */
@@ -59,10 +58,10 @@ public class Marketplace implements GameConstants {
 		this.setItemStock(itemStock);
 		this.setItemBuyPrices(itemBuyPrices);
 		this.setItemSellPrices(itemSellPrices);
-		
+
 		// planets set techlevel + situation
 	}
-	
+
 	/**
 	 * Marketplace constructor for new Marketplace
 	 */
@@ -71,7 +70,7 @@ public class Marketplace implements GameConstants {
 				new int[goods.length], level, situation);
 		updateStock();
 	}
-	
+
 	public Marketplace(int lastDock, int[] itemStock, int[] itemBuyPrices,
 			int[] itemSellPrices, TechLevel level, Situation situation) {
 		this.lastDock = lastDock;
@@ -81,8 +80,6 @@ public class Marketplace implements GameConstants {
 		this.level = level;
 		this.situation = situation;
 	}
-
-
 
 	/**
 	 * Dock method to be called by Planet upon traveling to that Planet
@@ -187,24 +184,6 @@ public class Marketplace implements GameConstants {
 		return ret + "]\n";
 	}
 
-	/**
-	 * Extra method for selling and buying trade good Added by apham9 on October
-	 * 29th, 2012
-	 * 
-	 */
-	// public void buyGood(TradeGood good){
-	// if (itemStock[good.ordinal()] == 0) {
-	// // This is not in stock
-	// // Throw exceptions
-	// }
-	// else {
-	// itemStock[good.ordinal()]--;
-	// }
-	// }
-	// public void sellGood(TradeGood good){
-	// itemStock[good.ordinal()]++;
-	// }
-
 	public int buyGood(TradeGood good, Ship ship, int money) throws Exception {
 		if (itemBuyPrices[good.ordinal()] > money) {
 			throw new Exception("We don't have enough money, captain!");
@@ -230,15 +209,14 @@ public class Marketplace implements GameConstants {
 		}
 	}
 
-	
 	public Long getId() {
-        return id;
-    }
+		return id;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-    
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public Integer getLastDock() {
 		return lastDock;
 	}
@@ -249,7 +227,7 @@ public class Marketplace implements GameConstants {
 
 	public String getStringItemStock() {
 		List<Integer> list = new ArrayList<Integer>();
-		for (int item: this.getItemStock())
+		for (int item : this.getItemStock())
 			list.add(item);
 		JSONArray json = new JSONArray(list);
 		return json.toString();
@@ -268,7 +246,7 @@ public class Marketplace implements GameConstants {
 
 	public String getStringItemBuyPrices() {
 		List<Integer> list = new ArrayList<Integer>();
-		for (int item: this.getItemBuyPrices())
+		for (int item : this.getItemBuyPrices())
 			list.add(item);
 		JSONArray json = new JSONArray(list);
 		return json.toString();
@@ -287,7 +265,7 @@ public class Marketplace implements GameConstants {
 
 	public String getStringItemSellPrices() {
 		List<Integer> list = new ArrayList<Integer>();
-		for (int item: this.getItemSellPrices())
+		for (int item : this.getItemSellPrices())
 			list.add(item);
 		JSONArray json = new JSONArray(list);
 		return json.toString();

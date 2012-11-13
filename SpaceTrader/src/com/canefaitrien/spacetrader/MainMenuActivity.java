@@ -138,4 +138,5 @@ public class MainMenuActivity extends AbstractActivity {
 	protected void onDestroy() {
 		super.onDestroy();
 	}
+
 }

@@ -1,11 +1,11 @@
 package com.canefaitrien.spacetrader.interfaces;
 
-import com.canefaitrien.spacetrader.Controller.Difficulty;
 import com.canefaitrien.spacetrader.models.Person;
 import com.canefaitrien.spacetrader.models.Planet;
 import com.canefaitrien.spacetrader.models.Ship;
 import com.canefaitrien.spacetrader.models.TradeGood;
 import com.canefaitrien.spacetrader.models.Universe;
+import com.canefaitrien.spacetrader.models.Controller.Difficulty;
 
 public interface IGameModel {
 

@@ -1,14 +1,13 @@
 package com.canefaitrien.spacetrader;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 
-import com.canefaitrien.spacetrader.R;
 import com.canefaitrien.spacetrader.models.GameData;
+import com.canefaitrien.spacetrader.utils.AbstractActivity;
 
-public class InfoActivity extends Activity {
+public class InfoActivity extends AbstractActivity {
 
 	private static final String TAG = "Info";
 

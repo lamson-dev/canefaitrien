@@ -4,6 +4,9 @@ import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 
@@ -16,8 +19,7 @@ public class MainScreenActivity extends TabActivity implements IMainScreenView {
 
 	private static final String TAG = "MainScreen";
 	MainScreenPresenter mPresenter;
-
-	private Long mRowId;
+	private long mRowId;
 
 	public MainScreenActivity() {
 		mPresenter = new MainScreenPresenter(this);
@@ -28,13 +30,14 @@ public class MainScreenActivity extends TabActivity implements IMainScreenView {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_mainscreen);
 
+		// if not new game then load game
 		if (!getIntent().getExtras().getBoolean("New Game"))
 			loadGame(savedInstanceState);
-		
+
 		init();
-		
 	}
 
+	// add tabs to mainscreen
 	private void init() {
 
 		TabHost tabhost = getTabHost();
@@ -43,7 +46,7 @@ public class MainScreenActivity extends TabActivity implements IMainScreenView {
 		addTab("Info", InfoActivity.class, tabhost);
 		addTab("Market", MarketPlaceActivity.class, tabhost);
 		addTab("Hub", HubActivity.class, tabhost);
-		tabhost.setCurrentTab(3);
+		// tabhost.setCurrentTab(3);
 	}
 
 	private void addTab(String tag, Class<?> c, TabHost th) {
@@ -57,42 +60,53 @@ public class MainScreenActivity extends TabActivity implements IMainScreenView {
 
 	private void loadGame(Bundle savedInstanceState) {
 
-		// mRowId = (savedInstanceState == null) ? null
-		// : (Long) savedInstanceState
-		// .getSerializable(GameDataDao.Properties.Id.columnName);
-		//
-		// if (mRowId == null) {
-		//
-		// Bundle extras = getIntent().getExtras();
-		// mRowId = extras != null ? extras
-		// .getLong(GameDataDao.Properties.Id.columnName) : null;
-		// }
-
 		Bundle extras = getIntent().getExtras();
 		mRowId = extras.getLong(GameDataDao.Properties.Id.columnName);
 
 		mPresenter.populateData(mRowId);
-
 	}
 
-	// @Override
-	// protected void onPause() {
-	// super.onPause();
-	// saveState();
-	// }
-	//
-	// @Override
-	// protected void onResume() {
-	// super.onResume();
-	// populateData();
-	// }
-	//
-	// @Override
-	// protected void onSaveInstanceState(Bundle outState) {
-	// super.onSaveInstanceState(outState);
-	// saveState();
-	// outState.putSerializable(DbAdapter.CHAR_KEY_ROWID, mRowId);
-	// }
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.activity_mainscreen, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onMenuItemSelected(int featureId, MenuItem item) {
+		switch (item.getItemId()) {
+		case R.id.menu_save:
+			mPresenter.saveData();
+			return true;
+		case R.id.menu_load:
+			// do something, load main menu?
+			return true;
+		}
+
+		return super.onMenuItemSelected(featureId, item);
+	}
+
+	@Override
+	protected void onPause() {
+		Log.d(TAG, "onPause called.");
+		super.onPause();
+		// saveState();
+	}
+
+	@Override
+	protected void onResume() {
+		Log.d(TAG, "onResume called.");
+		super.onResume();
+		// populateData();
+	}
+
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		// saveState();
+		// outState.putSerializable(DbAdapter.CHAR_KEY_ROWID, mRowId);
+	}
 
 	// private void saveState() {
 	// String title = mTitleText.getText().toString();
@@ -112,18 +126,6 @@ public class MainScreenActivity extends TabActivity implements IMainScreenView {
 	protected void onStart() {
 		super.onStart();
 		Log.d(TAG, "onStart called.");
-	}
-
-	@Override
-	protected void onPause() {
-		super.onPause();
-		Log.d(TAG, "onPause called.");
-	}
-
-	@Override
-	protected void onResume() {
-		super.onResume();
-		Log.d(TAG, "onResume called.");
 	}
 
 	@Override

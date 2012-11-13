@@ -1,6 +1,5 @@
 package com.canefaitrien.spacetrader.models;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import android.util.Log;
@@ -9,6 +8,7 @@ import com.canefaitrien.spacetrader.dao.DaoSession;
 import com.canefaitrien.spacetrader.dao.GameDataDao;
 import com.canefaitrien.spacetrader.dao.PersonDao;
 import com.canefaitrien.spacetrader.dao.PlanetDao;
+import com.canefaitrien.spacetrader.dao.ShipDao;
 
 import de.greenrobot.dao.AbstractDao;
 import de.greenrobot.dao.DaoException;
@@ -29,6 +29,7 @@ public class GameData {
 	private Integer turn;
 	private java.util.Date date;
 	private Long personId;
+	private Long shipId;
 
 	/** Used to resolve relations */
 	private transient DaoSession daoSession;
@@ -38,6 +39,9 @@ public class GameData {
 
 	private Person person;
 	private Long person__resolvedKey;
+
+	private Ship ship;
+	private Long ship__resolvedKey;
 
 	private List<Planet> planets;
 
@@ -50,7 +54,7 @@ public class GameData {
 
 	public GameData(Long id, String name, String difficulty, Integer money,
 			String currentPlanet, Integer turn, java.util.Date date,
-			Long personId) {
+			Long personId, Long shipId) {
 		this.id = id;
 		this.name = name;
 		this.difficulty = difficulty;
@@ -59,6 +63,7 @@ public class GameData {
 		this.turn = turn;
 		this.date = date;
 		this.personId = personId;
+		this.shipId = shipId;
 	}
 
 	/** called by internal mechanisms, do not call yourself. */
@@ -120,6 +125,10 @@ public class GameData {
 		this.currentPlanet = currentPlanet;
 	}
 
+	public void setCurrentPlanet(Planet location) {
+		this.currentPlanet = location.getName();
+	}
+
 	public Integer getTurn() {
 		return turn;
 	}
@@ -144,6 +153,14 @@ public class GameData {
 		this.personId = personId;
 	}
 
+	public Long getShipId() {
+		return shipId;
+	}
+
+	public void setShipId(Long shipId) {
+		this.shipId = shipId;
+	}
+
 	/** To-one relationship, resolved on first access. */
 	public Person getPerson() {
 		if (person__resolvedKey == null
@@ -164,6 +181,25 @@ public class GameData {
 		person__resolvedKey = personId;
 	}
 
+	/** To-one relationship, resolved on first access. */
+	public Ship getShip() {
+		if (ship__resolvedKey == null || !ship__resolvedKey.equals(shipId)) {
+			if (daoSession == null) {
+				throw new DaoException("Entity is detached from DAO context");
+			}
+			ShipDao targetDao = daoSession.getShipDao();
+			ship = targetDao.load(shipId);
+			ship__resolvedKey = shipId;
+		}
+		return ship;
+	}
+
+	public void setShip(Ship ship) {
+		this.ship = ship;
+		shipId = ship == null ? null : ship.getId();
+		ship__resolvedKey = shipId;
+	}
+
 	/**
 	 * To-many relationship, resolved on first access (and after reset). Changes
 	 * to to-many relations are not persisted, make changes to the target
@@ -177,23 +213,21 @@ public class GameData {
 			PlanetDao targetDao = daoSession.getPlanetDao();
 			planets = targetDao._queryGameData_Planets(id);
 
-			if (planets instanceof ArrayList)
-				Log.d("GameData", "planets is arraylist");
-
+			loadMarketplaceInAllPlanets();
 		}
 		return planets;
 	}
 
+	private void loadMarketplaceInAllPlanets() {
+		for (Planet p : planets)
+			p.getMarketplace();
+	}
+
 	public Planet[] getUniverse() {
-		Planet[] universe;
-		Log.d("GameData", "broke after planets.size()");
-		universe = new Planet[this.getPlanets().size()];
-		Log.d("GameData", "broke before getPlanets()");
+		Planet[] universe = new Planet[this.getPlanets().size()];
 		for (int i = 0; i < universe.length; i++)
 			universe[i] = planets.get(i);
-
 		return universe;
-
 	}
 
 	/**

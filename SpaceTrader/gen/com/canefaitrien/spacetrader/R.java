@@ -52,6 +52,8 @@ public final class R {
         public static final int good_price=0x7f090030;
         public static final int good_sell_price=0x7f090031;
         public static final int good_stock=0x7f090033;
+        public static final int menu_load=0x7f090039;
+        public static final int menu_save=0x7f090038;
         public static final int menu_settings=0x7f090037;
         public static final int pt_engineer=0x7f090012;
         public static final int pt_fighter=0x7f09000c;
@@ -105,6 +107,7 @@ public final class R {
     public static final class menu {
         public static final int activity_display_data=0x7f080000;
         public static final int activity_main=0x7f080001;
+        public static final int activity_mainscreen=0x7f080002;
     }
     public static final class raw {
         public static final int funny=0x7f040000;
@@ -124,6 +127,8 @@ public final class R {
         public static final int difficulty_default=0x7f06000d;
         public static final int hello_world=0x7f060002;
         public static final int hint_name=0x7f060006;
+        public static final int menu_load=0x7f06001f;
+        public static final int menu_save=0x7f06001e;
         public static final int menu_settings=0x7f060003;
         public static final int no_data=0x7f060019;
         public static final int pt_default=0x7f060013;

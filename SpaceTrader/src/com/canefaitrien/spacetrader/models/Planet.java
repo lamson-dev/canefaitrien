@@ -249,7 +249,8 @@ public class Planet {
 		if (marketplace__resolvedKey == null
 				|| !marketplace__resolvedKey.equals(marketId)) {
 			if (daoSession == null) {
-				throw new DaoException("Entity is detached from DAO context");
+				throw new DaoException(
+						"Marketplace is detached from DAO context");
 			}
 			MarketplaceDao targetDao = daoSession.getMarketplaceDao();
 			marketplace = targetDao.load(marketId);
