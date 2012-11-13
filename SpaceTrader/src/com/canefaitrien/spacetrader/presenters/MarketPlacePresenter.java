@@ -4,16 +4,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import android.content.Context;
-import android.widget.LinearLayout;
-import android.widget.SimpleAdapter;
-import android.widget.TextView;
+import android.util.Log;
 
-import com.canefaitrien.spacetrader.R;
-import com.canefaitrien.spacetrader.SpaceTraderApplication;
-import com.canefaitrien.spacetrader.interfaces.IGameModel;
+import com.canefaitrien.spacetrader.SpaceTrader;
 import com.canefaitrien.spacetrader.interfaces.IMarketPlaceView;
 import com.canefaitrien.spacetrader.models.Controller;
+import com.canefaitrien.spacetrader.models.GameData;
 import com.canefaitrien.spacetrader.models.Marketplace;
 import com.canefaitrien.spacetrader.models.TradeGood;
 
@@ -22,14 +18,59 @@ public class MarketPlacePresenter {
 	private static final String TAG = "MarketPresenter";
 	private IMarketPlaceView mView;
 	private Marketplace mMarket;
-	private Controller data;
+	private Controller controller;
 
 	public MarketPlacePresenter(IMarketPlaceView view) {
 		mView = view;
-		data = SpaceTraderApplication.getData();
-		mMarket = data.getLocation().getMarketplace();
+		controller = SpaceTrader.getController();
+		mMarket = controller.getLocation().getMarketplace1();
 	}
 
+	public List<HashMap<String, String>> populateStock(
+			List<HashMap<String, String>> list) {
+		Log.d(TAG, "null here");
+		TradeGood[] goods = TradeGood.values();
+
+		list = new ArrayList<HashMap<String, String>>();
+
+		for (int i = 0; i < goods.length; i++) {
+
+			HashMap<String, String> temp = new HashMap<String, String>();
+			temp.put("name", goods[i].toString());
+			temp.put("price", String.valueOf(mMarket.getItemBuyPrices()[i]));
+			temp.put("sellprice",
+					String.valueOf(mMarket.getItemSellPrices()[i]));
+			temp.put("owned",
+					String.valueOf(controller.getShip().getCargo()[i]));
+			temp.put("stock", String.valueOf(mMarket.getItemStock()[i]));
+
+			list.add(temp);
+		}
+		return list;
+
+	}
+
+	public void buyItem(int pos) throws Exception {
+		controller.buyGood(TradeGood.values()[pos]);
+		updateStockList(mView.getStockList());
+	}
+
+	public void sellItem(int pos) throws Exception {
+		controller.sellGood(TradeGood.values()[pos]);
+		updateStockList(mView.getStockList());
+	}
+
+	public void updateStockList(List<HashMap<String, String>> list) {
+		mView.setStockList(this.populateStock(list));
+	}
+
+	public void showOtherInfo() {
+		mView.displayMoney(String.valueOf(controller.getMoney()));
+		mView.displayCargo(String
+				.valueOf(controller.getShip().getCargo().length));
+	}
+
+	// dynamically add stuff to android layout
 	// public List<HashMap<String, String>> listStockItems(Context context,
 	// LinearLayout content) {
 	// dynamically add list views
@@ -74,98 +115,50 @@ public class MarketPlacePresenter {
 	// return ret;
 	// }
 
-	public List<HashMap<String, String>> populateStock(
-			List<HashMap<String, String>> list) {
-
-		TradeGood[] goods = TradeGood.values();
-
-		// List<Item> ret = new ArrayList<Item>();
-
-		list = new ArrayList<HashMap<String, String>>();
-
-		for (int i = 0; i < goods.length; i++) {
-			// ret.add(new Item(goods[i].toString(),
-			// mMarket.getItemBuyPrices()[i],
-			// data.getShip().getCargo()[i], mMarket.getItemStock()[i]));
-
-			HashMap<String, String> temp = new HashMap<String, String>();
-			temp.put("name", goods[i].toString());
-			temp.put("price", String.valueOf(mMarket.getItemBuyPrices()[i]));
-			temp.put("sellprice",
-					String.valueOf(mMarket.getItemSellPrices()[i]));
-			temp.put("owned", String.valueOf(data.getShip().getCargo()[i]));
-			temp.put("stock", String.valueOf(mMarket.getItemStock()[i]));
-
-			list.add(temp);
-		}
-		return list;
-
-	}
-
-	public void buyItem(int pos) throws Exception {
-		data.buyGood(TradeGood.values()[pos]);
-		updateStockList(mView.getStockList());
-	}
-
-	public void sellItem(int pos) throws Exception {
-		// TODO Auto-generated method stub
-		data.sellGood(TradeGood.values()[pos]);
-		updateStockList(mView.getStockList());
-	}
-
-	public void updateStockList(List<HashMap<String, String>> list) {
-		mView.setStockList(this.populateStock(list));
-	}
-
-	public void showOtherInfo() {
-		mView.displayMoney(String.valueOf(data.getMoney()));
-		mView.displayCargo(String.valueOf(data.getShip().getCargo().length));
-	}
-
-	public class Item {
-		private String name;
-		private int buyPrice;
-		private int owned;
-		private int stock;
-
-		public Item(String name, int buyPrice, int owned, int Stock) {
-			setName(name);
-			setBuyPrice(buyPrice);
-			setOwned(owned);
-			setStock(stock);
-		}
-
-		public String getName() {
-			return name;
-		}
-
-		public void setName(String name) {
-			this.name = name;
-		}
-
-		public int getBuyPrice() {
-			return buyPrice;
-		}
-
-		public void setBuyPrice(int buyPrice) {
-			this.buyPrice = buyPrice;
-		}
-
-		public int getOwned() {
-			return owned;
-		}
-
-		public void setOwned(int owned) {
-			this.owned = owned;
-		}
-
-		public int getStock() {
-			return stock;
-		}
-
-		public void setStock(int stock) {
-			this.stock = stock;
-		}
-
-	}
+	// public class Item {
+	// private String name;
+	// private int buyPrice;
+	// private int owned;
+	// private int stock;
+	//
+	// public Item(String name, int buyPrice, int owned, int Stock) {
+	// setName(name);
+	// setBuyPrice(buyPrice);
+	// setOwned(owned);
+	// setStock(stock);
+	// }
+	//
+	// public String getName() {
+	// return name;
+	// }
+	//
+	// public void setName(String name) {
+	// this.name = name;
+	// }
+	//
+	// public int getBuyPrice() {
+	// return buyPrice;
+	// }
+	//
+	// public void setBuyPrice(int buyPrice) {
+	// this.buyPrice = buyPrice;
+	// }
+	//
+	// public int getOwned() {
+	// return owned;
+	// }
+	//
+	// public void setOwned(int owned) {
+	// this.owned = owned;
+	// }
+	//
+	// public int getStock() {
+	// return stock;
+	// }
+	//
+	// public void setStock(int stock) {
+	// this.stock = stock;
+	// }
+	//
+	// }
 }

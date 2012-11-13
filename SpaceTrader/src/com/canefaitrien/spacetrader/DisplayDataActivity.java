@@ -1,5 +1,6 @@
 package com.canefaitrien.spacetrader;
 
+import com.canefaitrien.spacetrader.R;
 import com.canefaitrien.spacetrader.models.Marketplace;
 import com.canefaitrien.spacetrader.models.Situation;
 import com.canefaitrien.spacetrader.models.TechLevel;

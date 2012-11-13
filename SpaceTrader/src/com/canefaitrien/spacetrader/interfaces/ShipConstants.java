@@ -1,4 +1,4 @@
-package com.canefaitrien.spacetrader.constants;
+package com.canefaitrien.spacetrader.interfaces;
 
 
 

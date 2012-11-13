@@ -2,44 +2,43 @@ package com.canefaitrien.spacetrader;
 
 import android.app.TabActivity;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 
-import com.canefaitrien.spacetrader.models.Controller;
-import com.canefaitrien.spacetrader.models.Controller.Difficulty;
-import com.canefaitrien.spacetrader.models.Person;
-import com.canefaitrien.spacetrader.models.Planet;
-import com.canefaitrien.spacetrader.models.Ship;
-import com.canefaitrien.spacetrader.models.Universe;
-import com.canefaitrien.spacetrader.utils.DbAdapter;
+import com.canefaitrien.spacetrader.dao.GameDataDao;
+import com.canefaitrien.spacetrader.interfaces.IMainScreenView;
+import com.canefaitrien.spacetrader.presenters.MainScreenPresenter;
 
 @SuppressWarnings("deprecation")
-public class MainScreenActivity extends TabActivity {
+public class MainScreenActivity extends TabActivity implements IMainScreenView {
 
 	private static final String TAG = "MainScreen";
+	MainScreenPresenter mPresenter;
+	private long mRowId;
 
-	// This is the Adapter being used to display the list's data
-	private DbAdapter mDbHelper;
-	private Long mRowId;
+	public MainScreenActivity() {
+		mPresenter = new MainScreenPresenter(this);
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_mainscreen);
 
-		init(savedInstanceState);
+		// if not new game then load game
+		if (!getIntent().getExtras().getBoolean("New Game"))
+			loadGame(savedInstanceState);
 
-		// need to put this method in presenter
-		loadGame(savedInstanceState);
-
+		init();
 	}
 
-	private void init(Bundle savedInstanceState) {
-
-		mDbHelper = new DbAdapter(this);
+	// add tabs to mainscreen
+	private void init() {
 
 		TabHost tabhost = getTabHost();
 
@@ -47,7 +46,24 @@ public class MainScreenActivity extends TabActivity {
 		addTab("Info", InfoActivity.class, tabhost);
 		addTab("Market", MarketPlaceActivity.class, tabhost);
 		addTab("Hub", HubActivity.class, tabhost);
-//		tabhost.setCurrentTab(3);
+		// tabhost.setCurrentTab(3);
+
+		// ActionBar
+		// ActionBar actionbar = getActionBar();
+		// actionbar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+		//
+		// ActionBar.Tab PlayerTab = actionbar.newTab().setText("Fragment A");
+		// ActionBar.Tab StationsTab = actionbar.newTab().setText("Fragment B");
+		//
+		// Fragment PlayerFragment = new AFragment();
+		// Fragment StationsFragment = new BFragment();
+		//
+		// PlayerTab.setTabListener(new MyTabsListener(PlayerFragment));
+		// StationsTab.setTabListener(new MyTabsListener(StationsFragment));
+		//
+		// actionbar.addTab(PlayerTab);
+		// actionbar.addTab(StationsTab);
+
 	}
 
 	private void addTab(String tag, Class<?> c, TabHost th) {
@@ -61,82 +77,72 @@ public class MainScreenActivity extends TabActivity {
 
 	private void loadGame(Bundle savedInstanceState) {
 
-		mRowId = (savedInstanceState == null) ? null
-				: (Long) savedInstanceState
-						.getSerializable(DbAdapter.CHAR_KEY_ROWID);
+		Bundle extras = getIntent().getExtras();
+		mRowId = extras.getLong(GameDataDao.Properties.Id.columnName);
 
-		if (mRowId == null) {
+		mPresenter.populateData(mRowId);
+	}
 
-			Bundle extras = getIntent().getExtras();
-			mRowId = extras != null ? extras.getLong(DbAdapter.CHAR_KEY_ROWID)
-					: null;
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.activity_mainscreen, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onMenuItemSelected(int featureId, MenuItem item) {
+		switch (item.getItemId()) {
+		case R.id.menu_save:
+			mPresenter.saveData();
+			return true;
+		case R.id.menu_load:
+			// do something, load main menu?
+			return true;
 		}
 
-		// for LoadGame
+		return super.onMenuItemSelected(featureId, item);
+	}
+
+	@Override
+	protected void onPause() {
+		Log.d(TAG, "onPause called.");
+		super.onPause();
+		// saveState();
+	}
+
+	@Override
+	protected void onResume() {
+		Log.d(TAG, "onResume called.");
+		super.onResume();
 		// populateData();
-
 	}
 
-	private void populateData() {
-
-		if (mRowId == null)
-			return;
-
-		mDbHelper.open();
-
-		Log.d(TAG, String.valueOf(mRowId));
-
-		Cursor save = mDbHelper.fetchSave(mRowId);
-		startManagingCursor(save);
-
-		String name = save.getString(save
-				.getColumnIndexOrThrow(DbAdapter.CHAR_KEY_NAME));
-		// String level = save.getString(save
-		// .getColumnIndexOrThrow(DbAdapter.CHAR_KEY_DIFFICULTY));
-		// String money = save.getString(save
-		// .getColumnIndexOrThrow(DbAdapter.CHAR_KEY_MONEY));
-
-		Log.d(TAG, name);
-
-		int engineerPts = Integer.valueOf(save.getString(save
-				.getColumnIndexOrThrow(DbAdapter.CHAR_KEY_ENGINEER_PTS)));
-		int fighterPts = Integer.valueOf(save.getString(save
-				.getColumnIndexOrThrow(DbAdapter.CHAR_KEY_FIGHTER_PTS)));
-		int pilotPts = Integer.valueOf(save.getString(save
-				.getColumnIndexOrThrow(DbAdapter.CHAR_KEY_PILOT_PTS)));
-		int traderPts = Integer.valueOf(save.getString(save
-				.getColumnIndexOrThrow(DbAdapter.CHAR_KEY_TRADER_PTS)));
-
-		Person player = new Person(name, pilotPts, fighterPts, traderPts,
-				engineerPts);
-
-		Ship ship = null;
-		Planet location = null;
-		int money = 100;
-		//Universe universe = null;
-		Planet[] universe = null;
-		Difficulty difficulty = null;
-		int turn = 1;
-
-		Controller data = new Controller(player, ship, location, money,
-				universe, difficulty, turn);
-		SpaceTraderApplication.setData(data);
-
-		mDbHelper.close();
-
+	@Override
+	protected void onStart() {
+		super.onStart();
+		Log.d(TAG, "onStart called.");
 	}
-	// @Override
-	// protected void onPause() {
-	// super.onPause();
-	// saveState();
-	// }
-	//
-	// @Override
-	// protected void onResume() {
-	// super.onResume();
-	// populateData();
-	// }
-	//
+
+	@Override
+	protected void onStop() {
+		mPresenter.saveData();
+		super.onStop();
+		Log.d(TAG, "onStop called.");
+	}
+
+	@Override
+	protected void onRestart() {
+		super.onRestart();
+		Log.d(TAG, "onRestart called.");
+	}
+
+	@Override
+	protected void onDestroy() {
+		mPresenter.saveData();
+		super.onDestroy();
+	}
+
 	// @Override
 	// protected void onSaveInstanceState(Bundle outState) {
 	// super.onSaveInstanceState(outState);
@@ -158,38 +164,25 @@ public class MainScreenActivity extends TabActivity {
 	// }
 	// }
 
-	// @Override
-	// protected void onStart() {
-	// super.onStart();
-	// Log.d(TAG, "onStart called.");
-	// }
-	//
-	// @Override
-	// protected void onPause() {
-	// super.onPause();
-	// Log.d(TAG, "onPause called.");
-	// }
-	//
-	// @Override
-	// protected void onResume() {
-	// super.onResume();
-	// Log.d(TAG, "onResume called.");
-	// }
-	//
-	// @Override
-	// protected void onStop() {
-	// super.onStop();
-	// Log.d(TAG, "onStop called.");
-	// }
-	//
-	// @Override
-	// protected void onRestart() {
-	// super.onRestart();
-	// Log.d(TAG, "onRestart called.");
-	// }
-	//
-	// @Override
-	// protected void onDestroy() {
-	// super.onDestroy();
-	// }
 }
+
+// class MyTabsListener implements TabListener {
+// public Fragment fragment;
+//
+// public MyTabsListener(Fragment fragment) {
+// this.fragment = fragment;
+// }
+//
+// public void onTabReselected(Tab tab, FragmentTransaction ft) {
+// Toast.makeText(StartActivity.appContext, "Reselected!",
+// Toast.LENGTH_LONG).show();
+// }
+//
+// public void onTabSelected(Tab tab, FragmentTransaction ft) {
+// ft.replace(R.id.fragment_container, fragment);
+// }
+//
+// public void onTabUnselected(Tab tab, FragmentTransaction ft) {
+// ft.remove(fragment);
+// }
+// }

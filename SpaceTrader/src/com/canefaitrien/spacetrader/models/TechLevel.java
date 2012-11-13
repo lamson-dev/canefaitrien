@@ -25,4 +25,13 @@ public enum TechLevel {
 	public String toString() {
 		return NAME;
 	}
+
+	public static TechLevel fromString(String name) {
+		if (name != null)
+			for (TechLevel level : TechLevel.values())
+				if (name.equalsIgnoreCase(level.NAME))
+					return level;
+		throw new IllegalArgumentException("No constant with name " + name
+				+ " found");
+	}
 }
