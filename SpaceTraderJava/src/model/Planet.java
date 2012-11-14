@@ -68,9 +68,10 @@ public class Planet {
 		g.fillOval(coordinates.x - radius, coordinates.y - radius, 2*radius, 2*radius);
 	}
 	
-	public void drawMain(Graphics g, int distance) {
+	public void drawMain(Graphics g, int fuel, int distance) {
 		g.fillOval(coordinates.x - radius, coordinates.y - radius, 2*radius, 2*radius);
-		g.drawOval(coordinates.x - distance, coordinates.y - distance, 2*distance, 2*distance);
+		int temp = fuel < distance ? fuel: distance;
+		g.drawOval(coordinates.x - temp, coordinates.y - temp, 2*temp, 2*temp);
 	}
 	
 	public Rectangle getRectangle() {

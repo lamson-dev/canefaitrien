@@ -37,7 +37,7 @@ public class UniversePanel extends JPanel {
 			p.draw(g);
 		}
 		g.setColor(Color.white);
-		data.getLocation().drawMain(g, data.getShip().getFuel()*Ship.MPG);
+		data.getLocation().drawMain(g, data.getShip().getFuel()*Ship.MPG, data.getShip().getType().MAX_DISTANCE*5);
 		
 	}
 	
