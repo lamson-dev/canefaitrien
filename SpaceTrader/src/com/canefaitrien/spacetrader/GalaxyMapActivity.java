@@ -28,7 +28,7 @@ public class GalaxyMapActivity extends AbstractActivity implements OnTouchListen
 		super.onCreate(savedInstanceState);
 
 		// draw planets, done
-		galaxy = new GalaxyView(this, SpaceTrader.getData().getUniverse());
+		galaxy = new GalaxyView(this, SpaceTrader.getController().getUniverse());
 		galaxy.setOnTouchListener(this);
 
 		setContentView(galaxy);

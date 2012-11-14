@@ -117,6 +117,7 @@ public class LoadGameActivity extends ListActivity {
 		super.onActivityResult(requestCode, resultCode, intent);
 		cursor.requery();
 	}
+
 	@Override
 	protected void onStart() {
 		super.onStart();
@@ -139,6 +140,7 @@ public class LoadGameActivity extends ListActivity {
 	protected void onStop() {
 		super.onStop();
 		Log.d(TAG, "onStop called.");
+		finish();
 	}
 
 	@Override

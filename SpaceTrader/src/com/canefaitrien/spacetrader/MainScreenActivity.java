@@ -83,10 +83,10 @@ public class MainScreenActivity extends TabActivity implements IMainScreenView {
 		mPresenter.populateData(mRowId);
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.activity_mainscreen, menu);
+	 @Override
+	 public boolean onCreateOptionsMenu(Menu menu) {
+	 MenuInflater inflater = getMenuInflater();
+	 inflater.inflate(R.menu.menu_mainscreen, menu);
 		return true;
 	}
 
@@ -126,9 +126,9 @@ public class MainScreenActivity extends TabActivity implements IMainScreenView {
 
 	@Override
 	protected void onStop() {
-		mPresenter.saveData();
 		super.onStop();
 		Log.d(TAG, "onStop called.");
+		finish();
 	}
 
 	@Override
@@ -139,7 +139,7 @@ public class MainScreenActivity extends TabActivity implements IMainScreenView {
 
 	@Override
 	protected void onDestroy() {
-		mPresenter.saveData();
+		// mPresenter.saveData();
 		super.onDestroy();
 	}
 

@@ -1,6 +1,5 @@
 package com.canefaitrien.spacetrader.models;
 
-
 /**
  * Controller class which allows interaction between the Model and the View
  * 
@@ -31,8 +30,8 @@ public class Controller {
 	/**
 	 * Constructor for loading game data
 	 */
-	public Controller(Person player, Ship ship, Planet currentPlanet, int money,
-			Planet[] universe, Difficulty difficulty, int turn) {
+	public Controller(Person player, Ship ship, Planet currentPlanet,
+			int money, Planet[] universe, Difficulty difficulty, int turn) {
 		this.player = player;
 		this.ship = ship;
 		this.currentPlanet = currentPlanet;
@@ -90,16 +89,18 @@ public class Controller {
 				* Ship.MPG) { // if planet is too far will need to change the
 								// max distance constants to be more reasonable
 			throw new Exception("That planet is too far, captain!");
-		} else if (currentPlanet.distance(destination) > ship.getFuel() * Ship.MPG) { // if
-																					// not
-																					// enough
-																					// fuel
+		} else if (currentPlanet.distance(destination) > ship.getFuel()
+				* Ship.MPG) { // if
+								// not
+								// enough
+								// fuel
 			throw new Exception("We don't have enough fuel, captain!");
 		} else {
 			ship.setFuel(ship.getFuel() - currentPlanet.distance(destination)
 					/ Ship.MPG);
 			currentPlanet = destination;
-			currentPlanet.dock(++turn); // update turn and dock to update marketplace
+			currentPlanet.dock(++turn); // update turn and dock to update
+										// marketplace
 		}
 	}
 

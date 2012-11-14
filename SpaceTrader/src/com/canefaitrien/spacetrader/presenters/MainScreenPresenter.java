@@ -73,20 +73,22 @@ public class MainScreenPresenter {
 	}
 
 	public void saveData() {
+
 		personDao = SpaceTrader.daoSession.getPersonDao();
 		shipDao = SpaceTrader.daoSession.getShipDao();
 		marketDao = SpaceTrader.daoSession.getMarketplaceDao();
-		
+
 		Controller ctrl = SpaceTrader.getController();
 		GameData data = SpaceTrader.getData();
-		
+
 		Person person = ctrl.getPlayer();
 		Ship ship = ctrl.getShip();
 		Planet currentPlanet = ctrl.getLocation();
 		int money = ctrl.getMoney();
+		Log.d(TAG, "money left: " + String.valueOf(money));
 		int turn = ctrl.getTurn();
 		Date date = new Date();
-		
+
 		data.setPerson(person);
 		data.setShip(ship);
 		data.setCurrentPlanet(currentPlanet);
@@ -98,6 +100,9 @@ public class MainScreenPresenter {
 		personDao.update(person);
 		shipDao.update(ship);
 
+		// should do something so that
+		// it only update the "modified" planets & marketplace
+		// don't update the whole thing, too long
 		Planet[] universe = ctrl.getUniverse();
 		for (Planet p : universe) {
 			marketDao.update(p.getMarketplace1());

@@ -116,9 +116,9 @@
         android:id="@+id/textView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textView10"
-        android:layout_alignBottom="@+id/textView10"
-        android:layout_toLeftOf="@+id/textView9"
+        android:layout_alignLeft="@+id/textView10"
+        android:layout_below="@+id/textView10"
+        android:layout_marginTop="31dp"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </RelativeLayout>

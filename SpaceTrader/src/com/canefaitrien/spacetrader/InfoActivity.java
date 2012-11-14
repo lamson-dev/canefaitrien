@@ -18,17 +18,8 @@ public class InfoActivity extends AbstractActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_info);
 
-		// GameData game = SpaceTrader.getData();
-		//
-		// Log.d(TAG, "loaded data");
-		// String info = game.getPerson().toString();
-		// info += "\nMoney: " + game.getMoney();
-		// info += "\nDifficulty: " + game.getDifficulty();
-
 		data = SpaceTrader.getController();
 		Log.d(TAG, "loaded data");
-		// String info = data.getPlayer().toString() + "\n\n" +
-		// data.getShip().getCargoView();
 
 		populateData();
 	}
@@ -49,16 +40,15 @@ public class InfoActivity extends AbstractActivity {
 		TextView currentPlanet = (TextView) findViewById(R.id.textView10);
 		TextView money = (TextView) findViewById(R.id.textView11);
 
-		currentPlanet.setText("Current planet:\n"
+		currentPlanet.setText("Current planet: "
 				+ data.getLocation().getName());
-		money.setText("Money:\n" + String.valueOf(data.getMoney()));
+		money.setText("Money: $" + String.valueOf(data.getMoney()));
 	}
 
 	@Override
 	protected void onPause() {
 		Log.d(TAG, "onPause called.");
 		super.onPause();
-		// saveState();
 	}
 
 	@Override

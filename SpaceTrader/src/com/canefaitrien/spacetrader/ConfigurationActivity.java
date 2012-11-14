@@ -1,9 +1,7 @@
 package com.canefaitrien.spacetrader;
 
-import java.util.Date;
-
+import android.app.ProgressDialog;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,28 +12,21 @@ import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
-import com.canefaitrien.spacetrader.dao.GameDataDao;
-import com.canefaitrien.spacetrader.dao.MarketplaceDao;
-import com.canefaitrien.spacetrader.dao.PersonDao;
-import com.canefaitrien.spacetrader.dao.PlanetDao;
-import com.canefaitrien.spacetrader.dao.ShipDao;
 import com.canefaitrien.spacetrader.interfaces.GameConstants;
-import com.canefaitrien.spacetrader.models.Controller;
+import com.canefaitrien.spacetrader.interfaces.IConfigurationView;
 import com.canefaitrien.spacetrader.models.Controller.Difficulty;
-import com.canefaitrien.spacetrader.models.GameData;
-import com.canefaitrien.spacetrader.models.Marketplace;
-import com.canefaitrien.spacetrader.models.Person;
-import com.canefaitrien.spacetrader.models.Planet;
-import com.canefaitrien.spacetrader.models.Ship;
+import com.canefaitrien.spacetrader.presenters.ConfigurationPresenter;
 import com.canefaitrien.spacetrader.utils.AbstractActivity;
 import com.canefaitrien.spacetrader.utils.Tools;
 
 public class ConfigurationActivity extends AbstractActivity implements
-		GameConstants, OnClickListener, OnSeekBarChangeListener {
+		GameConstants, OnClickListener, OnSeekBarChangeListener,
+		IConfigurationView {
 
 	private static final String TAG = "Configuration";
 
-	private String name;
+	private EditText editName;
+	private TextView tvLevel;
 	private SeekBar barPilot;
 	private SeekBar barFighter;
 	private SeekBar barTrader;
@@ -45,6 +36,14 @@ public class ConfigurationActivity extends AbstractActivity implements
 
 	private int totalPts = NUM_MAX_SKILL_POINTS;
 	private int usedPts = 0;
+
+	ConfigurationPresenter mPresenter;
+
+	private ProgressDialog progressDialog;
+
+	public ConfigurationActivity() {
+		mPresenter = new ConfigurationPresenter(this);
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -85,28 +84,18 @@ public class ConfigurationActivity extends AbstractActivity implements
 		rmPts.setText(String.valueOf(pts));
 	}
 
-	private void setDifficultyLevel(int lvl) {
-		TextView level = (TextView) findViewById(R.id.txtview_level);
-		level.setText(difficulties[lvl].toString());
-	}
-
 	public final static String EXTRA_MESSAGE = "com.canefaitrient.spacetrader.MESSAGE";
-
-	private PersonDao personDao;
-	private PlanetDao planetDao;
-	private GameDataDao gameDataDao;
-	private MarketplaceDao marketplaceDao;
-	private ShipDao shipDao;
 
 	/** Called when the user clicks the START button */
 	public void startGame() {
 
 		boolean isGoodInput = true;
-		name = ((EditText) findViewById(R.id.edit_name)).getText().toString();
+		String editName = ((EditText) findViewById(R.id.edit_name)).getText()
+				.toString();
 
 		String message = "";
 
-		if (name.equals("")) {
+		if (editName.equals("")) {
 			isGoodInput = false;
 			message += "What's your name?\n";
 		}
@@ -121,56 +110,35 @@ public class ConfigurationActivity extends AbstractActivity implements
 			return;
 		}
 
-		personDao = SpaceTrader.daoSession.getPersonDao();
-		planetDao = SpaceTrader.daoSession.getPlanetDao();
-		marketplaceDao = SpaceTrader.daoSession.getMarketplaceDao();
-		gameDataDao = SpaceTrader.daoSession.getGameDataDao();
-		shipDao = SpaceTrader.daoSession.getShipDao();
+		// start the progress dialog
+		// progressDialog = ProgressDialog.show(ConfigurationActivity.this,
+		// "New Game", "Creating the Universe");
 
-		Person person = new Person(null, name, barPilot.getProgress(),
-				barFighter.getProgress(), barTrader.getProgress(),
-				barEngineer.getProgress());
-		personDao.insert(person);
+		mPresenter.createNewGame();
+		mPresenter.storeNewGameData();
 
-		Log.d(TAG, "Inserted new Person, ID: " + person.getId());
-
-		Controller ctrl = new Controller(person, difficulties[level]);
-
-		Ship ship = ctrl.getShip();
-		shipDao.insert(ship);
-
-		GameData data = new GameData(null, name, ctrl.getDifficulty().name(),
-				ctrl.getMoney(), ctrl.getLocation().getName(), 0, new Date(),
-				person.getId(), ship.getId());
-		gameDataDao.insert(data);
-		Log.d(TAG, "Inserted new GameData, ID: " + data.getId());
-
-		// for (Planet p : ctrl.getUniverse()) {
-		for (int i = 0; i < ctrl.getUniverse().length; i++) {
-			Planet p = ctrl.getUniverse()[i];
-
-			Marketplace mk = p.getMarketplace1();// p.getMarketplace1();
-
-			marketplaceDao.insert(mk);
-			Log.d(TAG, "Inserted new Marketplace, ID: " + mk.getId());
-
-			p.setMarketId(mk.getId());
-			p.setDataId(data.getId());
-			planetDao.insert(p);
-
-			Log.d(TAG, "Inserted new Planet, ID: " + p.getId());
-			Log.d(TAG, "Inserted new Planet, data-ID: " + p.getDataId());
-			Log.d(TAG, "Inserted new Planet, market-ID: " + p.getMarketId());
-		}
-
-		SpaceTrader.setController(ctrl);
-		SpaceTrader.setData(data);
+		// new Thread(new Runnable() {
+		//
+		// public void run() {
+		//
+		// mPresenter.storeNewGameData();
+		//
+		// try {
+		// Thread.sleep(10000);
+		// } catch (Exception e) {
+		// Log.e(TAG, e.getMessage());
+		// }
+		//
+		// // dismiss the progress dialog
+		// progressDialog.dismiss();
+		//
+		// }
+		// }).start();
 
 		Intent intent = new Intent(ConfigurationActivity.this,
 				MainScreenActivity.class);
 		intent.putExtra("New Game", true);
 		startActivity(intent);
-
 	}
 
 	public void onClick(View v) {
@@ -189,6 +157,11 @@ public class ConfigurationActivity extends AbstractActivity implements
 			break;
 		}
 
+	}
+
+	private void setDifficultyLevel(int lvl) {
+		TextView level = (TextView) findViewById(R.id.txtview_level);
+		level.setText(difficulties[lvl].toString());
 	}
 
 	public void onProgressChanged(SeekBar seekBar, int progress,
@@ -230,6 +203,55 @@ public class ConfigurationActivity extends AbstractActivity implements
 
 	}
 
+	public SeekBar getBarPilot() {
+		return (SeekBar) findViewById(R.id.bar_pilot);
+	}
+
+	public void setBarPilot(SeekBar barPilot) {
+		this.barPilot = barPilot;
+	}
+
+	public SeekBar getBarFighter() {
+		return (SeekBar) findViewById(R.id.bar_fighter);
+	}
+
+	public void setBarFighter(SeekBar barFighter) {
+		this.barFighter = barFighter;
+	}
+
+	public SeekBar getBarTrader() {
+		return (SeekBar) findViewById(R.id.bar_trader);
+	}
+
+	public void setBarTrader(SeekBar barTrader) {
+		this.barTrader = barTrader;
+	}
+
+	public SeekBar getBarEngineer() {
+		return (SeekBar) findViewById(R.id.bar_engineer);
+	}
+
+	public void setBarEngineer(SeekBar barEngineer) {
+		this.barEngineer = barEngineer;
+	}
+
+	public EditText getEditName() {
+		return (EditText) findViewById(R.id.edit_name);
+	}
+
+	public void setEditName(EditText editName) {
+		this.editName = editName;
+	}
+
+	public TextView getTxtViewLevel() {
+		return (TextView) this.findViewById(R.id.txtview_level);
+	}
+
+	public void setTxtViewLevel(TextView level) {
+		this.tvLevel = level;
+
+	}
+
 	@Override
 	protected void onStart() {
 		super.onStart();
@@ -252,6 +274,7 @@ public class ConfigurationActivity extends AbstractActivity implements
 	protected void onStop() {
 		super.onStop();
 		Log.d(TAG, "onStop called.");
+		finish();
 	}
 
 	@Override
@@ -264,5 +287,4 @@ public class ConfigurationActivity extends AbstractActivity implements
 	protected void onDestroy() {
 		super.onDestroy();
 	}
-
 }

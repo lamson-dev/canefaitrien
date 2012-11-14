@@ -11,45 +11,46 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center" >
+            android:gravity="center"
+            android:weightSum="100" >
 
             <TextView
-                android:id="@+id/TextView02"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="30"
+                android:gravity="center"
                 android:text="Name"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
-                android:id="@+id/TextView01"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="20"
+                android:gravity="center"
                 android:text="Buy Price"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="20"
+                android:gravity="center"
                 android:text="Sell Price"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
-                android:id="@+id/textView1"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="15"
+                android:gravity="center"
                 android:text="Cargo"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
-                android:id="@+id/TextView03"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="15"
+                android:gravity="center"
                 android:text="Stock"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
         </LinearLayout>
@@ -91,7 +92,6 @@
                 android:layout_weight="1" >
 
                 <TextView
-                    android:id="@+id/textView3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Money: $"
@@ -110,7 +110,6 @@
                 android:layout_weight="1" >
 
                 <TextView
-                    android:id="@+id/textView6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Cargo: "
