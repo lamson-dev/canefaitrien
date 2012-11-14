@@ -52,9 +52,9 @@ public final class R {
         public static final int good_sell_price=0x7f090035;
         public static final int good_stock=0x7f090037;
         public static final int imageView1=0x7f09001a;
-        public static final int menu_load=0x7f09003d;
-        public static final int menu_save=0x7f09003c;
-        public static final int menu_settings=0x7f09003b;
+        public static final int menu_load=0x7f09003e;
+        public static final int menu_save=0x7f09003d;
+        public static final int menu_settings=0x7f09003c;
         public static final int pt_engineer=0x7f090012;
         public static final int pt_fighter=0x7f09000c;
         public static final int pt_pilot=0x7f090009;
@@ -81,9 +81,10 @@ public final class R {
         public static final int textView9=0x7f09001f;
         public static final int tv_cargo=0x7f090032;
         public static final int tv_data=0x7f090017;
-        public static final int tv_entry_date=0x7f09003a;
         public static final int tv_entry_id=0x7f090038;
+        public static final int tv_entry_money=0x7f09003b;
         public static final int tv_entry_name=0x7f090039;
+        public static final int tv_entry_planet=0x7f09003a;
         public static final int tv_map_content=0x7f09002e;
         public static final int tv_money=0x7f090031;
         public static final int txtview_app_name=0x7f090022;

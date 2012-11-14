@@ -64,12 +64,15 @@ public class LoadGameActivity extends ListActivity {
 		String idCol = GameDataDao.Properties.Id.columnName;
 		String nameCol = GameDataDao.Properties.Name.columnName;
 		String dateCol = GameDataDao.Properties.Date.columnName;
+		String moneyCol = GameDataDao.Properties.Money.columnName;
+		String planetCol = GameDataDao.Properties.CurrentPlanet.columnName;
 
 		cursor = SpaceTrader.db.query(gameDataDao.getTablename(),
 				gameDataDao.getAllColumns(), null, null, null, null, null);
 
-		String[] from = { idCol, nameCol, dateCol };
-		int[] to = { R.id.tv_entry_id, R.id.tv_entry_name, R.id.tv_entry_date };
+		String[] from = { idCol, nameCol, planetCol, moneyCol };
+		int[] to = { R.id.tv_entry_id, R.id.tv_entry_name,
+				R.id.tv_entry_planet, R.id.tv_entry_money };
 
 		SimpleCursorAdapter adapter = new SimpleCursorAdapter(this,
 				R.layout.list_loadgame_data, cursor, from, to, 0);
