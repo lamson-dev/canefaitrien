@@ -55,10 +55,10 @@ public class GalaxyView extends View {
 			planetColor.setARGB(200, randomColor.nextInt(256),
 					randomColor.nextInt(256), randomColor.nextInt(256));
 			canvas.drawCircle(planets[i].getCoordinates().x,
-					planets[i].getCoordinates().y, planets[i].getSize(),
+					planets[i].getCoordinates().y, planets[i].getRadius(),
 					planetColor);
 
-			wordTest.setTextSize(planets[i].getSize());
+			wordTest.setTextSize(planets[i].getRadius());
 			canvas.drawText(planets[i].getName(), planets[i].getCoordinates().x, planets[i].getCoordinates().y, wordTest);
 			
 		}	

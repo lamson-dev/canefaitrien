@@ -1,4 +1,4 @@
-package other;
+package com.canefaitrien.spacetrader.models;
 /**
  * @author An Pham
  * @Date 11/07/12
@@ -6,11 +6,7 @@ package other;
  */
 import java.util.Random;
 
-import model.Ship;
-import model.ShipType;
-import model.TechLevel;
-import model.TradeGood;
-import controller.Controller;
+
 
 public class TraderEncounter implements Encounter {
 
@@ -24,7 +20,7 @@ public class TraderEncounter implements Encounter {
 	private int[] itemStock = new int[TradeGood.values().length];
 	private int[] itemBuyPrices = new int[TradeGood.values().length];
 	private int[] itemSellPrices = new int[TradeGood.values().length];
-	private TechLevel level = TechLevel.HI_TECH;;
+	private TechLevel level = TechLevel.HI_TECH;
 	
 	public TraderEncounter(Controller data) {
 		this.data = data;
@@ -44,7 +40,7 @@ public class TraderEncounter implements Encounter {
 		
 	}
 
-	@Override
+
 	public void encounter() {
 		// TODO Auto-generated method stub
 		
@@ -54,7 +50,7 @@ public class TraderEncounter implements Encounter {
 	 * false otherwise
 	 */
 	public boolean traderBattle() {
-		return ((data.getShip().getHullStrength() - type.getMaxHullStrength()) > 0);
+		return ((data.getShip().getHullStrength() - type.MAX_HULL_STRENGTH) > 0);
 	}
 	private int getBuyPrice(TradeGood good) {
 		return getPrice(good, good.MIN_TL_PRODUCE);

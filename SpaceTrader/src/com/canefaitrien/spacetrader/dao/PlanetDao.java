@@ -109,7 +109,7 @@ public class PlanetDao extends AbstractDao<Planet, Long> {
 			stmt.bindString(2, name);
 		}
 
-		Integer size = entity.getSize();
+		Integer size = entity.getRadius();
 		if (size != null) {
 			stmt.bindLong(3, size);
 		}
@@ -194,7 +194,7 @@ public class PlanetDao extends AbstractDao<Planet, Long> {
 				.getLong(offset + 0));
 		entity.setName(cursor.isNull(offset + 1) ? null : cursor
 				.getString(offset + 1));
-		entity.setSize(cursor.isNull(offset + 2) ? null : cursor
+		entity.setRadius(cursor.isNull(offset + 2) ? null : cursor
 				.getInt(offset + 2));
 		entity.setXCoordinate(cursor.isNull(offset + 3) ? null : cursor
 				.getInt(offset + 3));

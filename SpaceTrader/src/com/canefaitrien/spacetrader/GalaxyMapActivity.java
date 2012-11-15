@@ -68,6 +68,21 @@ public class GalaxyMapActivity extends AbstractActivity implements OnTouchListen
 	    alert.show();
 	}
 
+	public Dialog onCreateDialog(Bundle savedInstanceState) {
+	    AlertDialog.Builder builder = new AlertDialog.Builder(this);//getActivity());
+	    builder.setTitle("Event");
+	    String[] strs = new String[2];
+	    strs[0] = "Option";
+	    strs[1] = "hei";
+	    builder.setItems(strs, new DialogInterface.OnClickListener() {
+	               public void onClick(DialogInterface dialog, int which) {
+	               // The 'which' argument contains the index position
+	               // of the selected item
+	           }
+	    });
+	    return builder.create();
+	}
+	
 	public boolean onTouch(View v, MotionEvent e) {
 		if (e.getAction() == MotionEvent.ACTION_DOWN) {
 			Log.d("Galaxy", "ActionDown" +  (int)e.getRawX() + " " +  (int)e.getRawY());

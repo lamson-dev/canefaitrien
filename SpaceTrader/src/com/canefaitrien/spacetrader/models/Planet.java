@@ -30,7 +30,7 @@ public class Planet {
 	// private String situation;
 	// private Integer xOffset;
 	// private Integer yOffset;
-	private int size;
+	private int radius;
 	private Point coordinates;
 	private TechLevel level;
 	private Situation situation;
@@ -60,12 +60,12 @@ public class Planet {
 	/**
 	 * Constructor for loading Planet
 	 */
-	public Planet(Long id, String name, Integer size, Integer xCoordinate,
+	public Planet(Long id, String name, Integer radius, Integer xCoordinate,
 			Integer yCoordinate, String techLevel, String situation,
 			Integer xOffset, Integer yOffset, long dataId, Long marketId) {
 		this.id = id;
 		this.name = name;
-		this.size = size;
+		this.radius = radius;
 		this.coordinates = new Point(xCoordinate, yCoordinate);
 		this.level = TechLevel.fromString(techLevel);
 		this.situation = Situation.fromString(situation);
@@ -87,8 +87,8 @@ public class Planet {
 	public Planet(String name, Point location, TechLevel level,
 			Situation situation, Marketplace marketplace) {
 
-		this.size = (int) (Math.random() * 13) + 10;// for now each planet will
-		// randomly generate a size (radius)
+		this.radius = (int) (Math.random() * 13) + 10;// for now each planet will
+		// randomly generate a radius (radius)
 		this.name = name;
 		this.coordinates = location;
 		this.level = level;
@@ -125,14 +125,14 @@ public class Planet {
 	public String toString() {
 		return "Planet " + name + " TL " + level + " Sit " + situation
 				+ " at X = " + coordinates.x + " Y = " + coordinates.y
-				+ " of Size " + size + "\n";
+				+ " of radius " + radius + "\n";
 	}
 
 	public boolean isClicked(Point point) {
 		// so it looks like android doesn't have that rectangle thing
-		// This is assuming size is the diameter. Correct this if I'm wrong
-		if (point.x > coordinates.x && point.x < coordinates.x + size
-				&& point.y > coordinates.y && point.y < coordinates.y + size) {
+		// This is assuming radius is the diameter. Correct this if I'm wrong
+		if (point.x > coordinates.x - radius && point.x < coordinates.x + radius
+				&& point.y > coordinates.y - radius && point.y < coordinates.y + radius) {
 			return true;
 		}
 		return false;
@@ -154,12 +154,12 @@ public class Planet {
 		this.name = name;
 	}
 
-	public Integer getSize() {
-		return size;
+	public Integer getRadius() {
+		return radius;
 	}
 
-	public void setSize(Integer size) {
-		this.size = size;
+	public void setRadius(Integer radius) {
+		this.radius = radius;
 	}
 
 	public Point getCoordinates() {
