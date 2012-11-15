@@ -21,10 +21,10 @@ public class TraderEncounter implements Encounter {
 	private static Random rand = new Random();
 
 	// Cargo hold info
-	private int[] itemStock;
-	private int[] itemBuyPrices;
-	private int[] itemSellPrices;
-	private TechLevel level;
+	private int[] itemStock = new int[TradeGood.values().length];
+	private int[] itemBuyPrices = new int[TradeGood.values().length];
+	private int[] itemSellPrices = new int[TradeGood.values().length];
+	private TechLevel level = TechLevel.HI_TECH;;
 	
 	public TraderEncounter(Controller data) {
 		this.data = data;

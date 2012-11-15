@@ -212,5 +212,8 @@ public class Ship {
 	public void setGadgets(String gadgets) {
 		this.gadgets = gadgets;
 	}
+	public int getMaxSpeed() {
+		return type.MAX_DISTANCE;
+	}
 
 }

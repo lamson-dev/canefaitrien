@@ -17,8 +17,8 @@ public class Universe {
 	// Universe constants
 	public static final int WIDTH = 720, HEIGHT = 1280, SHUFFLE_AMT = 1000;
 	public static final int BORDER = 10; // Min distance from edge of screen
-	public static final int MIN_DISTANCE = 10; // Min distance planet must be from another planet
-	public static final int TOTAL_PLANETS = 100; // Total planets to create
+	public static final int MIN_DISTANCE = 40; // Min distance planet must be from another planet
+	public static final int TOTAL_PLANETS = 50; // Total planets to create
 	private static Random rand = new Random();
 	
 	// Array of planet names

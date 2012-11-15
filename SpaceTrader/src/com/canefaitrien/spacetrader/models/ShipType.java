@@ -1,4 +1,8 @@
 package com.canefaitrien.spacetrader.models;
+
+import java.util.Random;
+
+
 /**
  * Create Ship type
  * 
@@ -63,5 +67,12 @@ public enum ShipType {
 	
 	public String toString() {
 		return NAME;
+	}
+	public int getMaxSpeed() {
+		return MAX_DISTANCE;
+	}
+	public static ShipType getAShip() {
+		int pick = new Random().nextInt(ShipType.values().length);
+	    return ShipType.values()[pick];
 	}
 }

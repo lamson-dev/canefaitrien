@@ -2,6 +2,7 @@ package com.canefaitrien.spacetrader.presenters;
 
 import java.util.Date;
 
+import android.graphics.Point;
 import android.util.Log;
 
 import com.canefaitrien.spacetrader.SpaceTrader;
@@ -110,4 +111,5 @@ public class MainScreenPresenter {
 		}
 
 	}
+	
 }
