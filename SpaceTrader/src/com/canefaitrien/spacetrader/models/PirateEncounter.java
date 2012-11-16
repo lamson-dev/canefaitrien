@@ -1,6 +1,8 @@
 package com.canefaitrien.spacetrader.models;
 import java.util.Random;
 
+import android.widget.Toast;
+
 
 /**
  * Pirate Encounter Handler

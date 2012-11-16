@@ -134,16 +134,6 @@ public class PlanetDao extends AbstractDao<Planet, Long> {
 			stmt.bindString(7, situation);
 		}
 
-		Integer xOffset = entity.getXOffset();
-		if (xOffset != null) {
-			stmt.bindLong(8, xOffset);
-		}
-
-		Integer yOffset = entity.getYOffset();
-		if (yOffset != null) {
-			stmt.bindLong(9, yOffset);
-		}
-
 		Long dataId = entity.getDataId();
 		if (dataId != null) {
 			stmt.bindLong(10, dataId);
@@ -204,10 +194,6 @@ public class PlanetDao extends AbstractDao<Planet, Long> {
 				.getString(offset + 5));
 		entity.setSituation(cursor.isNull(offset + 6) ? null : cursor
 				.getString(offset + 6));
-		entity.setXOffset(cursor.isNull(offset + 7) ? null : cursor
-				.getInt(offset + 7));
-		entity.setYOffset(cursor.isNull(offset + 8) ? null : cursor
-				.getInt(offset + 8));
 		entity.setDataId(cursor.isNull(offset + 9) ? null : cursor
 				.getLong(offset + 9));
 		entity.setMarketId(cursor.isNull(offset + 10) ? null : cursor

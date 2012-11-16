@@ -17,7 +17,11 @@ public enum EncounterType {
 
 	
 	public static EncounterType getEncounterType() {
-		int pick = new Random().nextInt(EncounterType.values().length);
-	    return EncounterType.values()[pick];
+		if(new Random().nextDouble() > .65){
+			int pick = new Random().nextInt(EncounterType.values().length-1);
+		    return EncounterType.values()[pick];
+		}else{
+			return EncounterType.NOTHING;
+		}
 	}
 }

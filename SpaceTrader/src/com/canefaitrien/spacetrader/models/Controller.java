@@ -90,11 +90,9 @@ public class Controller {
 								// max distance constants to be more reasonable
 			throw new Exception("That planet is too far, captain!");
 		} else if (currentPlanet.distance(destination) > ship.getFuel()
-				* Ship.MPG) { // if
-								// not
-								// enough
-								// fuel
+				* Ship.MPG) { // if not enough fuel
 			throw new Exception("We don't have enough fuel, captain!");
+			
 		} else {
 			ship.setFuel(ship.getFuel() - currentPlanet.distance(destination)
 					/ Ship.MPG);

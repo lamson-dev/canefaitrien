@@ -1,7 +1,9 @@
 package com.canefaitrien.spacetrader.models;
 
+import java.util.Random;
+
+import android.graphics.Color;
 import android.graphics.Point;
-import android.util.Log;
 
 import com.canefaitrien.spacetrader.dao.DaoSession;
 import com.canefaitrien.spacetrader.dao.MarketplaceDao;
@@ -23,23 +25,16 @@ public class Planet {
 	// Instance variables
 	private Long id;
 	private String name;
-	// private Integer size;
-	// private Integer xCoordinate;
-	// private Integer yCoordinate;
-	// private String techLevel;
-	// private String situation;
-	// private Integer xOffset;
-	// private Integer yOffset;
 	private int radius;
 	private Point coordinates;
 	private TechLevel level;
 	private Situation situation;
+	private int planetColor;
 
 	private long dataId;
 	private Long marketId;
-
-	// Daniel doing testing
-	public int xOffset, yOffset;
+	
+	Random randomColor = new Random();
 
 	/** Used to resolve relations */
 	private transient DaoSession daoSession;
@@ -69,10 +64,9 @@ public class Planet {
 		this.coordinates = new Point(xCoordinate, yCoordinate);
 		this.level = TechLevel.fromString(techLevel);
 		this.situation = Situation.fromString(situation);
-		this.xOffset = xOffset;
-		this.yOffset = yOffset;
 		this.dataId = dataId;
 		this.marketId = marketId;
+		this.planetColor = Color.argb(255, randomColor.nextInt(256), randomColor.nextInt(256), randomColor.nextInt(256));
 	}
 
 	/**
@@ -86,18 +80,17 @@ public class Planet {
 
 	public Planet(String name, Point location, TechLevel level,
 			Situation situation, Marketplace marketplace) {
-
-		this.radius = (int) (Math.random() * 13) + 10;// for now each planet will
+		if(new Random().nextDouble()<.95){
+			this.radius = (int) (Math.random() * 15) + 15;// for now each planet will
+		}else{
+			this.radius = (int) (Math.random() * 15) + 75;;
+		}
 		// randomly generate a radius (radius)
 		this.name = name;
 		this.coordinates = location;
 		this.level = level;
 		this.situation = situation;
 		this.marketplace = marketplace;
-
-		// daniel doing testing
-		xOffset = 0;
-		yOffset = 0;
 	}
 
 	/**
@@ -229,6 +222,9 @@ public class Planet {
 	public Long getMarketId() {
 		return marketId;
 	}
+	public int getColor(){
+		return planetColor;
+	}
 
 	public void setMarketId(Long marketId) {
 		this.marketId = marketId;
@@ -296,21 +292,5 @@ public class Planet {
 			throw new DaoException("Entity is detached from DAO context");
 		}
 		myDao.refresh(this);
-	}
-
-	public Integer getXOffset() {
-		return xOffset;
-	}
-
-	public void setXOffset(Integer xOffset) {
-		this.xOffset = xOffset;
-	}
-
-	public Integer getYOffset() {
-		return yOffset;
-	}
-
-	public void setYOffset(Integer yOffset) {
-		this.yOffset = yOffset;
 	}
 }

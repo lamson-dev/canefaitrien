@@ -7,6 +7,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 
 import com.canefaitrien.spacetrader.interfaces.IMainScreenView;
+import com.canefaitrien.spacetrader.models.Ship;
 import com.canefaitrien.spacetrader.presenters.MainScreenPresenter;
 
 public class HubActivity extends Activity implements OnClickListener,
@@ -37,7 +38,9 @@ public class HubActivity extends Activity implements OnClickListener,
 			mPresenter.saveData();
 			break;
 		case R.id.btn_refill:
-			// refill fuel or something
+			//note to subtract money
+			Ship ship = SpaceTrader.getController().getShip();
+			ship.setFuel(ship.getType().MAX_DISTANCE);//change this to not be distance
 			break;
 		}
 

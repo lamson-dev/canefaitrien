@@ -71,8 +71,8 @@ public class MainMenuActivity extends AbstractActivity {
 	// opens the database to view saved games
 	private void addListenerLoadGameButton() {
 		button = (Button) findViewById(R.id.btn_loadgame);
-		button.setTypeface(font);
-
+		button.setTypeface(Typeface.createFromAsset(getAssets(),
+				"fonts/Street Corner.ttf"));
 		button.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				track.release();

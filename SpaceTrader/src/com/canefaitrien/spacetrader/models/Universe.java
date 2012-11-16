@@ -15,9 +15,9 @@ import android.graphics.Point;
 public class Universe {
 	
 	// Universe constants
-	public static final int WIDTH = 720, HEIGHT = 1280, SHUFFLE_AMT = 1000;
-	public static final int BORDER = 10; // Min distance from edge of screen
-	public static final int MIN_DISTANCE = 48; // Min distance planet must be from another planet
+	public static final int WIDTH = 720, HEIGHT = 1150, SHUFFLE_AMT = 1000;
+	public static final int BORDER = 20; // Min distance from edge of screen
+	public static final int MIN_DISTANCE = 5; // Min distance planet must be from another planet
 	public static final int TOTAL_PLANETS = 50; // Total planets to create
 	private static Random rand = new Random();
 	
@@ -91,7 +91,7 @@ public class Universe {
 				// compare current planet distance to all other planets
 				for(int j = i + 1; j < planets.length; j++) {
 					// if too close, create new location
-					if (current.distance(planets[j]) < MIN_DISTANCE) {
+					if (current.distance(planets[j]) < MIN_DISTANCE+current.getRadius()+planets[j].getRadius()) {
 						current.setCoordinates(new Point(rand.nextInt(WIDTH - 2*BORDER) + BORDER, rand.nextInt(HEIGHT - 2*BORDER) + BORDER));
 						movedPlanet = true;
 						break;

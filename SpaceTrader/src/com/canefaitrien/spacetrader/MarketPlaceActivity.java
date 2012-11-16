@@ -103,7 +103,7 @@ public class MarketPlaceActivity extends ListActivity implements
 				mPresenter.buyItem(itemPos);
 			} catch (Exception e) {
 				Log.e(TAG, e.toString());
-				Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
+				Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
 			}
 			break;
 		case R.id.btn_sell:
@@ -111,7 +111,7 @@ public class MarketPlaceActivity extends ListActivity implements
 				mPresenter.sellItem(itemPos);
 			} catch (Exception e) {
 				Log.e(TAG, e.toString());
-				Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
+				Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
 			}
 			break;
 		}
