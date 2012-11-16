@@ -76,7 +76,6 @@ public class MainMenuActivity extends AbstractActivity {
 		button.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				track.release();
-
 				Intent intent = new Intent(MainMenuActivity.this,
 						LoadGameActivity.class);
 				startActivity(intent);
