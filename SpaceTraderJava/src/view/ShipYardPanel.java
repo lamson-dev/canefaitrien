@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 
 import model.Ship;
 import model.ShipType;
+import model.ShipYard;
 
 import controller.Controller;
 
@@ -57,8 +58,23 @@ public class ShipYardPanel extends JPanel {
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			// TODO Auto-generated method stub
-			
+			panel.removeAll();
+			nameLabel = new JLabel("Ship " + data.getShip().getType());
+			panel.add(nameLabel);
+			JLabel playerLabel = new JLabel( data.getPlayer().getName());
+			panel.add(playerLabel);
+			moneyLabel = new JLabel("$" + data.getMoney());
+			panel.add(moneyLabel);
+			JButton weaponBtn = new JButton("Upgrade Weapon");
+			weaponBtn.addActionListener(new upgradeBtnListener());
+			panel.add(weaponBtn);
+			JButton shieldBtn = new JButton("Upgrade Shield");
+			shieldBtn.addActionListener(new newBtnListener());
+			panel.add(shieldBtn);
+			JButton gadgetBtn = new JButton("Upgrade Gadget");
+			gadgetBtn.addActionListener(new newBtnListener());
+			panel.add(gadgetBtn);
+			revalidate();
 		}
 		
 	}
@@ -103,15 +119,8 @@ public class ShipYardPanel extends JPanel {
 						    JOptionPane.WARNING_MESSAGE);
 				}
 				else {
-					// Take all goods
-					int[] cargo = data.getShip().getCargo();
-					for (int i = 0; i < cargo.length; i++)
-						cargo[i] = 0;
-
-					Ship newShip = new Ship(type);
-					newShip.setWeapons(data.getShip().getWeaponList());
-
-					data.setShip(newShip);
+					ShipYard shipYard = new ShipYard(data);
+					shipYard.buyShip(type);
 
 					JOptionPane.showMessageDialog(frame,
 							"Ship Transferred. You are now using" + type,
@@ -126,6 +135,7 @@ public class ShipYardPanel extends JPanel {
 		
 	}
 	
+	// Set up the yard view
 	public void setUpBuyShipView(JPanel panel) {
 		panel.removeAll();
 		panel.setLayout(new GridLayout(0, 3));

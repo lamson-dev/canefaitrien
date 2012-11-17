@@ -2,6 +2,8 @@ package model;
 
 import java.util.Random;
 
+import controller.Controller;
+
 
 /**
  * Class for handling the amounts and prices of gadget a planet can have.  Also 
@@ -27,6 +29,7 @@ public class ShipYard {
 	private int[] itemSellPrices;
 	private TechLevel level;
 	private Situation situation;
+	private Controller data;
 	
 	/**
 	 * constructor
@@ -50,6 +53,9 @@ public class ShipYard {
 		updateStock();
 	}
 
+	public ShipYard(Controller data) {
+		this.data = data;
+	}
 	/**
 	 * Dock method to be called by Planet upon traveling to that Planet
 	 */
@@ -109,87 +115,17 @@ public class ShipYard {
 		return itemSellPrices;
 	}
 
-	public String[] getBuyView(Ship ship) {
-		String[] ret = new String[itemStock.length];
-		int[] cargo = ship.getCargo();
-		for (int i = 0; i < itemStock.length; i++) {
-			ret[i] = goods[i].toString() + ": Price " + itemBuyPrices[i]
-					+ ", Available:" + itemStock[i] + ", In Cargo " + cargo[i];
-		}
-		return ret;
+
+	public void buyShip(ShipType type) {
+		// Take all goods
+		int[] cargo = data.getShip().getCargo();
+		for (int i = 0; i < cargo.length; i++)
+			cargo[i] = 0;
+
+		Ship newShip = new Ship(type);
+		newShip.setWeapons(data.getShip().getWeaponList());
+
+		data.setShip(newShip);
 	}
 
-	public String[] getSellView(Ship ship) {
-		String[] ret = new String[itemStock.length];
-		int[] cargo = ship.getCargo();
-		for (int i = 0; i < itemStock.length; i++) {
-			ret[i] = goods[i].toString() + ": Price " + itemSellPrices[i]
-					+ ", Available:" + itemStock[i] + ", In Cargo " + cargo[i];
-		}
-		return ret;
-	}
-	
-	public String[][] getView(Ship ship) {
-		String[][] ret = new String[itemStock.length][5];
-		int[] cargo = ship.getCargo();
-		for(int i = 0; i < ret.length; i++) {
-			ret[i][0] = goods[i].toString();
-			ret[i][1] = itemBuyPrices[i] + "";
-			ret[i][2] = itemSellPrices[i] + "";
-			ret[i][3] = itemStock[i] + "";
-			ret[i][4] = cargo[i] + "";
-		}
-		return ret;
-	}
-
-	public String arrayToString(int[] array) {
-		String ret = "[";
-		for (int i : array) {
-			ret += i + " ";
-		}
-		return ret + "]\n";
-	}
-
-	/**
-	 * Extra method for selling and buying trade good Added by apham9 on October
-	 * 29th, 2012
-	 * 
-	 */
-	// public void buyGood(TradeGood good){
-	// if (itemStock[good.ordinal()] == 0) {
-	// // This is not in stock
-	// // Throw exceptions
-	// }
-	// else {
-	// itemStock[good.ordinal()]--;
-	// }
-	// }
-	// public void sellGood(TradeGood good){
-	// itemStock[good.ordinal()]++;
-	// }
-
-	public int buyGood(TradeGood good, Ship ship, int money) throws Exception {
-		if (itemBuyPrices[good.ordinal()] > money) {
-			throw new Exception ("We don't have enough money, captain!");
-		} else if (itemStock[good.ordinal()] == 0) {
-			throw new Exception("They don't have that good, captain!");
-		} else {
-			ship.addGood(good);// throw cargo full exception
-			itemStock[good.ordinal()]--;
-			return money - itemBuyPrices[good.ordinal()];
-		}
-	}
-
-	/**
-	 * Sell a good 
-	 */
-	public int sellGood(TradeGood good, Ship ship, int money) throws Exception {
-		if (itemSellPrices[good.ordinal()] == 0) {
-			throw new Exception("They don't need that good, captain!");
-		} else {
-			ship.removeGood(good);
-			itemStock[good.ordinal()]++;
-			return money + itemSellPrices[good.ordinal()];
-		}
-	}
 }
