@@ -1,5 +1,8 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Ship class for holding info on the ship
  * 
@@ -14,7 +17,7 @@ public class Ship {
 	private int currentCargoHold;
 	private int[] cargo;
 	private int fuel;
-//	private Weapons[] weapons;
+	private List<Weapon> weapons = new ArrayList<Weapon>();
 //	private Shield[] shields;
 //	private Gadget[] gadgets;
 	
@@ -89,5 +92,31 @@ public class Ship {
 	}
 	public int getMaxSpeed() {
 		return type.getMaxSpeed();
+	}
+	
+	// These are added by An Pham on 11/17/12 for extra credit on gadget and shields
+	/**
+	 * Adds a weapon to weapon slot
+	 * 
+	 * @param weapon to be added
+	 * @throws Exception if no empty slot left
+	 */
+	public void addWeapon(Weapon weapon) throws Exception {
+		if (weapons.size() == type.MAX_WEAPONS_SLOTS) {
+			throw new Exception("No more weapon slot left, captain!");
+		} else {
+			weapons.add(weapon);
+		}
+	}
+	/**
+	 * this is used to transfer weapons to new ship. Do not call these functions elsewhere!
+	 * @param list
+	 */
+	public void setWeapons(List<Weapon> list) {
+		this.weapons = list;
+	}
+
+	public List<Weapon> getWeaponList() {
+		return weapons;
 	}
 }
