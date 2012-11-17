@@ -39,8 +39,15 @@ public class Weapon implements Equipment{
 		
 	};
 	
+	private WeaponType weaponType;
+	
 	@Override
 	public void addToShip(Ship s) {
 		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public int getBasePrice() {
+		return weaponType.getBasePrice();
 	}
 }

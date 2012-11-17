@@ -9,4 +9,5 @@ package model;
 public interface Equipment {
 	// Add equipment to ship
 	public void addToShip(Ship s);
+	public int getBasePrice();
 }
