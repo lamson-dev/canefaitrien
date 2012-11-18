@@ -34,7 +34,7 @@ public class Planet {
 
 	private long dataId;
 	private Long marketId;
-	
+
 	Random randomColor = new Random();
 
 	/** Used to resolve relations */
@@ -67,7 +67,8 @@ public class Planet {
 		this.situation = Situation.fromString(situation);
 		this.dataId = dataId;
 		this.marketId = marketId;
-		this.planetColor = Color.argb(255, randomColor.nextInt(256), randomColor.nextInt(256), randomColor.nextInt(256));
+		this.planetColor = Color.argb(255, randomColor.nextInt(256),
+				randomColor.nextInt(256), randomColor.nextInt(256));
 	}
 
 	/**
@@ -90,11 +91,19 @@ public class Planet {
 	 */
 	public Planet(String name, Point location, TechLevel level,
 			Situation situation, Marketplace marketplace) {
+<<<<<<< HEAD
 		// randomly generate a radius, occasionally making a giant planet.
 		if(new Random().nextDouble()<.98){
 			this.radius = (int) (Math.random() * 15) + 15;// for now each planet will
 		}else{
 			this.radius = (int) (Math.random() * 15) + 60;;
+=======
+		if (new Random().nextDouble() < .95) {
+			this.radius = (int) (Math.random() * 15) + 15;// for now each planet
+															// will
+		} else {
+			this.radius = (int) (Math.random() * 15) + 75;
+>>>>>>> 10120ef862176b786fae659d28a3e0eec7c32ef8
 		}
 		this.name = name;
 		this.coordinates = location;
@@ -144,8 +153,10 @@ public class Planet {
 	public boolean isClicked(Point point) {
 		// so it looks like android doesn't have that rectangle thing
 		// This is assuming radius is the diameter. Correct this if I'm wrong
-		if (point.x > coordinates.x - radius && point.x < coordinates.x + radius
-				&& point.y > coordinates.y - radius && point.y < coordinates.y + radius) {
+		if (point.x > coordinates.x - radius
+				&& point.x < coordinates.x + radius
+				&& point.y > coordinates.y - radius
+				&& point.y < coordinates.y + radius) {
 			return true;
 		}
 		return false;
@@ -246,7 +257,8 @@ public class Planet {
 	public Long getMarketId() {
 		return marketId;
 	}
-	public int getColor(){
+
+	public int getColor() {
 		return planetColor;
 	}
 

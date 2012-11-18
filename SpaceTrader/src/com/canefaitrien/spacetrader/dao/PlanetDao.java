@@ -24,8 +24,6 @@ import de.greenrobot.dao.SqlUtils;
  */
 public class PlanetDao extends AbstractDao<Planet, Long> {
 
-	private static final String TAG = "PlanetDao";
-
 	public static final String TABLENAME = "PLANETS";
 
 	/**

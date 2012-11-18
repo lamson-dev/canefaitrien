@@ -2,16 +2,17 @@ package com.canefaitrien.spacetrader;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.canefaitrien.spacetrader.models.Controller;
-import com.canefaitrien.spacetrader.models.GameData;
-import com.canefaitrien.spacetrader.utils.AbstractActivity;
+import com.canefaitrien.spacetrader.utils.MusicManager;
 
-public class InfoActivity extends AbstractActivity {
+public class InfoActivity extends RootActivity {
 
 	private static final String TAG = "Info";
 	private Controller data;
+	private boolean continueMusic;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -20,7 +21,7 @@ public class InfoActivity extends AbstractActivity {
 
 		data = SpaceTrader.getController();
 		Log.d(TAG, "loaded data");
-
+		setFont();
 		populateData();
 	}
 
@@ -40,21 +41,39 @@ public class InfoActivity extends AbstractActivity {
 		TextView currentPlanet = (TextView) findViewById(R.id.textView10);
 		TextView money = (TextView) findViewById(R.id.textView11);
 
-		currentPlanet.setText("Current planet: "
-				+ data.getLocation().getName());
+		currentPlanet
+				.setText("Current planet: " + data.getLocation().getName());
 		money.setText("Money: $" + String.valueOf(data.getMoney()));
 	}
 
+	private void setFont() {
+		ViewGroup activityViewGroup = (ViewGroup) findViewById(
+				android.R.id.content).getRootView();
+		setAppFont(activityViewGroup, appFont);
+	}
+
+	// @Override
+	// public void onBackPressed() {
+	// super.onBackPressed();
+	// continueMusic = true;
+	// }
+
 	@Override
 	protected void onPause() {
-		Log.d(TAG, "onPause called.");
 		super.onPause();
+		Log.d(TAG, "onPause called.");
+		if (!continueMusic) {
+			MusicManager.pause();
+		}
 	}
 
 	@Override
 	protected void onResume() {
-		Log.d(TAG, "onResume called.");
 		super.onResume();
+		Log.d(TAG, "onResume called.");
+		continueMusic = true;
+		MusicManager.start(this, MusicManager.MUSIC_GAME);
+
 		populateData();
 	}
 

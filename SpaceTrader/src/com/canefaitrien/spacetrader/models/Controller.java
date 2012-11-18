@@ -1,5 +1,7 @@
 package com.canefaitrien.spacetrader.models;
 
+import android.util.Log;
+
 /**
  * Controller class which allows interaction between the Model and the View
  * 
@@ -8,6 +10,8 @@ package com.canefaitrien.spacetrader.models;
  */
 
 public class Controller {
+	
+	private static final String TAG = "Controller";
 
 	// Controller constants
 	public static enum Difficulty {
@@ -97,6 +101,7 @@ public class Controller {
 			ship.setFuel(ship.getFuel() - currentPlanet.distance(destination)
 					/ Ship.MPG);
 			currentPlanet = destination;
+			Log.d(TAG, currentPlanet.getName() + "/" + destination.getName());
 			currentPlanet.dock(++turn); // update turn and dock to update
 										// marketplace
 		}

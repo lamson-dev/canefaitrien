@@ -1,40 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="horizontal"
+    android:padding="@dimen/m10dp"
     android:weightSum="100" >
 
     <TextView
         android:id="@+id/tv_entry_id"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:padding="@dimen/m20dp" />
+        android:layout_weight="5"
+        android:gravity="center" />
 
     <TextView
         android:id="@+id/tv_entry_name"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:padding="@dimen/m20dp" />
+        android:layout_weight="25"
+        android:gravity="center" />
 
     <TextView
         android:id="@+id/tv_entry_planet"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:padding="@dimen/m20dp" />
+        android:layout_weight="25"
+        android:gravity="center" />
 
     <TextView
         android:id="@+id/tv_entry_money"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:padding="@dimen/m20dp" />
-    <!--
+        android:layout_weight="15"
+        android:gravity="center" />
+
     <TextView
         android:id="@+id/tv_entry_date"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:padding="@dimen/m20dp" />
-    -->
-
+        android:layout_weight="30"
+        android:gravity="center" />
 
 </LinearLayout>

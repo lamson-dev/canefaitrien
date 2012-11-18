@@ -119,4 +119,9 @@ public class Controller {
 	public void setMoney(int money){
 		this.money = money;
 	}
+	// This is used to buy new ship.
+	// Do not call this method elsewhere.
+	public void setShip(Ship s) {
+		this.ship = s;
+	}
 }

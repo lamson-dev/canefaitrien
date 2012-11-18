@@ -1,7 +1,6 @@
 package com.canefaitrien.spacetrader.models;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -78,7 +77,7 @@ public class Marketplace implements GameConstants {
 		this.itemBuyPrices = itemBuyPrices;
 		this.itemSellPrices = itemSellPrices;
 		this.level = level;
-		this.situation = situation;
+		this.setSituation(situation);
 	}
 
 	/**
@@ -280,6 +279,14 @@ public class Marketplace implements GameConstants {
 			}
 			this.itemSellPrices = sellPrices;
 		}
+	}
+
+	public Situation getSituation() {
+		return situation;
+	}
+
+	public void setSituation(Situation situation) {
+		this.situation = situation;
 	}
 
 }

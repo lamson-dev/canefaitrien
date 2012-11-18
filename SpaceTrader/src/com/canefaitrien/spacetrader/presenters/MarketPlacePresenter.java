@@ -4,12 +4,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import android.util.Log;
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.SimpleAdapter;
+import android.widget.TextView;
 
+import com.canefaitrien.spacetrader.R;
+import com.canefaitrien.spacetrader.RootActivity;
 import com.canefaitrien.spacetrader.SpaceTrader;
 import com.canefaitrien.spacetrader.interfaces.IMarketPlaceView;
 import com.canefaitrien.spacetrader.models.Controller;
-import com.canefaitrien.spacetrader.models.GameData;
 import com.canefaitrien.spacetrader.models.Marketplace;
 import com.canefaitrien.spacetrader.models.TradeGood;
 
@@ -23,12 +29,12 @@ public class MarketPlacePresenter {
 	public MarketPlacePresenter(IMarketPlaceView view) {
 		mView = view;
 		controller = SpaceTrader.getController();
-		mMarket = controller.getLocation().getMarketplace1();
 	}
 
 	public List<HashMap<String, String>> populateStock(
 			List<HashMap<String, String>> list) {
-		Log.d(TAG, "null here");
+
+		mMarket = controller.getLocation().getMarketplace1();
 		TradeGood[] goods = TradeGood.values();
 
 		list = new ArrayList<HashMap<String, String>>();
@@ -50,6 +56,55 @@ public class MarketPlacePresenter {
 
 	}
 
+	public void displayMarket() {
+		updateStockList(mView.getStockList());
+
+		String[] from = new String[] { "name", "price", "sellprice", "owned",
+				"stock" };
+		int[] to = new int[] { R.id.good_name, R.id.good_price,
+				R.id.good_sell_price, R.id.good_owned, R.id.good_stock };
+		// SimpleAdapter adapter = new SimpleAdapter(mView.getContext(),
+		// mView.getStockList(), R.layout.list_item_market, from, to);
+
+		final List<HashMap<String, String>> entries = mView.getStockList();
+		SimpleAdapter adapter = new SimpleAdapter(mView.getContext(), entries,
+				R.layout.list_item_market, from, to) {
+			@Override
+			public View getView(int pos, View convertView, ViewGroup parent) {
+				View v = convertView;
+				if (v == null) {
+					LayoutInflater vi = (LayoutInflater) mView
+							.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+					v = vi.inflate(R.layout.list_item_market, null);
+				}
+
+				TextView tv;
+				tv = (TextView) v.findViewById(R.id.good_name);
+				tv.setText(entries.get(pos).get("name"));
+				tv.setTypeface(RootActivity.appFont);
+				tv = (TextView) v.findViewById(R.id.good_price);
+				tv.setText(entries.get(pos).get("price"));
+				tv.setTypeface(RootActivity.appFont);
+				tv = (TextView) v.findViewById(R.id.good_sell_price);
+				tv.setText(entries.get(pos).get("sellprice"));
+				tv.setTypeface(RootActivity.appFont);
+				tv = (TextView) v.findViewById(R.id.good_owned);
+				tv.setText(entries.get(pos).get("owned"));
+				tv.setTypeface(RootActivity.appFont);
+				tv = (TextView) v.findViewById(R.id.good_stock);
+				tv.setText(entries.get(pos).get("stock"));
+				tv.setTypeface(RootActivity.appFont);
+
+				// RootActivity.setAppFont(parent, RootActivity.appFont);
+				return v;
+			}
+
+		};
+
+		mView.setListAdapter(adapter);
+
+	}
+
 	public void buyItem(int pos) throws Exception {
 		controller.buyGood(TradeGood.values()[pos]);
 		updateStockList(mView.getStockList());
@@ -66,8 +121,9 @@ public class MarketPlacePresenter {
 
 	public void showOtherInfo() {
 		mView.displayMoney(String.valueOf(controller.getMoney()));
-		mView.displayCargo(String
-				.valueOf(controller.getShip().getCargo().length));
+		mView.displayCargo(mMarket.getId() + "/"
+				+ controller.getLocation().getMarketId() + "/"
+				+ controller.getLocation().getName());
 	}
 
 	// dynamically add stuff to android layout

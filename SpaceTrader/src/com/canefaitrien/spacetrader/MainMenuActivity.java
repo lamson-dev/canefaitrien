@@ -1,141 +1,110 @@
 package com.canefaitrien.spacetrader;
 
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Typeface;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 
-import com.canefaitrien.spacetrader.dao.DaoMaster;
-import com.canefaitrien.spacetrader.dao.DaoMaster.DevOpenHelper;
-import com.canefaitrien.spacetrader.utils.AbstractActivity;
+import com.canefaitrien.spacetrader.utils.MusicManager;
 
-public class MainMenuActivity extends AbstractActivity {
+public class MainMenuActivity extends RootActivity implements OnClickListener {
 
 	private static final String TAG = "MainMenu";
-	private Button button;
-	Typeface font;
-	MediaPlayer track; // background music
+	private boolean continueMusic;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_mainmenu);
-		addSound();
-		addListenerNewGameButton();
-		addListenerLoadGameButton();
-		addListenerDebugButton();
+		init();
+	}
 
-		TextView txt = (TextView) findViewById(R.id.txtview_app_name);
-		font = Typeface.createFromAsset(getAssets(), "fonts/Street Corner.ttf");
-		txt.setTypeface(font);
+	public void onClick(View v) {
 
-		DevOpenHelper helper = new DaoMaster.DevOpenHelper(this,
-				"spacetrader-db", null);
-		SpaceTrader.db = helper.getWritableDatabase();
-		SpaceTrader.daoMaster = new DaoMaster(SpaceTrader.db);
-		SpaceTrader.daoSession = SpaceTrader.daoMaster.newSession();
+		Intent intent = null;
+		switch (v.getId()) {
+		case R.id.btn_newgame:
+			intent = new Intent(MainMenuActivity.this,
+					ConfigurationActivity.class);
+			break;
+		case R.id.btn_loadgame:
+			intent = new Intent(MainMenuActivity.this, LoadGameActivity.class);
+			break;
+		case R.id.btn_debugmode:
+			intent = new Intent(MainMenuActivity.this, GalaxyMapActivity.class);
+			break;
+		}
+		startActivity(intent);
+
+	}
+
+	private void init() {
+		// Typeface font = Typeface.createFromAsset(getAssets(),
+		// "fonts/Street Corner.ttf");
+		// TextView txt = (TextView) findViewById(R.id.txtview_app_name);
+		// txt.setTypeface(font);
+
+		setFont();
+
+		Button btnNewGame = (Button) findViewById(R.id.btn_newgame);
+		Button btnLoadGame = (Button) findViewById(R.id.btn_loadgame);
+		Button btnDebug = (Button) findViewById(R.id.btn_debugmode);
+
+		btnNewGame.setOnClickListener(this);
+		btnLoadGame.setOnClickListener(this);
+		btnDebug.setOnClickListener(this);
+
+		// btnNewGame.setTypeface(font);
+		// btnLoadGame.setTypeface(font);
+		// btnDebug.setTypeface(font);
+	}
+
+	private void setFont() {
+		ViewGroup activityViewGroup = (ViewGroup) findViewById(
+				android.R.id.content).getRootView();
+		setAppFont(activityViewGroup, appFont);
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.activity_main, menu);
-		return true;
-	}
-
-	// starts a new game, goes to Configuration Activity
-	private void addListenerNewGameButton() {
-		final Context context = this;
-
-		button = (Button) findViewById(R.id.btn_newgame);
-		button.setTypeface(Typeface.createFromAsset(getAssets(),
-				"fonts/Street Corner.ttf"));
-
-		button.setOnClickListener(new View.OnClickListener() {
-
-			public void onClick(View v) {
-				track.release();
-
-				Intent intent = new Intent(context, ConfigurationActivity.class);
-				startActivity(intent);
-
-			}
-		});
-	}
-
-	// opens the database to view saved games
-	private void addListenerLoadGameButton() {
-		button = (Button) findViewById(R.id.btn_loadgame);
-		button.setTypeface(Typeface.createFromAsset(getAssets(),
-				"fonts/Street Corner.ttf"));
-		button.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) {
-				track.release();
-				Intent intent = new Intent(MainMenuActivity.this,
-						LoadGameActivity.class);
-				startActivity(intent);
-			}
-		});
-	}
-
-	// Edit this to go to a specific class for Debugging
-	private void addListenerDebugButton() {
-
-		button = (Button) findViewById(R.id.btn_debugmode);
-		button.setTypeface(Typeface.createFromAsset(getAssets(),
-				"fonts/Street Corner.ttf"));
-
-		button.setOnClickListener(new View.OnClickListener() {
-
-			public void onClick(View v) {
-				// track.release();
-
-				Intent intent = new Intent(MainMenuActivity.this,
-						GalaxyMapActivity.class);
-				startActivity(intent);
-			}
-		});
-	}
-
-	// Plays sound
-	private void addSound() {
-		track = MediaPlayer.create(MainMenuActivity.this, R.raw.silbruch);
-		track.start();
-	}
-
 	protected void onStart() {
 		super.onStart();
 		Log.d(TAG, "onStart called.");
 	}
 
+	@Override
 	protected void onPause() {
 		super.onPause();
-		track.release();
 		Log.d(TAG, "onPause called.");
+		if (!continueMusic) {
+			MusicManager.pause();
+		}
 	}
 
+	@Override
 	protected void onResume() {
 		super.onResume();
 		Log.d(TAG, "onResume called.");
+		continueMusic = false;
+		MusicManager.start(this, MusicManager.MUSIC_MENU);
 	}
 
+	@Override
 	protected void onStop() {
 		super.onStop();
 		Log.d(TAG, "onStop called.");
 	}
 
+	@Override
 	protected void onRestart() {
 		super.onRestart();
 		Log.d(TAG, "onRestart called.");
 	}
 
+	@Override
 	protected void onDestroy() {
 		super.onDestroy();
 	}
-
 }

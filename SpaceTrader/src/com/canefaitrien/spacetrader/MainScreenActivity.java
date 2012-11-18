@@ -7,12 +7,14 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.ViewGroup;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 
 import com.canefaitrien.spacetrader.dao.GameDataDao;
 import com.canefaitrien.spacetrader.interfaces.IMainScreenView;
 import com.canefaitrien.spacetrader.presenters.MainScreenPresenter;
+import com.canefaitrien.spacetrader.utils.MusicManager;
 
 @SuppressWarnings("deprecation")
 public class MainScreenActivity extends TabActivity implements IMainScreenView {
@@ -20,6 +22,7 @@ public class MainScreenActivity extends TabActivity implements IMainScreenView {
 	private static final String TAG = "MainScreen";
 	MainScreenPresenter mPresenter;
 	private long mRowId;
+	private boolean continueMusic;
 
 	public MainScreenActivity() {
 		mPresenter = new MainScreenPresenter(this);
@@ -30,14 +33,18 @@ public class MainScreenActivity extends TabActivity implements IMainScreenView {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_mainscreen);
 
-		// if not new game then load game
-		if (!getIntent().getExtras().getBoolean("New Game"))
-			loadGame(savedInstanceState);
+		boolean isNewGame = getIntent().getExtras().getBoolean("New Game");
 
+		// if not new game then load game
+		if (isNewGame)
+			mRowId = SpaceTrader.getData().getId();
+		else {
+			Bundle extras = getIntent().getExtras();
+			mRowId = extras.getLong(GameDataDao.Properties.Id.columnName);
+		}
+		mPresenter.populateData(mRowId);
 		init();
 	}
-
-	
 
 	// add tabs to mainscreen
 	private void init() {
@@ -49,6 +56,8 @@ public class MainScreenActivity extends TabActivity implements IMainScreenView {
 		addTab("Market", MarketPlaceActivity.class, tabhost);
 		addTab("Hub", HubActivity.class, tabhost);
 		// tabhost.setCurrentTab(3);
+
+		setFont();
 
 		// ActionBar
 		// ActionBar actionbar = getActionBar();
@@ -77,18 +86,16 @@ public class MainScreenActivity extends TabActivity implements IMainScreenView {
 		th.addTab(spec);
 	}
 
-	private void loadGame(Bundle savedInstanceState) {
-
-		Bundle extras = getIntent().getExtras();
-		mRowId = extras.getLong(GameDataDao.Properties.Id.columnName);
-
-		mPresenter.populateData(mRowId);
+	private void setFont() {
+		ViewGroup activityViewGroup = (ViewGroup) findViewById(
+				android.R.id.content).getRootView();
+		RootActivity.setAppFont(activityViewGroup, RootActivity.appFont);
 	}
 
-	 @Override
-	 public boolean onCreateOptionsMenu(Menu menu) {
-	 MenuInflater inflater = getMenuInflater();
-	 inflater.inflate(R.menu.menu_mainscreen, menu);
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.menu_mainscreen, menu);
 		return true;
 	}
 
@@ -106,31 +113,46 @@ public class MainScreenActivity extends TabActivity implements IMainScreenView {
 		return super.onMenuItemSelected(featureId, item);
 	}
 
-	@Override
-	protected void onPause() {
-		Log.d(TAG, "onPause called.");
-		super.onPause();
-		// saveState();
-	}
-
-	@Override
-	protected void onResume() {
-		Log.d(TAG, "onResume called.");
-		super.onResume();
-		// populateData();
-	}
+	// @Override
+	// public void onBackPressed() {
+	// super.onBackPressed();
+	// continueMusic = true;
+	// }
 
 	@Override
 	protected void onStart() {
 		super.onStart();
 		Log.d(TAG, "onStart called.");
+
+		MusicManager.release();
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		Log.d(TAG, "onPause called.");
+		if (!continueMusic) {
+			MusicManager.pause();
+		}
+
+		// saveState();
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		Log.d(TAG, "onResume called.");
+		continueMusic = true;
+		MusicManager.start(this, MusicManager.MUSIC_GAME);
+
+		mPresenter.populateData(mRowId);
 	}
 
 	@Override
 	protected void onStop() {
 		super.onStop();
 		Log.d(TAG, "onStop called.");
-		finish();
+		// finish();
 	}
 
 	@Override
@@ -141,7 +163,6 @@ public class MainScreenActivity extends TabActivity implements IMainScreenView {
 
 	@Override
 	protected void onDestroy() {
-		// mPresenter.saveData();
 		super.onDestroy();
 	}
 

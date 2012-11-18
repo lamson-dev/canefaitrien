@@ -1,12 +1,6 @@
 package view;
 
-import java.awt.Dimension;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
-import javax.swing.SwingUtilities;
-
 import controller.Controller;
 
 public class GamePanel extends JTabbedPane {
@@ -23,6 +17,6 @@ public class GamePanel extends JTabbedPane {
 		addTab("Info", new InfoPanel(data));		
 		addTab("Marketplace", mp);
 		addTab("Options", new OptionsPanel(data));
-		//addTab("Travel", new TravelPanel(data, mp));
+		addTab("ShipYard", new ShipYardPanel(data));
 	}
 }

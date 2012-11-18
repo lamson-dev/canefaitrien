@@ -14,7 +14,7 @@ public class SpaceTrader extends Application {
 	public static SQLiteDatabase db;
 	public static DaoMaster daoMaster;
 	public static DaoSession daoSession;
-	
+
 	public static void setData(GameData data) {
 		SpaceTrader.data = data;
 	}
@@ -30,5 +30,5 @@ public class SpaceTrader extends Application {
 	public static void setController(Controller controller) {
 		SpaceTrader.controller = controller;
 	}
-	
+
 }
