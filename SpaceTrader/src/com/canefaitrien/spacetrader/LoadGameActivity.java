@@ -25,7 +25,6 @@ import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -156,7 +155,7 @@ public class LoadGameActivity extends ListActivity {
 					.getMenuInfo();
 			Log.d(TAG, "Delete row ID: " + String.valueOf(info.id + 1));
 			gameDataDao.deleteByKey(info.id + 1);
-			Log.d(TAG, "Deleted game data, ID: " + info.id + 1);
+			Log.d(TAG, "Deleted game data, ID: " + (info.id + 1));
 			// TODO delete universe, planets/marketplaces/ship
 			// cursor.requery();
 			fillData();
@@ -169,13 +168,6 @@ public class LoadGameActivity extends ListActivity {
 		ViewGroup activityViewGroup = (ViewGroup) findViewById(
 				android.R.id.content).getRootView();
 		RootActivity.setAppFont(activityViewGroup, RootActivity.appFont);
-	}
-
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode,
-			Intent intent) {
-		super.onActivityResult(requestCode, resultCode, intent);
-		// cursor.requery();
 	}
 
 	@Override

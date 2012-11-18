@@ -5,7 +5,7 @@
 
     <uses-sdk
         android:minSdkVersion="11"
-        android:targetSdkVersion="16" />
+        android:targetSdkVersion="17" />
 
     <instrumentation
         android:name="android.test.InstrumentationTestRunner"
@@ -13,6 +13,7 @@
 
     <application
         android:name=".SpaceTrader"
+        android:allowBackup="true"
         android:icon="@drawable/ship_icon"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
@@ -20,6 +21,7 @@
 
         <activity
             android:name=".LauncherActivity"
+            android:exported="false"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,6 +31,7 @@
         </activity>
         <activity
             android:name=".MainMenuActivity"
+            android:exported="false"
             android:label="@string/title_activity_main" >
             <intent-filter>
                 <action android:name="com.cainefaitrient.spacetrader.MAINMENU" />
@@ -38,6 +41,7 @@
         </activity>
         <activity
             android:name=".ConfigurationActivity"
+            android:exported="false"
             android:label="@string/title_activity_config" >
             <intent-filter>
                 <action android:name="com.cainefaitrient.spacetrader.CONFIGURATION" />
@@ -47,7 +51,9 @@
         </activity>
         <activity android:name=".DisplayDataActivity" >
         </activity>
-        <activity android:name=".LoadGameActivity" >
+        <activity
+            android:name=".LoadGameActivity"
+            android:exported="false" >
             android:label="@string/title_activity_loadgame" >
             <intent-filter>
                 <action android:name="com.cainefaitrient.spacetrader.LOADGAME" />
@@ -55,7 +61,9 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainScreenActivity" >
+        <activity
+            android:name=".MainScreenActivity"
+            android:exported="false" >
             android:label="@string/title_activity_mainscreen" >
             <intent-filter>
                 <action android:name="com.cainefaitrient.spacetrader.MAINSCREEN" />
@@ -63,7 +71,9 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".InfoActivity" >
+        <activity
+            android:name=".InfoActivity"
+            android:exported="false" >
             android:label="@string/title_activity_marketplace" >
             <intent-filter>
                 <action android:name="com.cainefaitrient.spacetrader.INFO" />
@@ -71,7 +81,9 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".MarketPlaceActivity" >
+        <activity
+            android:name=".MarketPlaceActivity"
+            android:exported="false" >
             android:label="@string/title_activity_marketplace" >
             <intent-filter>
                 <action android:name="com.cainefaitrient.spacetrader.MARKETPLACE" />
@@ -79,7 +91,9 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".HubActivity" >
+        <activity
+            android:name=".HubActivity"
+            android:exported="false" >
             android:label="@string/title_activity_marketplace" >
             <intent-filter>
                 <action android:name="com.cainefaitrient.spacetrader.HUB" />
@@ -87,7 +101,9 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".GalaxyMapActivity" >
+        <activity
+            android:name=".GalaxyMapActivity"
+            android:exported="false" >
             android:label="@string/title_activity_galaxyview" >
             <intent-filter>
                 <action android:name="com.cainefaitrient.spacetrader.GALAXYMAP" />

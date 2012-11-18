@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.annotation.SuppressLint;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
@@ -84,6 +85,7 @@ public class GameDataDao extends AbstractDao<GameData, Long> {
 	}
 
 	/** @inheritdoc */
+	@SuppressLint("SimpleDateFormat")
 	@Override
 	protected void bindValues(SQLiteStatement stmt, GameData entity) {
 		stmt.clearBindings();

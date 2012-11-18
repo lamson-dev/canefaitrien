@@ -19,7 +19,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.canefaitrien.spacetrader.interfaces.IMarketPlaceView;
-import com.canefaitrien.spacetrader.models.TradeGood;
 import com.canefaitrien.spacetrader.presenters.MarketPlacePresenter;
 import com.canefaitrien.spacetrader.utils.MusicManager;
 
@@ -33,7 +32,7 @@ public class MarketPlaceActivity extends ListActivity implements
 
 	private int itemPos = 0;
 	private boolean continueMusic;
-	private int selectedId;
+	// private int selectedId;
 	private View tempView;
 
 	public MarketPlaceActivity() {
@@ -86,10 +85,10 @@ public class MarketPlaceActivity extends ListActivity implements
 
 		l.setFocusable(true);
 		l.setSelected(true);
-		v.setBackgroundColor(Color.rgb(0x28, 0x3C, 0x4F)); // CHANGE COLOR OF
-															// SELECTED ROW
-		// HERE>
-		selectedId = (int) id;
+		// CHANGE COLOR OF SELECTED ROW HERE
+		v.setBackgroundColor(Color.rgb(0x28, 0x3C, 0x4F));
+
+		// selectedId = (int) id;
 
 		if (tempView != null) {
 			// If row is already clicked then reset its color to default row
