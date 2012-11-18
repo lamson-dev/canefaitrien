@@ -4,30 +4,27 @@
     android:layout_height="match_parent"
     android:background="@drawable/background_mainmenu" >
 
-
     <TextView
         android:id="@+id/txtview_app_name"
-
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
         android:text="@string/app_name_main"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="70dp"
-        android:textColor="#CCDDE6" />
+        android:textColor="#CCDDE6"
+        android:textSize="70dp" />
 
     <Button
         android:id="@+id/btn_newgame"
-        android:background="@drawable/menubutton_nuetral"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/txtview_app_name"
         android:layout_marginTop="40dp"
+        android:background="@drawable/custom_btn_main"
         android:text="@string/bt_newgame"
-        android:textSize="30dp"        
-         />
+        android:textSize="30dp" />
 
     <Button
         android:id="@+id/btn_loadgame"
@@ -36,19 +33,19 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/btn_newgame"
         android:layout_marginTop="20dp"
+        android:background="@drawable/custom_btn_main"
         android:text="@string/bt_resumegame"
-        android:textSize="30dp"        
-        android:background="@drawable/menubutton_nuetral" />
-   <Button
+        android:textSize="30dp" />
+
+    <Button
         android:id="@+id/btn_debugmode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/btn_loadgame"
         android:layout_marginTop="20dp"
+        android:background="@drawable/custom_btn_main"
         android:text="@string/bt_debugmode"
-        android:textSize="30dp"        
-        android:background="@drawable/menubutton_nuetral" />
-  
+        android:textSize="30dp" />
 
 </RelativeLayout>
