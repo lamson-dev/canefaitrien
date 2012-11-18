@@ -6,10 +6,12 @@ import java.util.List;
 
 import android.app.ListActivity;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -31,6 +33,8 @@ public class MarketPlaceActivity extends ListActivity implements
 
 	private int itemPos = 0;
 	private boolean continueMusic;
+	private int selectedId;
+	private View tempView;
 
 	public MarketPlaceActivity() {
 		mPresenter = new MarketPlacePresenter(this);
@@ -51,6 +55,8 @@ public class MarketPlaceActivity extends ListActivity implements
 		mPresenter.displayMarket();
 		mPresenter.showOtherInfo();
 
+		setFont();
+
 		// MarketAdapter adapter = new MarketAdapter(this,
 		// R.layout.list_item_market, list);
 	}
@@ -58,7 +64,6 @@ public class MarketPlaceActivity extends ListActivity implements
 	public void displayMoney(String valueOf) {
 		TextView tv = (TextView) findViewById(R.id.tv_money);
 		tv.setText(valueOf);
-
 	}
 
 	public void displayCargo(String valueOf) {
@@ -78,10 +83,27 @@ public class MarketPlaceActivity extends ListActivity implements
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		// Do something when a list item is clicked
 		super.onListItemClick(l, v, position, id);
-		Toast.makeText(this, "You have chosen " + TradeGood.values()[position],
-				Toast.LENGTH_SHORT).show();
 
+		l.setFocusable(true);
+		l.setSelected(true);
+		v.setBackgroundColor(Color.rgb(0x28, 0x3C, 0x4F)); // CHANGE COLOR OF
+															// SELECTED ROW
+		// HERE>
+		selectedId = (int) id;
+
+		if (tempView != null) {
+			// If row is already clicked then reset its color to default row
+			// color
+			tempView.setBackgroundColor(Color.TRANSPARENT);
+
+		}
+		tempView = v;
+
+		// Toast.makeText(this, "You have chosen " +
+		// TradeGood.values()[position],
+		// Toast.LENGTH_SHORT).show();
 		itemPos = position;
+
 	}
 
 	public void onClick(View v) {
@@ -116,12 +138,23 @@ public class MarketPlaceActivity extends ListActivity implements
 	public Context getContext() {
 		return MarketPlaceActivity.this;
 	}
-	
-//	@Override
-//	public void onBackPressed() {
-//		super.onBackPressed();
-//		continueMusic = true;
-//	}
+
+	@Override
+	public Object getSystemService(String name) {
+		return super.getSystemService(name);
+	}
+
+	private void setFont() {
+		ViewGroup activityViewGroup = (ViewGroup) findViewById(
+				android.R.id.content).getRootView();
+		RootActivity.setAppFont(activityViewGroup, RootActivity.appFont);
+	}
+
+	// @Override
+	// public void onBackPressed() {
+	// super.onBackPressed();
+	// continueMusic = true;
+	// }
 
 	@Override
 	protected void onPause() {
@@ -138,7 +171,7 @@ public class MarketPlaceActivity extends ListActivity implements
 		Log.d(TAG, "onResume called.");
 		continueMusic = true;
 		MusicManager.start(this, MusicManager.MUSIC_GAME);
-		
+
 		mPresenter.displayMarket();
 		mPresenter.showOtherInfo();
 	}

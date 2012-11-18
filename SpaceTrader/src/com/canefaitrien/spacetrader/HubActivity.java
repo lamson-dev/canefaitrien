@@ -1,10 +1,10 @@
 package com.canefaitrien.spacetrader;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.canefaitrien.spacetrader.interfaces.IMainScreenView;
@@ -12,7 +12,7 @@ import com.canefaitrien.spacetrader.models.Ship;
 import com.canefaitrien.spacetrader.presenters.MainScreenPresenter;
 import com.canefaitrien.spacetrader.utils.MusicManager;
 
-public class HubActivity extends Activity implements OnClickListener,
+public class HubActivity extends RootActivity implements OnClickListener,
 		IMainScreenView {
 
 	private static final String TAG = "Hub";
@@ -35,6 +35,8 @@ public class HubActivity extends Activity implements OnClickListener,
 
 		saveGame.setOnClickListener(this);
 		refill.setOnClickListener(this);
+		
+		setFont();
 
 	}
 
@@ -53,11 +55,17 @@ public class HubActivity extends Activity implements OnClickListener,
 
 	}
 
-//	@Override
-//	public void onBackPressed() {
-//		super.onBackPressed();
-//		continueMusic = true;
-//	}
+	private void setFont() {
+		ViewGroup activityViewGroup = (ViewGroup) findViewById(
+				android.R.id.content).getRootView();
+		setAppFont(activityViewGroup, appFont);
+	}
+
+	// @Override
+	// public void onBackPressed() {
+	// super.onBackPressed();
+	// continueMusic = true;
+	// }
 
 	@Override
 	protected void onPause() {

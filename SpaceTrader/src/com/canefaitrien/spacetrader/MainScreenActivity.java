@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.ViewGroup;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 
@@ -56,6 +57,8 @@ public class MainScreenActivity extends TabActivity implements IMainScreenView {
 		addTab("Hub", HubActivity.class, tabhost);
 		// tabhost.setCurrentTab(3);
 
+		setFont();
+
 		// ActionBar
 		// ActionBar actionbar = getActionBar();
 		// actionbar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
@@ -81,6 +84,12 @@ public class MainScreenActivity extends TabActivity implements IMainScreenView {
 		Intent intent = new Intent(MainScreenActivity.this, c);
 		spec.setContent(intent);
 		th.addTab(spec);
+	}
+
+	private void setFont() {
+		ViewGroup activityViewGroup = (ViewGroup) findViewById(
+				android.R.id.content).getRootView();
+		RootActivity.setAppFont(activityViewGroup, RootActivity.appFont);
 	}
 
 	@Override
@@ -114,7 +123,7 @@ public class MainScreenActivity extends TabActivity implements IMainScreenView {
 	protected void onStart() {
 		super.onStart();
 		Log.d(TAG, "onStart called.");
-		
+
 		MusicManager.release();
 	}
 

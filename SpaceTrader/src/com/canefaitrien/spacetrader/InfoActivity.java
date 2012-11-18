@@ -2,10 +2,10 @@ package com.canefaitrien.spacetrader;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.canefaitrien.spacetrader.models.Controller;
-import com.canefaitrien.spacetrader.models.GameData;
 import com.canefaitrien.spacetrader.utils.MusicManager;
 
 public class InfoActivity extends RootActivity {
@@ -21,7 +21,7 @@ public class InfoActivity extends RootActivity {
 
 		data = SpaceTrader.getController();
 		Log.d(TAG, "loaded data");
-
+		setFont();
 		populateData();
 	}
 
@@ -46,11 +46,17 @@ public class InfoActivity extends RootActivity {
 		money.setText("Money: $" + String.valueOf(data.getMoney()));
 	}
 
-//	@Override
-//	public void onBackPressed() {
-//		super.onBackPressed();
-//		continueMusic = true;
-//	}
+	private void setFont() {
+		ViewGroup activityViewGroup = (ViewGroup) findViewById(
+				android.R.id.content).getRootView();
+		setAppFont(activityViewGroup, appFont);
+	}
+
+	// @Override
+	// public void onBackPressed() {
+	// super.onBackPressed();
+	// continueMusic = true;
+	// }
 
 	@Override
 	protected void onPause() {

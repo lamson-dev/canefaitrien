@@ -192,11 +192,11 @@ public class GalaxyMapActivity extends RootActivity implements OnTouchListener {
 		return true;
 	}
 
-//	@Override
-//	public void onBackPressed() {
-//		super.onBackPressed();
-//		continueMusic = true;
-//	}
+	// @Override
+	// public void onBackPressed() {
+	// super.onBackPressed();
+	// continueMusic = true;
+	// }
 
 	@Override
 	protected void onPause() {

@@ -10,35 +10,35 @@
         android:id="@+id/good_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_weight="30" />
+        android:layout_weight="30"
+        android:gravity="center" />
 
     <TextView
         android:id="@+id/good_price"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_weight="20" />
+        android:layout_weight="20"
+        android:gravity="center" />
 
     <TextView
         android:id="@+id/good_sell_price"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_weight="20" />
+        android:layout_weight="20"
+        android:gravity="center" />
 
     <TextView
         android:id="@+id/good_owned"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_weight="15" />
+        android:layout_weight="15"
+        android:gravity="center" />
 
     <TextView
         android:id="@+id/good_stock"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_weight="15" />
+        android:layout_weight="15"
+        android:gravity="center" />
 
 </LinearLayout>

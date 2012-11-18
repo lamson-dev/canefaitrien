@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.widget.ListAdapter;
 
 public interface IMarketPlaceView {
@@ -18,4 +19,6 @@ public interface IMarketPlaceView {
 	public void setListAdapter(ListAdapter adapter);
 
 	public Context getContext();
+
+	public Object getSystemService(String layoutInflaterService);
 }

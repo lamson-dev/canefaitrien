@@ -86,7 +86,6 @@ public class Planet {
 															// will
 		} else {
 			this.radius = (int) (Math.random() * 15) + 75;
-			;
 		}
 		// randomly generate a radius (radius)
 		this.name = name;

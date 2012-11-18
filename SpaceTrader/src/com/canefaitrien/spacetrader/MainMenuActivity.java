@@ -2,11 +2,10 @@ package com.canefaitrien.spacetrader;
 
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
@@ -45,11 +44,12 @@ public class MainMenuActivity extends RootActivity implements OnClickListener {
 	}
 
 	private void init() {
-		Typeface font = Typeface.createFromAsset(getAssets(),
-				"fonts/Street Corner.ttf");
+		// Typeface font = Typeface.createFromAsset(getAssets(),
+		// "fonts/Street Corner.ttf");
+		// TextView txt = (TextView) findViewById(R.id.txtview_app_name);
+		// txt.setTypeface(font);
 
-		TextView txt = (TextView) findViewById(R.id.txtview_app_name);
-		txt.setTypeface(font);
+		setFont();
 
 		Button btnNewGame = (Button) findViewById(R.id.btn_newgame);
 		Button btnLoadGame = (Button) findViewById(R.id.btn_loadgame);
@@ -59,17 +59,22 @@ public class MainMenuActivity extends RootActivity implements OnClickListener {
 		btnLoadGame.setOnClickListener(this);
 		btnDebug.setOnClickListener(this);
 
-		btnNewGame.setTypeface(font);
-		btnLoadGame.setTypeface(font);
-		btnDebug.setTypeface(font);
+		// btnNewGame.setTypeface(font);
+		// btnLoadGame.setTypeface(font);
+		// btnDebug.setTypeface(font);
 	}
 
-	// @Override
-	// protected void onStart() {
-	// super.onStart();
-	// MusicManager.start(this, MusicManager.MUSIC_MENU);
-	// Log.d(TAG, "onStart called.");
-	// }
+	private void setFont() {
+		ViewGroup activityViewGroup = (ViewGroup) findViewById(
+				android.R.id.content).getRootView();
+		setAppFont(activityViewGroup, appFont);
+	}
+
+	@Override
+	protected void onStart() {
+		super.onStart();
+		Log.d(TAG, "onStart called.");
+	}
 
 	@Override
 	protected void onPause() {

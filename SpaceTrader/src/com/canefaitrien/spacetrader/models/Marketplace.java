@@ -77,7 +77,7 @@ public class Marketplace implements GameConstants {
 		this.itemBuyPrices = itemBuyPrices;
 		this.itemSellPrices = itemSellPrices;
 		this.level = level;
-		this.situation = situation;
+		this.setSituation(situation);
 	}
 
 	/**
@@ -279,6 +279,14 @@ public class Marketplace implements GameConstants {
 			}
 			this.itemSellPrices = sellPrices;
 		}
+	}
+
+	public Situation getSituation() {
+		return situation;
+	}
+
+	public void setSituation(Situation situation) {
+		this.situation = situation;
 	}
 
 }

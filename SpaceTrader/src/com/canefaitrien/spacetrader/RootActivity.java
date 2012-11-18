@@ -1,18 +1,17 @@
 package com.canefaitrien.spacetrader;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
-
-import com.canefaitrien.spacetrader.dao.DaoMaster;
-import com.canefaitrien.spacetrader.dao.DaoMaster.DevOpenHelper;
-import com.canefaitrien.spacetrader.utils.MusicManager;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
 public abstract class RootActivity extends Activity {
-	private static final String TAG = "Root";
+
+	public static Typeface appFont;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +27,32 @@ public abstract class RootActivity extends Activity {
 			// // actionBar.setHomeButtonEnabled(false);
 			// getActionBar().setDisplayHomeAsUpEnabled(true);
 			// actionBar.hide();
+		}
+
+		appFont = Typeface.createFromAsset(getAssets(),
+				"fonts/Street Corner.ttf");
+	}
+
+	/**
+	 * Recursively sets a {@link Typeface} to all {@link TextView}s in a
+	 * {@link ViewGroup}.
+	 */
+	public static final void setAppFont(ViewGroup mContainer, Typeface mFont) {
+		if (mContainer == null || mFont == null)
+			return;
+
+		final int mCount = mContainer.getChildCount();
+
+		// Loop through all of the children.
+		for (int i = 0; i < mCount; ++i) {
+			final View mChild = mContainer.getChildAt(i);
+			if (mChild instanceof TextView) {
+				// Set the font if it is a TextView.
+				((TextView) mChild).setTypeface(mFont);
+			} else if (mChild instanceof ViewGroup) {
+				// Recursively attempt another ViewGroup.
+				setAppFont((ViewGroup) mChild, mFont);
+			}
 		}
 	}
 

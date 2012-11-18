@@ -7,7 +7,6 @@ import com.canefaitrien.spacetrader.dao.DaoMaster;
 import com.canefaitrien.spacetrader.dao.DaoSession;
 import com.canefaitrien.spacetrader.models.Controller;
 import com.canefaitrien.spacetrader.models.GameData;
-import com.canefaitrien.spacetrader.utils.MusicManager;
 
 public class SpaceTrader extends Application {
 	private static Controller controller;

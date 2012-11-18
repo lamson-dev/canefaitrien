@@ -1,14 +1,13 @@
 package com.canefaitrien.spacetrader;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.View.OnClickListener;
-import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
@@ -64,7 +63,10 @@ public class ConfigurationActivity extends RootActivity implements
 		// getSystemService(Context.INPUT_METHOD_SERVICE);
 		// imm.hideSoftInputFromWindow(getEditName().getWindowToken(), 0);
 		// getWindow().setSoftInputMode(
-		//		WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+		// WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+		ViewGroup activityViewGroup = (ViewGroup) findViewById(
+				android.R.id.content).getRootView();
+		setAppFont(activityViewGroup, appFont);
 
 		Button btnPlus = (Button) findViewById(R.id.btn_plus);
 		Button btnMinus = (Button) findViewById(R.id.btn_minus);

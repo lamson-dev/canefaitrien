@@ -16,11 +16,11 @@ import android.view.View;
 import com.canefaitrien.spacetrader.R;
 import com.canefaitrien.spacetrader.models.Planet;
 import com.canefaitrien.spacetrader.models.Ship;
+
 //Draws planets and creates a view
 @SuppressLint("ViewConstructor")
 public class GalaxyView extends View {
 
-	
 	private Planet[] planets;
 	Paint paint = new Paint();// normal paint
 	Paint wordTest = new Paint(); // text paint
@@ -30,8 +30,8 @@ public class GalaxyView extends View {
 	//
 	Bitmap ship_icon;
 	float x, y;
-	Canvas c;	
-	
+	Canvas c;
+
 	public GalaxyView(Context context, Planet[] planets) {
 		super(context);
 		//
@@ -48,30 +48,43 @@ public class GalaxyView extends View {
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
 		c = canvas;
-		//planets = universe.getPlanets().clone();
+		// planets = universe.getPlanets().clone();
 		for (int i = 0; i < planets.length; i++) {
 
-			planetColor.setARGB(200, randomColor.nextInt(256),randomColor.nextInt(256), randomColor.nextInt(256));
-			//planetColor.setColor(planets[i].getColor());
-			c.drawCircle(planets[i].getCoordinates().x,planets[i].getCoordinates().y, planets[i].getRadius(),planetColor);
+			planetColor.setARGB(200, randomColor.nextInt(256),
+					randomColor.nextInt(256), randomColor.nextInt(256));
+			// planetColor.setColor(planets[i].getColor());
+			c.drawCircle(planets[i].getCoordinates().x,
+					planets[i].getCoordinates().y, planets[i].getRadius(),
+					planetColor);
 
 			wordTest.setTextSize(planets[i].getRadius());
-			c.drawText(planets[i].getName(), planets[i].getCoordinates().x, planets[i].getCoordinates().y, wordTest);
-			
-		}	
+			wordTest.setTypeface(RootActivity.appFont);
+			c.drawText(planets[i].getName(), planets[i].getCoordinates().x,
+					planets[i].getCoordinates().y, wordTest);
+
+		}
 		Planet ship_location = SpaceTrader.getController().getLocation();
-		c.drawBitmap(ship_icon, ship_location.getXCoordinate()-ship_icon.getWidth()/2, ship_location.getYCoordinate()-ship_icon.getHeight()/2, paint);			
-		//draws a circle to indicate distance
+		c.drawBitmap(ship_icon,
+				ship_location.getXCoordinate() - ship_icon.getWidth() / 2,
+				ship_location.getYCoordinate() - ship_icon.getHeight() / 2,
+				paint);
+		// draws a circle to indicate distance
 		paint.setStyle(Paint.Style.STROKE);
 		paint.setColor(Color.WHITE);
-		//need to check which is higher: max dist or fuel
-		c.drawCircle(ship_location.getXCoordinate(), ship_location.getYCoordinate(), SpaceTrader.getController().getShip().getFuel()*Ship.MPG*1, paint);
-		}
+		// need to check which is higher: max dist or fuel
+		c.drawCircle(ship_location.getXCoordinate(),
+				ship_location.getYCoordinate(), SpaceTrader.getController()
+						.getShip().getFuel()
+						* Ship.MPG * 1, paint);
+	}
+
 	// getters and setters
 	public Planet[] getPlanets() {
 		return planets;
 	}
-	public void redraw(){
+
+	public void redraw() {
 		onDraw(c);
 		Log.d("Galaxy view", "redrawing");
 	}

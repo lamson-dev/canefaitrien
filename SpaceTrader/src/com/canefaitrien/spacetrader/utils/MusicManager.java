@@ -2,8 +2,8 @@ package com.canefaitrien.spacetrader.utils;
 
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Map;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.media.MediaPlayer;
 import android.util.Log;
@@ -26,6 +26,7 @@ public class MusicManager {
 	public static final int MUSIC_END_GAME = 2;
 	private static final int PREF_DEFAULT_MUSIC_VOLUME_ITEM = 5;
 
+	@SuppressLint("UseSparseArrays")
 	private static HashMap<Integer, MediaPlayer> players = new HashMap<Integer, MediaPlayer>();
 	private static int currentMusic = -1;
 	private static int previousMusic = -1;

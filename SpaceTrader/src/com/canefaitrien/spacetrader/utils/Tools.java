@@ -4,10 +4,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
-
-import com.canefaitrien.spacetrader.R;
 
 public class Tools {
 
@@ -27,13 +25,13 @@ public class Tools {
 		popup.create().show();
 	}
 
-	public static void inflater(Context context, int idChild,
+	public static View inflater(Context context, int idChild,
 			ViewGroup parentView) {
 		inflater = (LayoutInflater) context
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
 		// ViewGroup parentView = (RelativeLayout) findViewById(idParent);
 
-		inflater.inflate(idChild, parentView);
+		return inflater.inflate(idChild, parentView);
 	}
 }
