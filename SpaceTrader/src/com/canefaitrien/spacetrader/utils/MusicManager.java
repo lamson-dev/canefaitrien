@@ -2,14 +2,22 @@ package com.canefaitrien.spacetrader.utils;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Map;
 
 import android.content.Context;
 import android.media.MediaPlayer;
-import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.canefaitrien.spacetrader.R;
 
+/*
+ * To use this, each activity must have a boolean field called continueMusic 
+ * or whatever you want to call it. For any activity that isn't the root 
+ * activity (launcher), override onKeyDown and set continueMusic to true if 
+ * the key is the "back" key. Also set continueMusic to true when launching 
+ * any activities in which you want to keep playing this music in with no 
+ * interruption.
+ */
 public class MusicManager {
 	private static final String TAG = "MusicManager";
 	public static final int MUSIC_PREVIOUS = -1;
@@ -23,14 +31,14 @@ public class MusicManager {
 	private static int previousMusic = -1;
 
 	// public static float getMusicVolume(Context context) {
-	 // String[] volumes = context.getResources().getStringArray(
-	 // R.array.volume_values);
+	// String[] volumes = context.getResources().getStringArray(
+	// R.array.volume_values);
 	// String[] volumes = { "0", "10", "20", "30", "40", "50", "60", "70",
 	// "80", "90", "100" };
-	 // String volumeString = PreferenceManager.getDefaultSharedPreferences(
-	 // context).getString(
-	 // context.getString(R.string.key_pref_music_volume),
-	 // volumes[PREF_DEFAULT_MUSIC_VOLUME_ITEM]);
+	// String volumeString = PreferenceManager.getDefaultSharedPreferences(
+	// context).getString(
+	// context.getString(R.string.key_pref_music_volume),
+	// volumes[PREF_DEFAULT_MUSIC_VOLUME_ITEM]);
 	//
 	// String volumeString = "50";
 	//
@@ -66,32 +74,40 @@ public class MusicManager {
 		if (mp != null) {
 			if (!mp.isPlaying()) {
 				mp.start();
-			}
-		} else {
-			if (music == MUSIC_MENU) {
-				mp = MediaPlayer.create(context, R.raw.menu_music);
-			} else if (music == MUSIC_GAME) {
-				mp = MediaPlayer.create(context, R.raw.game_music);
-			} else if (music == MUSIC_END_GAME) {
-				mp = MediaPlayer.create(context, R.raw.end_game_music);
-			} else {
-				Log.e(TAG, "unsupported music number - " + music);
 				return;
 			}
-			players.put(music, mp);
-			// float volume = getMusicVolume(context);
-			// Log.d(TAG, "Setting music volume to " + volume);
-			// mp.setVolume(volume, volume);
-			// if (mp == null) {
-			// Log.e(TAG, "player was not created successfully");
-			// } else {
-			// try {
-			// mp.setLooping(true);
-			// mp.start();
-			// } catch (Exception e) {
-			// Log.e(TAG, e.getMessage(), e);
-			// }
-			// }
+		}
+
+		switch (music) {
+		case MUSIC_MENU:
+			mp = MediaPlayer.create(context, R.raw.music_menu);
+			break;
+		case MUSIC_GAME:
+			mp = MediaPlayer.create(context, R.raw.music_game);
+			break;
+		case MUSIC_END_GAME:
+			mp = MediaPlayer.create(context, R.raw.music_end_game);
+			break;
+		default:
+			Log.e(TAG, "unsupported music number - " + music);
+			return;
+		}
+
+		players.put(music, mp);
+		// float volume = getMusicVolume(context);
+		// Log.d(TAG, "Setting music volume to " + volume);
+		// mp.setVolume(volume, volume);
+		if (mp == null) {
+			Log.e(TAG, "player was not created successfully");
+		} else {
+			try {
+				mp.setLooping(true);
+				mp.start();
+				mp.setVolume(PREF_DEFAULT_MUSIC_VOLUME_ITEM,
+						PREF_DEFAULT_MUSIC_VOLUME_ITEM);
+			} catch (Exception e) {
+				Log.e(TAG, e.getMessage(), e);
+			}
 		}
 	}
 

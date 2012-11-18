@@ -17,13 +17,23 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <uses-library android:name="android.test.runner" />
+
         <activity
-            android:name=".MainMenuActivity"
-            android:label="@string/title_activity_main" >
+            android:name=".LauncherActivity"
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainMenuActivity"
+            android:label="@string/title_activity_main" >
+            <intent-filter>
+                <action android:name="com.cainefaitrient.spacetrader.MAINMENU" />
+
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
@@ -53,18 +63,10 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".MapActivity" >
-            android:label="@string/title_activity_marketplace" >
-            <intent-filter>
-                <action android:name="com.cainefaitrient.spacetrader.MAP" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
         <activity android:name=".InfoActivity" >
             android:label="@string/title_activity_marketplace" >
             <intent-filter>
-                <action android:name="com.cainefaitrient.spacetrader.Info" />
+                <action android:name="com.cainefaitrient.spacetrader.INFO" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>

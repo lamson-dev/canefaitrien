@@ -37,6 +37,7 @@ import com.canefaitrien.spacetrader.dao.DaoMaster.DevOpenHelper;
 import com.canefaitrien.spacetrader.dao.DaoSession;
 import com.canefaitrien.spacetrader.dao.GameDataDao;
 import com.canefaitrien.spacetrader.utils.DbAdapter;
+import com.canefaitrien.spacetrader.utils.MusicManager;
 
 public class LoadGameActivity extends ListActivity {
 
@@ -46,6 +47,7 @@ public class LoadGameActivity extends ListActivity {
 
 	private GameDataDao gameDataDao;
 	private Cursor cursor;
+	private boolean continueMusic;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -128,15 +130,26 @@ public class LoadGameActivity extends ListActivity {
 	}
 
 	@Override
+	public void onBackPressed() {
+		super.onBackPressed();
+		continueMusic = true;
+	}
+
+	@Override
 	protected void onPause() {
 		super.onPause();
 		Log.d(TAG, "onPause called.");
+		if (!continueMusic) {
+			MusicManager.pause();
+		}
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
 		Log.d(TAG, "onResume called.");
+		continueMusic = true;
+		MusicManager.start(this, MusicManager.MUSIC_MENU);
 	}
 
 	@Override

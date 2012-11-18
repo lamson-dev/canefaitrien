@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.canefaitrien.spacetrader.interfaces.IMarketPlaceView;
 import com.canefaitrien.spacetrader.models.TradeGood;
 import com.canefaitrien.spacetrader.presenters.MarketPlacePresenter;
+import com.canefaitrien.spacetrader.utils.MusicManager;
 
 public class MarketPlaceActivity extends ListActivity implements
 		IMarketPlaceView, OnClickListener {
@@ -29,6 +30,7 @@ public class MarketPlaceActivity extends ListActivity implements
 	private List<HashMap<String, String>> stockList = new ArrayList<HashMap<String, String>>();
 
 	private int itemPos = 0;
+	private boolean continueMusic;
 
 	public MarketPlaceActivity() {
 		mPresenter = new MarketPlacePresenter(this);
@@ -114,11 +116,29 @@ public class MarketPlaceActivity extends ListActivity implements
 	public Context getContext() {
 		return MarketPlaceActivity.this;
 	}
+	
+//	@Override
+//	public void onBackPressed() {
+//		super.onBackPressed();
+//		continueMusic = true;
+//	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		Log.d(TAG, "onPause called.");
+		if (!continueMusic) {
+			MusicManager.pause();
+		}
+	}
 
 	@Override
 	protected void onResume() {
-		Log.d(TAG, "onResume called.");
 		super.onResume();
+		Log.d(TAG, "onResume called.");
+		continueMusic = true;
+		MusicManager.start(this, MusicManager.MUSIC_GAME);
+		
 		mPresenter.displayMarket();
 		mPresenter.showOtherInfo();
 	}
@@ -127,8 +147,6 @@ public class MarketPlaceActivity extends ListActivity implements
 	protected void onStart() {
 		super.onStart();
 		Log.d(TAG, "onStart called.");
-		mPresenter.displayMarket();
-		mPresenter.showOtherInfo();
 	}
 
 	@Override

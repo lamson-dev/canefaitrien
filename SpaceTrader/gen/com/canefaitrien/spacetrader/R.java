@@ -118,11 +118,9 @@ public final class R {
         public static final int menu_mainscreen=0x7f080002;
     }
     public static final class raw {
-        public static final int end_game_music=0x7f040000;
-        public static final int funny=0x7f040001;
-        public static final int game_music=0x7f040002;
-        public static final int menu_music=0x7f040003;
-        public static final int silbruch=0x7f040004;
+        public static final int music_end_game=0x7f040000;
+        public static final int music_game=0x7f040001;
+        public static final int music_menu=0x7f040002;
     }
     public static final class string {
         public static final int app_name=0x7f060000;

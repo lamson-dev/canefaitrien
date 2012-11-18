@@ -13,6 +13,7 @@ import android.widget.TabHost.TabSpec;
 import com.canefaitrien.spacetrader.dao.GameDataDao;
 import com.canefaitrien.spacetrader.interfaces.IMainScreenView;
 import com.canefaitrien.spacetrader.presenters.MainScreenPresenter;
+import com.canefaitrien.spacetrader.utils.MusicManager;
 
 @SuppressWarnings("deprecation")
 public class MainScreenActivity extends TabActivity implements IMainScreenView {
@@ -20,6 +21,7 @@ public class MainScreenActivity extends TabActivity implements IMainScreenView {
 	private static final String TAG = "MainScreen";
 	MainScreenPresenter mPresenter;
 	private long mRowId;
+	private boolean continueMusic;
 
 	public MainScreenActivity() {
 		mPresenter = new MainScreenPresenter(this);
@@ -102,24 +104,39 @@ public class MainScreenActivity extends TabActivity implements IMainScreenView {
 		return super.onMenuItemSelected(featureId, item);
 	}
 
-	@Override
-	protected void onPause() {
-		Log.d(TAG, "onPause called.");
-		super.onPause();
-		// saveState();
-	}
-
-	@Override
-	protected void onResume() {
-		Log.d(TAG, "onResume called.");
-		super.onResume();
-		mPresenter.populateData(mRowId);
-	}
+	// @Override
+	// public void onBackPressed() {
+	// super.onBackPressed();
+	// continueMusic = true;
+	// }
 
 	@Override
 	protected void onStart() {
 		super.onStart();
 		Log.d(TAG, "onStart called.");
+		
+		MusicManager.release();
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		Log.d(TAG, "onPause called.");
+		if (!continueMusic) {
+			MusicManager.pause();
+		}
+
+		// saveState();
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		Log.d(TAG, "onResume called.");
+		continueMusic = true;
+		MusicManager.start(this, MusicManager.MUSIC_GAME);
+
+		mPresenter.populateData(mRowId);
 	}
 
 	@Override

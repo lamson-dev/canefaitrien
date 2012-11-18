@@ -19,11 +19,10 @@ import com.canefaitrien.spacetrader.models.Planet;
 import com.canefaitrien.spacetrader.models.PoliceEncounter;
 import com.canefaitrien.spacetrader.models.Ship;
 import com.canefaitrien.spacetrader.models.TraderEncounter;
-import com.canefaitrien.spacetrader.utils.AbstractActivity;
+import com.canefaitrien.spacetrader.utils.MusicManager;
 
 //This class should have the actions for clicking a planet
-public class GalaxyMapActivity extends AbstractActivity implements
-		OnTouchListener {
+public class GalaxyMapActivity extends RootActivity implements OnTouchListener {
 
 	private static final String TAG = "GalaxyMap";
 
@@ -31,6 +30,8 @@ public class GalaxyMapActivity extends AbstractActivity implements
 
 	LinearLayout galaxyLayout;
 	Button button;
+
+	private boolean continueMusic;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -191,16 +192,28 @@ public class GalaxyMapActivity extends AbstractActivity implements
 		return true;
 	}
 
+//	@Override
+//	public void onBackPressed() {
+//		super.onBackPressed();
+//		continueMusic = true;
+//	}
+
 	@Override
 	protected void onPause() {
-		Log.d(TAG, "onPause called.");
 		super.onPause();
+		Log.d(TAG, "onPause called.");
+		if (!continueMusic) {
+			MusicManager.pause();
+		}
 	}
 
 	@Override
 	protected void onResume() {
-		Log.d(TAG, "onResume called.");
 		super.onResume();
+		Log.d(TAG, "onResume called.");
+		continueMusic = true;
+		MusicManager.start(this, MusicManager.MUSIC_GAME);
+
 		galaxy.invalidate();
 	}
 

@@ -19,10 +19,10 @@ import com.canefaitrien.spacetrader.interfaces.GameConstants;
 import com.canefaitrien.spacetrader.interfaces.IConfigurationView;
 import com.canefaitrien.spacetrader.models.Controller.Difficulty;
 import com.canefaitrien.spacetrader.presenters.ConfigurationPresenter;
-import com.canefaitrien.spacetrader.utils.AbstractActivity;
+import com.canefaitrien.spacetrader.utils.MusicManager;
 import com.canefaitrien.spacetrader.utils.Tools;
 
-public class ConfigurationActivity extends AbstractActivity implements
+public class ConfigurationActivity extends RootActivity implements
 		GameConstants, OnClickListener, OnSeekBarChangeListener,
 		IConfigurationView {
 
@@ -44,8 +44,11 @@ public class ConfigurationActivity extends AbstractActivity implements
 
 	private ProgressDialog progressDialog;
 
+	boolean continueMusic;
+
 	public ConfigurationActivity() {
 		mPresenter = new ConfigurationPresenter(this);
+		continueMusic = true;
 	}
 
 	@Override
@@ -57,10 +60,11 @@ public class ConfigurationActivity extends AbstractActivity implements
 
 	private void init() {
 
-		InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-		imm.hideSoftInputFromWindow(getEditName().getWindowToken(), 0);
-		getWindow().setSoftInputMode(
-				WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+		// InputMethodManager imm = (InputMethodManager)
+		// getSystemService(Context.INPUT_METHOD_SERVICE);
+		// imm.hideSoftInputFromWindow(getEditName().getWindowToken(), 0);
+		// getWindow().setSoftInputMode(
+		//		WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
 		Button btnPlus = (Button) findViewById(R.id.btn_plus);
 		Button btnMinus = (Button) findViewById(R.id.btn_minus);
@@ -244,7 +248,8 @@ public class ConfigurationActivity extends AbstractActivity implements
 	}
 
 	public EditText getEditName() {
-		return (EditText) findViewById(R.id.edit_name);
+		editName = (EditText) findViewById(R.id.edit_name);
+		return editName;
 	}
 
 	public void setEditName(EditText editName) {
@@ -252,7 +257,8 @@ public class ConfigurationActivity extends AbstractActivity implements
 	}
 
 	public TextView getTxtViewLevel() {
-		return (TextView) this.findViewById(R.id.txtview_level);
+		tvLevel = (TextView) this.findViewById(R.id.txtview_level);
+		return tvLevel;
 	}
 
 	public void setTxtViewLevel(TextView level) {
@@ -261,21 +267,33 @@ public class ConfigurationActivity extends AbstractActivity implements
 	}
 
 	@Override
-	protected void onStart() {
-		super.onStart();
-		Log.d(TAG, "onStart called.");
+	public void onBackPressed() {
+		super.onBackPressed();
+		continueMusic = true;
 	}
 
 	@Override
 	protected void onPause() {
 		super.onPause();
 		Log.d(TAG, "onPause called.");
+		if (!continueMusic) {
+			MusicManager.pause();
+		}
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
 		Log.d(TAG, "onResume called.");
+		continueMusic = true;
+		MusicManager.start(this, MusicManager.MUSIC_MENU);
+
+	}
+
+	@Override
+	protected void onStart() {
+		super.onStart();
+		Log.d(TAG, "onStart called.");
 	}
 
 	@Override

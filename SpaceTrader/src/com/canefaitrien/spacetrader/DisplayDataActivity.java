@@ -4,7 +4,6 @@ import com.canefaitrien.spacetrader.R;
 import com.canefaitrien.spacetrader.models.Marketplace;
 import com.canefaitrien.spacetrader.models.Situation;
 import com.canefaitrien.spacetrader.models.TechLevel;
-import com.canefaitrien.spacetrader.utils.AbstractActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,7 +13,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-public class DisplayDataActivity extends AbstractActivity {
+public class DisplayDataActivity extends RootActivity {
+
+	private boolean continueMusic;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -31,7 +32,8 @@ public class DisplayDataActivity extends AbstractActivity {
 		// Create the text view
 		// TextView textView = new TextView(this);
 		textView.setTextSize(20);
-		Marketplace mp  =new Marketplace(0, TechLevel.HI_TECH, Situation.ARTISTIC);
+		Marketplace mp = new Marketplace(0, TechLevel.HI_TECH,
+				Situation.ARTISTIC);
 		textView.setText(mp.toString());
 		// Set the text view as the activity layout
 		// setContentView(textView);

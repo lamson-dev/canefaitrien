@@ -88,13 +88,13 @@ public class ConfigurationPresenter {
 			Marketplace mk = p.getMarketplace1();
 
 			marketplaceDao.insert(mk);
-			Log.d(TAG, "Inserted new Marketplace, ID: " + mk.getId());
+			// Log.d(TAG, "Inserted new Marketplace, ID: " + mk.getId());
 
 			p.setMarketId(mk.getId());
 			p.setDataId(data.getId());
 
 			planetDao.insert(p);
-			Log.d(TAG, "Inserted new Planet, ID: " + p.getId());
+			// Log.d(TAG, "Inserted new Planet, ID: " + p.getId());
 			// Log.d(TAG, "Inserted new Planet, data-ID: " + p.getDataId());
 			// Log.d(TAG, "Inserted new Planet, market-ID: " + p.getMarketId());
 		}

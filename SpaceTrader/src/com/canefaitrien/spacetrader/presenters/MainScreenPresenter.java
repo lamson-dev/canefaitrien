@@ -40,26 +40,25 @@ public class MainScreenPresenter {
 		gameDataDao = SpaceTrader.daoSession.getGameDataDao();
 
 		GameData game = gameDataDao.loadByRowId(rowId);
-		Log.d(TAG, "loaded game " + game.getName());
-		Log.d(TAG, "loaded game " + game.getMoney());
-		Log.d(TAG, "current planet" + game.getStringCurrentPlanet());
+		// Log.d(TAG, "loaded game " + game.getName());
+		// Log.d(TAG, "loaded game " + game.getMoney());
+		// Log.d(TAG, "current planet " + game.getStringCurrentPlanet());
 
 		Person player = game.getPerson();
-		Log.d(TAG, "loaded person" + player.getName());
+		// Log.d(TAG, "loaded person" + player.getName());
 
 		Ship ship = game.getShip();
-		Log.d(TAG, "loaded ship" + ship.getStringType());
+		// Log.d(TAG, "loaded ship" + ship.getStringType());
 		int money = game.getMoney();
-		Log.d(TAG, "loaded money " + String.valueOf(money));
 		int turn = game.getTurn();
-		Log.d(TAG, "loaded turn " + String.valueOf(turn));
+		// Log.d(TAG, "loaded turn " + String.valueOf(turn));
 
 		Planet[] universe = game.getUniverse();
 
 		Planet currentPlanet = game.getCurrentPlanet();
-		Log.d(TAG, "loaded currentPlanet: " + currentPlanet.getName());
+		// Log.d(TAG, "loaded currentPlanet: " + currentPlanet.getName());
+		// Log.d(TAG, "loaded difficulty " + game.getDifficulty());
 
-		Log.d(TAG, "loaded difficulty " + game.getDifficulty());
 		Difficulty difficulty = Difficulty.valueOf(game.getDifficulty());
 
 		Controller ctrl = new Controller(player, ship, currentPlanet, money,
@@ -108,5 +107,5 @@ public class MainScreenPresenter {
 		}
 
 	}
-	
+
 }
