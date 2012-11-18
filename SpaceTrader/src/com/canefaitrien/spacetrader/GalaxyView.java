@@ -18,7 +18,6 @@ import android.view.View;
 import com.canefaitrien.spacetrader.models.Planet;
 import com.canefaitrien.spacetrader.models.Ship;
 
-<<<<<<< HEAD
 /**
  * 
  * This class is the view for the galaxy map It draws onto the canvas
@@ -28,12 +27,6 @@ import com.canefaitrien.spacetrader.models.Ship;
  */
 @SuppressLint("ViewConstructor")
 public class GalaxyView extends View {
-=======
-//Draws planets and creates a view
-@SuppressLint("ViewConstructor")
-public class GalaxyView extends View {
-
->>>>>>> 10120ef862176b786fae659d28a3e0eec7c32ef8
 	private Planet[] planets;
 	Paint paint = new Paint();// normal paint
 	Paint wordTest = new Paint(); // text paint
@@ -42,7 +35,6 @@ public class GalaxyView extends View {
 	Paint planetColor = new Paint();
 	//
 	Bitmap ship_icon;
-<<<<<<< HEAD
 	Bitmap planetImage;
 	Canvas c;
 	Boolean firstDraw;
@@ -55,11 +47,6 @@ public class GalaxyView extends View {
 	 * @param planets
 	 *            takes in an array of planets
 	 */
-=======
-	float x, y;
-	Canvas c;
-
->>>>>>> 10120ef862176b786fae659d28a3e0eec7c32ef8
 	public GalaxyView(Context context, Planet[] planets) {
 		super(context);
 		//
@@ -82,7 +69,6 @@ public class GalaxyView extends View {
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
 		c = canvas;
-<<<<<<< HEAD
 		/**
 		 * Expensive planet drawing
 		 */
@@ -109,33 +95,14 @@ public class GalaxyView extends View {
 		}
 		// draw ship
 		Planet ship_location = SpaceTrader.getController().getLocation(); 
-=======
-		// planets = universe.getPlanets().clone();
-		for (int i = 0; i < planets.length; i++) {
-
-			planetColor.setARGB(200, randomColor.nextInt(256),
-					randomColor.nextInt(256), randomColor.nextInt(256));
-			// planetColor.setColor(planets[i].getColor());
-			c.drawCircle(planets[i].getCoordinates().x,
-					planets[i].getCoordinates().y, planets[i].getRadius(),
-					planetColor);
-
-			wordTest.setTextSize(planets[i].getRadius());
-			wordTest.setTypeface(RootActivity.appFont);
-			c.drawText(planets[i].getName(), planets[i].getCoordinates().x,
-					planets[i].getCoordinates().y, wordTest);
-
-		}
-		Planet ship_location = SpaceTrader.getController().getLocation();
->>>>>>> 10120ef862176b786fae659d28a3e0eec7c32ef8
 		c.drawBitmap(ship_icon,
 				ship_location.getXCoordinate() - ship_icon.getWidth() / 2,
 				ship_location.getYCoordinate() - ship_icon.getHeight() / 2,
 				paint);
-<<<<<<< HEAD
+
+		// draws a circle to indicate travelable distance
 		paint.setStyle(Paint.Style.STROKE);
 		paint.setColor(Color.WHITE);
-		// draws a circle to indicate travelable distance
 		Ship shippy = SpaceTrader.getController().getShip();
 		int drawDist = (shippy.getFuel()<shippy.getType().MAX_DISTANCE) ? shippy.getFuel()*Ship.MPG:shippy.getType().MAX_DISTANCE*Ship.MPG;
 		c.drawCircle(ship_location.getXCoordinate(),ship_location.getYCoordinate(), drawDist, paint);
@@ -145,26 +112,12 @@ public class GalaxyView extends View {
 		wordTest.setAlpha(254);
 		wordTest.setTextSize(20);
 		int added = (SpaceTrader.getController().getLocation().getXCoordinate()>shippy.getType().MAX_DISTANCE*Ship.MPG) ? 170 : 500;
-		c.drawTextOnPath("fuel: "+shippy.getFuel()+"/"+shippy.getType().MAX_DISTANCE, circle, added, -10, wordTest);
-=======
-		// draws a circle to indicate distance
-		paint.setStyle(Paint.Style.STROKE);
-		paint.setColor(Color.WHITE);
-		// need to check which is higher: max dist or fuel
-		c.drawCircle(ship_location.getXCoordinate(),
-				ship_location.getYCoordinate(), SpaceTrader.getController()
-						.getShip().getFuel()
-						* Ship.MPG * 1, paint);
+		int range = (drawDist < 50) ? -50 : -10;
+		c.drawTextOnPath("fuel: "+shippy.getFuel()+"/"+shippy.getType().MAX_DISTANCE, circle, added, -range, wordTest);
 	}
 
 	// getters and setters
 	public Planet[] getPlanets() {
 		return planets;
-	}
-
-	public void redraw() {
-		onDraw(c);
-		Log.d("Galaxy view", "redrawing");
->>>>>>> 10120ef862176b786fae659d28a3e0eec7c32ef8
 	}
 }

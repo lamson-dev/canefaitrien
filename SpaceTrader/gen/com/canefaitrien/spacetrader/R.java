@@ -22,18 +22,6 @@ public final class R {
     }
     public static final class drawable {
         public static final int background_mainmenu=0x7f020000;
-<<<<<<< HEAD
-        public static final int button_newgame_neutral=0x7f020001;
-        public static final int button_newgame_pressed=0x7f020002;
-        public static final int ic_action_search=0x7f020003;
-        public static final int ic_launcher=0x7f020004;
-        public static final int menubutton_nuetral=0x7f020005;
-        public static final int menubutton_pressed=0x7f020006;
-        public static final int planet_a=0x7f020007;
-        public static final int planet_b=0x7f020008;
-        public static final int planet_button_test=0x7f020009;
-        public static final int ship_icon=0x7f02000a;
-=======
         public static final int btn_buy_selected=0x7f020001;
         public static final int btn_buy_unselected=0x7f020002;
         public static final int btn_sell_selected=0x7f020003;
@@ -47,9 +35,10 @@ public final class R {
         public static final int ic_launcher=0x7f02000b;
         public static final int menubutton_nuetral=0x7f02000c;
         public static final int menubutton_pressed=0x7f02000d;
-        public static final int planet_button_test=0x7f02000e;
-        public static final int ship_icon=0x7f02000f;
->>>>>>> 10120ef862176b786fae659d28a3e0eec7c32ef8
+        public static final int planet_a=0x7f02000e;
+        public static final int planet_b=0x7f02000f;
+        public static final int planet_button_test=0x7f020010;
+        public static final int ship_icon=0x7f020011;
     }
     public static final class id {
         public static final int bar_engineer=0x7f090011;

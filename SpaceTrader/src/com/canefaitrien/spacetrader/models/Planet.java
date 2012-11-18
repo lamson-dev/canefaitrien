@@ -91,19 +91,11 @@ public class Planet {
 	 */
 	public Planet(String name, Point location, TechLevel level,
 			Situation situation, Marketplace marketplace) {
-<<<<<<< HEAD
 		// randomly generate a radius, occasionally making a giant planet.
 		if(new Random().nextDouble()<.98){
 			this.radius = (int) (Math.random() * 15) + 15;// for now each planet will
 		}else{
-			this.radius = (int) (Math.random() * 15) + 60;;
-=======
-		if (new Random().nextDouble() < .95) {
-			this.radius = (int) (Math.random() * 15) + 15;// for now each planet
-															// will
-		} else {
-			this.radius = (int) (Math.random() * 15) + 75;
->>>>>>> 10120ef862176b786fae659d28a3e0eec7c32ef8
+			this.radius = (int) (Math.random() * 15) + 60;
 		}
 		this.name = name;
 		this.coordinates = location;
@@ -118,8 +110,6 @@ public class Planet {
 		case 1:
 			imgType = 1; break;
 		}
-		
-		
 	}
 
 	/**
