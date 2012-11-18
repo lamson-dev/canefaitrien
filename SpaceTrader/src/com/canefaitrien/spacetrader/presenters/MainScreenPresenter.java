@@ -2,14 +2,12 @@ package com.canefaitrien.spacetrader.presenters;
 
 import java.util.Date;
 
-import android.graphics.Point;
 import android.util.Log;
 
 import com.canefaitrien.spacetrader.SpaceTrader;
 import com.canefaitrien.spacetrader.dao.GameDataDao;
 import com.canefaitrien.spacetrader.dao.MarketplaceDao;
 import com.canefaitrien.spacetrader.dao.PersonDao;
-import com.canefaitrien.spacetrader.dao.PlanetDao;
 import com.canefaitrien.spacetrader.dao.ShipDao;
 import com.canefaitrien.spacetrader.interfaces.IMainScreenView;
 import com.canefaitrien.spacetrader.models.Controller;

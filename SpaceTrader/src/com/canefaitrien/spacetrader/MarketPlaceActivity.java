@@ -13,7 +13,6 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,8 +46,8 @@ public class MarketPlaceActivity extends ListActivity implements
 		btnSell.setOnClickListener(this);
 
 		mPresenter.updateStockList(stockList);
-		mPresenter.showOtherInfo();
 		mPresenter.displayMarket();
+		mPresenter.showOtherInfo();
 
 		// MarketAdapter adapter = new MarketAdapter(this,
 		// R.layout.list_item_market, list);
@@ -120,16 +119,16 @@ public class MarketPlaceActivity extends ListActivity implements
 	protected void onResume() {
 		Log.d(TAG, "onResume called.");
 		super.onResume();
-		mPresenter.updateStockList(stockList);
 		mPresenter.displayMarket();
+		mPresenter.showOtherInfo();
 	}
 
 	@Override
 	protected void onStart() {
 		super.onStart();
 		Log.d(TAG, "onStart called.");
-		mPresenter.updateStockList(stockList);
 		mPresenter.displayMarket();
+		mPresenter.showOtherInfo();
 	}
 
 	@Override

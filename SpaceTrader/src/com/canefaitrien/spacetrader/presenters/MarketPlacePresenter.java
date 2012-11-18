@@ -4,11 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import android.content.Context;
-import android.util.Log;
 import android.widget.SimpleAdapter;
 
-import com.canefaitrien.spacetrader.MarketPlaceActivity;
 import com.canefaitrien.spacetrader.R;
 import com.canefaitrien.spacetrader.SpaceTrader;
 import com.canefaitrien.spacetrader.interfaces.IMarketPlaceView;
@@ -26,11 +23,12 @@ public class MarketPlacePresenter {
 	public MarketPlacePresenter(IMarketPlaceView view) {
 		mView = view;
 		controller = SpaceTrader.getController();
-		mMarket = controller.getLocation().getMarketplace1();
 	}
 
 	public List<HashMap<String, String>> populateStock(
 			List<HashMap<String, String>> list) {
+
+		mMarket = controller.getLocation().getMarketplace1();
 		TradeGood[] goods = TradeGood.values();
 
 		list = new ArrayList<HashMap<String, String>>();
@@ -53,6 +51,8 @@ public class MarketPlacePresenter {
 	}
 
 	public void displayMarket() {
+		updateStockList(mView.getStockList());
+		
 		String[] from = new String[] { "name", "price", "sellprice", "owned",
 				"stock" };
 		int[] to = new int[] { R.id.good_name, R.id.good_price,
@@ -79,8 +79,9 @@ public class MarketPlacePresenter {
 
 	public void showOtherInfo() {
 		mView.displayMoney(String.valueOf(controller.getMoney()));
-		mView.displayCargo(String
-				.valueOf(controller.getShip().getCargo().length));
+		mView.displayCargo(mMarket.getId() + "/"
+				+ controller.getLocation().getMarketId() + "/"
+				+ controller.getLocation().getName());
 	}
 
 	// dynamically add stuff to android layout
