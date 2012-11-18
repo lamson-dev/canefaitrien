@@ -4,12 +4,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import android.content.Context;
 import android.util.Log;
+import android.widget.SimpleAdapter;
 
+import com.canefaitrien.spacetrader.MarketPlaceActivity;
+import com.canefaitrien.spacetrader.R;
 import com.canefaitrien.spacetrader.SpaceTrader;
 import com.canefaitrien.spacetrader.interfaces.IMarketPlaceView;
 import com.canefaitrien.spacetrader.models.Controller;
-import com.canefaitrien.spacetrader.models.GameData;
 import com.canefaitrien.spacetrader.models.Marketplace;
 import com.canefaitrien.spacetrader.models.TradeGood;
 
@@ -28,7 +31,6 @@ public class MarketPlacePresenter {
 
 	public List<HashMap<String, String>> populateStock(
 			List<HashMap<String, String>> list) {
-		Log.d(TAG, "null here");
 		TradeGood[] goods = TradeGood.values();
 
 		list = new ArrayList<HashMap<String, String>>();
@@ -47,6 +49,17 @@ public class MarketPlacePresenter {
 			list.add(temp);
 		}
 		return list;
+
+	}
+
+	public void displayMarket() {
+		String[] from = new String[] { "name", "price", "sellprice", "owned",
+				"stock" };
+		int[] to = new int[] { R.id.good_name, R.id.good_price,
+				R.id.good_sell_price, R.id.good_owned, R.id.good_stock };
+		SimpleAdapter adapter = new SimpleAdapter(mView.getContext(),
+				mView.getStockList(), R.layout.list_item_market, from, to);
+		mView.setListAdapter(adapter);
 
 	}
 

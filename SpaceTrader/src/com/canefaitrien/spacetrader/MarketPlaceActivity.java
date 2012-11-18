@@ -5,11 +5,13 @@ import java.util.HashMap;
 import java.util.List;
 
 import android.app.ListActivity;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -39,31 +41,17 @@ public class MarketPlaceActivity extends ListActivity implements
 
 		setContentView(R.layout.activity_marketplace);
 
-		Log.d(TAG, "got here");
 		Button btnBuy = (Button) findViewById(R.id.btn_buy);
 		Button btnSell = (Button) findViewById(R.id.btn_sell);
 		btnBuy.setOnClickListener(this);
 		btnSell.setOnClickListener(this);
 
 		mPresenter.updateStockList(stockList);
-		Log.d(TAG, "got here????");
 		mPresenter.showOtherInfo();
-		Log.d(TAG, "got here here here????");
-		displayMarket();
+		mPresenter.displayMarket();
 
 		// MarketAdapter adapter = new MarketAdapter(this,
 		// R.layout.list_item_market, list);
-	}
-
-	public void displayMarket() {
-		String[] from = new String[] { "name", "price", "sellprice", "owned",
-				"stock" };
-		int[] to = new int[] { R.id.good_name, R.id.good_price,
-				R.id.good_sell_price, R.id.good_owned, R.id.good_stock };
-		SimpleAdapter adapter = new SimpleAdapter(this, stockList,
-				R.layout.list_item_market, from, to);
-		setListAdapter(adapter);
-
 	}
 
 	public void displayMoney(String valueOf) {
@@ -115,8 +103,46 @@ public class MarketPlaceActivity extends ListActivity implements
 			}
 			break;
 		}
-		this.displayMarket();
+		mPresenter.displayMarket();
 		mPresenter.showOtherInfo();
+	}
+
+	@Override
+	public void setListAdapter(ListAdapter adapter) {
+		super.setListAdapter(adapter);
+	}
+
+	public Context getContext() {
+		return MarketPlaceActivity.this;
+	}
+
+	@Override
+	protected void onResume() {
+		Log.d(TAG, "onResume called.");
+		super.onResume();
+		mPresenter.updateStockList(stockList);
+		mPresenter.displayMarket();
+	}
+
+	@Override
+	protected void onStart() {
+		super.onStart();
+		Log.d(TAG, "onStart called.");
+		mPresenter.updateStockList(stockList);
+		mPresenter.displayMarket();
+	}
+
+	@Override
+	protected void onStop() {
+		super.onStop();
+		Log.d(TAG, "onStop called.");
+		finish();
+	}
+
+	@Override
+	protected void onDestroy() {
+		// mPresenter.saveData();
+		super.onDestroy();
 	}
 
 	// public class MarketAdapter extends ArrayAdapter<Item> {

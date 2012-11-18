@@ -27,7 +27,6 @@ public class MainScreenPresenter {
 	private ShipDao shipDao;
 	private PersonDao personDao;
 	private MarketplaceDao marketDao;
-	private PlanetDao planetDao;
 
 	public MainScreenPresenter(IMainScreenView view) {
 		mView = view;

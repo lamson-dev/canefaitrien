@@ -2,10 +2,10 @@ package com.canefaitrien.spacetrader;
 
 import android.app.Application;
 import android.database.sqlite.SQLiteDatabase;
+import android.media.MediaPlayer;
 
 import com.canefaitrien.spacetrader.dao.DaoMaster;
 import com.canefaitrien.spacetrader.dao.DaoSession;
-import com.canefaitrien.spacetrader.dao.DaoMaster.DevOpenHelper;
 import com.canefaitrien.spacetrader.models.Controller;
 import com.canefaitrien.spacetrader.models.GameData;
 
@@ -15,6 +15,7 @@ public class SpaceTrader extends Application {
 	public static SQLiteDatabase db;
 	public static DaoMaster daoMaster;
 	public static DaoSession daoSession;
+	public static MediaPlayer track;
 	
 	public static void setData(GameData data) {
 		SpaceTrader.data = data;
