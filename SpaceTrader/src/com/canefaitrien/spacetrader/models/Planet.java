@@ -30,6 +30,7 @@ public class Planet {
 	private TechLevel level;
 	private Situation situation;
 	private int planetColor;
+	private int imgType;
 
 	private long dataId;
 	private Long marketId;
@@ -77,20 +78,39 @@ public class Planet {
 		this(name, location, level, situation, new Marketplace(0, level,
 				situation));
 	}
-
+	/**
+	 * Sets values to equal ones generated in the universe
+	 * also random creates a size and planet image
+	 * 
+	 * @param name  of planet
+	 * @param location player's current location
+	 * @param level the techlevel of the planet
+	 * @param situation the planet's current situation
+	 * @param marketplace create a marketplace with good values
+	 */
 	public Planet(String name, Point location, TechLevel level,
 			Situation situation, Marketplace marketplace) {
-		if(new Random().nextDouble()<.95){
+		// randomly generate a radius, occasionally making a giant planet.
+		if(new Random().nextDouble()<.98){
 			this.radius = (int) (Math.random() * 15) + 15;// for now each planet will
 		}else{
-			this.radius = (int) (Math.random() * 15) + 75;;
+			this.radius = (int) (Math.random() * 15) + 60;;
 		}
-		// randomly generate a radius (radius)
 		this.name = name;
 		this.coordinates = location;
 		this.level = level;
 		this.situation = situation;
 		this.marketplace = marketplace;
+		//randomly pick a planet image number
+		int imageNumber = randomColor.nextInt(2);
+		switch(imageNumber){
+		case 0:
+			imgType = 0; break;
+		case 1:
+			imgType = 1; break;
+		}
+		
+		
 	}
 
 	/**
@@ -185,6 +205,10 @@ public class Planet {
 
 	public String getStringSituation() {
 		return situation.NAME;
+	}
+	
+	public int getImageType(){
+		return imgType;
 	}
 
 	public void setSituation(Situation situation) {
