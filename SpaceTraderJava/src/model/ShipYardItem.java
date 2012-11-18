@@ -10,7 +10,7 @@ public class ShipYardItem {
 	public ShipYardItem(Equipment equipment) {
 		this.equipment = equipment;
 		available = new Random().nextInt(10);
-		price = new Random().nextInt(10) * equipment.getBasePrice();
+		price = new Random().nextInt(10) * equipment.getBasePrice() + 50;// make sure this is never free
 	}
 	
 	public int getQuantity() {
@@ -23,5 +23,8 @@ public class ShipYardItem {
 	
 	public String getName() {
 		return equipment.toString();
+	}
+	public Equipment getType() {
+		return equipment;
 	}
 }

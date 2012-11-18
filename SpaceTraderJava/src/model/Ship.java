@@ -119,4 +119,12 @@ public class Ship {
 	public List<Weapon> getWeaponList() {
 		return weapons;
 	}
+	
+	public boolean checkWeaponExistence(Equipment w) {
+		for(int i = 0; i<weapons.size(); i++) {
+			if(weapons.get(i).equals(w))
+				return true;
+		}
+		return false;
+	}
 }
