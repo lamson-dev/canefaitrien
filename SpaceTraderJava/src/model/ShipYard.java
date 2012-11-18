@@ -1,6 +1,8 @@
 package model;
 
-import java.util.Random;
+import java.util.ArrayList;
+import java.util.List;
+import model.Weapon.WeaponType;
 
 import controller.Controller;
 
@@ -17,6 +19,7 @@ public class ShipYard {
 
 	
 	private Controller data;
+	private List<ShipYardItem> items = new ArrayList<ShipYardItem>();
 	
 	/**
 	 * constructor
@@ -29,9 +32,21 @@ public class ShipYard {
 
 	public ShipYard(Controller data) {
 		this.data = data;
+		setup();
 	}
-	
-
+	/**
+	 * Setting up, create new shipyard items.
+	 */
+	public void setup() {
+		WeaponType[] weapons =WeaponType.values();
+		for (int i = 0; i<weapons.length; i++) {
+			items.add(new ShipYardItem(new Weapon(weapons[i])));
+		}
+	}
+	/**
+	 * Buy new Ship
+	 * @param type
+	 */
 	public void buyShip(ShipType type) {
 		// Take all goods
 		int[] cargo = data.getShip().getCargo();
@@ -39,9 +54,14 @@ public class ShipYard {
 			cargo[i] = 0;
 
 		Ship newShip = new Ship(type);
+		// Transfer weapon
 		newShip.setWeapons(data.getShip().getWeaponList());
 
 		data.setShip(newShip);
 	}
-
+	
+	public List<ShipYardItem> getShipYard() {
+		return items;
+	}
+	
 }
