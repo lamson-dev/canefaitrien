@@ -1,14 +1,15 @@
 package com.canefaitrien.spacetrader;
 
+import android.app.ActionBar.LayoutParams;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.canefaitrien.spacetrader.models.EncounterType;
@@ -24,66 +25,86 @@ import com.canefaitrien.spacetrader.utils.MusicManager;
  * 
  * 
  * @author Daniel Xiao
- *
+ * 
  */
 public class GalaxyMapActivity extends RootActivity implements OnTouchListener {
 
 	private String TAG = "Galaxy Activity";
 	private GalaxyView galaxy;
+	private PlanetsView planetsView;
+	// LinearLayout gfl = (LinearLayout) findViewById(R.id.galaxy_view);
+	// //galaxy frame layout
 	/**
-	 * Displays the galaxy canvas and draws it on
-	 * Creates a listener for screen pressing
+	 * Displays the galaxy canvas and draws it on Creates a listener for screen
+	 * pressing
 	 */
-
 	private boolean continueMusic;
+
 	protected void onCreate(Bundle savedInstanceState) {
+
+		FrameLayout main = new FrameLayout(this);
+		main.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,
+				LayoutParams.MATCH_PARENT));
+		//
 		super.onCreate(savedInstanceState);
 		Log.d("Galaxy", "Created Galaxy");
 		// draw planets
 		galaxy = new GalaxyView(this, SpaceTrader.getController().getUniverse());
-		galaxy.setBackgroundColor(Color.BLACK);
+		planetsView = new PlanetsView(this, SpaceTrader.getController()
+				.getUniverse());
 		galaxy.setOnTouchListener(this);
-		
-		setContentView(galaxy);
+		setContentView(main);
+		main.setBackgroundResource(R.drawable.starfield_a);
+		main.addView(planetsView);
+		main.addView(galaxy);
+
 	}
+
 	/**
 	 * Creates popup menus for when a planet is clicked on
 	 * 
-	 * @param planet Takes in the planet clicked on.
+	 * @param planet
+	 *            Takes in the planet clicked on.
 	 */
 	public void onCreateDialog(Planet planet) {
 		final Planet p = planet;
-	    AlertDialog.Builder builder = new AlertDialog.Builder(this);
-	    builder.setTitle(""+planet.getName());
-	    Planet location = SpaceTrader.getController().getLocation();
-	    builder.setMessage("Tech Level: "+location.getStringTechLevel()+
-	    		"Situation: "+location.getStringSituation()+
-	    		"\nFuel needed to travel: "+location.distance(p)/Ship.MPG+"/"+SpaceTrader.getController().getShip().getFuel());
-	    builder.setPositiveButton("Close", new DialogInterface.OnClickListener(){
-	    	 public void onClick(DialogInterface dialog, int which) {
-	    		 //do nothing
-	           }
-	    	 
-	    });
-	    if(planet!=location){
-		    builder.setNegativeButton("Travel", new DialogInterface.OnClickListener(){
-		    	public void onClick(DialogInterface dialog, int which) {
-		    		 try {
-						SpaceTrader.getController().move(p);
-						galaxy.invalidate();
-						Log.d("Galaxy", "traveling to "+p.getName());
-						//
-						listDialog();
-						} catch (Exception e) {
-							Toast.makeText(getApplicationContext(), "" +e.getMessage(),Toast.LENGTH_SHORT).show();
-							e.printStackTrace();
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle("" + planet.getName());
+		Planet location = SpaceTrader.getController().getLocation();
+		builder.setMessage("Tech Level: " + location.getStringTechLevel()
+				+ "\nSituation: " + location.getStringSituation()
+				+ "\nFuel needed to travel: " + location.distance(p) / Ship.MPG
+				+ "/" + SpaceTrader.getController().getShip().getFuel());
+		builder.setPositiveButton("Close",
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+						// do nothing
+					}
+
+				});
+		if (planet != location) {
+			builder.setNegativeButton("Travel",
+					new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int which) {
+							try {
+								SpaceTrader.getController().move(p);
+								galaxy.invalidate();
+								Log.d("Galaxy", "traveling to " + p.getName());
+								//
+								listDialog();
+							} catch (Exception e) {
+								Toast.makeText(getApplicationContext(),
+										"" + e.getMessage(), Toast.LENGTH_SHORT)
+										.show();
+								e.printStackTrace();
+							}
 						}
-		           }
-		    });
-	    }
-	    AlertDialog alert = builder.create();
-	    alert.show();
+					});
+		}
+		AlertDialog alert = builder.create();
+		alert.show();
 	}
+
 	/**
 	 * Creates a dialog for when an encounter appears
 	 */
@@ -166,27 +187,32 @@ public class GalaxyMapActivity extends RootActivity implements OnTouchListener {
 		case NOTHING:
 			break;
 		}
-	    if(encounter!=EncounterType.NOTHING){//no encounter
-		    AlertDialog alert = builder.create();
-		    alert.show();
-	    }
+		if (encounter != EncounterType.NOTHING) {// no encounter
+			AlertDialog alert = builder.create();
+			alert.show();
+		}
 	}
+
 	/**
-	 * Checks entire screen when pressed and sees if 
-	 * a planet contains those coordinates
-	 * @param takes in a view and an event
+	 * Checks entire screen when pressed and sees if a planet contains those
+	 * coordinates
+	 * 
+	 * @param takes
+	 *            in a view and an event
 	 * @return returns true when the view is touched
 	 */
 	public boolean onTouch(View v, MotionEvent e) {
 		if (e.getAction() == MotionEvent.ACTION_DOWN) {
-			Log.d("Galaxy", "ActionDown" +  (int)e.getRawX() + " " +  (int)e.getRawY());
-			for(Planet p : SpaceTrader.getController().getUniverse()) {
-				if(p.isClicked(new Point((int)e.getRawX(), (int)e.getRawY()))){
-					//if(p!=SpaceTrader.getController().getLocation()){//is this the planet we're on
-						Log.d("Galaxy", "clicked " +p.getName());
-						//passes the planet clicked on
-						onCreateDialog(p);
-					//}
+			Log.d("Galaxy",
+					"ActionDown" + (int) e.getRawX() + " " + (int) e.getRawY());
+			for (Planet p : SpaceTrader.getController().getUniverse()) {
+				if (p.isClicked(new Point((int) e.getRawX(), (int) e.getRawY()))) {
+					// if(p!=SpaceTrader.getController().getLocation()){//is
+					// this the planet we're on
+					Log.d("Galaxy", "clicked " + p.getName());
+					// passes the planet clicked on
+					onCreateDialog(p);
+					// }
 				}
 			}
 		}

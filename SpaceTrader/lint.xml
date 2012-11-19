@@ -2,5 +2,6 @@
 <lint>
     <issue id="DrawAllocation">
         <ignore path="src/com/canefaitrien/spacetrader/GalaxyView.java" />
+        <ignore path="src/com/canefaitrien/spacetrader/PlanetsView.java" />
     </issue>
 </lint>

@@ -39,13 +39,13 @@ public final class R {
         public static final int planet_b=0x7f02000f;
         public static final int planet_button_test=0x7f020010;
         public static final int ship_icon=0x7f020011;
+        public static final int starfield_a=0x7f020012;
     }
     public static final class id {
         public static final int bar_engineer=0x7f090011;
         public static final int bar_fighter=0x7f09000b;
         public static final int bar_pilot=0x7f090008;
         public static final int bar_trader=0x7f09000e;
-        public static final int bh_galaxy=0x7f090034;
         public static final int btn_buy=0x7f090031;
         public static final int btn_debugmode=0x7f090025;
         public static final int btn_loadgame=0x7f090024;
@@ -57,7 +57,8 @@ public final class R {
         public static final int btn_sell=0x7f090032;
         public static final int btn_start=0x7f090015;
         public static final int edit_name=0x7f090001;
-        public static final int galaxy_layout=0x7f090033;
+        public static final int galaxy_view=0x7f090033;
+        public static final int gl_galaxyview=0x7f090034;
         public static final int good_name=0x7f090035;
         public static final int good_owned=0x7f090038;
         public static final int good_price=0x7f090036;

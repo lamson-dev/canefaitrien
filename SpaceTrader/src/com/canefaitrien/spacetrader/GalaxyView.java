@@ -1,7 +1,5 @@
 package com.canefaitrien.spacetrader;
 
-import java.util.Random;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -12,7 +10,6 @@ import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.Path;
 import android.graphics.Path.Direction;
-import android.graphics.Rect;
 import android.view.View;
 
 import com.canefaitrien.spacetrader.models.Planet;
@@ -28,16 +25,11 @@ import com.canefaitrien.spacetrader.models.Ship;
 @SuppressLint("ViewConstructor")
 public class GalaxyView extends View {
 	private Planet[] planets;
-	Paint paint = new Paint();// normal paint
-	Paint wordTest = new Paint(); // text paint
-	// for create planets
-	Random randomColor = new Random();
-	Paint planetColor = new Paint();
-	//
-	Bitmap ship_icon;
-	Bitmap planetImage;
-	Canvas c;
-	Boolean firstDraw;
+	private Paint paint = new Paint();// normal paint
+	private Paint wordTest = new Paint(); // text paint
+
+	private Bitmap ship_icon;
+	private Canvas c;
 
 	/**
 	 * Constructor that sets up the paint for text and other set ups
@@ -53,7 +45,6 @@ public class GalaxyView extends View {
 		this.planets = planets;
 		wordTest.setColor(Color.WHITE);
 		wordTest.setTextAlign(Align.CENTER);
-		firstDraw = false;
 
 		ship_icon = BitmapFactory.decodeResource(getResources(),
 				R.drawable.ship_icon);
@@ -69,30 +60,6 @@ public class GalaxyView extends View {
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
 		c = canvas;
-		/**
-		 * Expensive planet drawing
-		 */
-		if(!firstDraw){
-			for (int i = 0; i < planets.length; i++) {
-				Planet planet = planets[i];
-				//planetColor.setARGB(200, randomColor.nextInt(256),randomColor.nextInt(256), randomColor.nextInt(256));
-				//c.drawCircle(planets[i].getCoordinates().x,planets[i].getCoordinates().y, planets[i].getRadius(),planetColor);
-				switch(planet.getImageType()){
-				case 0:
-					planetImage = BitmapFactory.decodeResource(getResources(),R.drawable.planet_a); break;
-				case 1:
-					planetImage = BitmapFactory.decodeResource(getResources(),R.drawable.planet_b); break;
-				}
-				//this is the rectangle that determines the scaled planet size
-				Rect dst = new Rect(planet.getXCoordinate()-planet.getRadius(),planet.getYCoordinate()-planet.getRadius(),
-						planet.getXCoordinate()+planet.getRadius(),planet.getYCoordinate()+planet.getRadius());
-				c.drawBitmap(planetImage, null, dst, paint);
-				wordTest.setAlpha(125);
-				wordTest.setTextSize(16);
-				c.drawText(planets[i].getName(), planets[i].getCoordinates().x,planets[i].getCoordinates().y, wordTest);
-			}
-			//firstDraw = true; //doesn't do anything now because it'll just not draw the planets
-		}
 		// draw ship
 		Planet ship_location = SpaceTrader.getController().getLocation(); 
 		c.drawBitmap(ship_icon,
@@ -113,7 +80,7 @@ public class GalaxyView extends View {
 		wordTest.setTextSize(20);
 		int added = (SpaceTrader.getController().getLocation().getXCoordinate()>shippy.getType().MAX_DISTANCE*Ship.MPG) ? 170 : 500;
 		int range = (drawDist < 50) ? -50 : -10;
-		c.drawTextOnPath("fuel: "+shippy.getFuel()+"/"+shippy.getType().MAX_DISTANCE, circle, added, -range, wordTest);
+		c.drawTextOnPath("fuel: "+shippy.getFuel()+"/"+shippy.getType().MAX_DISTANCE, circle, added, range, wordTest);
 	}
 
 	// getters and setters
