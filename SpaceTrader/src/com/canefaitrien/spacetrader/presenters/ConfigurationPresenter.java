@@ -75,7 +75,7 @@ public class ConfigurationPresenter {
 				ctrl.getMoney(), //
 				ctrl.getLocation().getName(), //
 				ctrl.getTurn(), //
-				new Date(), //
+				new Date(0), //
 				person.getId(),//
 				ship.getId());
 

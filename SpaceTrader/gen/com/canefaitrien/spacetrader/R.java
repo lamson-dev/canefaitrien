@@ -39,9 +39,15 @@ public final class R {
         public static final int planet_b=0x7f02000f;
         public static final int planet_c=0x7f020010;
         public static final int planet_d=0x7f020011;
-        public static final int ship_icon=0x7f020012;
-        public static final int space_trader_logo=0x7f020013;
-        public static final int starfield_a=0x7f020014;
+        public static final int planet_e=0x7f020012;
+        public static final int planet_f=0x7f020013;
+        public static final int planet_g=0x7f020014;
+        public static final int planet_h=0x7f020015;
+        public static final int planet_i=0x7f020016;
+        public static final int planet_j=0x7f020017;
+        public static final int ship_icon=0x7f020018;
+        public static final int space_trader_logo=0x7f020019;
+        public static final int starfield_a=0x7f02001a;
     }
     public static final class id {
         public static final int bar_engineer=0x7f090011;
