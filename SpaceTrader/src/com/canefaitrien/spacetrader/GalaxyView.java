@@ -61,7 +61,7 @@ public class GalaxyView extends View {
 		super.onDraw(canvas);
 		c = canvas;
 		// draw ship
-		Planet ship_location = SpaceTrader.getController().getLocation(); 
+		Planet ship_location = SpaceTrader.getController().getLocation();
 		c.drawBitmap(ship_icon,
 				ship_location.getXCoordinate() - ship_icon.getWidth() / 2,
 				ship_location.getYCoordinate() - ship_icon.getHeight() / 2,
@@ -71,16 +71,22 @@ public class GalaxyView extends View {
 		paint.setStyle(Paint.Style.STROKE);
 		paint.setColor(Color.WHITE);
 		Ship shippy = SpaceTrader.getController().getShip();
-		int drawDist = (shippy.getFuel()<shippy.getType().MAX_DISTANCE) ? shippy.getFuel()*Ship.MPG:shippy.getType().MAX_DISTANCE*Ship.MPG;
-		c.drawCircle(ship_location.getXCoordinate(),ship_location.getYCoordinate(), drawDist, paint);
-		//fuel text
+		int drawDist = (shippy.getFuel() < shippy.getType().MAX_DISTANCE) ? shippy
+				.getFuel() * Ship.MPG
+				: shippy.getType().MAX_DISTANCE * Ship.MPG;
+		c.drawCircle(ship_location.getXCoordinate(),
+				ship_location.getYCoordinate(), drawDist, paint);
+		// fuel text
 		Path circle = new Path();
-		circle.addCircle(ship_location.getXCoordinate(), ship_location.getYCoordinate(), drawDist, Direction.CW);
+		circle.addCircle(ship_location.getXCoordinate(),
+				ship_location.getYCoordinate(), drawDist, Direction.CW);
 		wordTest.setAlpha(254);
 		wordTest.setTextSize(20);
-		int added = (SpaceTrader.getController().getLocation().getXCoordinate()>shippy.getType().MAX_DISTANCE*Ship.MPG) ? 170 : 500;
+		int added = (SpaceTrader.getController().getLocation().getXCoordinate() > shippy
+				.getType().MAX_DISTANCE * Ship.MPG) ? 170 : 500;
 		int range = (drawDist < 50) ? -50 : -10;
-		c.drawTextOnPath("fuel: "+shippy.getFuel()+"/"+shippy.getType().MAX_DISTANCE, circle, added, range, wordTest);
+		c.drawTextOnPath("fuel: " + shippy.getFuel() + "/"
+				+ shippy.getType().MAX_DISTANCE, circle, added, range, wordTest);
 	}
 
 	// getters and setters

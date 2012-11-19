@@ -152,6 +152,7 @@ public class MainScreenActivity extends TabActivity implements IMainScreenView {
 	protected void onStop() {
 		super.onStop();
 		Log.d(TAG, "onStop called.");
+		MusicManager.release();
 		// finish();
 	}
 

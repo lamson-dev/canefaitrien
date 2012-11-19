@@ -26,11 +26,11 @@ public class InfoActivity extends RootActivity {
 	}
 
 	private void populateData() {
-		TextView nameView = (TextView) findViewById(R.id.textView1);
-		TextView pilotPts = (TextView) findViewById(R.id.textView6);
-		TextView fighterPts = (TextView) findViewById(R.id.textView7);
-		TextView traderPts = (TextView) findViewById(R.id.textView8);
-		TextView engineerPts = (TextView) findViewById(R.id.textView9);
+		TextView nameView = (TextView) findViewById(R.id.tv_name);
+		TextView pilotPts = (TextView) findViewById(R.id.tv_pilot);
+		TextView fighterPts = (TextView) findViewById(R.id.tv_fighter);
+		TextView traderPts = (TextView) findViewById(R.id.tv_trader);
+		TextView engineerPts = (TextView) findViewById(R.id.tv_engineer);
 
 		nameView.setText("" + data.getPlayer().getName());
 		pilotPts.setText("" + data.getPlayer().getPilotPts());
@@ -38,8 +38,8 @@ public class InfoActivity extends RootActivity {
 		traderPts.setText("" + data.getPlayer().getTraderPts());
 		engineerPts.setText("" + data.getPlayer().getEngineerPts());
 
-		TextView currentPlanet = (TextView) findViewById(R.id.textView10);
-		TextView money = (TextView) findViewById(R.id.textView11);
+		TextView currentPlanet = (TextView) findViewById(R.id.tv_planet);
+		TextView money = (TextView) findViewById(R.id.tv_money);
 
 		currentPlanet
 				.setText("Current planet: " + data.getLocation().getName());
