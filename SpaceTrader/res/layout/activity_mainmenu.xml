@@ -4,23 +4,19 @@
     android:layout_height="match_parent"
     android:background="@drawable/background_mainmenu" >
 
-    <TextView
-        android:id="@+id/txtview_app_name"
+    <ImageView
+        android:id="@+id/img_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
-        android:text="@string/app_name_main"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="#CCDDE6"
-        android:textSize="70dp" />
+        android:src="@drawable/space_trader_logo"
+        android:contentDescription="@string/logo_desc"/>
 
     <Button
         android:id="@+id/btn_newgame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/txtview_app_name"
+        android:layout_below="@+id/img_logo"
         android:layout_marginTop="40dp"
         android:background="@drawable/custom_btn_main"
         android:text="@string/bt_newgame"
