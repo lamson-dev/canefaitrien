@@ -3,17 +3,15 @@ package view;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import model.Planet;
 import model.Ship;
+import model.ShipYard;
 
 import controller.Controller;
 
@@ -22,9 +20,19 @@ public class UniversePanel extends JPanel {
 	private static final long serialVersionUID = -2657666322078794773L;
 	private Controller data;
 	private MarketplacePanel mp;
+	private ShipYardPanel shipYardPanel;
 	public UniversePanel(Controller data, MarketplacePanel mp) {
 		this.mp = mp;
 		this.data = data;
+		setPreferredSize(new Dimension(600, 500));
+		setBackground(Color.black);
+		addMouseListener(new PlanetListener());
+	}
+	// This is extended method added by An Pham 11/18/12
+	public UniversePanel(Controller data, MarketplacePanel mp, ShipYardPanel shipYardPanel) {
+		this.mp = mp;
+		this.data = data;
+		this.shipYardPanel = shipYardPanel;
 		setPreferredSize(new Dimension(600, 500));
 		setBackground(Color.black);
 		addMouseListener(new PlanetListener());
@@ -66,13 +74,14 @@ public class UniversePanel extends JPanel {
 		}
 	}
 	/**
-	 * This is implementation of space encounter
+	 * This is implementation of space encounter and SHipYard
 	 * @Author An Pham
 	 * @Date 11/07/12
 	 * @Version 1.0
 	 */
 	private void getSomeAction() {
 		TravelPanel travel = new TravelPanel(data, mp);		
+		shipYardPanel.change();
 	}
 	
 }

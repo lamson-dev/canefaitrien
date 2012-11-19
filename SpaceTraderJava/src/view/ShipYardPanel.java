@@ -12,6 +12,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import model.Gadget;
+import model.Shield;
 import model.ShipType;
 import model.ShipYard;
 import model.ShipYardItem;
@@ -36,6 +38,7 @@ public class ShipYardPanel extends JPanel {
 	JLabel nameLabel, moneyLabel;
 	JPanel panel = new JPanel();
 	ShipYard shipYard;
+	int shipPriceConstant = 400; // this will be multiplied by max distance to calculate ship price.
 	
 	// 
 	public ShipYardPanel(Controller data) {
@@ -44,9 +47,20 @@ public class ShipYardPanel extends JPanel {
 		shipYard = new ShipYard(data);
 		setup();
 	}
+	public ShipYardPanel(Controller data, ShipYard shipYard) {
+		
+		this.data = data;
+		this.shipYard = shipYard;
+		setup();
+	}
 	
+	public void change() {
+		shipYard.setup();
+	}
 	public void setup() {
 		panel.removeAll();
+		
+		
 		panel.setLayout(new GridLayout(0, 3));
 		setPreferredSize(new Dimension(600, 400));
 		nameLabel = new JLabel("Ship " + data.getShip().getType());
@@ -122,7 +136,8 @@ public class ShipYardPanel extends JPanel {
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			if (data.getMoney() < type.MAX_DISTANCE * 100) {
+			int price = type.MAX_DISTANCE * shipPriceConstant;// Ship price calculation
+			if (data.getMoney() < price) {
 				JOptionPane.showMessageDialog(frame,
 					    "Not enough money captain",
 					    "Warning",
@@ -137,7 +152,7 @@ public class ShipYardPanel extends JPanel {
 				}
 				else {
 					
-					shipYard.buyShip(type);
+					shipYard.buyShip(type, price);
 
 					JOptionPane.showMessageDialog(frame,
 							"Ship Transferred. You are now using" + type,
@@ -167,7 +182,7 @@ public class ShipYardPanel extends JPanel {
 		ShipType[] shipTypes = ShipType.values();
 		int[] shipPrice = new int[shipTypes.length];
 		for (int i = 0; i<shipPrice.length; i++) 
-			shipPrice[i] = shipTypes[i].MAX_DISTANCE * 100; // Price is calculated base on the max distance of each ship type
+			shipPrice[i] = shipTypes[i].MAX_DISTANCE * shipPriceConstant; // Price is calculated base on the max distance of each ship type
 		
 		for (int i = 0; i<shipPrice.length; i++) {
 			panel.add(new JLabel(shipTypes[i].toString()));
@@ -214,6 +229,8 @@ public class ShipYardPanel extends JPanel {
 			
 			List<ShipYardItem> shipYardItems = shipYard.getShipYard();
 			for (int i = 0; i<shipYardItems.size(); i++) {
+				if (!(shipYardItems.get(i).getType() instanceof Weapon)) // this is a filter, we only need object of Weapon type
+					continue;
 				JLabel nameLbl = new JLabel(shipYardItems.get(i).getName().toString());
 				panel.add(nameLbl);
 				JLabel priceLbl = new JLabel("Price :"+shipYardItems.get(i).getPrice());
@@ -251,18 +268,29 @@ public class ShipYardPanel extends JPanel {
 							JOptionPane.WARNING_MESSAGE);
 				}
 				else {
-					try {
-						data.getShip().addWeapon((Weapon) item.getType());
-						data.setMoney(data.getMoney() - item.getPrice());
-						
+					if (item.getQuantity() <= 0) {
 						JOptionPane.showMessageDialog(frame,
-								"Upgrade successful! your money now is "+data.getMoney(),
+								"They don't have this captain",
 								"Warning",
 								JOptionPane.WARNING_MESSAGE);
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} 
+					}
+					else {
+						try {
+							data.getShip().addWeapon((Weapon) item.getType());
+							data.setMoney(data.getMoney() - item.getPrice());
+							item.setQuantity(item.getQuantity() -1);
+
+							JOptionPane.showMessageDialog(frame,
+									"Upgrade successful! your money now is "+data.getMoney(),
+									"Warning",
+									JOptionPane.WARNING_MESSAGE);
+						} catch (Exception e) {
+							JOptionPane.showMessageDialog(frame,
+									e.toString(),
+									"Warning",
+									JOptionPane.WARNING_MESSAGE);
+						} 
+					}
 					
 				}
 			}
@@ -279,7 +307,95 @@ public class ShipYardPanel extends JPanel {
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			setup();
+			panel.removeAll();
+			panel.setLayout(new GridLayout(0, 4));
+			nameLabel = new JLabel("Ship " + data.getShip().getType());
+			panel.add(nameLabel);
+			JLabel playerLabel = new JLabel( data.getPlayer().getName());
+			panel.add(playerLabel);
+			moneyLabel = new JLabel("$" + data.getMoney());
+			panel.add(moneyLabel);
+			JLabel nothing = new JLabel("_");
+			panel.add(nothing);
+			List<Gadget> gadgetsOnShip = data.getShip().getGadgetList();
+			for(int i = 0; i<gadgetsOnShip.size(); i++) {
+				JLabel tempLbl = new JLabel(gadgetsOnShip.get(i).toString());
+				panel.add(tempLbl);
+			}
+			
+			List<ShipYardItem> shipYardItems = shipYard.getShipYard();
+			for (int i = 0; i<shipYardItems.size(); i++) {
+				if (!(shipYardItems.get(i).getType() instanceof Gadget)) // this is a filter, we only need object of Gadget type
+					continue;
+				JLabel nameLbl = new JLabel(shipYardItems.get(i).getName().toString());
+				panel.add(nameLbl);
+				JLabel priceLbl = new JLabel("Price :"+shipYardItems.get(i).getPrice());
+				panel.add(priceLbl);
+				JLabel numberLbl = new JLabel("Available :" + shipYardItems.get(i).getQuantity());
+				panel.add(numberLbl);
+				JButton buyGadgetBtn = new JButton("Buy Gadget");
+				buyGadgetBtn.addActionListener(new buyGadgetBtnListener(shipYardItems.get(i)));
+				panel.add(buyGadgetBtn);
+				
+			}
+			JButton cancelBtn = new JButton("Go Back");
+			cancelBtn.addActionListener(new cancelBtnListener());
+
+			panel.add(cancelBtn);
+			revalidate();
+		}
+		
+	}
+	public class buyGadgetBtnListener implements ActionListener {
+		
+		private ShipYardItem item;
+		private JFrame frame;
+		public buyGadgetBtnListener(ShipYardItem item) {
+			this.item = item;
+		}
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			if (!data.getShip().checkGadgetExistence(item.getType())) {
+				if (item.getPrice()> data.getMoney()) {
+					JOptionPane.showMessageDialog(frame,
+							"Not enough money captain",
+							"Warning",
+							JOptionPane.WARNING_MESSAGE);
+				}
+				else {
+					if (item.getQuantity() <= 0) {
+						JOptionPane.showMessageDialog(frame,
+								"They don't have this captain",
+								"Warning",
+								JOptionPane.WARNING_MESSAGE);
+					}
+					else {
+						try {
+							data.getShip().addGadget((Gadget) item.getType());
+							data.setMoney(data.getMoney() - item.getPrice());
+							item.setQuantity(item.getQuantity() -1);
+
+							JOptionPane.showMessageDialog(frame,
+									"Upgrade successful! your money now is "+data.getMoney(),
+									"Warning",
+									JOptionPane.WARNING_MESSAGE);
+						} catch (Exception e) {
+							JOptionPane.showMessageDialog(frame,
+									e.toString(),
+									"Warning",
+									JOptionPane.WARNING_MESSAGE);
+						} 
+					}
+					
+				}
+			}
+			else {
+				JOptionPane.showMessageDialog(frame,
+					    "You have already had this",
+					    "Warning",
+					    JOptionPane.WARNING_MESSAGE);
+			}
 		}
 		
 	}
@@ -287,7 +403,95 @@ public class ShipYardPanel extends JPanel {
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			setup();
+			panel.removeAll();
+			panel.setLayout(new GridLayout(0, 4));
+			nameLabel = new JLabel("Ship " + data.getShip().getType());
+			panel.add(nameLabel);
+			JLabel playerLabel = new JLabel( data.getPlayer().getName());
+			panel.add(playerLabel);
+			moneyLabel = new JLabel("$" + data.getMoney());
+			panel.add(moneyLabel);
+			JLabel nothing = new JLabel("_");
+			panel.add(nothing);
+			List<Shield> shieldsOnShip = data.getShip().getShieldList();
+			for(int i = 0; i<shieldsOnShip.size(); i++) {
+				JLabel tempLbl = new JLabel(shieldsOnShip.get(i).toString());
+				panel.add(tempLbl);
+			}
+			
+			List<ShipYardItem> shipYardItems = shipYard.getShipYard();
+			for (int i = 0; i<shipYardItems.size(); i++) {
+				if (!(shipYardItems.get(i).getType() instanceof Shield)) // this is a filter, we only need object of Shield type
+					continue;
+				JLabel nameLbl = new JLabel(shipYardItems.get(i).getName().toString());
+				panel.add(nameLbl);
+				JLabel priceLbl = new JLabel("Price :"+shipYardItems.get(i).getPrice());
+				panel.add(priceLbl);
+				JLabel numberLbl = new JLabel("Available :" + shipYardItems.get(i).getQuantity());
+				panel.add(numberLbl);
+				JButton buyShieldBtn = new JButton("Buy Shield");
+				buyShieldBtn.addActionListener(new buyShieldBtnListener(shipYardItems.get(i)));
+				panel.add(buyShieldBtn);
+				
+			}
+			JButton cancelBtn = new JButton("Go Back");
+			cancelBtn.addActionListener(new cancelBtnListener());
+
+			panel.add(cancelBtn);
+			revalidate();
+		}
+		
+	}
+public class buyShieldBtnListener implements ActionListener {
+		
+		private ShipYardItem item;
+		private JFrame frame;
+		public buyShieldBtnListener(ShipYardItem item) {
+			this.item = item;
+		}
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			if (!data.getShip().checkShieldExistence(item.getType())) {
+				if (item.getPrice()> data.getMoney()) {
+					JOptionPane.showMessageDialog(frame,
+							"Not enough money captain",
+							"Warning",
+							JOptionPane.WARNING_MESSAGE);
+				}
+				else {
+					if (item.getQuantity() <= 0) {
+						JOptionPane.showMessageDialog(frame,
+								"They don't have this captain",
+								"Warning",
+								JOptionPane.WARNING_MESSAGE);
+					}
+					else {
+						try {
+							data.getShip().addShield((Shield) item.getType());
+							data.setMoney(data.getMoney() - item.getPrice());
+							item.setQuantity(item.getQuantity() -1);
+
+							JOptionPane.showMessageDialog(frame,
+									"Upgrade successful! your money now is "+data.getMoney(),
+									"Warning",
+									JOptionPane.WARNING_MESSAGE);
+						} catch (Exception e) {
+							JOptionPane.showMessageDialog(frame,
+									e.toString(),
+									"Warning",
+									JOptionPane.WARNING_MESSAGE);
+						} 
+					}
+					
+				}
+			}
+			else {
+				JOptionPane.showMessageDialog(frame,
+					    "You have already had this",
+					    "Warning",
+					    JOptionPane.WARNING_MESSAGE);
+			}
 		}
 		
 	}

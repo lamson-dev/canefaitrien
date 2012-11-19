@@ -3,6 +3,9 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Gadget.GadgetType;
+import model.Shield.ShieldType;
+
 /**
  * Ship class for holding info on the ship
  * 
@@ -17,7 +20,12 @@ public class Ship {
 	private int currentCargoHold;
 	private int[] cargo;
 	private int fuel;
+	// These are added on 11/18/12 for shipyard extension
 	private List<Weapon> weapons = new ArrayList<Weapon>();
+	private List<Shield> shields = new ArrayList<Shield>();
+	private List<Gadget> gadgets = new ArrayList<Gadget>();
+	private int maxCargo;
+	public boolean detectable = true; // if this set to false, no encounter will occur
 //	private Shield[] shields;
 //	private Gadget[] gadgets;
 	
@@ -39,6 +47,7 @@ public class Ship {
 		this.currentCargoHold = currentCargoHold;
 		this.cargo = cargo;
 		this.fuel = fuel;
+		maxCargo =type.MAX_CARGO_HOLD;
 	}
 	
 	/**
@@ -48,7 +57,7 @@ public class Ship {
 	 * @throws Exception if no room in cargo
 	 */
 	public void addGood(TradeGood good) throws Exception {
-		if (currentCargoHold == type.MAX_CARGO_HOLD) {
+		if (currentCargoHold == maxCargo) {
 			throw new Exception("No more room in the cargo, captain!");
 		} else {
 			cargo[good.ordinal()]++;
@@ -108,21 +117,83 @@ public class Ship {
 			weapons.add(weapon);
 		}
 	}
+	
 	/**
-	 * this is used to transfer weapons to new ship. Do not call these functions elsewhere!
+	 * Adds a shield to shield slot
+	 * 
+	 * @param shield to be added
+	 * @throws Exception if no empty slot left
+	 */
+	public void addShield(Shield shield) throws Exception {
+		if (shields.size() == type.MAX_SHIELDS_SLOTS) {
+			throw new Exception("No more shields slot left, captain!");
+		} else {
+			shields.add(shield);
+			if (shield.getType() == ShieldType.ENERGY) 
+				hullStrength += 50;
+			else if (shield.getType() == ShieldType.REFLECTIVE) 
+				hullStrength += 100;
+		}
+	}
+	
+	/**
+	 * Adds a gadget to gadget slot
+	 * 
+	 * @param shield to be added
+	 * @throws Exception if no empty slot left
+	 */
+	public void addGadget(Gadget gadget) throws Exception {
+		if (gadgets.size() == type.MAX_GADGETS_SLOTS) {
+			throw new Exception("No more gadget slot left, captain!");
+		} else {
+			gadgets.add(gadget);
+			if (gadget.getType() == GadgetType.FIVE_EXTRA) 
+				maxCargo += 5;
+			else if (gadget.getType() == GadgetType.CLOAK_DEVICE) 
+				detectable = false;
+		}
+	}
+	/**
+	 * this is used to transfer equipments to new ship. Do not call these functions elsewhere!
 	 * @param list
 	 */
 	public void setWeapons(List<Weapon> list) {
 		this.weapons = list;
 	}
+	public void setGadgets(List<Gadget> list) {
+		this.gadgets = list;
+	}
+	public void setShields(List<Shield> list) {
+		this.shields = list;
+	}
 
 	public List<Weapon> getWeaponList() {
 		return weapons;
+	}
+	public List<Gadget> getGadgetList() {
+		return gadgets;
+	}
+	public List<Shield> getShieldList() {
+		return shields;
 	}
 	
 	public boolean checkWeaponExistence(Equipment w) {
 		for(int i = 0; i<weapons.size(); i++) {
 			if(weapons.get(i).equals(w))
+				return true;
+		}
+		return false;
+	}
+	public boolean checkShieldExistence(Equipment w) {
+		for(int i = 0; i<shields.size(); i++) {
+			if(shields.get(i).equals(w))
+				return true;
+		}
+		return false;
+	}
+	public boolean checkGadgetExistence(Equipment w) {
+		for(int i = 0; i<gadgets.size(); i++) {
+			if(gadgets.get(i).equals(w))
 				return true;
 		}
 		return false;

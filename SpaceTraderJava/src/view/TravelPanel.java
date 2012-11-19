@@ -49,7 +49,8 @@ public class TravelPanel extends JPanel {
 	}
 	
 	private void getAction() {
-
+		if (!data.getShip().detectable) // If the cloak device was bought, there will be no encounter;
+			return;
 		EncounterType encounter = EncounterType.getEncounterType();
 		switch (encounter) {
 		case POLICE:

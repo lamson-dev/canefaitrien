@@ -2,6 +2,9 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import model.Gadget.GadgetType;
+import model.Shield.ShieldType;
 import model.Weapon.WeaponType;
 
 import controller.Controller;
@@ -19,7 +22,7 @@ public class ShipYard {
 
 	
 	private Controller data;
-	private List<ShipYardItem> items = new ArrayList<ShipYardItem>();
+	private List<ShipYardItem> items;
 	
 	/**
 	 * constructor
@@ -38,16 +41,26 @@ public class ShipYard {
 	 * Setting up, create new shipyard items.
 	 */
 	public void setup() {
+		items = new ArrayList<ShipYardItem>();
+		
 		WeaponType[] weapons =WeaponType.values();
 		for (int i = 0; i<weapons.length; i++) {
 			items.add(new ShipYardItem(new Weapon(weapons[i])));
+		}
+		GadgetType[] gadgets =GadgetType.values();
+		for (int i = 0; i<gadgets.length; i++) {
+			items.add(new ShipYardItem(new Gadget(gadgets[i])));
+		}
+		ShieldType[] shields =ShieldType.values();
+		for (int i = 0; i<shields.length; i++) {
+			items.add(new ShipYardItem(new Shield(shields[i])));
 		}
 	}
 	/**
 	 * Buy new Ship
 	 * @param type
 	 */
-	public void buyShip(ShipType type) {
+	public void buyShip(ShipType type, int price) {
 		// Take all goods
 		int[] cargo = data.getShip().getCargo();
 		for (int i = 0; i < cargo.length; i++)
@@ -56,7 +69,11 @@ public class ShipYard {
 		Ship newShip = new Ship(type);
 		// Transfer weapon
 		newShip.setWeapons(data.getShip().getWeaponList());
-
+		// Transfer gadget
+		newShip.setGadgets(data.getShip().getGadgetList());
+		// Transfer shield
+		newShip.setShields(data.getShip().getShieldList());
+		data.setMoney(data.getMoney() - price);
 		data.setShip(newShip);
 	}
 	

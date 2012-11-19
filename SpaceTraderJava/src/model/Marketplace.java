@@ -25,8 +25,6 @@ public class Marketplace {
 	private int[] itemBuyPrices;
 	private int[] itemSellPrices;
 	private TechLevel level;
-	private Situation situation;
-	
 	/**
 	 * Marketplace constructor for loading
 	 */
@@ -37,7 +35,6 @@ public class Marketplace {
 		this.itemBuyPrices = itemBuyPrices;
 		this.itemSellPrices = itemSellPrices;
 		this.level = level;
-		this.situation = situation;
 	}
 	
 	/**
