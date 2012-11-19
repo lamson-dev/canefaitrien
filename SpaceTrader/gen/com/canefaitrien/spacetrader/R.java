@@ -35,8 +35,10 @@ public final class R {
         public static final int ic_launcher=0x7f02000b;
         public static final int menubutton_nuetral=0x7f02000c;
         public static final int menubutton_pressed=0x7f02000d;
-        public static final int planet_button_test=0x7f02000e;
-        public static final int ship_icon=0x7f02000f;
+        public static final int planet_a=0x7f02000e;
+        public static final int planet_b=0x7f02000f;
+        public static final int planet_button_test=0x7f020010;
+        public static final int ship_icon=0x7f020011;
     }
     public static final class id {
         public static final int bar_engineer=0x7f090011;

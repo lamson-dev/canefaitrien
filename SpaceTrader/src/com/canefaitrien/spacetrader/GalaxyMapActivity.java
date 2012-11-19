@@ -9,8 +9,6 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
-import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.canefaitrien.spacetrader.models.EncounterType;
@@ -21,74 +19,74 @@ import com.canefaitrien.spacetrader.models.Ship;
 import com.canefaitrien.spacetrader.models.TraderEncounter;
 import com.canefaitrien.spacetrader.utils.MusicManager;
 
-//This class should have the actions for clicking a planet
+/**
+ * This class handles the actions on the Galaxy menu
+ * 
+ * 
+ * @author Daniel Xiao
+ *
+ */
 public class GalaxyMapActivity extends RootActivity implements OnTouchListener {
 
-	private static final String TAG = "GalaxyMap";
-
+	private String TAG = "Galaxy Activity";
 	private GalaxyView galaxy;
-
-	LinearLayout galaxyLayout;
-	Button button;
+	/**
+	 * Displays the galaxy canvas and draws it on
+	 * Creates a listener for screen pressing
+	 */
 
 	private boolean continueMusic;
-
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		Log.d("Galaxy", "Created Galaxy");
-		galaxyLayout = (LinearLayout) findViewById(R.id.galaxy_layout);
 		// draw planets
 		galaxy = new GalaxyView(this, SpaceTrader.getController().getUniverse());
 		galaxy.setBackgroundColor(Color.BLACK);
 		galaxy.setOnTouchListener(this);
-
+		
 		setContentView(galaxy);
-		// setContentView(galaxyLayout);
-
-		// galaxyLayout.addView(galaxy);
-
-		// button = new Button(this);
-		// galaxyLayout.addView(button);
-
 	}
-
+	/**
+	 * Creates popup menus for when a planet is clicked on
+	 * 
+	 * @param planet Takes in the planet clicked on.
+	 */
 	public void onCreateDialog(Planet planet) {
 		final Planet p = planet;
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);// getActivity());
-		builder.setTitle("" + planet.getName());
-		// Change this to display actual fuel needed when necessary
-		Planet location = SpaceTrader.getController().getLocation();
-		builder.setMessage("Tech Level: " + planet.getStringTechLevel()
-				+ "\nFuel needed to travel: " + location.distance(p) / Ship.MPG
-				+ "/" + SpaceTrader.getController().getShip().getFuel());
-		builder.setPositiveButton("Cancel",
-				new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int which) {
-						// do nothing
-					}
-
-				});
-		builder.setNegativeButton("Travel",
-				new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int which) {
-						try {
-							SpaceTrader.getController().move(p);
-							galaxy.invalidate();
-							Log.d("Galaxy", "traveling to " + p.getName());
-							//
-							listDialog();
+	    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+	    builder.setTitle(""+planet.getName());
+	    Planet location = SpaceTrader.getController().getLocation();
+	    builder.setMessage("Tech Level: "+location.getStringTechLevel()+
+	    		"Situation: "+location.getStringSituation()+
+	    		"\nFuel needed to travel: "+location.distance(p)/Ship.MPG+"/"+SpaceTrader.getController().getShip().getFuel());
+	    builder.setPositiveButton("Close", new DialogInterface.OnClickListener(){
+	    	 public void onClick(DialogInterface dialog, int which) {
+	    		 //do nothing
+	           }
+	    	 
+	    });
+	    if(planet!=location){
+		    builder.setNegativeButton("Travel", new DialogInterface.OnClickListener(){
+		    	public void onClick(DialogInterface dialog, int which) {
+		    		 try {
+						SpaceTrader.getController().move(p);
+						galaxy.invalidate();
+						Log.d("Galaxy", "traveling to "+p.getName());
+						//
+						listDialog();
 						} catch (Exception e) {
-							Toast.makeText(getApplicationContext(),
-									"" + e.getMessage(), Toast.LENGTH_SHORT)
-									.show();
+							Toast.makeText(getApplicationContext(), "" +e.getMessage(),Toast.LENGTH_SHORT).show();
 							e.printStackTrace();
 						}
-					}
-				});
-		AlertDialog alert = builder.create();
-		alert.show();
+		           }
+		    });
+	    }
+	    AlertDialog alert = builder.create();
+	    alert.show();
 	}
-
+	/**
+	 * Creates a dialog for when an encounter appears
+	 */
 	public void listDialog() {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
@@ -168,26 +166,29 @@ public class GalaxyMapActivity extends RootActivity implements OnTouchListener {
 		case NOTHING:
 			break;
 		}
-		if (encounter != EncounterType.NOTHING) {
-			AlertDialog alert = builder.create();
-			alert.show();
-		}
+	    if(encounter!=EncounterType.NOTHING){//no encounter
+		    AlertDialog alert = builder.create();
+		    alert.show();
+	    }
 	}
-
+	/**
+	 * Checks entire screen when pressed and sees if 
+	 * a planet contains those coordinates
+	 * @param takes in a view and an event
+	 * @return returns true when the view is touched
+	 */
 	public boolean onTouch(View v, MotionEvent e) {
 		if (e.getAction() == MotionEvent.ACTION_DOWN) {
-			Log.d("Galaxy",
-					"ActionDown" + (int) e.getRawX() + " " + (int) e.getRawY());
-			for (Planet p : SpaceTrader.getController().getUniverse()) {
-				if (p.isClicked(new Point((int) e.getRawX(), (int) e.getRawY()))) {
-					if (p != SpaceTrader.getController().getLocation()) {
-						Log.d("Galaxy", "clicked " + p.getName());
-						// need some sort of popup to invoke move
+			Log.d("Galaxy", "ActionDown" +  (int)e.getRawX() + " " +  (int)e.getRawY());
+			for(Planet p : SpaceTrader.getController().getUniverse()) {
+				if(p.isClicked(new Point((int)e.getRawX(), (int)e.getRawY()))){
+					//if(p!=SpaceTrader.getController().getLocation()){//is this the planet we're on
+						Log.d("Galaxy", "clicked " +p.getName());
+						//passes the planet clicked on
 						onCreateDialog(p);
-					}
+					//}
 				}
 			}
-
 		}
 		return true;
 	}
