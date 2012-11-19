@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_mainmenu"
+    android:background="@drawable/starfield_b"
     android:orientation="vertical" >
 
     <LinearLayout
@@ -117,17 +117,47 @@
         </LinearLayout>
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/img_ship"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="137dp"
-        android:src="@drawable/ic_launcher" />
+        android:orientation="vertical"
+        android:padding="@dimen/m15dp" >
 
-    <TextView
-        android:id="@+id/tv_planet"
+        <TextView
+            android:id="@+id/tv_ship"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ship type goes here"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <ImageView
+            android:id="@+id/img_ship"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ship_icon" />
+
+        <TextView
+            android:id="@+id/tv_ship_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ship information goes here"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:orientation="vertical"
+        android:padding="@dimen/m20dp" >
+
+        <TextView
+            android:id="@+id/tv_planet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="current planetgoes here"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    </LinearLayout>
 
 </LinearLayout>
