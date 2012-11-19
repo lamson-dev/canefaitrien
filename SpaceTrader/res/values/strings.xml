@@ -32,5 +32,6 @@
     <string name="bt_debugmode">debug mode</string>
     <string name="menu_save">Save Game</string>
     <string name="menu_load">Load Game</string>
+    <string name="logo_desc">Space Trader</string>
 
 </resources>

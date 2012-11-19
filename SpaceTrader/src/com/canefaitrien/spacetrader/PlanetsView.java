@@ -54,10 +54,8 @@ public class PlanetsView extends View {
 		for (int i = 0; i < planets.length; i++) {
 			Planet planet = planets[i];
 			// planetColor.setARGB(200,
-			// randomColor.nextInt(256),randomColor.nextInt(256),
-			// randomColor.nextInt(256));
-			// c.drawCircle(planets[i].getCoordinates().x,planets[i].getCoordinates().y,
-			// planets[i].getRadius(),planetColor);
+			// randomColor.nextInt(256),randomColor.nextInt(256),randomColor.nextInt(256));
+			// c.drawCircle(planets[i].getCoordinates().x,planets[i].getCoordinates().y,planets[i].getRadius(),planetColor);
 			switch (planet.getType()) {
 			case 0:
 				planetImage = BitmapFactory.decodeResource(getResources(),
@@ -66,6 +64,14 @@ public class PlanetsView extends View {
 			case 1:
 				planetImage = BitmapFactory.decodeResource(getResources(),
 						R.drawable.planet_b);
+				break;
+			case 2:
+				planetImage = BitmapFactory.decodeResource(getResources(),
+						R.drawable.planet_c);
+				break;
+			case 3:
+				planetImage = BitmapFactory.decodeResource(getResources(),
+						R.drawable.planet_a);
 				break;
 			}
 			// this is the rectangle that determines the scaled planet size

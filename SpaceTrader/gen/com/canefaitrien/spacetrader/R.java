@@ -37,9 +37,11 @@ public final class R {
         public static final int menubutton_pressed=0x7f02000d;
         public static final int planet_a=0x7f02000e;
         public static final int planet_b=0x7f02000f;
-        public static final int planet_button_test=0x7f020010;
-        public static final int ship_icon=0x7f020011;
-        public static final int starfield_a=0x7f020012;
+        public static final int planet_c=0x7f020010;
+        public static final int planet_d=0x7f020011;
+        public static final int ship_icon=0x7f020012;
+        public static final int space_trader_logo=0x7f020013;
+        public static final int starfield_a=0x7f020014;
     }
     public static final class id {
         public static final int bar_engineer=0x7f090011;
@@ -64,6 +66,7 @@ public final class R {
         public static final int good_price=0x7f090039;
         public static final int good_sell_price=0x7f09003a;
         public static final int good_stock=0x7f09003c;
+        public static final int img_logo=0x7f090026;
         public static final int img_ship=0x7f090024;
         public static final int linearLayout1=0x7f09001d;
         public static final int menu_load=0x7f090044;
@@ -104,7 +107,6 @@ public final class R {
         public static final int tv_planet=0x7f090025;
         public static final int tv_title=0x7f09001b;
         public static final int tv_trader=0x7f090021;
-        public static final int txtview_app_name=0x7f090026;
         public static final int txtview_engineer=0x7f090010;
         public static final int txtview_fighter=0x7f09000a;
         public static final int txtview_level=0x7f090004;
@@ -150,6 +152,7 @@ public final class R {
         public static final int difficulty_default=0x7f06000d;
         public static final int hello_world=0x7f060002;
         public static final int hint_name=0x7f060006;
+        public static final int logo_desc=0x7f060020;
         public static final int menu_load=0x7f06001f;
         public static final int menu_save=0x7f06001e;
         public static final int menu_settings=0x7f060003;

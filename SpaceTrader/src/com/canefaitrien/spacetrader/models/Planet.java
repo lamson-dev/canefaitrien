@@ -112,7 +112,7 @@ public class Planet {
 		this.color = Color.argb(255, randomColor.nextInt(256),
 				randomColor.nextInt(256), randomColor.nextInt(256));
 		// randomly pick a planet image number
-		this.type = randomColor.nextInt(2);
+		this.type = randomColor.nextInt(4);
 	}
 
 	/**
