@@ -29,8 +29,8 @@ public class Planet {
 	private Point coordinates;
 	private TechLevel level;
 	private Situation situation;
-	private int planetColor;
-	private int imgType;
+	private int color;
+	private int type;
 
 	private long dataId;
 	private Long marketId;
@@ -58,17 +58,17 @@ public class Planet {
 	 */
 	public Planet(Long id, String name, Integer radius, Integer xCoordinate,
 			Integer yCoordinate, String techLevel, String situation,
-			Integer xOffset, Integer yOffset, long dataId, Long marketId) {
+			Integer type, Integer color, Long dataId, Long marketId) {
 		this.id = id;
 		this.name = name;
 		this.radius = radius;
 		this.coordinates = new Point(xCoordinate, yCoordinate);
 		this.level = TechLevel.fromString(techLevel);
 		this.situation = Situation.fromString(situation);
+		this.type = type;
+		this.color = color;
 		this.dataId = dataId;
 		this.marketId = marketId;
-		this.planetColor = Color.argb(255, randomColor.nextInt(256),
-				randomColor.nextInt(256), randomColor.nextInt(256));
 	}
 
 	/**
@@ -79,22 +79,29 @@ public class Planet {
 		this(name, location, level, situation, new Marketplace(0, level,
 				situation));
 	}
+
 	/**
-	 * Sets values to equal ones generated in the universe
-	 * also random creates a size and planet image
+	 * Sets values to equal ones generated in the universe also random creates a
+	 * size and planet image
 	 * 
-	 * @param name  of planet
-	 * @param location player's current location
-	 * @param level the techlevel of the planet
-	 * @param situation the planet's current situation
-	 * @param marketplace create a marketplace with good values
+	 * @param name
+	 *            of planet
+	 * @param location
+	 *            player's current location
+	 * @param level
+	 *            the techlevel of the planet
+	 * @param situation
+	 *            the planet's current situation
+	 * @param marketplace
+	 *            create a marketplace with good values
 	 */
 	public Planet(String name, Point location, TechLevel level,
 			Situation situation, Marketplace marketplace) {
 		// randomly generate a radius, occasionally making a giant planet.
-		if(new Random().nextDouble()<.98){
-			this.radius = (int) (Math.random() * 15) + 15;// for now each planet will
-		}else{
+		if (new Random().nextDouble() < .98) {
+			this.radius = (int) (Math.random() * 15) + 15;// for now each planet
+															// will
+		} else {
 			this.radius = (int) (Math.random() * 15) + 60;
 		}
 		this.name = name;
@@ -102,14 +109,10 @@ public class Planet {
 		this.level = level;
 		this.situation = situation;
 		this.marketplace = marketplace;
-		//randomly pick a planet image number
-		int imageNumber = randomColor.nextInt(2);
-		switch(imageNumber){
-		case 0:
-			imgType = 0; break;
-		case 1:
-			imgType = 1; break;
-		}
+		this.color = Color.argb(255, randomColor.nextInt(256),
+				randomColor.nextInt(256), randomColor.nextInt(256));
+		// randomly pick a planet image number
+		this.type = randomColor.nextInt(2);
 	}
 
 	/**
@@ -207,10 +210,6 @@ public class Planet {
 	public String getStringSituation() {
 		return situation.NAME;
 	}
-	
-	public int getImageType(){
-		return imgType;
-	}
 
 	public void setSituation(Situation situation) {
 		this.situation = situation;
@@ -235,6 +234,22 @@ public class Planet {
 	public String getStringTechLevel() {
 		return level.NAME;
 	}
+	
+	public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
+    public Integer getColor() {
+        return color;
+    }
+
+    public void setColor(Integer color) {
+        this.color = color;
+    }
 
 	public Long getDataId() {
 		return dataId;
@@ -246,10 +261,6 @@ public class Planet {
 
 	public Long getMarketId() {
 		return marketId;
-	}
-
-	public int getColor() {
-		return planetColor;
 	}
 
 	public void setMarketId(Long marketId) {

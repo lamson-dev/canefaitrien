@@ -11,13 +11,13 @@ public class Planet {
 
     private Long id;
     private String name;
-    private Integer size;
+    private Integer radius;
     private Integer xCoordinate;
     private Integer yCoordinate;
     private String techLevel;
     private String situation;
-    private Integer xOffset;
-    private Integer yOffset;
+    private Integer type;
+    private Integer color;
     private Long dataId;
     private Long marketId;
 
@@ -38,16 +38,16 @@ public class Planet {
         this.id = id;
     }
 
-    public Planet(Long id, String name, Integer size, Integer xCoordinate, Integer yCoordinate, String techLevel, String situation, Integer xOffset, Integer yOffset, Long dataId, Long marketId) {
+    public Planet(Long id, String name, Integer radius, Integer xCoordinate, Integer yCoordinate, String techLevel, String situation, Integer type, Integer color, Long dataId, Long marketId) {
         this.id = id;
         this.name = name;
-        this.size = size;
+        this.radius = radius;
         this.xCoordinate = xCoordinate;
         this.yCoordinate = yCoordinate;
         this.techLevel = techLevel;
         this.situation = situation;
-        this.xOffset = xOffset;
-        this.yOffset = yOffset;
+        this.type = type;
+        this.color = color;
         this.dataId = dataId;
         this.marketId = marketId;
     }
@@ -74,12 +74,12 @@ public class Planet {
         this.name = name;
     }
 
-    public Integer getSize() {
-        return size;
+    public Integer getRadius() {
+        return radius;
     }
 
-    public void setSize(Integer size) {
-        this.size = size;
+    public void setRadius(Integer radius) {
+        this.radius = radius;
     }
 
     public Integer getXCoordinate() {
@@ -114,20 +114,20 @@ public class Planet {
         this.situation = situation;
     }
 
-    public Integer getXOffset() {
-        return xOffset;
+    public Integer getType() {
+        return type;
     }
 
-    public void setXOffset(Integer xOffset) {
-        this.xOffset = xOffset;
+    public void setType(Integer type) {
+        this.type = type;
     }
 
-    public Integer getYOffset() {
-        return yOffset;
+    public Integer getColor() {
+        return color;
     }
 
-    public void setYOffset(Integer yOffset) {
-        this.yOffset = yOffset;
+    public void setColor(Integer color) {
+        this.color = color;
     }
 
     public Long getDataId() {

@@ -6,7 +6,6 @@ import java.util.List;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
-import android.util.Log;
 
 import com.canefaitrien.spacetrader.models.Marketplace;
 import com.canefaitrien.spacetrader.models.Planet;
@@ -35,8 +34,8 @@ public class PlanetDao extends AbstractDao<Planet, Long> {
 				true, "_id");
 		public final static Property Name = new Property(1, String.class,
 				"name", false, "NAME");
-		public final static Property Size = new Property(2, Integer.class,
-				"size", false, "SIZE");
+		public final static Property Radius = new Property(2, Integer.class,
+				"radius", false, "RADIUS");
 		public final static Property XCoordinate = new Property(3,
 				Integer.class, "xCoordinate", false, "X_COORDINATE");
 		public final static Property YCoordinate = new Property(4,
@@ -45,10 +44,10 @@ public class PlanetDao extends AbstractDao<Planet, Long> {
 				"techLevel", false, "TECH_LEVEL");
 		public final static Property Situation = new Property(6, String.class,
 				"situation", false, "SITUATION");
-		public final static Property XOffset = new Property(7, Integer.class,
-				"xOffset", false, "X_OFFSET");
-		public final static Property YOffset = new Property(8, Integer.class,
-				"yOffset", false, "Y_OFFSET");
+		public final static Property Type = new Property(7, Integer.class,
+				"type", false, "TYPE");
+		public final static Property Color = new Property(8, Integer.class,
+				"color", false, "COLOR");
 		public final static Property DataId = new Property(9, Long.class,
 				"dataId", false, "DATA_ID");
 		public final static Property MarketId = new Property(10, Long.class,
@@ -74,13 +73,13 @@ public class PlanetDao extends AbstractDao<Planet, Long> {
 		db.execSQL("CREATE TABLE " + constraint + "'PLANETS' (" + //
 				"'_id' INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
 				"'NAME' TEXT," + // 1: name
-				"'SIZE' INTEGER," + // 2: size
+				"'RADIUS' INTEGER," + // 2: radius
 				"'X_COORDINATE' INTEGER," + // 3: xCoordinate
 				"'Y_COORDINATE' INTEGER," + // 4: yCoordinate
 				"'TECH_LEVEL' TEXT," + // 5: techLevel
 				"'SITUATION' TEXT," + // 6: situation
-				"'X_OFFSET' INTEGER," + // 7: xOffset
-				"'Y_OFFSET' INTEGER," + // 8: yOffset
+				"'TYPE' INTEGER," + // 7: type
+				"'COLOR' INTEGER," + // 8: color
 				"'DATA_ID' INTEGER," + // 9: dataId
 				"'MARKET_ID' INTEGER);"); // 10: marketId
 	}
@@ -107,9 +106,9 @@ public class PlanetDao extends AbstractDao<Planet, Long> {
 			stmt.bindString(2, name);
 		}
 
-		Integer size = entity.getRadius();
-		if (size != null) {
-			stmt.bindLong(3, size);
+		Integer radius = entity.getRadius();
+		if (radius != null) {
+			stmt.bindLong(3, radius);
 		}
 
 		Integer xCoordinate = entity.getXCoordinate();
@@ -130,6 +129,16 @@ public class PlanetDao extends AbstractDao<Planet, Long> {
 		String situation = entity.getStringSituation();
 		if (situation != null) {
 			stmt.bindString(7, situation);
+		}
+
+		Integer type = entity.getType();
+		if (type != null) {
+			stmt.bindLong(8, type);
+		}
+
+		Integer color = entity.getColor();
+		if (color != null) {
+			stmt.bindLong(9, color);
 		}
 
 		Long dataId = entity.getDataId();
@@ -162,13 +171,13 @@ public class PlanetDao extends AbstractDao<Planet, Long> {
 				//
 				cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
 				cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // name
-				cursor.isNull(offset + 2) ? null : cursor.getInt(offset + 2), // size
+				cursor.isNull(offset + 2) ? null : cursor.getInt(offset + 2), // radius
 				cursor.isNull(offset + 3) ? null : cursor.getInt(offset + 3), // xCoordinate
 				cursor.isNull(offset + 4) ? null : cursor.getInt(offset + 4), // yCoordinate
 				cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // techLevel
 				cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // situation
-				cursor.isNull(offset + 7) ? null : cursor.getInt(offset + 7), // xOffset
-				cursor.isNull(offset + 8) ? null : cursor.getInt(offset + 8), // yOffset
+				cursor.isNull(offset + 7) ? null : cursor.getInt(offset + 7), // type
+				cursor.isNull(offset + 8) ? null : cursor.getInt(offset + 8), // color
 				cursor.isNull(offset + 9) ? null : cursor.getLong(offset + 9), // dataId
 				cursor.isNull(offset + 10) ? null : cursor.getLong(offset + 10) // marketId
 		);
@@ -192,6 +201,10 @@ public class PlanetDao extends AbstractDao<Planet, Long> {
 				.getString(offset + 5));
 		entity.setSituation(cursor.isNull(offset + 6) ? null : cursor
 				.getString(offset + 6));
+		entity.setType(cursor.isNull(offset + 7) ? null : cursor
+				.getInt(offset + 7));
+		entity.setColor(cursor.isNull(offset + 8) ? null : cursor
+				.getInt(offset + 8));
 		entity.setDataId(cursor.isNull(offset + 9) ? null : cursor
 				.getLong(offset + 9));
 		entity.setMarketId(cursor.isNull(offset + 10) ? null : cursor
@@ -225,12 +238,10 @@ public class PlanetDao extends AbstractDao<Planet, Long> {
 	 * Internal query to resolve the "planets" to-many relationship of GameData.
 	 */
 	public synchronized List<Planet> _queryGameData_Planets(Long dataId) {
-		Log.d("PlanetDao", "data ID is: " + String.valueOf(dataId));
 		if (gameData_PlanetsQuery == null) {
 			QueryBuilder<Planet> queryBuilder = queryBuilder();
 			queryBuilder.where(Properties.DataId.eq(dataId));
 			gameData_PlanetsQuery = queryBuilder.build();
-
 		} else {
 			gameData_PlanetsQuery.setParameter(0, dataId);
 		}

@@ -14,14 +14,14 @@ import android.graphics.Paint.Align;
 import android.view.View;
 
 /**
- * This class draws the planets
- * made so it doesn't have to be expensively redrawn everytime
+ * This class draws the planets made so it doesn't have to be expensively
+ * redrawn everytime
  * 
  * @author Daniel Xiao
- *
+ * 
  */
 @SuppressLint("ViewConstructor")
-public class PlanetsView extends View{
+public class PlanetsView extends View {
 
 	private Planet[] planets;
 	private Paint wordTest = new Paint();
@@ -44,6 +44,7 @@ public class PlanetsView extends View{
 		wordTest.setColor(Color.WHITE);
 		wordTest.setTextAlign(Align.CENTER);
 	}
+
 	/**
 	 * Draw method called when created
 	 */
@@ -52,21 +53,32 @@ public class PlanetsView extends View{
 
 		for (int i = 0; i < planets.length; i++) {
 			Planet planet = planets[i];
-			//planetColor.setARGB(200, randomColor.nextInt(256),randomColor.nextInt(256), randomColor.nextInt(256));
-			//c.drawCircle(planets[i].getCoordinates().x,planets[i].getCoordinates().y, planets[i].getRadius(),planetColor);
-			switch(planet.getImageType()){
+			// planetColor.setARGB(200,
+			// randomColor.nextInt(256),randomColor.nextInt(256),
+			// randomColor.nextInt(256));
+			// c.drawCircle(planets[i].getCoordinates().x,planets[i].getCoordinates().y,
+			// planets[i].getRadius(),planetColor);
+			switch (planet.getType()) {
 			case 0:
-				planetImage = BitmapFactory.decodeResource(getResources(),R.drawable.planet_a); break;
+				planetImage = BitmapFactory.decodeResource(getResources(),
+						R.drawable.planet_a);
+				break;
 			case 1:
-				planetImage = BitmapFactory.decodeResource(getResources(),R.drawable.planet_b); break;
+				planetImage = BitmapFactory.decodeResource(getResources(),
+						R.drawable.planet_b);
+				break;
 			}
-			//this is the rectangle that determines the scaled planet size
-			dst = new Rect(planet.getXCoordinate()-planet.getRadius(),planet.getYCoordinate()-planet.getRadius(),
-					planet.getXCoordinate()+planet.getRadius(),planet.getYCoordinate()+planet.getRadius());
+			// this is the rectangle that determines the scaled planet size
+			dst = new Rect(planet.getXCoordinate() - planet.getRadius(),
+					planet.getYCoordinate() - planet.getRadius(),
+					planet.getXCoordinate() + planet.getRadius(),
+					planet.getYCoordinate() + planet.getRadius());
 			canvas.drawBitmap(planetImage, null, dst, paint);
 			wordTest.setAlpha(125);
 			wordTest.setTextSize(16);
-			canvas.drawText(planets[i].getName(), planets[i].getCoordinates().x,planets[i].getCoordinates().y, wordTest);
+			canvas.drawText(planets[i].getName(),
+					planets[i].getCoordinates().x,
+					planets[i].getCoordinates().y, wordTest);
 		}
 	}
 }
