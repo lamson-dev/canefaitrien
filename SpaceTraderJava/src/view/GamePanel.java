@@ -13,10 +13,11 @@ public class GamePanel extends JTabbedPane {
 		// tabs
 		//JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.BOTTOM);
 		MarketplacePanel mp = new MarketplacePanel(data);
-		addTab("Universe", new UniversePanel(data, mp));
+		ShipYardPanel shipYardPanel = new ShipYardPanel(data);
+		addTab("Universe", new UniversePanel(data, mp, shipYardPanel));
 		addTab("Info", new InfoPanel(data));		
 		addTab("Marketplace", mp);
 		addTab("Options", new OptionsPanel(data));
-		addTab("ShipYard", new ShipYardPanel(data));
+		addTab("ShipYard", shipYardPanel);
 	}
 }
