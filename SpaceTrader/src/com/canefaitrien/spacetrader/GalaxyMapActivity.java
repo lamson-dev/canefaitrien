@@ -71,9 +71,9 @@ public class GalaxyMapActivity extends RootActivity implements OnTouchListener {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle("" + planet.getName());
 		Planet location = SpaceTrader.getController().getLocation();
-		builder.setMessage("Tech Level: " + location.getStringTechLevel()
-				+ "\nSituation: " + location.getStringSituation()
-				+ "\nFuel needed to travel: " + location.distance(p) / Ship.MPG
+		builder.setMessage("Tech Level: " + planet.getStringTechLevel()
+				+ "\nSituation: " + planet.getStringSituation()
+				+ "\nFuel needed to travel: " + planet.distance(location) / Ship.MPG
 				+ "/" + SpaceTrader.getController().getShip().getFuel());
 		builder.setPositiveButton("Close",
 				new DialogInterface.OnClickListener() {
