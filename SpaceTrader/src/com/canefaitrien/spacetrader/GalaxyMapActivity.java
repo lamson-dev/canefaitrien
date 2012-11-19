@@ -54,7 +54,7 @@ public class GalaxyMapActivity extends RootActivity implements OnTouchListener {
 				.getUniverse());
 		galaxy.setOnTouchListener(this);
 		setContentView(main);
-		main.setBackgroundResource(R.drawable.starfield_b);
+		main.setBackgroundResource(R.drawable.starfield_a);
 		main.addView(planetsView);
 		main.addView(galaxy);
 

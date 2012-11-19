@@ -24,7 +24,6 @@ import com.canefaitrien.spacetrader.models.Ship;
  */
 @SuppressLint("ViewConstructor")
 public class GalaxyView extends View {
-	private Planet[] planets;
 	private Paint paint = new Paint();// normal paint
 	private Paint wordTest = new Paint(); // text paint
 
@@ -41,18 +40,15 @@ public class GalaxyView extends View {
 	 */
 	public GalaxyView(Context context, Planet[] planets) {
 		super(context);
-		//
-		this.planets = planets;
 		wordTest.setColor(Color.WHITE);
 		wordTest.setTextAlign(Align.CENTER);
-
 		ship_icon = BitmapFactory.decodeResource(getResources(),
-				R.drawable.ship_icon);
+				R.drawable.ship_model_a_small);
 	}
 
 	/**
-	 * Method that is called when class is started Basically draws planets and
-	 * the ship and the fuel radius
+	 * Method that is called when class is started
+	 * draws the ship and the fuel radius
 	 * 
 	 * @param canvas
 	 *            the canvas
@@ -87,10 +83,5 @@ public class GalaxyView extends View {
 		int range = (drawDist < 50) ? -50 : -10;
 		c.drawTextOnPath("fuel: " + shippy.getFuel() + "/"
 				+ shippy.getType().MAX_DISTANCE, circle, added, range, wordTest);
-	}
-
-	// getters and setters
-	public Planet[] getPlanets() {
-		return planets;
 	}
 }
