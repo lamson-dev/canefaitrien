@@ -21,10 +21,16 @@ public class HubActivity extends RootActivity implements OnClickListener,
 
 	private boolean continueMusic;
 
+	/**
+	 * Construtor for HubActivity, pass in this View to the Presenter
+	 */
 	public HubActivity() {
 		mPresenter = new MainScreenPresenter(this);
 	}
 
+	/**
+	 * called when activity is created
+	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -35,11 +41,14 @@ public class HubActivity extends RootActivity implements OnClickListener,
 
 		saveGame.setOnClickListener(this);
 		refill.setOnClickListener(this);
-		
+
 		setFont();
 
 	}
 
+	/**
+	 * OnClick events for all Buttons
+	 */
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.btn_savegame:
@@ -55,6 +64,9 @@ public class HubActivity extends RootActivity implements OnClickListener,
 
 	}
 
+	/**
+	 * Recursively set font for every TextView in the activity
+	 */
 	private void setFont() {
 		ViewGroup activityViewGroup = (ViewGroup) findViewById(
 				android.R.id.content).getRootView();
@@ -67,6 +79,9 @@ public class HubActivity extends RootActivity implements OnClickListener,
 	// continueMusic = true;
 	// }
 
+	/**
+	 * pause music when activity is paused
+	 */
 	@Override
 	protected void onPause() {
 		super.onPause();
@@ -76,6 +91,9 @@ public class HubActivity extends RootActivity implements OnClickListener,
 		}
 	}
 
+	/**
+	 * resume/start music without disruption
+	 */
 	@Override
 	protected void onResume() {
 		super.onResume();

@@ -10,13 +10,12 @@ import android.util.Log;
 
 import com.canefaitrien.spacetrader.R;
 
-/*
- * To use this, each activity must have a boolean field called continueMusic 
- * or whatever you want to call it. For any activity that isn't the root 
- * activity (launcher), override onKeyDown and set continueMusic to true if 
- * the key is the "back" key. Also set continueMusic to true when launching 
- * any activities in which you want to keep playing this music in with no 
- * interruption.
+/**
+ * To use this, each activity must have a boolean field called continueMusic or
+ * whatever you want to call it. For any activity that isn't the root activity
+ * (launcher), override onKeyDown and set continueMusic to true if the key is
+ * the "back" key. Also set continueMusic to true when launching any activities
+ * in which you want to keep playing this music in with no interruption.
  */
 public class MusicManager {
 	private static final String TAG = "MusicManager";

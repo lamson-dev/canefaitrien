@@ -40,15 +40,23 @@ public class ConfigurationActivity extends RootActivity implements
 
 	ConfigurationPresenter mPresenter;
 
+	@SuppressWarnings("unused")
 	private ProgressDialog progressDialog;
 
 	boolean continueMusic;
 
+	/**
+	 * Constructor to pass in Configuration View to the presenter, also let the
+	 * music to continue without disruption from previous activity
+	 */
 	public ConfigurationActivity() {
 		mPresenter = new ConfigurationPresenter(this);
 		continueMusic = true;
 	}
 
+	/**
+	 * called when activity is created
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -56,6 +64,10 @@ public class ConfigurationActivity extends RootActivity implements
 		init();
 	}
 
+	/**
+	 * initialize the activity, set font for all TextView, set OnClickListener
+	 * for all buttons, and set maximum points for each SeekBar
+	 */
 	private void init() {
 
 		// InputMethodManager imm = (InputMethodManager)
@@ -92,14 +104,21 @@ public class ConfigurationActivity extends RootActivity implements
 		setRemainingPts(totalPts);
 	}
 
+	/**
+	 * Display number of remaining points on the view
+	 * 
+	 * @param pts
+	 *            number of remaining points
+	 */
 	private void setRemainingPts(int pts) {
 		TextView rmPts = (TextView) findViewById(R.id.txtview_rm_pt);
 		rmPts.setText(String.valueOf(pts));
 	}
 
-	public final static String EXTRA_MESSAGE = "com.canefaitrient.spacetrader.MESSAGE";
-
-	/** Called when the user clicks the START button */
+	/**
+	 * Called when the user clicks the START button, validate input, pop up
+	 * messages when user missed any input
+	 */
 	public void startGame() {
 
 		boolean isGoodInput = true;
@@ -154,6 +173,9 @@ public class ConfigurationActivity extends RootActivity implements
 		startActivity(intent);
 	}
 
+	/**
+	 * OnClick events for all buttons
+	 */
 	public void onClick(View v) {
 
 		switch (v.getId()) {
@@ -172,11 +194,21 @@ public class ConfigurationActivity extends RootActivity implements
 
 	}
 
+	/**
+	 * Display difficulty level on the View
+	 * 
+	 * @param lvl
+	 *            difficulty level
+	 * 
+	 */
 	private void setDifficultyLevel(int lvl) {
 		TextView level = (TextView) findViewById(R.id.txtview_level);
 		level.setText(difficulties[lvl].toString());
 	}
 
+	/**
+	 * OnProgressChanged events for all SeekBars
+	 */
 	public void onProgressChanged(SeekBar seekBar, int progress,
 			boolean fromUser) {
 
@@ -206,16 +238,30 @@ public class ConfigurationActivity extends RootActivity implements
 
 	}
 
+	/**
+	 * OnStartTrackingTouch event for all SeekBars modify number of used points
+	 * on every touch so that View displays most updated data
+	 */
 	public void onStartTrackingTouch(SeekBar seekBar) {
 		usedPts -= seekBar.getProgress();
 
 	}
 
+	/**
+	 * OnStopTrackingTouch event for all SeekBars modify number of used points
+	 * on every touch so that View displays most updated data
+	 */
 	public void onStopTrackingTouch(SeekBar seekBar) {
 		usedPts += seekBar.getProgress();
 
 	}
 
+	// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+	// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+	// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+	/**
+	 * Getters/Setters for View elements
+	 */
 	public SeekBar getBarPilot() {
 		return (SeekBar) findViewById(R.id.bar_pilot);
 	}
@@ -267,12 +313,18 @@ public class ConfigurationActivity extends RootActivity implements
 
 	}
 
+	/**
+	 * make sure music keeps playing without disruption when user press Back
+	 */
 	@Override
 	public void onBackPressed() {
 		super.onBackPressed();
 		continueMusic = true;
 	}
 
+	/**
+	 * pause music when activity is paused
+	 */
 	@Override
 	protected void onPause() {
 		super.onPause();
@@ -282,6 +334,9 @@ public class ConfigurationActivity extends RootActivity implements
 		}
 	}
 
+	/**
+	 * resume/start music without disruption
+	 */
 	@Override
 	protected void onResume() {
 		super.onResume();
@@ -291,6 +346,12 @@ public class ConfigurationActivity extends RootActivity implements
 
 	}
 
+	// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+	// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+	// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+	/**
+	 * other fundamental android methods
+	 */
 	@Override
 	protected void onStart() {
 		super.onStart();

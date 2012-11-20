@@ -10,6 +10,13 @@ import com.canefaitrien.spacetrader.models.Marketplace;
 import com.canefaitrien.spacetrader.models.Situation;
 import com.canefaitrien.spacetrader.models.TechLevel;
 
+/**
+ * This Activity is for displaying information on the screen. Mainly for
+ * debugging
+ * 
+ * @author Son Nguyen
+ * 
+ */
 public class DisplayDataActivity extends RootActivity {
 
 	// private boolean continueMusic;
