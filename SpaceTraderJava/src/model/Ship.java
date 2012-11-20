@@ -198,4 +198,8 @@ public class Ship {
 		}
 		return false;
 	}
+
+	public int getCurrentCargoHold() {
+		return currentCargoHold;
+	}
 }
