@@ -1,12 +1,12 @@
 package com.canefaitrien.spacetrader.models;
+
+import java.util.Random;
+
 /**
  * @author An Pham
  * @Date 11/07/12
  * @Version 1.0
  */
-import java.util.Random;
-
-
 
 public class TraderEncounter implements Encounter {
 
@@ -21,7 +21,7 @@ public class TraderEncounter implements Encounter {
 	private int[] itemBuyPrices = new int[TradeGood.values().length];
 	private int[] itemSellPrices = new int[TradeGood.values().length];
 	private TechLevel level = TechLevel.HI_TECH;
-	
+
 	public TraderEncounter(Controller data) {
 		this.data = data;
 		for (TradeGood good : goods) {
@@ -35,29 +35,32 @@ public class TraderEncounter implements Encounter {
 			}
 		}
 	}
-	
-	public void trade() {
-		
-	}
 
+	public void trade() {
+
+	}
 
 	public void encounter() {
 		// TODO Auto-generated method stub
-		
+
 	}
+
 	/**
-	 * @Return true if survive
-	 * false otherwise
+	 * @Return true if survive false otherwise
 	 */
 	public boolean traderBattle() {
 		return ((data.getShip().getHullStrength() - type.MAX_HULL_STRENGTH) > 0);
 	}
+
 	private int getBuyPrice(TradeGood good) {
 		return getPrice(good, good.MIN_TL_PRODUCE);
 	}
 
 	private int getSellPrice(TradeGood good) {
-		return (int)(0.9*getPrice(good, good.MIN_TL_USE)); // makes sell values less than buy values
+		return (int) (0.9 * getPrice(good, good.MIN_TL_USE)); // makes sell
+																// values less
+																// than buy
+																// values
 	}
 
 	private int getPrice(TradeGood good, int minTL) {
@@ -71,6 +74,7 @@ public class TraderEncounter implements Encounter {
 			return 0;
 		}
 	}
+
 	public String[] getBuyView(Ship ship) {
 		String[] ret = new String[itemStock.length];
 		int[] cargo = ship.getCargo();
@@ -90,11 +94,11 @@ public class TraderEncounter implements Encounter {
 		}
 		return ret;
 	}
-	
+
 	public String[][] getView(Ship ship) {
 		String[][] ret = new String[itemStock.length][5];
 		int[] cargo = ship.getCargo();
-		for(int i = 0; i < ret.length; i++) {
+		for (int i = 0; i < ret.length; i++) {
 			ret[i][0] = goods[i].toString();
 			ret[i][1] = itemBuyPrices[i] + "";
 			ret[i][2] = itemSellPrices[i] + "";

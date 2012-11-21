@@ -24,15 +24,20 @@ public class Controller {
 	private Person player;
 	private Ship ship;
 	private Planet currentPlanet;
-	private int money; // might want to move this into Person? although it is
-						// easier to operate on in here
-
+	private int money;
 	private Planet[] universe;
 	private Difficulty difficulty;
 	private int turn;
 
 	/**
-	 * Constructor for loading game data
+	 * Constructor for Controller
+	 * @param player
+	 * @param ship
+	 * @param currentPlanet
+	 * @param money
+	 * @param universe
+	 * @param difficulty
+	 * @param turn
 	 */
 	public Controller(Person player, Ship ship, Planet currentPlanet,
 			int money, Planet[] universe, Difficulty difficulty, int turn) {
@@ -46,7 +51,9 @@ public class Controller {
 	}
 
 	/**
-	 * Constructor for new game
+	 * Constructor for Controller
+	 * @param player
+	 * @param difficulty
 	 */
 	public Controller(Person player, Difficulty difficulty) {
 		this(player, new Ship(ShipType.GNAT), null, STARTING_MONEY, Universe
@@ -135,9 +142,6 @@ public class Controller {
 		return turn;
 	}
 
-	// This is added by An Pham on 05/11/12
-	// This method should only be called from EncounterHandler
-	// Do not call this method elsewhere.
 	public void setMoney(int money) {
 		this.money = money;
 	}

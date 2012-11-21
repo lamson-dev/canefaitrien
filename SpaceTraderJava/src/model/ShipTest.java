@@ -24,13 +24,16 @@ Ship ship;
 	public void testAddGood() {
 		try{
 			ship.addGood(TradeGood.FOOD);
-			ship.addGood(TradeGood.NARCOTICS);
-			ship.addGood(TradeGood.ROBOTICS);
-			ship.addGood(TradeGood.FIREARMS);
-			ship.addGood(TradeGood.GAMES);
-			assertTrue("15 items in cargo", ship.getCurrentCargoHold() == 15);
 			assertTrue("3 food", ship.getCargo()[2] == 3);
+			ship.addGood(TradeGood.NARCOTICS);
 			assertTrue("1 narcotic", ship.getCargo()[8] == 1);
+			ship.addGood(TradeGood.ROBOTICS);
+			assertTrue("1 robot", ship.getCargo()[9] == 1);
+			ship.addGood(TradeGood.FIREARMS);
+			assertTrue("1", ship.getCargo()[5] == 1);
+			ship.addGood(TradeGood.GAMES);
+			assertTrue("3 food", ship.getCargo()[4] == 5);
+			assertTrue("15 items in cargo", ship.getCurrentCargoHold() == 15);
 		} catch(Exception e) {
 			fail("Shouldn't fail");
 		}

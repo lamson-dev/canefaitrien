@@ -20,7 +20,6 @@ import de.greenrobot.dao.DaoException;
  * @version 10/11/2012
  */
 
-// Planet data
 public class Planet {
 
 	// Instance variables
@@ -47,15 +46,33 @@ public class Planet {
 	private Marketplace marketplace;
 	private Long marketplace__resolvedKey;
 
+	/**
+	 * Constructor for Planet
+	 */
 	public Planet() {
 	}
 
+	/**
+	 * Constructor for Planet
+	 * @param id
+	 */
 	public Planet(Long id) {
 		this.id = id;
 	}
 
 	/**
-	 * Constructor for loading Planet
+	 * Constructor for Planet
+	 * @param id
+	 * @param name
+	 * @param radius
+	 * @param xCoordinate
+	 * @param yCoordinate
+	 * @param techLevel
+	 * @param situation
+	 * @param type
+	 * @param color
+	 * @param dataId
+	 * @param marketId
 	 */
 	public Planet(Long id, String name, Integer radius, Integer xCoordinate,
 			Integer yCoordinate, String techLevel, String situation,
@@ -73,7 +90,11 @@ public class Planet {
 	}
 
 	/**
-	 * Constructor for a new Planet
+	 * Constructor for Planet
+	 * @param name
+	 * @param location
+	 * @param level
+	 * @param situation
 	 */
 	public Planet(String name, Point location, TechLevel level,
 			Situation situation) {
@@ -118,6 +139,8 @@ public class Planet {
 
 	/**
 	 * Distance between planets
+	 * @param planet to compare
+	 * @return distance
 	 */
 	public int distance(Planet planet) {
 		return distance(planet.getCoordinates());
@@ -125,6 +148,8 @@ public class Planet {
 
 	/**
 	 * Distance between the planet and another point (like a click)
+	 * @param other Point to compare
+	 * @return distance
 	 */
 	public int distance(Point other) {
 		int dx, dy;
@@ -133,20 +158,20 @@ public class Planet {
 		return (int) Math.sqrt(dx * dx + dy * dy);
 	}
 
+	/**
+	 * Dock method to be called upon traveling
+	 * @param turn
+	 */
 	public void dock(int turn) {
 		marketplace.dock(turn);
 	}
-
-	// For testing purpose
-	public String toString() {
-		return "Planet " + name + " TL " + level + " Sit " + situation
-				+ " at X = " + coordinates.x + " Y = " + coordinates.y
-				+ " of radius " + radius + "\n";
-	}
-
+	
+	/**
+	 * Method to check if a Planet was clicked on the screen
+	 * @param point click location
+	 * @return was clicked
+	 */
 	public boolean isClicked(Point point) {
-		// so it looks like android doesn't have that rectangle thing
-		// This is assuming radius is the diameter. Correct this if I'm wrong
 		if (point.x > coordinates.x - radius
 				&& point.x < coordinates.x + radius
 				&& point.y > coordinates.y - radius
@@ -155,7 +180,13 @@ public class Planet {
 		}
 		return false;
 	}
-
+	
+	public String toString() {
+		return "Planet " + name + " TL " + level + " Sit " + situation
+				+ " at X = " + coordinates.x + " Y = " + coordinates.y
+				+ " of radius " + radius + "\n";
+	}
+	
 	public Long getId() {
 		return id;
 	}

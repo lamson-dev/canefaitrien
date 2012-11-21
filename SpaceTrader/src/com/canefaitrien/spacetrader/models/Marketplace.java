@@ -16,11 +16,8 @@ import com.canefaitrien.spacetrader.interfaces.GameConstants;
  * @author Andrew Duda
  * @version 1.0
  */
-public class Marketplace implements GameConstants {
 
-	public static enum MarketAction {
-		BUY, SELL
-	};
+public class Marketplace implements GameConstants {
 
 	private static TradeGood[] goods = TradeGood.values();
 	private static Random rand = new Random();
@@ -35,20 +32,28 @@ public class Marketplace implements GameConstants {
 
 	private Long id;
 
-	// private Integer lastDock;
-	// private String itemStock;
-	// private String itemBuyPrices;
-	// private String itemSellPrices;
-
+	/**
+	 * Constructor for Marketplace
+	 */
 	public Marketplace() {
 	}
 
+	/**
+	 * Constructor for Marketplace
+	 * @param id
+	 */
 	public Marketplace(Long id) {
 		this.id = id;
 	}
 
 	/**
-	 * Marketplace constructor for loading
+	 * Constructor for Marketplace
+	 * @param id
+	 * @param lastDock
+	 * @param itemStock
+	 * @param itemBuyPrices
+	 * @param itemSellPrices
+	 * @throws JSONException
 	 */
 	public Marketplace(Long id, Integer lastDock, String itemStock,
 			String itemBuyPrices, String itemSellPrices) throws JSONException {
@@ -62,7 +67,10 @@ public class Marketplace implements GameConstants {
 	}
 
 	/**
-	 * Marketplace constructor for new Marketplace
+	 * Constructor for Marketplace
+	 * @param lastDock
+	 * @param level
+	 * @param situation
 	 */
 	public Marketplace(int lastDock, TechLevel level, Situation situation) {
 		this(lastDock, new int[goods.length], new int[goods.length],
@@ -70,6 +78,15 @@ public class Marketplace implements GameConstants {
 		updateStock();
 	}
 
+	/**
+	 * Constructor for Marketplace
+	 * @param lastDock
+	 * @param itemStock
+	 * @param itemBuyPrices
+	 * @param itemSellPrices
+	 * @param level
+	 * @param situation
+	 */
 	public Marketplace(int lastDock, int[] itemStock, int[] itemBuyPrices,
 			int[] itemSellPrices, TechLevel level, Situation situation) {
 		this.lastDock = lastDock;
@@ -82,6 +99,7 @@ public class Marketplace implements GameConstants {
 
 	/**
 	 * Dock method to be called by Planet upon traveling to that Planet
+	 * @param turnDocked
 	 */
 	public void dock(int turnDocked) {
 		if (turnDocked - lastDock > STOCK_REFRESH_TURNS) {
@@ -107,17 +125,31 @@ public class Marketplace implements GameConstants {
 
 	}
 
+	/** 
+	 * Private method to get the buy price of a good
+	 * @param good
+	 * @return
+	 */
 	private int getBuyPrice(TradeGood good) {
 		return getPrice(good, good.MIN_TL_PRODUCE);
 	}
 
+	/**
+	 * Private method to get the sell price of a good
+	 * @param good
+	 * @return
+	 */
 	private int getSellPrice(TradeGood good) {
-		return (int) (0.9 * getPrice(good, good.MIN_TL_USE)); // makes sell
-																// values less
-																// than buy
-																// values
+		return (int) (0.8 * getPrice(good, good.MIN_TL_USE));
+		// 0.8 makes sell values less than buy values
 	}
 
+	/**
+	 * Method to calculate the price of a good based on the TechLevel
+	 * @param good
+	 * @param minTL
+	 * @return
+	 */
 	private int getPrice(TradeGood good, int minTL) {
 		if (level.ordinal() >= minTL) {
 			int temp = good.BASE_PRICE + good.INCREASE_PER_TL
@@ -130,59 +162,14 @@ public class Marketplace implements GameConstants {
 		}
 	}
 
-	public int[] getItemStock() {
-		return itemStock;
-	}
-
-	public int[] getItemBuyPrices() {
-		return itemBuyPrices;
-	}
-
-	public int[] getItemSellPrices() {
-		return itemSellPrices;
-	}
-
-	public String[] getBuyView(Ship ship) {
-		String[] ret = new String[itemStock.length];
-		int[] cargo = ship.getCargo();
-		for (int i = 0; i < itemStock.length; i++) {
-			ret[i] = goods[i].toString() + ": Price " + itemBuyPrices[i]
-					+ ", Available:" + itemStock[i] + ", In Cargo " + cargo[i];
-		}
-		return ret;
-	}
-
-	public String[] getSellView(Ship ship) {
-		String[] ret = new String[itemStock.length];
-		int[] cargo = ship.getCargo();
-		for (int i = 0; i < itemStock.length; i++) {
-			ret[i] = goods[i].toString() + ": Price " + itemSellPrices[i]
-					+ ", Available:" + itemStock[i] + ", In Cargo " + cargo[i];
-		}
-		return ret;
-	}
-
-	public String[][] getView(Ship ship) {
-		String[][] ret = new String[itemStock.length][5];
-		int[] cargo = ship.getCargo();
-		for (int i = 0; i < ret.length; i++) {
-			ret[i][0] = goods[i].toString();
-			ret[i][1] = itemBuyPrices[i] + "";
-			ret[i][2] = itemSellPrices[i] + "";
-			ret[i][3] = itemStock[i] + "";
-			ret[i][4] = cargo[i] + "";
-		}
-		return ret;
-	}
-
-	public String arrayToString(int[] array) {
-		String ret = "[";
-		for (int i : array) {
-			ret += i + " ";
-		}
-		return ret + "]\n";
-	}
-
+	/**
+	 * Method for a Player to buy a good from Marketplace
+	 * @param good
+	 * @param ship
+	 * @param money
+	 * @return
+	 * @throws Exception
+	 */
 	public int buyGood(TradeGood good, Ship ship, int money) throws Exception {
 		if (itemBuyPrices[good.ordinal()] > money) {
 			throw new Exception("We don't have enough money, captain!");
@@ -196,7 +183,12 @@ public class Marketplace implements GameConstants {
 	}
 
 	/**
-	 * Sell a good
+	 * Method for a Player to sell a good to the Marketplace
+	 * @param good
+	 * @param ship
+	 * @param money
+	 * @return
+	 * @throws Exception
 	 */
 	public int sellGood(TradeGood good, Ship ship, int money) throws Exception {
 		if (itemSellPrices[good.ordinal()] == 0) {
@@ -206,22 +198,6 @@ public class Marketplace implements GameConstants {
 			itemStock[good.ordinal()]++;
 			return money + itemSellPrices[good.ordinal()];
 		}
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Integer getLastDock() {
-		return lastDock;
-	}
-
-	public void setLastDock(Integer lastDock) {
-		this.lastDock = lastDock;
 	}
 
 	public String getStringItemStock() {
@@ -288,5 +264,39 @@ public class Marketplace implements GameConstants {
 	public void setSituation(Situation situation) {
 		this.situation = situation;
 	}
+	public int[] getItemStock() {
+		return itemStock;
+	}
 
+	public int[] getItemBuyPrices() {
+		return itemBuyPrices;
+	}
+
+	public int[] getItemSellPrices() {
+		return itemSellPrices;
+	}
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Integer getLastDock() {
+		return lastDock;
+	}
+
+	public void setLastDock(Integer lastDock) {
+		this.lastDock = lastDock;
+	}
+
+	public String arrayToString(int[] array) {
+		String ret = "[";
+		for (int i : array) {
+			ret += i + " ";
+		}
+		return ret + "]\n";
+	}
 }
