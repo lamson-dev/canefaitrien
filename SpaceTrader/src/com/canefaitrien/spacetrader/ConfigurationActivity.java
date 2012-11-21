@@ -28,13 +28,11 @@ public class ConfigurationActivity extends RootActivity implements
 
 	private EditText editName;
 	private TextView tvLevel;
-	private SeekBar barPilot;
-	private SeekBar barFighter;
-	private SeekBar barTrader;
-	private SeekBar barEngineer;
-	private int level = 0;
+	private SeekBar barPilot, barFighter, barTrader, barEngineer;
+	private Button btnPlus, btnMinus, btnStart;
 	private Difficulty[] difficulties = Difficulty.values();
 
+	private int level = 0;
 	private int totalPts = NUM_MAX_SKILL_POINTS;
 	private int usedPts = 0;
 
@@ -79,17 +77,21 @@ public class ConfigurationActivity extends RootActivity implements
 				android.R.id.content).getRootView();
 		setAppFont(activityViewGroup, appFont);
 
-		Button btnPlus = (Button) findViewById(R.id.btn_plus);
-		Button btnMinus = (Button) findViewById(R.id.btn_minus);
-		Button btnStart = (Button) findViewById(R.id.btn_start);
-		btnStart.setOnClickListener(this);
-		btnPlus.setOnClickListener(this);
-		btnMinus.setOnClickListener(this);
+		tvLevel = (TextView) findViewById(R.id.txtview_level);
+		editName = (EditText) findViewById(R.id.edit_name);
+
+		btnPlus = (Button) findViewById(R.id.btn_plus);
+		btnMinus = (Button) findViewById(R.id.btn_minus);
+		btnStart = (Button) findViewById(R.id.btn_start);
 
 		barPilot = (SeekBar) findViewById(R.id.bar_pilot);
 		barFighter = (SeekBar) findViewById(R.id.bar_fighter);
 		barTrader = (SeekBar) findViewById(R.id.bar_trader);
 		barEngineer = (SeekBar) findViewById(R.id.bar_engineer);
+
+		btnStart.setOnClickListener(this);
+		btnPlus.setOnClickListener(this);
+		btnMinus.setOnClickListener(this);
 
 		barPilot.setMax(NUM_MAX_INITIAL_POINTS);
 		barFighter.setMax(NUM_MAX_INITIAL_POINTS);
@@ -146,7 +148,12 @@ public class ConfigurationActivity extends RootActivity implements
 		// progressDialog = ProgressDialog.show(ConfigurationActivity.this,
 		// "New Game", "Creating the Universe");
 
-		mPresenter.createNewGame();
+		mPresenter.createNewGame(this.editName.getText().toString(),//
+				this.barPilot.getProgress(),//
+				this.barFighter.getProgress(),//
+				this.barTrader.getProgress(),//
+				this.barEngineer.getProgress(),//
+				this.tvLevel.getText().toString());
 		mPresenter.storeNewGameData();
 
 		// new Thread(new Runnable() {
@@ -191,7 +198,6 @@ public class ConfigurationActivity extends RootActivity implements
 				setDifficultyLevel(--level);
 			break;
 		}
-
 	}
 
 	/**
@@ -202,8 +208,7 @@ public class ConfigurationActivity extends RootActivity implements
 	 * 
 	 */
 	private void setDifficultyLevel(int lvl) {
-		TextView level = (TextView) findViewById(R.id.txtview_level);
-		level.setText(difficulties[lvl].toString());
+		tvLevel.setText(difficulties[lvl].toString());
 	}
 
 	/**
@@ -371,8 +376,8 @@ public class ConfigurationActivity extends RootActivity implements
 		Log.d(TAG, "onRestart called.");
 	}
 
-	@Override
-	protected void onDestroy() {
-		super.onDestroy();
-	}
+//	@Override
+//	protected void onDestroy() {
+//		super.onDestroy();
+//	}
 }

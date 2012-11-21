@@ -132,6 +132,7 @@ public class MarketPlaceActivity extends ListActivity implements
 	@Override
 	public void setListAdapter(ListAdapter adapter) {
 		super.setListAdapter(adapter);
+		Log.d(TAG, "set list adapter");
 	}
 
 	public Context getContext() {
@@ -188,11 +189,11 @@ public class MarketPlaceActivity extends ListActivity implements
 		finish();
 	}
 
-	@Override
-	protected void onDestroy() {
-		// mPresenter.saveData();
-		super.onDestroy();
-	}
+	// @Override
+	// protected void onDestroy() {
+	// // mPresenter.saveData();
+	// super.onDestroy();
+	// }
 
 	// public class MarketAdapter extends ArrayAdapter<Item> {
 	// private List<Item> items;

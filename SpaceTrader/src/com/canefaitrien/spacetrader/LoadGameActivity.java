@@ -50,6 +50,7 @@ public class LoadGameActivity extends ListActivity {
 	private static final int DELETE_ID = Menu.FIRST;
 
 	private GameDataDao gameDataDao;
+	@SuppressWarnings("unused")
 	private Cursor cursor;
 	private boolean continueMusic;
 
@@ -212,9 +213,9 @@ public class LoadGameActivity extends ListActivity {
 		Log.d(TAG, "onRestart called.");
 	}
 
-	@Override
-	protected void onDestroy() {
-		super.onDestroy();
-	}
+//	@Override
+//	protected void onDestroy() {
+//		super.onDestroy();
+//	}
 
 }

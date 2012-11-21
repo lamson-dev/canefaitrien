@@ -162,10 +162,10 @@ public class MainScreenActivity extends TabActivity implements IMainScreenView {
 		Log.d(TAG, "onRestart called.");
 	}
 
-	@Override
-	protected void onDestroy() {
-		super.onDestroy();
-	}
+//	@Override
+//	protected void onDestroy() {
+//		super.onDestroy();
+//	}
 
 	// @Override
 	// protected void onSaveInstanceState(Bundle outState) {

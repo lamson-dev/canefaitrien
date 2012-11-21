@@ -1,3 +1,4 @@
+// $codepro.audit.disable transientFieldInNonSerializable
 package com.canefaitrien.spacetrader.models;
 
 import java.util.Random;
@@ -234,22 +235,22 @@ public class Planet {
 	public String getStringTechLevel() {
 		return level.NAME;
 	}
-	
+
 	public Integer getType() {
-        return type;
-    }
+		return type;
+	}
 
-    public void setType(Integer type) {
-        this.type = type;
-    }
+	public void setType(Integer type) {
+		this.type = type;
+	}
 
-    public Integer getColor() {
-        return color;
-    }
+	public Integer getColor() {
+		return color;
+	}
 
-    public void setColor(Integer color) {
-        this.color = color;
-    }
+	public void setColor(Integer color) {
+		this.color = color;
+	}
 
 	public Long getDataId() {
 		return dataId;

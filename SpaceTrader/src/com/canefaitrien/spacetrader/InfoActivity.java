@@ -133,11 +133,11 @@ public class InfoActivity extends RootActivity {
 		Log.d(TAG, "onRestart called.");
 	}
 
-	/**
-	 * called when destroyed
-	 */
-	protected void onDestroy() {
-		super.onDestroy();
-	}
+//	/**
+//	 * called when destroyed
+//	 */
+//	protected void onDestroy() {
+//		super.onDestroy();
+//	}
 
 }

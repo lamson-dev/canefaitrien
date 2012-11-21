@@ -263,8 +263,8 @@ public class GalaxyMapActivity extends RootActivity implements OnTouchListener {
 		Log.d(TAG, "onRestart called.");
 	}
 
-	@Override
-	protected void onDestroy() {
-		super.onDestroy();
-	}
+//	@Override
+//	protected void onDestroy() {
+//		super.onDestroy();
+//	}
 }

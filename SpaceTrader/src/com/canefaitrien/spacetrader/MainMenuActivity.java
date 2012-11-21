@@ -103,8 +103,8 @@ public class MainMenuActivity extends RootActivity implements OnClickListener {
 		Log.d(TAG, "onRestart called.");
 	}
 
-	@Override
-	protected void onDestroy() {
-		super.onDestroy();
-	}
+//	@Override
+//	protected void onDestroy() {
+//		super.onDestroy();
+//	}
 }

@@ -1,3 +1,4 @@
+// $codepro.audit.disable transientFieldInNonSerializable
 package com.canefaitrien.spacetrader.models;
 
 import java.util.List;

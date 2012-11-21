@@ -1,4 +1,4 @@
-package com.canefaitrien.spacetrader.utils;
+package com.canefaitrien.spacetrader.tests;
 
 import java.util.Date;
 import java.util.List;
@@ -29,7 +29,7 @@ public class DataPlanetTest extends
 
 		Person player = new Person(null, "darnit", 5, 5, 5, 5);
 		daoSession.insert(player);
-		
+
 		Ship ship = new Ship();
 		daoSession.insert(ship);
 		GameData game = new GameData(null, null, "Hard", 500, "Hello", 0,

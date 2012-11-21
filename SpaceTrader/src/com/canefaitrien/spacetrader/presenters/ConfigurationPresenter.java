@@ -29,18 +29,11 @@ public class ConfigurationPresenter {
 		mView = view;
 	}
 
-	public void createNewGame() {
-
-		String name = mView.getEditName().getText().toString();
-		int pilotPts = mView.getBarPilot().getProgress();
-		int fighterPts = mView.getBarFighter().getProgress();
-		int traderPts = mView.getBarTrader().getProgress();
-		int engineerPts = mView.getBarEngineer().getProgress();
+	public void createNewGame(String name, int pilotPts, int fighterPts,
+			int traderPts, int engineerPts, String level) {
 
 		Log.d(TAG, "" + pilotPts + " " + traderPts + " " + engineerPts + " "
 				+ fighterPts);
-
-		String level = mView.getTxtViewLevel().getText().toString();
 		Log.d(TAG, level);
 
 		Person person = new Person(null,// id
