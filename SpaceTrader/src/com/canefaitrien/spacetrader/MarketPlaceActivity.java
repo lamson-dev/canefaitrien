@@ -35,6 +35,9 @@ public class MarketPlaceActivity extends ListActivity implements
 	// private int selectedId;
 	private View tempView;
 
+	/**
+	 * constructor pass in this view for the presenter to use
+	 */
 	public MarketPlaceActivity() {
 		mPresenter = new MarketPlacePresenter(this);
 	}
@@ -60,11 +63,17 @@ public class MarketPlaceActivity extends ListActivity implements
 		// R.layout.list_item_market, list);
 	}
 
+	/**
+	 * display money on screen
+	 */
 	public void displayMoney(String valueOf) {
 		TextView tv = (TextView) findViewById(R.id.tv_money);
 		tv.setText(valueOf);
 	}
 
+	/**
+	 * display cargo on screen
+	 */
 	public void displayCargo(String valueOf) {
 		TextView tv = (TextView) findViewById(R.id.tv_cargo);
 		tv.setText(valueOf);

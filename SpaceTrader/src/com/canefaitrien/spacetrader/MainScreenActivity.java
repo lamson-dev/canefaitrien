@@ -24,6 +24,9 @@ public class MainScreenActivity extends TabActivity implements IMainScreenView {
 	private long mRowId;
 	private boolean continueMusic;
 
+	/**
+	 * constructor pass in this view for the presenter to use
+	 */
 	public MainScreenActivity() {
 		mPresenter = new MainScreenPresenter(this);
 	}
@@ -46,7 +49,9 @@ public class MainScreenActivity extends TabActivity implements IMainScreenView {
 		init();
 	}
 
-	// add tabs to mainscreen
+	/**
+	 * add tabs to mainscreen
+	 */
 	private void init() {
 
 		TabHost tabhost = getTabHost();
@@ -77,6 +82,16 @@ public class MainScreenActivity extends TabActivity implements IMainScreenView {
 
 	}
 
+	/**
+	 * add tab to mainscreen
+	 * 
+	 * @param tag
+	 *            tag for tab
+	 * @param c
+	 *            class that tab goes to
+	 * @param th
+	 *            tabhost
+	 */
 	private void addTab(String tag, Class<?> c, TabHost th) {
 		TabSpec spec = th.newTabSpec(tag);
 		// specs.setIndicator("Market",R.drawable.tab_market);
@@ -86,6 +101,9 @@ public class MainScreenActivity extends TabActivity implements IMainScreenView {
 		th.addTab(spec);
 	}
 
+	/**
+	 * recursively set font for all app
+	 */
 	private void setFont() {
 		ViewGroup activityViewGroup = (ViewGroup) findViewById(
 				android.R.id.content).getRootView();
@@ -134,8 +152,6 @@ public class MainScreenActivity extends TabActivity implements IMainScreenView {
 		if (!continueMusic) {
 			MusicManager.pause();
 		}
-
-		// saveState();
 	}
 
 	@Override
@@ -162,10 +178,10 @@ public class MainScreenActivity extends TabActivity implements IMainScreenView {
 		Log.d(TAG, "onRestart called.");
 	}
 
-//	@Override
-//	protected void onDestroy() {
-//		super.onDestroy();
-//	}
+	// @Override
+	// protected void onDestroy() {
+	// super.onDestroy();
+	// }
 
 	// @Override
 	// protected void onSaveInstanceState(Bundle outState) {

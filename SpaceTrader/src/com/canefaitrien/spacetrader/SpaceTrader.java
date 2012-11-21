@@ -8,6 +8,12 @@ import com.canefaitrien.spacetrader.dao.DaoSession;
 import com.canefaitrien.spacetrader.models.Controller;
 import com.canefaitrien.spacetrader.models.GameData;
 
+/**
+ * SpaceTrader application
+ * 
+ * @author Son, Andrew, An, Daniel
+ * 
+ */
 public class SpaceTrader extends Application {
 	private static Controller controller;
 	private static GameData data;

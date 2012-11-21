@@ -67,6 +67,9 @@ public class LoadGameActivity extends ListActivity {
 		setFont();
 	}
 
+	/**
+	 * retrieve data from the database and populate it on to the screen
+	 */
 	private void fillData() {
 		final String idCol = GameDataDao.Properties.Id.columnName;
 		final String nameCol = GameDataDao.Properties.Name.columnName;
@@ -213,9 +216,9 @@ public class LoadGameActivity extends ListActivity {
 		Log.d(TAG, "onRestart called.");
 	}
 
-//	@Override
-//	protected void onDestroy() {
-//		super.onDestroy();
-//	}
+	// @Override
+	// protected void onDestroy() {
+	// super.onDestroy();
+	// }
 
 }

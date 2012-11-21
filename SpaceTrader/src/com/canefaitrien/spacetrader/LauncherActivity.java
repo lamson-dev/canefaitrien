@@ -10,7 +10,10 @@ import com.canefaitrien.spacetrader.dao.DaoMaster.DevOpenHelper;
 
 public class LauncherActivity extends Activity {
 	private static final String TAG = "Launcher";
-
+	
+	/**
+	 * open the database when application starts
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

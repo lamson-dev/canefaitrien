@@ -13,6 +13,10 @@ public abstract class RootActivity extends Activity {
 
 	public static Typeface appFont;
 
+	/**
+	 * an abstract class that extends activity, where we can set some of the
+	 * configuration for the app, like theme and stuff
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
