@@ -28,13 +28,13 @@ public class UniverseTest {
 			assertNotNull(planets[i].getMarketplace());
 			
 			//test that their locations are within the boundaries (600 x 500)
-			assertTrue(planets[i].getCoordinates().X<600);
-			assertTrue(planets[i].getCoordinates().Y<500);
+			assertTrue(planets[i].getCoordinates().x<600);
+			assertTrue(planets[i].getCoordinates().y<500);
 			
 			//test that they don't overlap, ie their distance is greater than their radius
 			//crappy O^2 test
-			for(int j =0;j<planets.length;j++){
-				assertTrue(planets[i].distance(planets[j])<planets[i].radius);
+			for(int j = i + 1;j<planets.length;j++){
+				assertTrue(planets[i].distance(planets[j])>Universe.MIN_DISTANCE);
 			}
 		}
 	}
