@@ -20,14 +20,20 @@ import com.canefaitrien.spacetrader.interfaces.GameConstants;
 public class Marketplace implements GameConstants {
 
 	private static TradeGood[] goods = TradeGood.values();
+
 	private static Random rand = new Random();
 
 	// Marketplace info
 	private int lastDock;
+
 	private int[] itemStock;
+
 	private int[] itemBuyPrices;
+
 	private int[] itemSellPrices;
+
 	private TechLevel level;
+
 	private Situation situation;
 
 	private Long id;
@@ -40,6 +46,7 @@ public class Marketplace implements GameConstants {
 
 	/**
 	 * Constructor for Marketplace
+	 * 
 	 * @param id
 	 */
 	public Marketplace(Long id) {
@@ -48,6 +55,7 @@ public class Marketplace implements GameConstants {
 
 	/**
 	 * Constructor for Marketplace
+	 * 
 	 * @param id
 	 * @param lastDock
 	 * @param itemStock
@@ -68,6 +76,7 @@ public class Marketplace implements GameConstants {
 
 	/**
 	 * Constructor for Marketplace
+	 * 
 	 * @param lastDock
 	 * @param level
 	 * @param situation
@@ -80,6 +89,7 @@ public class Marketplace implements GameConstants {
 
 	/**
 	 * Constructor for Marketplace
+	 * 
 	 * @param lastDock
 	 * @param itemStock
 	 * @param itemBuyPrices
@@ -94,11 +104,12 @@ public class Marketplace implements GameConstants {
 		this.itemBuyPrices = itemBuyPrices;
 		this.itemSellPrices = itemSellPrices;
 		this.level = level;
-		this.setSituation(situation);
+		this.situation = situation;
 	}
 
 	/**
 	 * Dock method to be called by Planet upon traveling to that Planet
+	 * 
 	 * @param turnDocked
 	 */
 	public void dock(int turnDocked) {
@@ -111,7 +122,7 @@ public class Marketplace implements GameConstants {
 	/**
 	 * Updates the good prices and the amount of goods
 	 */
-	public void updateStock() {
+	public final void updateStock() {
 		for (TradeGood good : goods) {
 			itemBuyPrices[good.ordinal()] = getBuyPrice(good);
 			// situation modify
@@ -125,8 +136,9 @@ public class Marketplace implements GameConstants {
 
 	}
 
-	/** 
+	/**
 	 * Private method to get the buy price of a good
+	 * 
 	 * @param good
 	 * @return
 	 */
@@ -136,6 +148,7 @@ public class Marketplace implements GameConstants {
 
 	/**
 	 * Private method to get the sell price of a good
+	 * 
 	 * @param good
 	 * @return
 	 */
@@ -146,6 +159,7 @@ public class Marketplace implements GameConstants {
 
 	/**
 	 * Method to calculate the price of a good based on the TechLevel
+	 * 
 	 * @param good
 	 * @param minTL
 	 * @return
@@ -164,6 +178,7 @@ public class Marketplace implements GameConstants {
 
 	/**
 	 * Method for a Player to buy a good from Marketplace
+	 * 
 	 * @param good
 	 * @param ship
 	 * @param money
@@ -184,6 +199,7 @@ public class Marketplace implements GameConstants {
 
 	/**
 	 * Method for a Player to sell a good to the Marketplace
+	 * 
 	 * @param good
 	 * @param ship
 	 * @param money
@@ -208,7 +224,7 @@ public class Marketplace implements GameConstants {
 		return json.toString();
 	}
 
-	public void setItemStock(String itemStock) throws JSONException {
+	public final void setItemStock(String itemStock) throws JSONException {
 		JSONArray jsonArray = new JSONArray(itemStock);
 		if (jsonArray != null) {
 			int[] stock = new int[goods.length];
@@ -227,7 +243,8 @@ public class Marketplace implements GameConstants {
 		return json.toString();
 	}
 
-	public void setItemBuyPrices(String itemBuyPrices) throws JSONException {
+	public final void setItemBuyPrices(String itemBuyPrices)
+			throws JSONException {
 		JSONArray jsonArray = new JSONArray(itemBuyPrices);
 		if (jsonArray != null) {
 			int[] buyPrices = new int[goods.length];
@@ -246,7 +263,8 @@ public class Marketplace implements GameConstants {
 		return json.toString();
 	}
 
-	public void setItemSellPrices(String itemSellPrices) throws JSONException {
+	public final void setItemSellPrices(String itemSellPrices)
+			throws JSONException {
 		JSONArray jsonArray = new JSONArray(itemSellPrices);
 		if (jsonArray != null) {
 			int[] sellPrices = new int[goods.length];
@@ -264,6 +282,7 @@ public class Marketplace implements GameConstants {
 	public void setSituation(Situation situation) {
 		this.situation = situation;
 	}
+
 	public int[] getItemStock() {
 		return itemStock;
 	}
@@ -275,7 +294,7 @@ public class Marketplace implements GameConstants {
 	public int[] getItemSellPrices() {
 		return itemSellPrices;
 	}
-	
+
 	public Long getId() {
 		return id;
 	}

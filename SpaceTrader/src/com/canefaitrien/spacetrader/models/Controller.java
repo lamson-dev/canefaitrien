@@ -10,27 +10,34 @@ import android.util.Log;
  */
 
 public class Controller {
-	
+
 	private static final String TAG = "Controller";
 
 	// Controller constants
 	public static enum Difficulty {
-		Easy, Medium, Hard
+		EASY, MEDIUM, HARD
 	};
 
 	private static final int STARTING_MONEY = 500;
 
 	// Controller info
 	private Person player;
+
 	private Ship ship;
+
 	private Planet currentPlanet;
+
 	private int money;
+
 	private Planet[] universe;
+
 	private Difficulty difficulty;
+
 	private int turn;
 
 	/**
 	 * Constructor for Controller
+	 * 
 	 * @param player
 	 * @param ship
 	 * @param currentPlanet
@@ -52,6 +59,7 @@ public class Controller {
 
 	/**
 	 * Constructor for Controller
+	 * 
 	 * @param player
 	 * @param difficulty
 	 */
@@ -103,7 +111,7 @@ public class Controller {
 		} else if (currentPlanet.distance(destination) > ship.getFuel()
 				* Ship.MPG) { // if not enough fuel
 			throw new Exception("We don't have enough fuel, captain!");
-			
+
 		} else {
 			ship.setFuel(ship.getFuel() - currentPlanet.distance(destination)
 					/ Ship.MPG);

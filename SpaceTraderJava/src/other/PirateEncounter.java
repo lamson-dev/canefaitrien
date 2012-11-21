@@ -1,7 +1,7 @@
 package other;
-import java.util.Random;
 
-import model.EncounterType;
+
+
 import model.ShipType;
 /**
  * Pirate Encounter Handler

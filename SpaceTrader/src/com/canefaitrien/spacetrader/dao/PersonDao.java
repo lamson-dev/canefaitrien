@@ -1,3 +1,4 @@
+// $codepro.audit.disable
 package com.canefaitrien.spacetrader.dao;
 
 import android.database.Cursor;
@@ -24,13 +25,17 @@ public class PersonDao extends AbstractDao<Person, Long> {
     */
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
+
         public final static Property Name = new Property(1, String.class, "name", false, "NAME");
+
         public final static Property PilotPts = new Property(2, Integer.class, "pilotPts", false, "PILOT_PTS");
+
         public final static Property FighterPts = new Property(3, Integer.class, "fighterPts", false, "FIGHTER_PTS");
+
         public final static Property TraderPts = new Property(4, Integer.class, "traderPts", false, "TRADER_PTS");
+
         public final static Property EngineerPts = new Property(5, Integer.class, "engineerPts", false, "ENGINEER_PTS");
     };
-
 
     public PersonDao(DaoConfig config) {
         super(config);

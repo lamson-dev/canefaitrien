@@ -30,16 +30,18 @@ import com.canefaitrien.spacetrader.utils.MusicManager;
 public class GalaxyMapActivity extends RootActivity implements OnTouchListener {
 
 	private String TAG = "Galaxy Activity";
+
 	private GalaxyView galaxy;
+
 	private PlanetsView planetsView;
-	// LinearLayout gfl = (LinearLayout) findViewById(R.id.galaxy_view);
-	// //galaxy frame layout
+
 	/**
 	 * Displays the galaxy canvas and draws it on Creates a listener for screen
 	 * pressing
 	 */
 	private boolean continueMusic;
 
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 
 		FrameLayout main = new FrameLayout(this);
@@ -49,7 +51,7 @@ public class GalaxyMapActivity extends RootActivity implements OnTouchListener {
 		super.onCreate(savedInstanceState);
 		Log.d("Galaxy", "Created Galaxy");
 		// draw planets
-		galaxy = new GalaxyView(this, SpaceTrader.getController().getUniverse());
+		galaxy = new GalaxyView(this);
 		planetsView = new PlanetsView(this, SpaceTrader.getController()
 				.getUniverse());
 		galaxy.setOnTouchListener(this);
@@ -67,14 +69,15 @@ public class GalaxyMapActivity extends RootActivity implements OnTouchListener {
 	 *            Takes in the planet clicked on.
 	 */
 	public void onCreateDialog(Planet planet) {
-		final Planet p = planet;
+		final Planet thePlanet = planet;
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle("" + planet.getName());
 		Planet location = SpaceTrader.getController().getLocation();
 		builder.setMessage("Tech Level: " + planet.getStringTechLevel()
 				+ "\nSituation: " + planet.getStringSituation()
-				+ "\nFuel needed to travel: " + planet.distance(location) / Ship.MPG
-				+ "/" + SpaceTrader.getController().getShip().getFuel());
+				+ "\nFuel needed to travel: " + planet.distance(location)
+				/ Ship.MPG + "/"
+				+ SpaceTrader.getController().getShip().getFuel());
 		builder.setPositiveButton("Close",
 				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int which) {
@@ -82,14 +85,15 @@ public class GalaxyMapActivity extends RootActivity implements OnTouchListener {
 					}
 
 				});
-		if (planet != location) {
+		if (!planet.equals(location)) {
 			builder.setNegativeButton("Travel",
 					new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog, int which) {
 							try {
-								SpaceTrader.getController().move(p);
+								SpaceTrader.getController().move(thePlanet);
 								galaxy.invalidate();
-								Log.d("Galaxy", "traveling to " + p.getName());
+								Log.d("Galaxy",
+										"traveling to " + thePlanet.getName());
 								//
 								listDialog();
 							} catch (Exception e) {
@@ -149,8 +153,8 @@ public class GalaxyMapActivity extends RootActivity implements OnTouchListener {
 						police.policeBattle();
 						break;
 					case 1:
-						police.bribePolice((int) ((float) SpaceTrader
-								.getController().getMoney() * .1));
+						police.bribePolice(SpaceTrader.getController()
+								.getMoney() / 10); // *.1
 						break;
 					case 2:
 						police.checkGoods();
@@ -219,12 +223,6 @@ public class GalaxyMapActivity extends RootActivity implements OnTouchListener {
 		return true;
 	}
 
-	// @Override
-	// public void onBackPressed() {
-	// super.onBackPressed();
-	// continueMusic = true;
-	// }
-
 	@Override
 	protected void onPause() {
 		super.onPause();
@@ -263,8 +261,8 @@ public class GalaxyMapActivity extends RootActivity implements OnTouchListener {
 		Log.d(TAG, "onRestart called.");
 	}
 
-//	@Override
-//	protected void onDestroy() {
-//		super.onDestroy();
-//	}
+	// @Override
+	// protected void onDestroy() {
+	// super.onDestroy();
+	// }
 }

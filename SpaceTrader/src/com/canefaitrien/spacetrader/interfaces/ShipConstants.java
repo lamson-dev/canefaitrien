@@ -6,67 +6,105 @@ public interface ShipConstants {
 
 	// SHIP
 	public static final int FLEA_PARSECS = 20;
+
 	public static final int FLEA_WEAPON_SLOTS = 0;
+
 	public static final int FLEA_SHIELD_SLOTS = 0;
+
 	public static final int FLEA_GADGET_SLOTS = 0;
+
 	public static final int FLEA_CARGO_CAP = 2;
 
 	public static final int GNAT_PARSECS = 14;
+
 	public static final int GNAT_WEAPON_SLOTS = 1;
+
 	public static final int GNAT_SHIELD_SLOTS = 0;
+
 	public static final int GNAT_GADGET_SLOTS = 1;
+
 	public static final int GNAT_CARGO_CAP = 15;
 
 	public static final int FIREFLY_PARSECS = 17;
+
 	public static final int FIREFLY_WEAPON_SLOTS = 1;
+
 	public static final int FIREFLY_SHIELD_SLOTS = 1;
+
 	public static final int FIREFLY_GADGET_SLOTS = 1;
+
 	public static final int FIREFLY_CARGO_CAP = 20;
 
 	public static final int MOSQUITO_PARSECS = 13;
+
 	public static final int MOSQUITO_WEAPON_SLOTS = 2;
+
 	public static final int MOSQUITO_SHIELD_SLOTS = 1;
+
 	public static final int MOSQUITO_GADGET_SLOTS = 1;
+
 	public static final int MOSQUITO_CARGO_CAP = 20;
 
 	public static final int BUMBLEBEE_PARSECS = 15;
+
 	public static final int BUMBLEBEE_WEAPON_SLOTS = 1;
+
 	public static final int BUMBLEBEE_SHIELD_SLOTS = 2;
+
 	public static final int BUMBLEBEE_GADGET_SLOTS = 2;
+
 	public static final int BUMBLEBEE_CARGO_CAP = 20;
 
 	public static final int BEETLE_PARSECS = 14;
+
 	public static final int BEETLE_WEAPON_SLOTS = 0;
+
 	public static final int BEETLE_SHIELD_SLOTS = 1;
+
 	public static final int BEETLE_GADGET_SLOTS = 1;
+
 	public static final int BEETLE_CARGO_CAP = 50;
 
 	public static final int HORNET_PARSECS = 16;
+
 	public static final int HORNET_WEAPON_SLOTS = 3;
+
 	public static final int HORNET_SHIELD_SLOTS = 2;
+
 	public static final int HORNET_GADGET_SLOTS = 1;
+
 	public static final int HORNET_CARGO_CAP = 20;
 
 	public static final int GRASSHOPPER_PARSECS = 15;
+
 	public static final int GRASSHOPPER_WEAPON_SLOTS = 2;
+
 	public static final int GRASSHOPPER_SHIELD_SLOTS = 2;
+
 	public static final int GRASSHOPPER_GADGET_SLOTS = 3;
+
 	public static final int GRASSHOPPER_CARGO_CAP = 30;
 
 	public static final int TERMITE_PARSECS = 13;
+
 	public static final int TERMITE_WEAPON_SLOTS = 1;
+
 	public static final int TERMITE_SHIELD_SLOTS = 3;
+
 	public static final int TERMITE_GADGET_SLOTS = 2;
+
 	public static final int TERMITE_CARGO_CAP = 60;
 
 	public static final int WASP_PARSECS = 14;
+
 	public static final int WASP_WEAPON_SLOTS = 3;
+
 	public static final int WASP_SHIELD_SLOTS = 2;
+
 	public static final int WASP_GADGET_SLOTS = 2;
+
 	public static final int WASP_CARGO_CAP = 35;
 
-
-	// Possible directions for the motion of the caterpillar
 	public static final int NORTH = 1;
 
 	public static final int EAST = 2;

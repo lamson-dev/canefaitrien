@@ -25,9 +25,11 @@ import com.canefaitrien.spacetrader.models.Ship;
 @SuppressLint("ViewConstructor")
 public class GalaxyView extends View {
 	private Paint paint = new Paint();// normal paint
+
 	private Paint wordTest = new Paint(); // text paint
 
 	private Bitmap ship_icon;
+
 	private Canvas c;
 
 	/**
@@ -38,23 +40,23 @@ public class GalaxyView extends View {
 	 * @param planets
 	 *            takes in an array of planets
 	 */
-	public GalaxyView(Context context, Planet[] planets) {
+	public GalaxyView(Context context) {
 		super(context);
-		wordTest.setColor(Color.WHITE);
-		wordTest.setTextAlign(Align.CENTER);
-		ship_icon = BitmapFactory.decodeResource(getResources(),
-				R.drawable.ship_model_a_small);
 	}
 
 	/**
-	 * Method that is called when class is started
-	 * draws the ship and the fuel radius
+	 * Method that is called when class is started draws the ship and the fuel
+	 * radius
 	 * 
 	 * @param canvas
 	 *            the canvas
 	 */
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
+		wordTest.setColor(Color.WHITE);
+		wordTest.setTextAlign(Align.CENTER);
+		ship_icon = BitmapFactory.decodeResource(getResources(),
+				R.drawable.ship_model_a_small);
 		c = canvas;
 		// draw ship
 		Planet ship_location = SpaceTrader.getController().getLocation();

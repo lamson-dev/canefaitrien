@@ -1,3 +1,4 @@
+// $codepro.audit.disable
 package com.canefaitrien.spacetrader.dao;
 
 import java.util.Map;
@@ -25,15 +26,23 @@ import de.greenrobot.dao.IdentityScopeType;
 public class DaoSession extends AbstractDaoSession {
 
     private final DaoConfig gameDataDaoConfig;
+
     private final DaoConfig personDaoConfig;
+
     private final DaoConfig shipDaoConfig;
+
     private final DaoConfig planetDaoConfig;
+
     private final DaoConfig marketplaceDaoConfig;
 
     private final GameDataDao gameDataDao;
+
     private final PersonDao personDao;
+
     private final ShipDao shipDao;
+
     private final PlanetDao planetDao;
+
     private final MarketplaceDao marketplaceDao;
 
     public DaoSession(SQLiteDatabase db, IdentityScopeType type, Map<Class<? extends AbstractDao<?, ?>>, DaoConfig>

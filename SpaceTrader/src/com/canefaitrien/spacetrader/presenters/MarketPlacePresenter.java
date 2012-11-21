@@ -3,6 +3,7 @@ package com.canefaitrien.spacetrader.presenters;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -23,8 +24,11 @@ public class MarketPlacePresenter {
 
 	@SuppressWarnings("unused")
 	private static final String TAG = "MarketPresenter";
+
 	private IMarketPlaceView mView;
+
 	private Marketplace mMarket;
+
 	private Controller controller;
 
 	public MarketPlacePresenter(IMarketPlaceView view) {
@@ -32,17 +36,17 @@ public class MarketPlacePresenter {
 		controller = SpaceTrader.getController();
 	}
 
-	public List<HashMap<String, String>> populateStock(
-			List<HashMap<String, String>> list) {
+	public List<Map<String, String>> populateStock(
+			List<Map<String, String>> list) {
 
 		mMarket = controller.getLocation().getMarketplace1();
 		TradeGood[] goods = TradeGood.values();
 
-		list = new ArrayList<HashMap<String, String>>();
+		list = new ArrayList<Map<String, String>>();
 
 		for (int i = 0; i < goods.length; i++) {
 
-			HashMap<String, String> temp = new HashMap<String, String>();
+			Map<String, String> temp = new HashMap<String, String>();
 			temp.put("name", goods[i].toString());
 			temp.put("price", String.valueOf(mMarket.getItemBuyPrices()[i]));
 			temp.put("sellprice",
@@ -67,7 +71,7 @@ public class MarketPlacePresenter {
 		// SimpleAdapter adapter = new SimpleAdapter(mView.getContext(),
 		// mView.getStockList(), R.layout.list_item_market, from, to);
 
-		final List<HashMap<String, String>> entries = mView.getStockList();
+		final List<Map<String, String>> entries = mView.getStockList();
 		SimpleAdapter adapter = new SimpleAdapter(mView.getContext(), entries,
 				R.layout.list_item_market, from, to) {
 			@Override
@@ -116,7 +120,7 @@ public class MarketPlacePresenter {
 		updateStockList(mView.getStockList());
 	}
 
-	public void updateStockList(List<HashMap<String, String>> list) {
+	public void updateStockList(List<Map<String, String>> list) {
 		mView.setStockList(this.populateStock(list));
 	}
 

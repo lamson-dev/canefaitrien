@@ -22,13 +22,21 @@ public class GameData {
 	private static final String TAG = "GameData";
 
 	private Long id;
+
 	private String name;
+
 	private String difficulty;
+
 	private Integer money;
+
 	private String currentPlanet;
+
 	private Integer turn;
+
 	private java.util.Date date;
+
 	private Long personId;
+
 	private Long shipId;
 
 	/** Used to resolve relations */
@@ -38,9 +46,11 @@ public class GameData {
 	private transient GameDataDao myDao;
 
 	private Person person;
+
 	private Long person__resolvedKey;
 
 	private Ship ship;
+
 	private Long ship__resolvedKey;
 
 	private List<Planet> planets;

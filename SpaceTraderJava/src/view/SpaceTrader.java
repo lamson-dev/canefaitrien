@@ -1,9 +1,9 @@
 package view;
 
-import java.awt.Dimension;
+
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
+
 
 /**
  * Java class to run the java game

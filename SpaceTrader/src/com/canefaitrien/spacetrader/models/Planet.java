@@ -24,18 +24,26 @@ public class Planet {
 
 	// Instance variables
 	private Long id;
+
 	private String name;
+
 	private int radius;
+
 	private Point coordinates;
+
 	private TechLevel level;
+
 	private Situation situation;
+
 	private int color;
+
 	private int type;
 
 	private long dataId;
+
 	private Long marketId;
 
-	Random randomColor = new Random();
+	private Random randomColor = new Random();
 
 	/** Used to resolve relations */
 	private transient DaoSession daoSession;
@@ -44,6 +52,7 @@ public class Planet {
 	private transient PlanetDao myDao;
 
 	private Marketplace marketplace;
+
 	private Long marketplace__resolvedKey;
 
 	/**

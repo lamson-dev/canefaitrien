@@ -9,20 +9,21 @@ import android.view.ViewGroup;
 
 public class Tools {
 
-	static AlertDialog.Builder popup;
-	static LayoutInflater inflater;
+	public static AlertDialog.Builder alertDialog;
+
+	public static LayoutInflater inflater;
 
 	public static void popUp(Context context, String message) {
-		popup = new AlertDialog.Builder(context);
-		popup.setTitle("Heyyy!");
-		popup.setMessage(message);
-		popup.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+		alertDialog = new AlertDialog.Builder(context);
+		alertDialog.setTitle("Heyyy!");
+		alertDialog.setMessage(message);
+		alertDialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int which) {
 				// dismiss the dialog
 			}
 		});
-		popup.setCancelable(true);
-		popup.create().show();
+		alertDialog.setCancelable(true);
+		alertDialog.create().show();
 	}
 
 	public static View inflater(Context context, int idChild,

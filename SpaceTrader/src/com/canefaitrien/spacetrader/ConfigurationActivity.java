@@ -27,21 +27,27 @@ public class ConfigurationActivity extends RootActivity implements
 	private static final String TAG = "Configuration";
 
 	private EditText editName;
+
 	private TextView tvLevel;
+
 	private SeekBar barPilot, barFighter, barTrader, barEngineer;
+
 	private Button btnPlus, btnMinus, btnStart;
+
 	private Difficulty[] difficulties = Difficulty.values();
 
 	private int level = 0;
+
 	private int totalPts = NUM_MAX_SKILL_POINTS;
+
 	private int usedPts = 0;
 
-	ConfigurationPresenter mPresenter;
+	private ConfigurationPresenter mPresenter;
 
 	@SuppressWarnings("unused")
 	private ProgressDialog progressDialog;
 
-	boolean continueMusic;
+	private boolean continueMusic;
 
 	/**
 	 * Constructor to pass in Configuration View to the presenter, also let the
@@ -73,9 +79,7 @@ public class ConfigurationActivity extends RootActivity implements
 		// imm.hideSoftInputFromWindow(getEditName().getWindowToken(), 0);
 		// getWindow().setSoftInputMode(
 		// WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-		ViewGroup activityViewGroup = (ViewGroup) findViewById(
-				android.R.id.content).getRootView();
-		setAppFont(activityViewGroup, appFont);
+		applyFont();
 
 		tvLevel = (TextView) findViewById(R.id.txtview_level);
 		editName = (EditText) findViewById(R.id.edit_name);
@@ -104,6 +108,12 @@ public class ConfigurationActivity extends RootActivity implements
 		barEngineer.setOnSeekBarChangeListener(this);
 
 		setRemainingPts(totalPts);
+	}
+
+	public void applyFont() {
+		ViewGroup activityViewGroup = (ViewGroup) findViewById(
+				android.R.id.content).getRootView();
+		setAppFont(activityViewGroup, appFont);
 	}
 
 	/**
@@ -148,11 +158,11 @@ public class ConfigurationActivity extends RootActivity implements
 		// progressDialog = ProgressDialog.show(ConfigurationActivity.this,
 		// "New Game", "Creating the Universe");
 
-		mPresenter.createNewGame(this.editName.getText().toString(),//
-				this.barPilot.getProgress(),//
-				this.barFighter.getProgress(),//
-				this.barTrader.getProgress(),//
-				this.barEngineer.getProgress(),//
+		mPresenter.createNewGame(this.editName.getText().toString(), //
+				this.barPilot.getProgress(), //
+				this.barFighter.getProgress(), //
+				this.barTrader.getProgress(), //
+				this.barEngineer.getProgress(), //
 				this.tvLevel.getText().toString());
 		mPresenter.storeNewGameData();
 

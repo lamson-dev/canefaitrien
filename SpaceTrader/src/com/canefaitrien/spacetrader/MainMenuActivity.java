@@ -13,6 +13,7 @@ import com.canefaitrien.spacetrader.utils.MusicManager;
 public class MainMenuActivity extends RootActivity implements OnClickListener {
 
 	private static final String TAG = "MainMenu";
+
 	private boolean continueMusic;
 
 	@Override
@@ -47,7 +48,7 @@ public class MainMenuActivity extends RootActivity implements OnClickListener {
 		// TextView txt = (TextView) findViewById(R.id.txtview_app_name);
 		// txt.setTypeface(font);
 
-		setFont();
+		applyFont();
 
 		Button btnNewGame = (Button) findViewById(R.id.btn_newgame);
 		Button btnLoadGame = (Button) findViewById(R.id.btn_loadgame);
@@ -65,7 +66,7 @@ public class MainMenuActivity extends RootActivity implements OnClickListener {
 	/**
 	 * recursively set font for all textview
 	 */
-	private void setFont() {
+	public void applyFont() {
 		ViewGroup activityViewGroup = (ViewGroup) findViewById(
 				android.R.id.content).getRootView();
 		setAppFont(activityViewGroup, appFont);

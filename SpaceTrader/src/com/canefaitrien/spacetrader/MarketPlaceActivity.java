@@ -3,6 +3,7 @@ package com.canefaitrien.spacetrader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import android.app.ListActivity;
 import android.content.Context;
@@ -26,13 +27,15 @@ public class MarketPlaceActivity extends ListActivity implements
 		IMarketPlaceView, OnClickListener {
 
 	private final String TAG = "MarketPlace";
-	MarketPlacePresenter mPresenter;
 
-	private List<HashMap<String, String>> stockList = new ArrayList<HashMap<String, String>>();
+	protected MarketPlacePresenter mPresenter;
+
+	private List<Map<String, String>> stockList = new ArrayList<Map<String, String>>();
 
 	private int itemPos = 0;
+
 	private boolean continueMusic;
-	// private int selectedId;
+
 	private View tempView;
 
 	/**
@@ -57,7 +60,7 @@ public class MarketPlaceActivity extends ListActivity implements
 		mPresenter.displayMarket();
 		mPresenter.showOtherInfo();
 
-		setFont();
+		applyFont();
 
 		// MarketAdapter adapter = new MarketAdapter(this,
 		// R.layout.list_item_market, list);
@@ -79,15 +82,16 @@ public class MarketPlaceActivity extends ListActivity implements
 		tv.setText(valueOf);
 	}
 
-	public List<HashMap<String, String>> getStockList() {
+	public List<Map<String, String>> getStockList() {
 		return stockList;
 	}
 
-	public void setStockList(List<HashMap<String, String>> stockList) {
+	public void setStockList(List<Map<String, String>> stockList) {
 		this.stockList = stockList;
 
 	}
 
+	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		// Do something when a list item is clicked
 		super.onListItemClick(l, v, position, id);
@@ -153,17 +157,11 @@ public class MarketPlaceActivity extends ListActivity implements
 		return super.getSystemService(name);
 	}
 
-	private void setFont() {
+	private void applyFont() {
 		ViewGroup activityViewGroup = (ViewGroup) findViewById(
 				android.R.id.content).getRootView();
 		RootActivity.setAppFont(activityViewGroup, RootActivity.appFont);
 	}
-
-	// @Override
-	// public void onBackPressed() {
-	// super.onBackPressed();
-	// continueMusic = true;
-	// }
 
 	@Override
 	protected void onPause() {

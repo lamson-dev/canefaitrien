@@ -1,4 +1,5 @@
 package view;
+
 /**
  * Travel Panel
  * @author An Pham
@@ -30,7 +31,7 @@ public class TravelPanel extends JPanel {
 	private MarketplacePanel mp;
 	private JFrame frame;
 	JPanel panel = new JPanel(new BorderLayout());
-	//JButton resetBtn = new JButton("Reset");
+	// JButton resetBtn = new JButton("Reset");
 	EncounterHandler encounter;
 
 	public TravelPanel(Controller data, MarketplacePanel mp) {
@@ -41,15 +42,16 @@ public class TravelPanel extends JPanel {
 		new UniversePanel(data, mp);
 		frame = new JFrame("Encounter Situation");
 		frame.setLayout(new BorderLayout());
-		
+
 		panel.setLayout(new GridLayout(11, 7));
 		frame.setPreferredSize(new Dimension(300, 300));
 		frame.add(panel);
 		getAction();
 	}
-	
+
 	private void getAction() {
-		if (!data.getShip().detectable) // If the cloak device was bought, there will be no encounter;
+		if (!data.getShip().detectable) // If the cloak device was bought, there
+										// will be no encounter;
 			return;
 		EncounterType encounter = EncounterType.getEncounterType();
 		switch (encounter) {
@@ -58,7 +60,8 @@ public class TravelPanel extends JPanel {
 			JButton bribeButton = new JButton("Bribe");
 			bribeButton.addActionListener(new bribeButtonListener());
 			JButton attackPoliceButton = new JButton("Attack");
-			attackPoliceButton.addActionListener(new attackPoliceButtonListener());			
+			attackPoliceButton
+					.addActionListener(new attackPoliceButtonListener());
 			JButton fleePoliceButton = new JButton("Flee");
 			fleePoliceButton.addActionListener(new fleePoliceButtonListener());
 			JButton submitButton = new JButton("Submit");
@@ -77,11 +80,13 @@ public class TravelPanel extends JPanel {
 		case PIRATE:
 			JLabel pirate = new JLabel("Pirate Encounter");
 			JButton attackPirateButton = new JButton("Attack");
-			attackPirateButton.addActionListener(new attackPirateButtonListener());
+			attackPirateButton
+					.addActionListener(new attackPirateButtonListener());
 			JButton fleePirateButton = new JButton("Flee");
 			fleePirateButton.addActionListener(new fleePirateButtonListener());
 			JButton surrenderButton = new JButton("Surrender");
-			surrenderButton.addActionListener(new surrenderPirateButtonListener());
+			surrenderButton
+					.addActionListener(new surrenderPirateButtonListener());
 			panel.removeAll();
 			panel.add(pirate);
 			panel.add(attackPirateButton, BorderLayout.PAGE_END);
@@ -93,9 +98,10 @@ public class TravelPanel extends JPanel {
 			frame.setVisible(true);
 			break;
 		case TRADER:
-			JLabel trader= new JLabel("Trader Encounter");
+			JLabel trader = new JLabel("Trader Encounter");
 			JButton attackTraderButton = new JButton("Attack");
-			attackTraderButton.addActionListener(new attackTraderButtonListener());
+			attackTraderButton
+					.addActionListener(new attackTraderButtonListener());
 			JButton ignoreButton = new JButton("Ignore");
 			ignoreButton.addActionListener(new ignoreTraderButtonListener());
 			JButton tradeButton = new JButton("Trade");
@@ -105,7 +111,7 @@ public class TravelPanel extends JPanel {
 			panel.add(attackTraderButton, BorderLayout.PAGE_END);
 			panel.add(ignoreButton, BorderLayout.PAGE_END);
 			panel.add(tradeButton, BorderLayout.PAGE_END);
-			
+
 			revalidate();
 			frame.pack();
 			frame.setVisible(true);
@@ -114,8 +120,9 @@ public class TravelPanel extends JPanel {
 			frame.setVisible(false);
 			break;
 		}
-		
+
 	}
+
 	private class bribeButtonListener implements ActionListener {
 
 		@Override
@@ -125,88 +132,96 @@ public class TravelPanel extends JPanel {
 			boolean isNumber = false;
 			int bribeAmount = 0;
 			do {
-				text = JOptionPane.showInputDialog(bribeFrame, "How much do you decide to bribe?");
-				try  
-				{  
-					bribeAmount = Integer.parseInt( text );  
-					isNumber = true;  
-				}  
-				catch( Exception ex)  
-				{  
-					isNumber = false;  
-				}  
+				text = JOptionPane.showInputDialog(bribeFrame,
+						"How much do you decide to bribe?");
+				try {
+					bribeAmount = Integer.parseInt(text);
+					isNumber = true;
+				} catch (Exception ex) {
+					isNumber = false;
+					ex.printStackTrace();
+				}
 
 				boolean success = encounter.bribePolice(bribeAmount);
-				if (success) {	
-					JOptionPane.showMessageDialog(bribeFrame, 
-							"Bribe Successful!. Your money now is " + data.getMoney());
+				if (success) {
+					JOptionPane.showMessageDialog(
+							bribeFrame,
+							"Bribe Successful!. Your money now is "
+									+ data.getMoney());
 					break;
-				}
-				else {
-					JOptionPane.showMessageDialog(bribeFrame, 
-							"Bribe Failed!. Your money now is " + data.getMoney());
+				} else {
+					JOptionPane.showMessageDialog(
+							bribeFrame,
+							"Bribe Failed!. Your money now is "
+									+ data.getMoney());
 					continue;
 				}
 
-			}while (isNumber == true);	
+			} while (isNumber);
 			frame.setVisible(false);
 			mp.changeMarketplace();
 			mp.repaint();
 		}
 
 	}
-	private class submitButtonListener implements ActionListener{
+
+	private class submitButtonListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			int currentCredit = data.getMoney();
-			if (encounter.submitPolice()) 
-				JOptionPane.showMessageDialog(
-						panel, "Sorry for wasting your time! You are free to go.");
+			if (encounter.submitPolice())
+				JOptionPane.showMessageDialog(panel,
+						"Sorry for wasting your time! You are free to go.");
 			else
-				JOptionPane.showMessageDialog(
-						panel, "You have illegal goods in your cargo. A fine of "+ (currentCredit-data.getMoney())+
-						" has been charged to your bank account.\n");
+				JOptionPane.showMessageDialog(panel,
+						"You have illegal goods in your cargo. A fine of "
+								+ (currentCredit - data.getMoney())
+								+ " has been charged to your bank account.\n");
 			frame.setVisible(false);
 			mp.changeMarketplace();
 			mp.repaint();
 		}
 
 	}
+
 	private class attackPoliceButtonListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if (encounter.attackPolice()) 
-				JOptionPane.showMessageDialog(
-						panel, "Congratulation, you have destroyed a police ship");
+			if (encounter.attackPolice())
+				JOptionPane.showMessageDialog(panel,
+						"Congratulation, you have destroyed a police ship");
 			else
-				JOptionPane.showMessageDialog(
-						panel, "Sorry Game Over.");
+				JOptionPane.showMessageDialog(panel, "Sorry Game Over.");
 			frame.setVisible(false);
 			mp.changeMarketplace();
 			mp.repaint();
 		}
 
 	}
+
 	private class fleePoliceButtonListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			int currentCredit = data.getMoney();
 			if (encounter.fleePolice())
-				JOptionPane.showMessageDialog(
-						panel, "Congratulation, you have got away");
+				JOptionPane.showMessageDialog(panel,
+						"Congratulation, you have got away");
 			else {
-				JOptionPane.showMessageDialog(
-						panel, "You got pulled over for inspection!");
-				if (encounter.submitPolice()) 
-					JOptionPane.showMessageDialog(
-							panel, "Sorry for wasting your time! You are free to go.");
+				JOptionPane.showMessageDialog(panel,
+						"You got pulled over for inspection!");
+				if (encounter.submitPolice())
+					JOptionPane.showMessageDialog(panel,
+							"Sorry for wasting your time! You are free to go.");
 				else
-					JOptionPane.showMessageDialog(
-							panel, "You have illegal goods in your cargo. A fine of "+ (currentCredit-data.getMoney())+
-							" has been charged to your bank account.\n");
+					JOptionPane
+							.showMessageDialog(
+									panel,
+									"You have illegal goods in your cargo. A fine of "
+											+ (currentCredit - data.getMoney())
+											+ " has been charged to your bank account.\n");
 			}
 			frame.setVisible(false);
 			mp.changeMarketplace();
@@ -215,16 +230,17 @@ public class TravelPanel extends JPanel {
 		}
 
 	}
+
 	private class fleePirateButtonListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if (encounter.fleePirate()) 
-				JOptionPane.showMessageDialog(
-						panel, "Congratulation, you have got a way from a pirate");
+			if (encounter.fleePirate())
+				JOptionPane.showMessageDialog(panel,
+						"Congratulation, you have got a way from a pirate");
 			else {
-				JOptionPane.showMessageDialog(
-						panel, "Sorry pirate got you! All your goods will be taken!");
+				JOptionPane.showMessageDialog(panel,
+						"Sorry pirate got you! All your goods will be taken!");
 				encounter.surrenderToPirate();
 			}
 			frame.setVisible(false);
@@ -234,16 +250,16 @@ public class TravelPanel extends JPanel {
 		}
 
 	}
+
 	private class attackPirateButtonListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if (encounter.attackPirate()) 
-				JOptionPane.showMessageDialog(
-						panel, "Congratulation, you have destroyed a pirate ship");
+			if (encounter.attackPirate())
+				JOptionPane.showMessageDialog(panel,
+						"Congratulation, you have destroyed a pirate ship");
 			else
-				JOptionPane.showMessageDialog(
-						panel, "Sorry Game Over.");
+				JOptionPane.showMessageDialog(panel, "Sorry Game Over.");
 			frame.setVisible(false);
 			mp.changeMarketplace();
 			mp.repaint();
@@ -251,6 +267,7 @@ public class TravelPanel extends JPanel {
 		}
 
 	}
+
 	private class surrenderPirateButtonListener implements ActionListener {
 
 		@Override
@@ -263,16 +280,16 @@ public class TravelPanel extends JPanel {
 		}
 
 	}
+
 	private class attackTraderButtonListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if (encounter.attackTrader()) 
-				JOptionPane.showMessageDialog(
-						panel, "Congratulation, you have destroyed a trader ship");
+			if (encounter.attackTrader())
+				JOptionPane.showMessageDialog(panel,
+						"Congratulation, you have destroyed a trader ship");
 			else
-				JOptionPane.showMessageDialog(
-						panel, "Sorry Game Over.");
+				JOptionPane.showMessageDialog(panel, "Sorry Game Over.");
 			frame.setVisible(false);
 			mp.changeMarketplace();
 			mp.repaint();
@@ -280,6 +297,7 @@ public class TravelPanel extends JPanel {
 		}
 
 	}
+
 	private class ignoreTraderButtonListener implements ActionListener {
 
 		@Override
@@ -288,6 +306,7 @@ public class TravelPanel extends JPanel {
 		}
 
 	}
+
 	private class tradeTraderButtonListener implements ActionListener {
 
 		@Override
@@ -303,6 +322,7 @@ public class TravelPanel extends JPanel {
 		}
 
 	}
+
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 	}

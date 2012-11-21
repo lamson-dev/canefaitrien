@@ -48,16 +48,27 @@ public enum TradeGood{
 	
 	// TradeGood info
 	public final int MIN_TL_PRODUCE;
+
 	public final int MIN_TL_USE;
+
 	public final int TL_TOP_PRODUCE;
+
 	public final int BASE_PRICE;
+
 	public final int INCREASE_PER_TL;
+
 	public final int VARIANCE;
+
 	public final Situation INCREASE_SITUATION;
+
 	public final Situation DECREASE_SITUATION;
+
 	public final Situation EXPENSIVE_SITUATION;
+
 	public final int MIN_TRADE_PRICE;
+
 	public final int MAX_TRADE_PRICE;
+
 	public final String NAME;
 	
 	/**

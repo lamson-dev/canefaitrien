@@ -11,15 +11,22 @@ import java.util.Random;
 public class TraderEncounter implements Encounter {
 
 	private Controller data;
+
 	private ShipType type = ShipType.getAShip();
+
 	private TradeGood[] goods = TradeGood.values();
+
 	private final int MIN_NUM_GOODS = 5, VARIANCE = 5;
+
 	private static Random rand = new Random();
 
 	// Cargo hold info
 	private int[] itemStock = new int[TradeGood.values().length];
+
 	private int[] itemBuyPrices = new int[TradeGood.values().length];
+
 	private int[] itemSellPrices = new int[TradeGood.values().length];
+
 	private TechLevel level = TechLevel.HI_TECH;
 
 	public TraderEncounter(Controller data) {

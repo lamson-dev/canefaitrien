@@ -18,8 +18,11 @@ import com.canefaitrien.spacetrader.utils.MusicManager;
 public class InfoActivity extends RootActivity {
 
 	private static final String TAG = "Info";
+
 	private Controller data;
+
 	private boolean continueMusic;
+
 	@SuppressWarnings("unused")
 	private InfoView infoView;
 
@@ -40,7 +43,7 @@ public class InfoActivity extends RootActivity {
 		// grab data and set data
 		data = SpaceTrader.getController();
 		Log.d(TAG, "loaded data");
-		setFont();
+		applyFont();
 		populateData();
 	}
 
@@ -71,20 +74,11 @@ public class InfoActivity extends RootActivity {
 		money.setText("$" + String.valueOf(data.getMoney()));
 	}
 
-	/**
-	 * prepares font
-	 */
-	private void setFont() {
+	public void applyFont() {
 		ViewGroup activityViewGroup = (ViewGroup) findViewById(
 				android.R.id.content).getRootView();
 		setAppFont(activityViewGroup, appFont);
 	}
-
-	// @Override
-	// public void onBackPressed() {
-	// super.onBackPressed();
-	// continueMusic = true;
-	// }
 
 	/**
 	 * called when paused
@@ -133,11 +127,11 @@ public class InfoActivity extends RootActivity {
 		Log.d(TAG, "onRestart called.");
 	}
 
-//	/**
-//	 * called when destroyed
-//	 */
-//	protected void onDestroy() {
-//		super.onDestroy();
-//	}
+	// /**
+	// * called when destroyed
+	// */
+	// protected void onDestroy() {
+	// super.onDestroy();
+	// }
 
 }

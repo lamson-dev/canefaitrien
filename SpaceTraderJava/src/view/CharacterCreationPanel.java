@@ -42,7 +42,7 @@ public class CharacterCreationPanel extends JPanel {
 			try {
 				controller.move(controller.getUniverse()[0]);
 			} catch(Exception ex) {
-				
+				ex.printStackTrace();
 			}
 		}
 	}

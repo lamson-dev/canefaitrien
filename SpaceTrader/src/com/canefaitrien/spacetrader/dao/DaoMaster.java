@@ -1,3 +1,4 @@
+// $codepro.audit.disable
 package com.canefaitrien.spacetrader.dao;
 
 import android.content.Context;

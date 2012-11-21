@@ -20,6 +20,7 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import android.app.ListActivity;
 import android.content.Context;
@@ -46,12 +47,16 @@ import com.canefaitrien.spacetrader.utils.MusicManager;
 public class LoadGameActivity extends ListActivity {
 
 	private static final String TAG = "LoadGame";
+
 	private static final int ACTIVITY_LOAD = 1;
+
 	private static final int DELETE_ID = Menu.FIRST;
 
 	private GameDataDao gameDataDao;
+
 	@SuppressWarnings("unused")
 	private Cursor cursor;
+
 	private boolean continueMusic;
 
 	/** Called when the activity is first created. */
@@ -64,7 +69,7 @@ public class LoadGameActivity extends ListActivity {
 		fillData();
 		registerForContextMenu(getListView());
 
-		setFont();
+		applyFont();
 	}
 
 	/**
@@ -87,10 +92,10 @@ public class LoadGameActivity extends ListActivity {
 		// SimpleCursorAdapter adapter = new SimpleCursorAdapter(this,
 		// R.layout.list_loadgame_data, cursor, from, to, 0);
 		List<GameData> saves = gameDataDao.loadAll();
-		final List<HashMap<String, String>> entries = new ArrayList<HashMap<String, String>>();
+		final List<Map<String, String>> entries = new ArrayList<Map<String, String>>();
 
 		for (GameData data : saves) {
-			HashMap<String, String> entry = new HashMap<String, String>();
+			Map<String, String> entry = new HashMap<String, String>();
 			entry.put(idCol, String.valueOf(data.getId()));
 			entry.put(nameCol, data.getName());
 			entry.put(planetCol, data.getCurrentPlanet().getName());
@@ -168,7 +173,7 @@ public class LoadGameActivity extends ListActivity {
 		return super.onContextItemSelected(item);
 	}
 
-	private void setFont() {
+	private void applyFont() {
 		ViewGroup activityViewGroup = (ViewGroup) findViewById(
 				android.R.id.content).getRootView();
 		RootActivity.setAppFont(activityViewGroup, RootActivity.appFont);

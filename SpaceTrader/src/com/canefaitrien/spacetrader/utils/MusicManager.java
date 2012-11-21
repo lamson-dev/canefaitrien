@@ -1,3 +1,4 @@
+// $codepro.audit.disable
 package com.canefaitrien.spacetrader.utils;
 
 import java.util.Collection;
@@ -19,31 +20,23 @@ import com.canefaitrien.spacetrader.R;
  */
 public class MusicManager {
 	private static final String TAG = "MusicManager";
+
 	public static final int MUSIC_PREVIOUS = -1;
+
 	public static final int MUSIC_MENU = 0;
+
 	public static final int MUSIC_GAME = 1;
+
 	public static final int MUSIC_END_GAME = 2;
+
 	private static final int PREF_DEFAULT_MUSIC_VOLUME_ITEM = 5;
 
 	@SuppressLint("UseSparseArrays")
 	private static HashMap<Integer, MediaPlayer> players = new HashMap<Integer, MediaPlayer>();
-	private static int currentMusic = -1;
-	private static int previousMusic = -1;
 
-	// public static float getMusicVolume(Context context) {
-	// String[] volumes = context.getResources().getStringArray(
-	// R.array.volume_values);
-	// String[] volumes = { "0", "10", "20", "30", "40", "50", "60", "70",
-	// "80", "90", "100" };
-	// String volumeString = PreferenceManager.getDefaultSharedPreferences(
-	// context).getString(
-	// context.getString(R.string.key_pref_music_volume),
-	// volumes[PREF_DEFAULT_MUSIC_VOLUME_ITEM]);
-	//
-	// String volumeString = "50";
-	//
-	// return new Float(volumeString).floatValue();
-	// }
+	private static int currentMusic = -1;
+
+	private static int previousMusic = -1;
 
 	public static void start(Context context, int music) {
 		start(context, music, false);
@@ -70,7 +63,7 @@ public class MusicManager {
 		}
 		currentMusic = music;
 		Log.d(TAG, "Current music is now [" + currentMusic + "]");
-		MediaPlayer mp = players.get(music);
+		MediaPlayer mp = players.get(music); // $codepro.audit.disable
 		if (mp != null) {
 			if (!mp.isPlaying()) {
 				mp.start();
@@ -126,19 +119,6 @@ public class MusicManager {
 		currentMusic = -1;
 		Log.d(TAG, "Current music is now [" + currentMusic + "]");
 	}
-
-	// public static void updateVolumeFromPrefs(Context context) {
-	// try {
-	// float volume = getMusicVolume(context);
-	// Log.d(TAG, "Setting music volume to " + volume);
-	// Collection mps = players.values();
-	// for (MediaPlayer p : mps) {
-	// p.setVolume(volume, volume);
-	// }
-	// } catch (Exception e) {
-	// Log.e(TAG, e.getMessage(), e);
-	// }
-	// }
 
 	public static void release() {
 		Log.d(TAG, "Releasing media players");

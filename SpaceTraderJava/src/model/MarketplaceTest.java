@@ -1,3 +1,4 @@
+// $codepro.audit.disable logExceptions
 package model;
 
 import static org.junit.Assert.*;
@@ -37,7 +38,7 @@ public class MarketplaceTest {
 			assertTrue("bought 1 fur", ship.getCargo()[1] == 2);
 			money = mrktplc.buyGood(TradeGood.FOOD, ship, money);
 			assertTrue("bought 1 food", ship.getCargo()[2] == 3);
-		} catch(Exception e) {
+		} catch(Exception e) { // $codepro.audit.disable logExceptions
 			fail("Shouldn't fail");
 		}
 	}

@@ -26,12 +26,19 @@ import android.view.View;
 public class PlanetsView extends View {
 
 	private Planet[] planets;
+
 	private Paint paint = new Paint();// normal paint
+
 	private Paint wordPaint = new Paint();// for text
+
 	private Paint planetPaint = new Paint();// for simple planets
+
 	private Random rand = new Random();
+
 	private Bitmap planetImage;
+
 	private Rect dst;
+
 	private boolean simplePlanets;
 
 	/**
@@ -72,7 +79,7 @@ public class PlanetsView extends View {
 						planetPaint);
 			} else {
 				planetImage = BitmapFactory.decodeResource(getResources(),
-						planetImgs[planet.getType()]);
+						planetImgs[(int) planet.getType()]);
 				// this is the rectangle that determines the scaled planet size
 				dst = new Rect(planet.getXCoordinate() - planet.getRadius(),
 						planet.getYCoordinate() - planet.getRadius(),

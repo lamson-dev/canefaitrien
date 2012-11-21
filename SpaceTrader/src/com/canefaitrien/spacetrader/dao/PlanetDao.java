@@ -1,3 +1,4 @@
+// $codepro.audit.disable
 package com.canefaitrien.spacetrader.dao;
 
 import java.util.ArrayList;
@@ -32,24 +33,34 @@ public class PlanetDao extends AbstractDao<Planet, Long> {
 	public static class Properties {
 		public final static Property Id = new Property(0, Long.class, "id",
 				true, "_id");
+
 		public final static Property Name = new Property(1, String.class,
 				"name", false, "NAME");
+
 		public final static Property Radius = new Property(2, Integer.class,
 				"radius", false, "RADIUS");
+
 		public final static Property XCoordinate = new Property(3,
 				Integer.class, "xCoordinate", false, "X_COORDINATE");
+
 		public final static Property YCoordinate = new Property(4,
 				Integer.class, "yCoordinate", false, "Y_COORDINATE");
+
 		public final static Property TechLevel = new Property(5, String.class,
 				"techLevel", false, "TECH_LEVEL");
+
 		public final static Property Situation = new Property(6, String.class,
 				"situation", false, "SITUATION");
+
 		public final static Property Type = new Property(7, Integer.class,
 				"type", false, "TYPE");
+
 		public final static Property Color = new Property(8, Integer.class,
 				"color", false, "COLOR");
+
 		public final static Property DataId = new Property(9, Long.class,
 				"dataId", false, "DATA_ID");
+
 		public final static Property MarketId = new Property(10, Long.class,
 				"marketId", false, "MARKET_ID");
 	};

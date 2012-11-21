@@ -33,20 +33,7 @@ public class DataPlanetTest extends
 		super(DaoMaster.class);
 	}
 
-	Controller ctrl;
-
-	// public synchronized List<Planet> getPlanets() {
-	// if (planets == null) {
-	// if (daoSession == null) {
-	// throw new DaoException("Entity is detached from DAO context");
-	// }
-	// PlanetDao targetDao = daoSession.getPlanetDao();
-	// planets = targetDao._queryGameData_Planets(id);
-	//
-	// loadMarketplaceInAllPlanets();
-	// }
-	// return planets;
-	// }
+	private Controller ctrl;
 
 	/**
 	 * test One-To-Many Mapping relationship - One GameData to Many Planets
@@ -55,7 +42,7 @@ public class DataPlanetTest extends
 
 		Person player = new Person(null, "darnit", 5, 5, 5, 5);
 		daoSession.insert(player);
-		ctrl = new Controller(player, Difficulty.Hard);
+		ctrl = new Controller(player, Difficulty.HARD);
 		GameData data = new GameData(null, null, "Hard", 500, "Hello", 0,
 				new Date(), player.getId(), ctrl.getShip().getId());
 		daoSession.insert(ctrl.getShip());
@@ -86,7 +73,7 @@ public class DataPlanetTest extends
 	public void testCachedPlanets() {
 		Person player = new Person(null, "darnit", 5, 5, 5, 5);
 		daoSession.insert(player);
-		ctrl = new Controller(player, Difficulty.Hard);
+		ctrl = new Controller(player, Difficulty.HARD);
 		GameData data = new GameData(null, null, "Hard", 500, "Hello", 0,
 				new Date(), ctrl.getPlayer().getId(), ctrl.getShip().getId());
 		daoSession.insert(ctrl.getShip());
@@ -103,10 +90,10 @@ public class DataPlanetTest extends
 		List<Planet> planets = data.getPlanets();
 
 		// add an extra planet to database
-		Planet p = new Planet("name", new Point(0, 0), TechLevel.HI_TECH,
+		Planet planet = new Planet("name", new Point(0, 0), TechLevel.HI_TECH,
 				Situation.ARTISTIC);
-		p.setDataId(data.getId());
-		daoSession.insert(p);
+		planet.setDataId(data.getId());
+		daoSession.insert(planet);
 
 		// get list of planets out, should be the cached list
 		List<Planet> planets2 = data.getPlanets();
@@ -132,7 +119,7 @@ public class DataPlanetTest extends
 		Person player = new Person(null, "darnit", 5, 5, 5, 5);
 		daoSession.insert(player);
 
-		ctrl = new Controller(player, Difficulty.Hard);
+		ctrl = new Controller(player, Difficulty.HARD);
 		GameData data = new GameData(null, null, "Hard", 500, "Hello", 0,
 				new Date(), ctrl.getPlayer().getId(), ctrl.getShip().getId());
 
@@ -158,9 +145,9 @@ public class DataPlanetTest extends
 	 */
 	private void addPlanetToData(GameData data) {
 		for (int i = 0; i < ctrl.getUniverse().length; i++) {
-			Planet p = ctrl.getUniverse()[i];
-			p.setDataId(data.getId());
-			daoSession.insert(p);
+			Planet planet = ctrl.getUniverse()[i];
+			planet.setDataId(data.getId());
+			daoSession.insert(planet);
 
 		}
 	}

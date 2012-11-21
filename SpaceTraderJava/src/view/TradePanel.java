@@ -17,7 +17,7 @@ import javax.swing.JPanel;
 
 import controller.Controller;
 
-import model.Marketplace;
+
 import model.TradeGood;
 
 public class TradePanel extends JPanel {

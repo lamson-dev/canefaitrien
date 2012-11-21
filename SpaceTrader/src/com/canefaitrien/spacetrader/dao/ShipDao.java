@@ -1,3 +1,4 @@
+// $codepro.audit.disable
 package com.canefaitrien.spacetrader.dao;
 
 import org.json.JSONException;
@@ -27,16 +28,23 @@ public class ShipDao extends AbstractDao<Ship, Long> {
     */
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
+
         public final static Property Type = new Property(1, String.class, "type", false, "TYPE");
+
         public final static Property HullStrength = new Property(2, Integer.class, "hullStrength", false, "HULL_STRENGTH");
+
         public final static Property CurrentCargoHold = new Property(3, Integer.class, "currentCargoHold", false, "CURRENT_CARGO_HOLD");
+
         public final static Property Cargo = new Property(4, String.class, "cargo", false, "CARGO");
+
         public final static Property Fuel = new Property(5, Integer.class, "fuel", false, "FUEL");
+
         public final static Property Weapons = new Property(6, String.class, "weapons", false, "WEAPONS");
+
         public final static Property Shields = new Property(7, String.class, "shields", false, "SHIELDS");
+
         public final static Property Gadgets = new Property(8, String.class, "gadgets", false, "GADGETS");
     };
-
 
     public ShipDao(DaoConfig config) {
         super(config);

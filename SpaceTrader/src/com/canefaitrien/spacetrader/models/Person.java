@@ -9,11 +9,16 @@ package com.canefaitrien.spacetrader.models;
 public class Person {
 
 	private Long id;
+
 	/** Not-null value. */
 	private String name;
+
 	private int pilotPts;
+
 	private int fighterPts;
+
 	private int traderPts;
+
 	private int engineerPts;
 
 	/**

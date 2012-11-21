@@ -17,7 +17,7 @@ public class HubActivity extends RootActivity implements OnClickListener,
 
 	private static final String TAG = "Hub";
 
-	MainScreenPresenter mPresenter;
+	private MainScreenPresenter mPresenter;
 
 	private boolean continueMusic;
 
@@ -42,7 +42,7 @@ public class HubActivity extends RootActivity implements OnClickListener,
 		saveGame.setOnClickListener(this);
 		refill.setOnClickListener(this);
 
-		setFont();
+		applyFont();
 
 	}
 
@@ -67,17 +67,11 @@ public class HubActivity extends RootActivity implements OnClickListener,
 	/**
 	 * Recursively set font for every TextView in the activity
 	 */
-	private void setFont() {
+	public void applyFont() {
 		ViewGroup activityViewGroup = (ViewGroup) findViewById(
 				android.R.id.content).getRootView();
 		setAppFont(activityViewGroup, appFont);
 	}
-
-	// @Override
-	// public void onBackPressed() {
-	// super.onBackPressed();
-	// continueMusic = true;
-	// }
 
 	/**
 	 * pause music when activity is paused

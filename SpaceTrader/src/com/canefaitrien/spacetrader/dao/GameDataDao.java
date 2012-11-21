@@ -1,3 +1,4 @@
+// $codepro.audit.disable
 package com.canefaitrien.spacetrader.dao;
 
 import java.text.DateFormat;
@@ -33,20 +34,28 @@ public class GameDataDao extends AbstractDao<GameData, Long> {
 	public static class Properties {
 		public final static Property Id = new Property(0, Long.class, "id",
 				true, "_id");
+
 		public final static Property Name = new Property(1, String.class,
 				"name", false, "NAME");
+
 		public final static Property Difficulty = new Property(2, String.class,
 				"difficulty", false, "DIFFICULTY");
+
 		public final static Property Money = new Property(3, Integer.class,
 				"money", false, "MONEY");
+
 		public final static Property CurrentPlanet = new Property(4,
 				String.class, "currentPlanet", false, "CURRENT_PLANET");
+
 		public final static Property Turn = new Property(5, Integer.class,
 				"turn", false, "TURN");
+
 		public final static Property Date = new Property(6,
 				java.util.Date.class, "date", false, "DATE");
+
 		public final static Property PersonId = new Property(7, Long.class,
 				"personId", false, "PERSON_ID");
+
 		public final static Property ShipId = new Property(8, Long.class,
 				"shipId", false, "SHIP_ID");
 	};

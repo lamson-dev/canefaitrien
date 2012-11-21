@@ -3,13 +3,13 @@ package com.canefaitrien.spacetrader;
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
-import android.os.Build;
+
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-public abstract class RootActivity extends Activity {
+public class RootActivity extends Activity {
 
 	public static Typeface appFont;
 
@@ -23,15 +23,15 @@ public abstract class RootActivity extends Activity {
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
 		// Make sure we're running on Honeycomb or higher to use ActionBar APIs
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-			// For the main activity, make sure the app icon in the action bar
-			// does not behave as a button
-			// ActionBar actionBar = getActionBar();
-			// actionBar.setDisplayHomeAsUpEnabled(true);
-			// // actionBar.setHomeButtonEnabled(false);
-			// getActionBar().setDisplayHomeAsUpEnabled(true);
-			// actionBar.hide();
-		}
+		// if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+		// For the main activity, make sure the app icon in the action bar
+		// does not behave as a button
+		// ActionBar actionBar = getActionBar();
+		// actionBar.setDisplayHomeAsUpEnabled(true);
+		// // actionBar.setHomeButtonEnabled(false);
+		// getActionBar().setDisplayHomeAsUpEnabled(true);
+		// actionBar.hide();
+		// }
 
 		appFont = Typeface.createFromAsset(getAssets(),
 				"fonts/Street Corner.ttf");

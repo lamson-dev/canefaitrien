@@ -1,3 +1,4 @@
+// $codepro.audit.disable
 package com.canefaitrien.spacetrader.dao;
 
 import org.json.JSONException;
@@ -27,12 +28,15 @@ public class MarketplaceDao extends AbstractDao<Marketplace, Long> {
     */
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
+
         public final static Property LastDock = new Property(1, Integer.class, "lastDock", false, "LAST_DOCK");
+
         public final static Property ItemStock = new Property(2, String.class, "itemStock", false, "ITEM_STOCK");
+
         public final static Property ItemBuyPrices = new Property(3, String.class, "itemBuyPrices", false, "ITEM_BUY_PRICES");
+
         public final static Property ItemSellPrices = new Property(4, String.class, "itemSellPrices", false, "ITEM_SELL_PRICES");
     };
-
 
     public MarketplaceDao(DaoConfig config) {
         super(config);

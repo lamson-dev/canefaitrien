@@ -16,13 +16,21 @@ public class Ship {
 
 	// Ship info
 	private Long id;
+
 	private String weapons;
+
 	private String shields;
+
 	private String gadgets;
+
 	private ShipType type;
+
 	private int hullStrength;
+
 	private int currentCargoHold;
+
 	private int[] cargo;
+
 	private int fuel;
 	// private Weapons[] weapons;
 	// private Shield[] shields;
@@ -140,7 +148,7 @@ public class Ship {
 		return json.toString();
 	}
 
-	public void setCargo(String cargo) throws JSONException {
+	public final void setCargo(String cargo) throws JSONException {
 		JSONArray jsonArray = new JSONArray(cargo);
 		if (jsonArray != null) {
 			int[] cargoArray = new int[TradeGood.values().length];
@@ -222,6 +230,7 @@ public class Ship {
 	public void setGadgets(String gadgets) {
 		this.gadgets = gadgets;
 	}
+
 	public int getMaxSpeed() {
 		return type.MAX_DISTANCE;
 	}

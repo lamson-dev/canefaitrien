@@ -1,3 +1,4 @@
+// $codepro.audit.disable
 /*
  * Copyright (C) 2008 Google Inc.
  * 
@@ -39,22 +40,35 @@ import com.canefaitrien.spacetrader.models.Person;
 public class DbAdapter {
 
 	public static final String CHAR_KEY_ROWID = "_id";
+
 	public static final String CHAR_KEY_NAME = "name";
+
 	public static final String CHAR_KEY_DIFFICULTY = "difficulty";
+
 	public static final String CHAR_KEY_MONEY = "money";
+
 	public static final String CHAR_KEY_ENGINEER_PTS = "engineer_pts";
+
 	public static final String CHAR_KEY_PILOT_PTS = "pilot_pts";
+
 	public static final String CHAR_KEY_TRADER_PTS = "trader_pts";
+
 	public static final String CHAR_KEY_FIGHTER_PTS = "fighter_pts";
+
 	public static final String CHAR_KEY_DATE = "date";
 
 	private static final String TAG = "DbAdapter";
+
 	private DatabaseHelper mDbHelper;
+
 	private SQLiteDatabase mDb;
+
 	private final Context mContext;
 
 	private static final String DB_NAME = "spacetrader";
+
 	private static final String TABLE_CHARACTER = "character";
+
 	private static final int DB_VERSION = 2;
 
 	/**
@@ -72,8 +86,6 @@ public class DbAdapter {
 			+ CHAR_KEY_PILOT_PTS + " INTEGER, " + CHAR_KEY_TRADER_PTS
 			+ " INTEGER, " + CHAR_KEY_FIGHTER_PTS + " INTEGER, "
 			+ CHAR_KEY_ENGINEER_PTS + " INTEGER);";
-
-	// + CHAR_KEY_DATE + " TEXT NOT NULL);";
 
 	private static class DatabaseHelper extends SQLiteOpenHelper {
 

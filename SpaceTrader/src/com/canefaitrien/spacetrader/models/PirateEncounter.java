@@ -12,9 +12,9 @@ package com.canefaitrien.spacetrader.models;
 public class PirateEncounter implements Encounter {
 
 	private Controller data;
+
 	private ShipType type = ShipType.getAShip();
-	
-	
+
 	public PirateEncounter(Controller data){
 		this.data = data;
 	}
@@ -25,7 +25,6 @@ public class PirateEncounter implements Encounter {
 		for (int i = 0; i < cargo.length; i++)
 			cargo[i] = 0;
 	}
-
 
 	public void encounter() {
 		// TODO Auto-generated method stub

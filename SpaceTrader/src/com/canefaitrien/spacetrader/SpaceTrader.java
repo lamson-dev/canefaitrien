@@ -1,3 +1,4 @@
+// $codepro.audit.disable
 package com.canefaitrien.spacetrader;
 
 import android.app.Application;
@@ -16,9 +17,13 @@ import com.canefaitrien.spacetrader.models.GameData;
  */
 public class SpaceTrader extends Application {
 	private static Controller controller;
+
 	private static GameData data;
+
 	public static SQLiteDatabase db;
+
 	public static DaoMaster daoMaster;
+
 	public static DaoSession daoSession;
 
 	public static void setData(GameData data) {

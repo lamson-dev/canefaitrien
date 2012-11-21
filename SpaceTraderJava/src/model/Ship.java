@@ -6,6 +6,9 @@ import java.util.List;
 import model.Gadget.GadgetType;
 import model.Shield.ShieldType;
 
+
+
+
 /**
  * Ship class for holding info on the ship
  * 

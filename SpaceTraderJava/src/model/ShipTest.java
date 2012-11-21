@@ -1,3 +1,4 @@
+// $codepro.audit.disable logExceptions
 package model;
 
 import static org.junit.Assert.*;
@@ -34,7 +35,7 @@ Ship ship;
 			ship.addGood(TradeGood.GAMES);
 			assertTrue("3 food", ship.getCargo()[4] == 5);
 			assertTrue("15 items in cargo", ship.getCurrentCargoHold() == 15);
-		} catch(Exception e) {
+		} catch(Exception e) { // $codepro.audit.disable logExceptions
 			fail("Shouldn't fail");
 		}
 	}
