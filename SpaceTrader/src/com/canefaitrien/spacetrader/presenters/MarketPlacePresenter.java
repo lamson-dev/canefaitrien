@@ -21,6 +21,7 @@ import com.canefaitrien.spacetrader.models.TradeGood;
 
 public class MarketPlacePresenter {
 
+	@SuppressWarnings("unused")
 	private static final String TAG = "MarketPresenter";
 	private IMarketPlaceView mView;
 	private Marketplace mMarket;

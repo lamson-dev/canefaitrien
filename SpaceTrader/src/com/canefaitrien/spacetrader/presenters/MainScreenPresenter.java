@@ -20,6 +20,7 @@ import com.canefaitrien.spacetrader.models.Ship;
 public class MainScreenPresenter {
 
 	private static final String TAG = "MainScreenPresenter";
+	@SuppressWarnings("unused")
 	private IMainScreenView mView;
 	private GameDataDao gameDataDao;
 	private ShipDao shipDao;

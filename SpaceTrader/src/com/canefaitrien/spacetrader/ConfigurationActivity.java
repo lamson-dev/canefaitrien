@@ -376,8 +376,8 @@ public class ConfigurationActivity extends RootActivity implements
 		Log.d(TAG, "onRestart called.");
 	}
 
-//	@Override
-//	protected void onDestroy() {
-//		super.onDestroy();
-//	}
+	// @Override
+	// protected void onDestroy() {
+	// super.onDestroy();
+	// }
 }

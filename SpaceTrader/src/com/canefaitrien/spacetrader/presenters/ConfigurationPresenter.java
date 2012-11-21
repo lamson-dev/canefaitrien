@@ -23,6 +23,7 @@ import com.canefaitrien.spacetrader.models.Ship;
 public class ConfigurationPresenter {
 
 	private static final String TAG = "ConfigPresenter";
+	@SuppressWarnings("unused")
 	private IConfigurationView mView;
 
 	public ConfigurationPresenter(IConfigurationView view) {
