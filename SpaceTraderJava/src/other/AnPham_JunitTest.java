@@ -66,7 +66,7 @@ public class AnPham_JunitTest {
 	}
 
 
-	// This will test the presence of fire arm only
+	// This will test the presence of Narcotics only
 	@Test(timeout = 2000)
 	public void checkNarcotics() {
 		settingUp();
@@ -103,7 +103,7 @@ public class AnPham_JunitTest {
 		Assert.assertEquals("Fail to retain other legal trade goods", 1, (data.getShip().getCargo())[TradeGood.WATER.ordinal()]);
 	}
 
-	// This will test the presence of fire arm only
+	// This will test the presence of fire arm and narcotics at the same time 
 	@Test(timeout = 2000)
 	public void checkFireArmAndNarcotics() {
 		settingUp();
@@ -147,7 +147,7 @@ public class AnPham_JunitTest {
 		Assert.assertEquals("Fail to retain other legal trade goods", 1, (data.getShip().getCargo())[TradeGood.FUR.ordinal()]);
 	}
 	
-	// This will test the none presence of illegal trade good only
+	// This will test the none presence of illegal trade good
 	@Test(timeout = 2000)
 	public void checkNoIllegalTradeGood() {
 		settingUp();
