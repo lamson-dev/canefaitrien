@@ -41,6 +41,7 @@ public class Universe {
 	
 	/**
 	 * Shuffles planet names to create random planets
+	 * @param planets planet array
 	 */
 	private static void shuffle(String[] planets) {
 		int ind1, ind2;
@@ -56,6 +57,7 @@ public class Universe {
 	
 	/**
 	 * Generates all of the planets in the universe
+	 * @return array of planets
 	 */
 	public static Planet[] generate() {
 		Planet[] planets = new Planet[TOTAL_PLANETS];
@@ -78,6 +80,7 @@ public class Universe {
 	
 	/**
 	 * Checks to make sure no planets are too close, and moves them if they are
+	 * @param planets array of planets
 	 */
 	public static void validate(Planet[] planets) {
 		boolean isChecking = true, movedPlanet;
@@ -109,7 +112,6 @@ public class Universe {
 		}
 	}
 	
-	// Accessors
 	
 	public static String toString(Planet[] planets) {
 		String ret = "";

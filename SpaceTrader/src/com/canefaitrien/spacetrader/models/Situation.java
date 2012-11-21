@@ -6,6 +6,7 @@ package com.canefaitrien.spacetrader.models;
  * @author Andrew Duda
  * @version 1.0
  */
+
 public enum Situation {
 	LOTS_OF_WATER("Lots of Water"), RICH_FAUNA("Rich Fauna"), RICH_SOIL(
 			"Rich Soil"), MINERAL_RICH("Mineral_Rich"), ARTISTIC("Artistic"), WARLIKE(
@@ -20,6 +21,7 @@ public enum Situation {
 
 	/**
 	 * Constructor for Situation
+	 * @param name
 	 */
 	private Situation(String name) {
 		NAME = name;
@@ -29,6 +31,11 @@ public enum Situation {
 		return NAME;
 	}
 
+	/**
+	 * Method which creates a Situation from a String of the name
+	 * @param name
+	 * @return Situation of the String
+	 */
 	public static Situation fromString(String name) {
 		if (name != null)
 			for (Situation s : Situation.values())

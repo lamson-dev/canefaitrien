@@ -16,13 +16,29 @@ public class Person {
 	private int traderPts;
 	private int engineerPts;
 
+	/**
+	 * Constructor for Person
+	 */
 	public Person() {
 	}
 
+	/**
+	 * Constructor for Person
+	 * @param id
+	 */
 	public Person(Long id) {
 		this.id = id;
 	}
 
+	/**
+	 * Constructor for Person
+	 * @param id
+	 * @param name
+	 * @param pilotPts
+	 * @param fighterPts
+	 * @param traderPts
+	 * @param engineerPts
+	 */
 	public Person(Long id, String name, int pilotPts, int fighterPts,
 			int traderPts, int engineerPts) {
 		this.id = id;

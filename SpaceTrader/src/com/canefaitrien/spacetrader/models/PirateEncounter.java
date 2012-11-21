@@ -37,7 +37,7 @@ public class PirateEncounter implements Encounter {
 	 * false otherwise
 	 */
 	public boolean pirateFlee() {
-		return ((data.getShip().getMaxSpeed() - type.getMaxSpeed()) > 0);
+		return ((data.getShip().getMaxSpeed() - type.MAX_DISTANCE) > 0);
 	}
 	
 	/**

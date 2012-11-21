@@ -16,11 +16,6 @@ public class Ship {
 
 	// Ship info
 	private Long id;
-	// private String type;
-	// private Integer hullStrength;
-	// private Integer currentCargoHold;
-	// private String cargo;
-	// private Integer fuel;
 	private String weapons;
 	private String shields;
 	private String gadgets;
@@ -35,16 +30,31 @@ public class Ship {
 
 	public static final int MPG = 15;
 
+	/**
+	 * Constructor for Ship
+	 */
 	public Ship() {
 	}
 
+	/**
+	 * Constructor for Ship
+	 * @param id
+	 */
 	public Ship(Long id) {
 		this.id = id;
 	}
 
 	/**
-	 * Constructor for load Ship
-	 * 
+	 * Constructor for Ship
+	 * @param id
+	 * @param type
+	 * @param hullStrength
+	 * @param currentCargoHold
+	 * @param cargo
+	 * @param fuel
+	 * @param weapons
+	 * @param shields
+	 * @param gadgets
 	 * @throws JSONException
 	 */
 	public Ship(Long id, String type, Integer hullStrength,
@@ -63,13 +73,22 @@ public class Ship {
 	}
 
 	/**
-	 * Constructor for new Ship
+	 * Constructor for Ship
+	 * @param type
 	 */
 	public Ship(ShipType type) {
 		this(type, type.MAX_HULL_STRENGTH, 0,
 				new int[TradeGood.values().length], type.MAX_DISTANCE);
 	}
 
+	/**
+	 * Constructor for Ship
+	 * @param type
+	 * @param hullStrength
+	 * @param currentCargoHold
+	 * @param cargo
+	 * @param fuel
+	 */
 	public Ship(ShipType type, int hullStrength, int currentCargoHold,
 			int[] cargo, int fuel) {
 		this.type = type;
@@ -110,6 +129,25 @@ public class Ship {
 		} else {
 			cargo[good.ordinal()]--;
 			currentCargoHold--;
+		}
+	}
+	
+	public String getStringCargo() {
+		List<Integer> list = new ArrayList<Integer>();
+		for (int item : this.getCargo())
+			list.add(item);
+		JSONArray json = new JSONArray(list);
+		return json.toString();
+	}
+
+	public void setCargo(String cargo) throws JSONException {
+		JSONArray jsonArray = new JSONArray(cargo);
+		if (jsonArray != null) {
+			int[] cargoArray = new int[TradeGood.values().length];
+			for (int i = 0; i < jsonArray.length(); i++) {
+				cargoArray[i] = jsonArray.getInt(i);
+			}
+			this.cargo = cargoArray;
 		}
 	}
 
@@ -153,40 +191,12 @@ public class Ship {
 		this.currentCargoHold = currentCargoHold;
 	}
 
-	public String getStringCargo() {
-		List<Integer> list = new ArrayList<Integer>();
-		for (int item : this.getCargo())
-			list.add(item);
-		JSONArray json = new JSONArray(list);
-		return json.toString();
-	}
-
-	public void setCargo(String cargo) throws JSONException {
-		JSONArray jsonArray = new JSONArray(cargo);
-		if (jsonArray != null) {
-			int[] cargoArray = new int[TradeGood.values().length];
-			for (int i = 0; i < jsonArray.length(); i++) {
-				cargoArray[i] = jsonArray.getInt(i);
-			}
-			this.cargo = cargoArray;
-		}
-	}
-
 	public Integer getFuel() {
 		return fuel;
 	}
 
 	public void setFuel(Integer fuel) {
 		this.fuel = fuel;
-	}
-
-	public String getCargoView() {
-		String ret = "";
-		TradeGood[] goods = TradeGood.values();
-		for (int i = 0; i < cargo.length; i++) {
-			ret += goods[i].toString() + ": " + cargo[i];
-		}
-		return ret;
 	}
 
 	public String getWeapons() {

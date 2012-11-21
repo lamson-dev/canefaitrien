@@ -1,4 +1,5 @@
 package com.canefaitrien.spacetrader.models;
+
 /**
  * TradeGoods to be bought and sold durring the game
  * 
