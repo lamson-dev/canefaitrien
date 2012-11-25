@@ -1,3 +1,7 @@
+/**
+ * Custom View of Info Screen
+ */
+
 package com.canefaitrien.spacetrader;
 
 import android.content.Context;

@@ -1,3 +1,7 @@
+/**
+ * Concrete View of MainMenu Screen
+ */
+
 package com.canefaitrien.spacetrader;
 
 import android.content.Intent;

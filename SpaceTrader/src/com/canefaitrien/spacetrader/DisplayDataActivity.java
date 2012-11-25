@@ -1,7 +1,12 @@
+/**
+ * Concrete View of Display Data Screen, for debugging
+ */
+
 package com.canefaitrien.spacetrader;
 
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -56,6 +61,8 @@ public class DisplayDataActivity extends RootActivity {
 		case android.R.id.home:
 			NavUtils.navigateUpFromSameTask(this);
 			return true;
+		default:
+			Log.d("DisplayActivity", "no idea which option was pressed");
 		}
 		return super.onOptionsItemSelected(item);
 	}

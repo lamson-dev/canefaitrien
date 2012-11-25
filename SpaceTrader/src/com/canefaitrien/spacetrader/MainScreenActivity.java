@@ -1,3 +1,7 @@
+/**
+ * Concrete View of Main Navigation Screen
+ */
+
 package com.canefaitrien.spacetrader;
 
 import android.app.TabActivity;

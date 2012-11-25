@@ -1,3 +1,6 @@
+/**
+ * Concrete View of Configuration Screen
+ */
 package com.canefaitrien.spacetrader;
 
 import android.app.ProgressDialog;
@@ -200,13 +203,17 @@ public class ConfigurationActivity extends RootActivity implements
 			startGame();
 			break;
 		case R.id.btn_plus:
-			if (level < difficulties.length - 1)
+			if (level < difficulties.length - 1) {
 				setDifficultyLevel(++level);
+			}
 			break;
 		case R.id.btn_minus:
-			if (level > 0)
+			if (level > 0) {
 				setDifficultyLevel(--level);
+			}
 			break;
+		default:
+			Log.d(TAG, "no idea which button was pressed");
 		}
 	}
 
@@ -243,13 +250,16 @@ public class ConfigurationActivity extends RootActivity implements
 		case R.id.bar_engineer:
 			pt = (TextView) findViewById(R.id.pt_engineer);
 			break;
+		default:
+			Log.d(TAG, "no idea which seekbar was changed");
 		}
 
 		if (rmPts >= 0) {
 			pt.setText(String.valueOf(progress));
 			setRemainingPts(rmPts);
-		} else
+		} else {
 			seekBar.setProgress(totalPts - usedPts);
+		}
 
 	}
 

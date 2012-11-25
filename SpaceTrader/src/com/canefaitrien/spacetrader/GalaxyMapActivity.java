@@ -1,3 +1,7 @@
+/**
+ * Concrete View of GalaxyMap Screen
+ */
+
 package com.canefaitrien.spacetrader;
 
 import android.app.ActionBar.LayoutParams;
@@ -29,9 +33,9 @@ import com.canefaitrien.spacetrader.utils.MusicManager;
  */
 public class GalaxyMapActivity extends RootActivity implements OnTouchListener {
 
-	private String TAG = "Galaxy Activity";
+	private static final String TAG = "GalaxyActivity";
 
-	private GalaxyView galaxy;
+	private ShipLocationView galaxy;
 
 	private PlanetsView planetsView;
 
@@ -51,7 +55,7 @@ public class GalaxyMapActivity extends RootActivity implements OnTouchListener {
 		super.onCreate(savedInstanceState);
 		Log.d("Galaxy", "Created Galaxy");
 		// draw planets
-		galaxy = new GalaxyView(this);
+		galaxy = new ShipLocationView(this);
 		planetsView = new PlanetsView(this, SpaceTrader.getController()
 				.getUniverse());
 		galaxy.setOnTouchListener(this);
@@ -82,6 +86,7 @@ public class GalaxyMapActivity extends RootActivity implements OnTouchListener {
 				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int which) {
 						// do nothing
+						Log.i(TAG, "user pressed close");
 					}
 
 				});

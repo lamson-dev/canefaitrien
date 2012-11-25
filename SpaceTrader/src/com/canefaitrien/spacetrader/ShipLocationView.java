@@ -1,3 +1,7 @@
+/**
+ * Custom View of GalaxyMap Screen, draw ship and ship's fuel level
+ */
+
 package com.canefaitrien.spacetrader;
 
 import android.annotation.SuppressLint;
@@ -23,7 +27,7 @@ import com.canefaitrien.spacetrader.models.Ship;
  * 
  */
 @SuppressLint("ViewConstructor")
-public class GalaxyView extends View {
+public class ShipLocationView extends View {
 	private Paint paint = new Paint();// normal paint
 
 	private Paint wordTest = new Paint(); // text paint
@@ -40,7 +44,7 @@ public class GalaxyView extends View {
 	 * @param planets
 	 *            takes in an array of planets
 	 */
-	public GalaxyView(Context context) {
+	public ShipLocationView(Context context) {
 		super(context);
 	}
 

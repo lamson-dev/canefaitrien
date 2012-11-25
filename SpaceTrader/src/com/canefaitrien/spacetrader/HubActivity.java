@@ -1,3 +1,7 @@
+/**
+ * Concrete View of Hub Screen
+ */
+
 package com.canefaitrien.spacetrader;
 
 import android.os.Bundle;

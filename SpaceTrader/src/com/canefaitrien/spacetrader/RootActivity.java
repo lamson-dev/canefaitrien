@@ -1,3 +1,4 @@
+// $codepro.audit.disable
 package com.canefaitrien.spacetrader;
 
 import android.app.Activity;
@@ -11,7 +12,8 @@ import android.widget.TextView;
 
 public class RootActivity extends Activity {
 
-	public static Typeface appFont;
+	public static Typeface appFont; // $codepro.audit.disable
+									// initializeStaticFields
 
 	/**
 	 * an abstract class that extends activity, where we can set some of the
@@ -42,9 +44,9 @@ public class RootActivity extends Activity {
 	 * {@link ViewGroup}.
 	 */
 	public static final void setAppFont(ViewGroup mContainer, Typeface mFont) {
-		if (mContainer == null || mFont == null)
+		if (mContainer == null || mFont == null) {
 			return;
-
+		}
 		final int mCount = mContainer.getChildCount();
 
 		// Loop through all of the children.

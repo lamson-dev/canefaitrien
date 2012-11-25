@@ -1,3 +1,7 @@
+/**
+ * Application Launcher
+ */
+
 package com.canefaitrien.spacetrader;
 
 import android.app.Activity;

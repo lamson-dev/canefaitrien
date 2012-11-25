@@ -1,3 +1,7 @@
+/**
+ * Custom View of GalaxyMap Screen, draw planets
+ */
+
 package com.canefaitrien.spacetrader;
 
 import java.util.Random;

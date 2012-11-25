@@ -1,3 +1,7 @@
+/**
+ * Concrete View of Marketplace Screen
+ */
+
 package com.canefaitrien.spacetrader;
 
 import java.util.ArrayList;
@@ -26,7 +30,7 @@ import com.canefaitrien.spacetrader.utils.MusicManager;
 public class MarketPlaceActivity extends ListActivity implements
 		IMarketPlaceView, OnClickListener {
 
-	private final String TAG = "MarketPlace";
+	private static final String TAG = "MarketPlace";
 
 	protected MarketPlacePresenter mPresenter;
 
