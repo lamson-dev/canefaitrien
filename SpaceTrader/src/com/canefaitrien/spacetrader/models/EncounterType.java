@@ -9,10 +9,28 @@ package com.canefaitrien.spacetrader.models;
 
 import java.util.Random;
 
+/**
+ */
 public enum EncounterType {
 
-	TRADER, POLICE, PIRATE, NOTHING;
+	/**
+	 * Field TRADER.
+	 */
+	TRADER, /**
+  * Field POLICE.
+  */
+ POLICE, /**
+  * Field PIRATE.
+  */
+ PIRATE, /**
+  * Field NOTHING.
+  */
+ NOTHING;
 
+	/**
+	 * Method getEncounterType.
+	 * @return EncounterType
+	 */
 	public static EncounterType getEncounterType() {
 		if (new Random().nextDouble() > .65) {
 			int pick = new Random().nextInt(EncounterType.values().length - 1);

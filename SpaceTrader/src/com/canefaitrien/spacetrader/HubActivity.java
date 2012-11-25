@@ -75,7 +75,7 @@ public class HubActivity extends RootActivity implements OnClickListener,
 	 * 
 	 * @see android.view.View$OnClickListener#onClick(View)
 	 */
-	public void onClick(View v) {
+	public void onClick(View v) { // $codepro.audit.disable inconsistentUseOfOverride
 		switch (v.getId()) {
 		case R.id.btn_savegame:
 			mPresenter.saveData();

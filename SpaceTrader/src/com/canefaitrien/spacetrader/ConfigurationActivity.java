@@ -265,7 +265,7 @@ public class ConfigurationActivity extends RootActivity implements
 	 * 
 	 * @see android.view.View$OnClickListener#onClick(View)
 	 */
-	public void onClick(View v) {
+	public void onClick(View v) { // $codepro.audit.disable inconsistentUseOfOverride
 
 		switch (v.getId()) {
 		case R.id.btn_start:
@@ -310,7 +310,7 @@ public class ConfigurationActivity extends RootActivity implements
 	 * @see android.widget.SeekBar$OnSeekBarChangeListener#onProgressChanged(SeekBar,
 	 *      int, boolean)
 	 */
-	public void onProgressChanged(SeekBar seekBar, int progress,
+	public void onProgressChanged(SeekBar seekBar, int progress, // $codepro.audit.disable inconsistentUseOfOverride
 			boolean fromUser) {
 
 		int rmPts = totalPts - usedPts - progress;
@@ -351,7 +351,7 @@ public class ConfigurationActivity extends RootActivity implements
 	 * 
 	 * @see android.widget.SeekBar$OnSeekBarChangeListener#onStartTrackingTouch(SeekBar)
 	 */
-	public void onStartTrackingTouch(SeekBar seekBar) {
+	public void onStartTrackingTouch(SeekBar seekBar) { // $codepro.audit.disable inconsistentUseOfOverride
 		usedPts -= seekBar.getProgress();
 
 	}
@@ -365,7 +365,7 @@ public class ConfigurationActivity extends RootActivity implements
 	 * 
 	 * @see android.widget.SeekBar$OnSeekBarChangeListener#onStopTrackingTouch(SeekBar)
 	 */
-	public void onStopTrackingTouch(SeekBar seekBar) {
+	public void onStopTrackingTouch(SeekBar seekBar) { // $codepro.audit.disable inconsistentUseOfOverride
 		usedPts += seekBar.getProgress();
 
 	}
@@ -381,7 +381,7 @@ public class ConfigurationActivity extends RootActivity implements
 	 * @see com.canefaitrien.spacetrader.interfaces.IConfigurationView
 	 *      #getBarPilot()
 	 */
-	public SeekBar getBarPilot() {
+	public SeekBar getBarPilot() { // $codepro.audit.disable inconsistentUseOfOverride
 		return (SeekBar) findViewById(R.id.bar_pilot);
 	}
 
@@ -394,7 +394,7 @@ public class ConfigurationActivity extends RootActivity implements
 	 * @see com.canefaitrien.spacetrader.interfaces.IConfigurationView
 	 *      #setBarPilot(SeekBar)
 	 */
-	public void setBarPilot(SeekBar barPilot) {
+	public void setBarPilot(SeekBar barPilot) { // $codepro.audit.disable inconsistentUseOfOverride
 		this.barPilot = barPilot;
 	}
 
@@ -406,7 +406,7 @@ public class ConfigurationActivity extends RootActivity implements
 	 * @see com.canefaitrien.spacetrader.interfaces.IConfigurationView
 	 *      #getBarFighter()
 	 */
-	public SeekBar getBarFighter() {
+	public SeekBar getBarFighter() { // $codepro.audit.disable inconsistentUseOfOverride
 		return (SeekBar) findViewById(R.id.bar_fighter);
 	}
 
@@ -419,7 +419,7 @@ public class ConfigurationActivity extends RootActivity implements
 	 * @see com.canefaitrien.spacetrader.interfaces.IConfigurationView
 	 *      #setBarFighter(SeekBar)
 	 */
-	public void setBarFighter(SeekBar barFighter) {
+	public void setBarFighter(SeekBar barFighter) { // $codepro.audit.disable inconsistentUseOfOverride
 		this.barFighter = barFighter;
 	}
 
@@ -431,7 +431,7 @@ public class ConfigurationActivity extends RootActivity implements
 	 * @see com.canefaitrien.spacetrader.interfaces.IConfigurationView
 	 *      #getBarTrader()
 	 */
-	public SeekBar getBarTrader() {
+	public SeekBar getBarTrader() { // $codepro.audit.disable inconsistentUseOfOverride
 		return (SeekBar) findViewById(R.id.bar_trader);
 	}
 
@@ -444,7 +444,7 @@ public class ConfigurationActivity extends RootActivity implements
 	 * @see com.canefaitrien.spacetrader.interfaces.IConfigurationView
 	 *      #setBarTrader(SeekBar)
 	 */
-	public void setBarTrader(SeekBar barTrader) {
+	public void setBarTrader(SeekBar barTrader) { // $codepro.audit.disable inconsistentUseOfOverride
 		this.barTrader = barTrader;
 	}
 
@@ -456,7 +456,7 @@ public class ConfigurationActivity extends RootActivity implements
 	 * @see com.canefaitrien.spacetrader.interfaces.IConfigurationView
 	 *      #getBarEngineer()
 	 */
-	public SeekBar getBarEngineer() {
+	public SeekBar getBarEngineer() { // $codepro.audit.disable inconsistentUseOfOverride
 		return (SeekBar) findViewById(R.id.bar_engineer);
 	}
 
@@ -469,7 +469,7 @@ public class ConfigurationActivity extends RootActivity implements
 	 * @see com.canefaitrien.spacetrader.interfaces.IConfigurationView
 	 *      #setBarEngineer(SeekBar)
 	 */
-	public void setBarEngineer(SeekBar barEngineer) {
+	public void setBarEngineer(SeekBar barEngineer) { // $codepro.audit.disable inconsistentUseOfOverride
 		this.barEngineer = barEngineer;
 	}
 
@@ -481,7 +481,7 @@ public class ConfigurationActivity extends RootActivity implements
 	 * @see com.canefaitrien.spacetrader.interfaces.IConfigurationView
 	 *      #getEditName()
 	 */
-	public EditText getEditName() {
+	public EditText getEditName() { // $codepro.audit.disable inconsistentUseOfOverride
 		editName = (EditText) findViewById(R.id.edit_name);
 		return editName;
 	}
@@ -495,7 +495,7 @@ public class ConfigurationActivity extends RootActivity implements
 	 * @see com.canefaitrien.spacetrader.interfaces.IConfigurationView
 	 *      #setEditName(EditText)
 	 */
-	public void setEditName(EditText editName) {
+	public void setEditName(EditText editName) { // $codepro.audit.disable inconsistentUseOfOverride
 		this.editName = editName;
 	}
 
@@ -507,7 +507,7 @@ public class ConfigurationActivity extends RootActivity implements
 	 * @see com.canefaitrien.spacetrader.interfaces.IConfigurationView
 	 *      #getTxtViewLevel()
 	 */
-	public TextView getTxtViewLevel() {
+	public TextView getTxtViewLevel() { // $codepro.audit.disable inconsistentUseOfOverride
 		tvLevel = (TextView) this.findViewById(R.id.txtview_level);
 		return tvLevel;
 	}
@@ -521,7 +521,7 @@ public class ConfigurationActivity extends RootActivity implements
 	 * @see com.canefaitrien.spacetrader.interfaces.IConfigurationView
 	 *      #setTxtViewLevel(TextView)
 	 */
-	public void setTxtViewLevel(TextView level) {
+	public void setTxtViewLevel(TextView level) { // $codepro.audit.disable inconsistentUseOfOverride
 		this.tvLevel = level;
 
 	}

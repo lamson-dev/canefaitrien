@@ -1,5 +1,5 @@
 // $codepro.audit.disable logExceptions
-package model;
+
 
 import java.util.Date;
 import java.util.List;

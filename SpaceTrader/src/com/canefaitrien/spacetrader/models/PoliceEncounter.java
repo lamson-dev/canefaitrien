@@ -1,23 +1,39 @@
 /**
  * Handling PoliceEncounter
- * @author An Pham
- * @Data 11/ 07/ 12
- * @Version 1.0
  */
 package com.canefaitrien.spacetrader.models;
 
 import java.util.Random;
 
+/**
+ * @author An Pham
+ * @version $Revision: 1.0 $
+ */
 public class PoliceEncounter implements Encounter {
 
 	// HORNET(16, 300, 3, 1, 2, 20, 0, 0, "Hornet"),
 	// 30 cargo/ 2 weapons, 2 shield, 3 gadget, 3 crew, 15/tank
+	/**
+	 * Field policeShip.
+	 */
 	private Ship policeShip = new Ship(ShipType.HORNET);
 
+	/**
+	 * Field illegalTradeGood.
+	 */
 	private TradeGood[] illegalTradeGood;
 
+	/**
+	 * Field data.
+	 */
 	private Controller data;
 
+	/**
+	 * Constructor for PoliceEncounter.
+	 * 
+	 * @param data
+	 *            Controller
+	 */
 	public PoliceEncounter(Controller data) {
 		illegalTradeGood = new TradeGood[2];
 		illegalTradeGood[0] = TradeGood.NARCOTICS;
@@ -27,6 +43,7 @@ public class PoliceEncounter implements Encounter {
 
 	/**
 	 * Check for illegal goods
+	 * 
 	 * 
 	 * @return money after fines
 	 */
@@ -47,6 +64,7 @@ public class PoliceEncounter implements Encounter {
 	 * Method is called to bribe the police
 	 * 
 	 * @param amount
+	 * 
 	 * @return true upon successful, false otherwise
 	 */
 	public boolean canBribePolice(int amount) {
@@ -61,7 +79,8 @@ public class PoliceEncounter implements Encounter {
 	}
 
 	/**
-	 * @Return true if survive false otherwise
+	 * 
+	 * @return boolean
 	 */
 	public boolean canPoliceBattle() {
 		return ((data.getShip().getHullStrength() - policeShip
@@ -69,12 +88,18 @@ public class PoliceEncounter implements Encounter {
 	}
 
 	/**
-	 * @Return true if get away false otherwise
+	 * 
+	 * @return boolean
 	 */
 	public boolean canPoliceFlee() {
 		return ((data.getShip().getMaxSpeed() - policeShip.getMaxSpeed()) > 0);
 	}
-	
+
+	/**
+	 * Method toString.
+	 * 
+	 * @return String
+	 */
 	@Override
 	public String toString() {
 		return super.toString();

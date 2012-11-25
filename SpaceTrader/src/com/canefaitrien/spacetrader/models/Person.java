@@ -1,3 +1,4 @@
+// $codepro.audit.disable largeNumberOfParameters
 /**
  * Person class for holding info on the Person
  * 
@@ -7,19 +8,40 @@
 
 package com.canefaitrien.spacetrader.models;
 
+/**
+ * 
+ * @author Son Nguyen
+ *
+ * @version $Revision: 1.0 $
+ */
 public class Person {
 
+	/**
+	 * Field id.
+	 */
 	private Long id;
 
 	/** Not-null value. */
 	private String name;
 
+	/**
+	 * Field pilotPts.
+	 */
 	private int pilotPts;
 
+	/**
+	 * Field fighterPts.
+	 */
 	private int fighterPts;
 
+	/**
+	 * Field traderPts.
+	 */
 	private int traderPts;
 
+	/**
+	 * Field engineerPts.
+	 */
 	private int engineerPts;
 
 	/**
@@ -55,14 +77,26 @@ public class Person {
 		this.engineerPts = engineerPts;
 	}
 
+	/**
+	 * Method getId.
+	 * @return Long
+	 */
 	public Long getId() {
 		return id;
 	}
 
+	/**
+	 * Method setId.
+	 * @param id Long
+	 */
 	public void setId(Long id) {
 		this.id = id;
 	}
 
+	/**
+	 * Method toString.
+	 * @return String
+	 */
 	public String toString() {
 		return "Name: " + name + 
 				"\nPilot:    " + pilotPts + 
@@ -71,42 +105,82 @@ public class Person {
 				"\nEngineer: " + engineerPts;
 	}
 
+	/**
+	 * Method getName.
+	 * @return String
+	 */
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * Method setName.
+	 * @param name String
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
+	/**
+	 * Method getPilotPts.
+	 * @return int
+	 */
 	public int getPilotPts() {
 		return pilotPts;
 	}
 
+	/**
+	 * Method setPilotPts.
+	 * @param pilotPts int
+	 */
 	public void setPilotPts(int pilotPts) {
 		this.pilotPts = pilotPts;
 	}
 
+	/**
+	 * Method getFighterPts.
+	 * @return int
+	 */
 	public int getFighterPts() {
 		return fighterPts;
 	}
 
+	/**
+	 * Method setFighterPts.
+	 * @param fighterPts int
+	 */
 	public void setFighterPts(int fighterPts) {
 		this.fighterPts = fighterPts;
 	}
 
+	/**
+	 * Method getTraderPts.
+	 * @return int
+	 */
 	public int getTraderPts() {
 		return traderPts;
 	}
 
+	/**
+	 * Method setTraderPts.
+	 * @param traderPts int
+	 */
 	public void setTraderPts(int traderPts) {
 		this.traderPts = traderPts;
 	}
 
+	/**
+	 * Method getEngineerPts.
+	 * @return int
+	 */
 	public int getEngineerPts() {
 		return engineerPts;
 	}
 
+	/**
+	 * Method setEngineerPts.
+	 * @param engineerPts int
+	 */
 	public void setEngineerPts(int engineerPts) {
 		this.engineerPts = engineerPts;
 	}

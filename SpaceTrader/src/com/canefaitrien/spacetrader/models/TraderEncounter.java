@@ -1,34 +1,72 @@
 /**
- * @author An Pham
- * @Date 11/07/12
- * @Version 1.0
  */
 
 package com.canefaitrien.spacetrader.models;
 
 import java.util.Random;
 
+/**
+ * 
+ * @author An Pham
+ * @version $Revision: 1.0 $
+ */
 public class TraderEncounter implements Encounter {
 
+	/**
+	 * Field data.
+	 */
 	private Controller data;
 
+	/**
+	 * Field type.
+	 */
 	private ShipType type = ShipType.getAShip();
 
+	/**
+	 * Field goods.
+	 */
 	private TradeGood[] goods = TradeGood.values();
 
+	/**
+	 * Field VARIANCE. (value is 5)
+	 */
+	/**
+	 * Field MIN_NUM_GOODS. (value is 5)
+	 */
 	private static final int MIN_NUM_GOODS = 5, VARIANCE = 5;
 
+	/**
+	 * Field RAND.
+	 */
 	private static Random RAND = new Random();
 
 	// Cargo hold info
+	/**
+	 * Field itemStock.
+	 */
 	private int[] itemStock = new int[TradeGood.values().length];
 
+	/**
+	 * Field itemBuyPrices.
+	 */
 	private int[] itemBuyPrices = new int[TradeGood.values().length];
 
+	/**
+	 * Field itemSellPrices.
+	 */
 	private int[] itemSellPrices = new int[TradeGood.values().length];
 
+	/**
+	 * Field level.
+	 */
 	private TechLevel level = TechLevel.HI_TECH;
 
+	/**
+	 * Constructor for TraderEncounter.
+	 * 
+	 * @param data
+	 *            Controller
+	 */
 	public TraderEncounter(Controller data) {
 		this.data = data;
 		for (TradeGood good : goods) {
@@ -44,23 +82,47 @@ public class TraderEncounter implements Encounter {
 	}
 
 	/**
-	 * @Return true if survive false otherwise
+	 * 
+	 * @return boolean
 	 */
 	public boolean canTraderBattle() {
 		return ((data.getShip().getHullStrength() - type.maxHullStrength) > 0);
 	}
 
+	/**
+	 * Method getBuyPrice.
+	 * 
+	 * @param good
+	 *            TradeGood
+	 * @return int
+	 */
 	private int getBuyPrice(TradeGood good) {
 		return getPrice(good, good.minTLProduce);
 	}
 
+	/**
+	 * Method getSellPrice.
+	 * 
+	 * @param good
+	 *            TradeGood
+	 * @return int
+	 */
 	private int getSellPrice(TradeGood good) {
 		return getPrice(good, good.minTLUse); // makes sell
-																// values less
-																// than buy
-																// values
+												// values less
+												// than buy
+												// values
 	}
 
+	/**
+	 * Method getPrice.
+	 * 
+	 * @param good
+	 *            TradeGood
+	 * @param minTL
+	 *            int
+	 * @return int
+	 */
 	private int getPrice(TradeGood good, int minTL) {
 		if (level.ordinal() >= minTL) {
 			int temp = good.basePrice + good.increasePerTL
@@ -73,6 +135,13 @@ public class TraderEncounter implements Encounter {
 		}
 	}
 
+	/**
+	 * Method getBuyView.
+	 * 
+	 * @param ship
+	 *            Ship
+	 * @return String[]
+	 */
 	public String[] getBuyView(Ship ship) {
 		String[] ret = new String[itemStock.length];
 		int[] cargo = ship.getCargo();
@@ -83,6 +152,13 @@ public class TraderEncounter implements Encounter {
 		return ret;
 	}
 
+	/**
+	 * Method getSellView.
+	 * 
+	 * @param ship
+	 *            Ship
+	 * @return String[]
+	 */
 	public String[] getSellView(Ship ship) {
 		String[] ret = new String[itemStock.length];
 		int[] cargo = ship.getCargo();
@@ -93,6 +169,13 @@ public class TraderEncounter implements Encounter {
 		return ret;
 	}
 
+	/**
+	 * Method getView.
+	 * 
+	 * @param ship
+	 *            Ship
+	 * @return String[][]
+	 */
 	public String[][] getView(Ship ship) {
 		String[][] ret = new String[itemStock.length][5];
 		int[] cargo = ship.getCargo();
@@ -105,7 +188,12 @@ public class TraderEncounter implements Encounter {
 		}
 		return ret;
 	}
-	
+
+	/**
+	 * Method toString.
+	 * 
+	 * @return String
+	 */
 	@Override
 	public String toString() {
 		return super.toString();

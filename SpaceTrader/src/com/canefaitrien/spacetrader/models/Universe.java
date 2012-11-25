@@ -1,9 +1,6 @@
 /**
  * Universe class to generate planets from a list of names with random
  * coordinates within the area of the map
- * 
- * @author AN PHAM
- * @version
  */
 
 package com.canefaitrien.spacetrader.models;
@@ -12,24 +9,71 @@ import java.util.Random;
 
 import android.graphics.Point;
 
+/**
+ * @author AN PHAM
+
+ * 
+ * @version $Revision: 1.0 $
+ */
 public class Universe {
 
 	// Universe constants
+	/**
+	 * Field SHUFFLE_AMT.
+	 * (value is 1000)
+	 */
+	/**
+	 * Field HEIGHT.
+	 * (value is 1150)
+	 */
+	/**
+	 * Field WIDTH.
+	 * (value is 720)
+	 */
 	public static final int WIDTH = 720, HEIGHT = 1150, SHUFFLE_AMT = 1000;
 
-	public static final int BORDER = 20, BORDERTWO = 40; // Min distance from edge of screen
-	
+	/**
+	 * Field BORDERTWO.
+	 * (value is 40)
+	 */
+	/**
+	 * Field BORDER.
+	 * (value is 20)
+	 */
+	public static final int BORDER = 20, BORDERTWO = 40; // Min distance from
+															// edge of screen
+
+	/**
+	 * Field HMINBORDERTWO.
+	 */
+	/**
+	 * Field WMINBORDERTWO.
+	 */
 	public static final int WMINBORDERTWO = WIDTH - BORDERTWO,
 			HMINBORDERTWO = HEIGHT - BORDERTWO;
 
+	/**
+	 * Field MIN_DISTANCE.
+	 * (value is 5)
+	 */
 	public static final int MIN_DISTANCE = 5; // Min distance planet must be
 												// from another planet
 
+	/**
+	 * Field TOTAL_PLANETS.
+	 * (value is 50)
+	 */
 	public static final int TOTAL_PLANETS = 50; // Total planets to create
 
+	/**
+	 * Field RAND.
+	 */
 	private static Random RAND = new Random();
 
 	// Array of planet names
+	/**
+	 * Field PLANET_NAMES.
+	 */
 	private static final String PLANET_NAMES[] = { "Acamar", "Adahn", "Aldea",
 			"Andevian", "Antedi", "Balosnee", "Baratas", "Brax", "Bretel",
 			"Calondia", "Campor", "Capelle", "Carzon", "Castor", "Cestus",
@@ -72,8 +116,8 @@ public class Universe {
 	/**
 	 * Generates all of the planets in the universe
 	 * 
-	 * @return array of planets
-	 */
+	
+	 * @return array of planets */
 	public static Planet[] generate() {
 		Planet[] planets = new Planet[TOTAL_PLANETS];
 		int x, y;
@@ -114,8 +158,9 @@ public class Universe {
 					// if too close, create new location
 					if (current.distance(planets[j]) < MIN_DISTANCE
 							+ current.getRadius() + planets[j].getRadius()) {
-						current.setCoordinates(new Point(RAND.nextInt(WMINBORDERTWO)
-								+ BORDER, RAND.nextInt(HMINBORDERTWO) + BORDER));
+						current.setCoordinates(new Point(RAND
+								.nextInt(WMINBORDERTWO) + BORDER, RAND
+								.nextInt(HMINBORDERTWO) + BORDER));
 						movedPlanet = true;
 						break;
 					}
@@ -132,6 +177,11 @@ public class Universe {
 		}
 	}
 
+	/**
+	 * Method toString.
+	 * @param planets Planet[]
+	 * @return String
+	 */
 	public static String toString(Planet[] planets) {
 		StringBuffer ret = new StringBuffer();
 		for (int i = 0; i < planets.length; i++) {
@@ -139,7 +189,11 @@ public class Universe {
 		}
 		return ret.toString();
 	}
-	
+
+	/**
+	 * Method toString.
+	 * @return String
+	 */
 	@Override
 	public String toString() {
 		return super.toString();

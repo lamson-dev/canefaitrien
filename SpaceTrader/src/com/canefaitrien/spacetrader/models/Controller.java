@@ -1,39 +1,81 @@
+// $codepro.audit.disable largeNumberOfParameters
 /**
  * Controller class which allows interaction between the Model and the View
  * 
- * @author Andrew
- * @version 1.0
  */
 package com.canefaitrien.spacetrader.models;
 
 import android.util.Log;
 
-
-
+/**
+ * 
+ * @author Andrew
+ * @version 1.0
+ */
 public class Controller {
 
+	/**
+	 * Field TAG.
+	 * (value is ""Controller"")
+	 */
 	private static final String TAG = "Controller";
 
 	// Controller constants
+	/**
+	 */
 	public static enum Difficulty {
-		EASY, MEDIUM, HARD
+		/**
+		 * Field EASY.
+		 */
+		EASY, /**
+  * Field MEDIUM.
+  */
+ MEDIUM, /**
+  * Field HARD.
+  */
+ HARD
 	};
 
+	/**
+	 * Field STARTING_MONEY.
+	 * (value is 500)
+	 */
 	private static final int STARTING_MONEY = 500;
 
 	// Controller info
+	/**
+	 * Field player.
+	 */
 	private Person player;
 
+	/**
+	 * Field ship.
+	 */
 	private Ship ship;
 
+	/**
+	 * Field currentPlanet.
+	 */
 	private Planet currentPlanet;
 
+	/**
+	 * Field money.
+	 */
 	private int money;
 
+	/**
+	 * Field universe.
+	 */
 	private Planet[] universe;
 
+	/**
+	 * Field difficulty.
+	 */
 	private Difficulty difficulty;
 
+	/**
+	 * Field turn.
+	 */
 	private int turn;
 
 	/**
@@ -77,9 +119,9 @@ public class Controller {
 	 * 
 	 * @param good
 	 *            Good to be bought by player
+	
 	 * @throws Exception
-	 *             if not able to buy, get the reason using .getMessage()
-	 */
+	 *             if not able to buy, get the reason using .getMessage() */
 	public void buyGood(TradeGood good) throws Exception {
 		money = currentPlanet.getMarketplace().buyGood(good, ship, money);
 	}
@@ -89,9 +131,9 @@ public class Controller {
 	 * 
 	 * @param good
 	 *            Good to be sold
+	
 	 * @throws Exception
-	 *             if not able to sell, get the reason using .getMessage()
-	 */
+	 *             if not able to sell, get the reason using .getMessage() */
 	public void sellGood(TradeGood good) throws Exception {
 		money = currentPlanet.getMarketplace().sellGood(good, ship, money);
 	}
@@ -101,9 +143,9 @@ public class Controller {
 	 * 
 	 * @param destination
 	 *            new target location
+	
 	 * @throws Exception
-	 *             if not able to move, get the reason using .getMessage()
-	 */
+	 *             if not able to move, get the reason using .getMessage() */
 	public void move(Planet destination) throws Exception {
 		if (currentPlanet.distance(destination) > ship.getType().maxDistance
 				* Ship.MPG) { // if planet is too far will need to change the
@@ -123,38 +165,74 @@ public class Controller {
 		}
 	}
 
+	/**
+	 * Method getPlayer.
+	 * @return Person
+	 */
 	public Person getPlayer() {
 		return player;
 	}
 
+	/**
+	 * Method getShip.
+	 * @return Ship
+	 */
 	public Ship getShip() {
 		return ship;
 	}
 
+	/**
+	 * Method getLocation.
+	 * @return Planet
+	 */
 	public Planet getLocation() {
 		return currentPlanet;
 	}
 
+	/**
+	 * Method getUniverse.
+	 * @return Planet[]
+	 */
 	public Planet[] getUniverse() {
 		return universe;
 	}
 
+	/**
+	 * Method getMoney.
+	 * @return int
+	 */
 	public int getMoney() {
 		return money;
 	}
 
+	/**
+	 * Method getDifficulty.
+	 * @return Difficulty
+	 */
 	public Difficulty getDifficulty() {
 		return difficulty;
 	}
 
+	/**
+	 * Method getTurn.
+	 * @return int
+	 */
 	public int getTurn() {
 		return turn;
 	}
 
+	/**
+	 * Method setMoney.
+	 * @param money int
+	 */
 	public void setMoney(int money) {
 		this.money = money;
 	}
-	
+
+	/**
+	 * Method toString.
+	 * @return String
+	 */
 	@Override
 	public String toString() {
 		return super.toString();

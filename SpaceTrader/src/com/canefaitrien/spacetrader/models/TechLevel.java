@@ -7,13 +7,42 @@
 
 package com.canefaitrien.spacetrader.models;
 
+/**
+ */
 public enum TechLevel {
-	PRE_AGRICULTURAL("PreAgricultural"), AGRICULTURAL("Agricultural"), MEDIEVAL(
-			"Medieval"), RENAISSANCE("Renaissance"), EARLY_INDUSTRIAL(
-			"Early Industrial"), INDUSTRIAL("Industrial"), POST_INDUSTRIAL(
-			"Post Industrial"), HI_TECH("HiTech");
+	/**
+	 * Field PRE_AGRICULTURAL.
+	 */
+	PRE_AGRICULTURAL("PreAgricultural"), /**
+  * Field AGRICULTURAL.
+  */
+ AGRICULTURAL("Agricultural"), /**
+  * Field MEDIEVAL.
+  */
+ MEDIEVAL(
+			"Medieval"), /**
+  * Field RENAISSANCE.
+  */
+ RENAISSANCE("Renaissance"), /**
+  * Field EARLY_INDUSTRIAL.
+  */
+ EARLY_INDUSTRIAL(
+			"Early Industrial"), /**
+  * Field INDUSTRIAL.
+  */
+ INDUSTRIAL("Industrial"), /**
+  * Field POST_INDUSTRIAL.
+  */
+ POST_INDUSTRIAL(
+			"Post Industrial"), /**
+  * Field HI_TECH.
+  */
+ HI_TECH("HiTech");
 
 	// TechLevel info
+	/**
+	 * Field name.
+	 */
 	public final String name; // Needs a name to print out multi-word situations
 
 	/**
@@ -25,6 +54,10 @@ public enum TechLevel {
 		this.name = name;
 	}
 
+	/**
+	 * Method toString.
+	 * @return String
+	 */
 	public String toString() {
 		return name;
 	}
@@ -33,8 +66,8 @@ public enum TechLevel {
 	 * Method which creates a TechLevel from a String of the name
 	 * 
 	 * @param name
-	 * @return TechLevel of the String
-	 */
+	
+	 * @return TechLevel of the String */
 	public static TechLevel fromString(String name) {
 		if (name != null) {
 			for (TechLevel level : TechLevel.values()) {

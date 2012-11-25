@@ -1,23 +1,40 @@
 /**
  * Pirate Encounter Handler
  * 
- * @author: An Pham
- * @Date 07/11/12
- * @Version 1.0
  */
 
 package com.canefaitrien.spacetrader.models;
 
+/**
+ * 
+ * @author An Pham
+ * @version $Revision: 1.0 $
+ */
 public class PirateEncounter implements Encounter {
 
+	/**
+	 * Field data.
+	 */
 	private Controller data;
 
+	/**
+	 * Field type.
+	 */
 	private ShipType type = ShipType.getAShip();
 
+	/**
+	 * Constructor for PirateEncounter.
+	 * 
+	 * @param data
+	 *            Controller
+	 */
 	public PirateEncounter(Controller data) {
 		this.data = data;
 	}
 
+	/**
+	 * Method takeGoods.
+	 */
 	public void takeGoods() {
 
 		int[] cargo = data.getShip().getCargo();
@@ -27,19 +44,26 @@ public class PirateEncounter implements Encounter {
 	}
 
 	/**
-	 * @Return true if get away false otherwise
+	 * 
+	 * @return boolean
 	 */
 	public boolean canPirateFlee() {
 		return ((data.getShip().getMaxSpeed() - type.maxDistance) > 0);
 	}
 
 	/**
-	 * @Return true if survive false otherwise
+	 * 
+	 * @return boolean
 	 */
 	public boolean canPirateBattle() {
 		return ((data.getShip().getHullStrength() - type.maxHullStrength) > 0);
 	}
 
+	/**
+	 * Method toString.
+	 * 
+	 * @return String
+	 */
 	@Override
 	public String toString() {
 		return super.toString();

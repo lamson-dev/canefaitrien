@@ -1,3 +1,4 @@
+// $codepro.audit.disable largeNumberOfParameters
 /**
  * Class for handling the amounts and prices of goods a Planet's marketplace can
  * have. Also handles buying and selling goods
@@ -18,26 +19,58 @@ import org.json.JSONException;
 import com.canefaitrien.spacetrader.interfaces.GameConstants;
 
 
-
+/**
+ * 
+ * @author Son Nguyen
+ *
+ * @version $Revision: 1.0 $
+ */
 public class Marketplace implements GameConstants {
 
+	/**
+	 * Field GOODS.
+	 */
 	private static TradeGood[] GOODS = TradeGood.values();
 
+	/**
+	 * Field RAND.
+	 */
 	private static Random RAND = new Random();
 
 	// Marketplace info
+	/**
+	 * Field lastDock.
+	 */
 	private int lastDock;
 
+	/**
+	 * Field itemStock.
+	 */
 	private int[] itemStock;
 
+	/**
+	 * Field itemBuyPrices.
+	 */
 	private int[] itemBuyPrices;
 
+	/**
+	 * Field itemSellPrices.
+	 */
 	private int[] itemSellPrices;
 
+	/**
+	 * Field level.
+	 */
 	private TechLevel level;
 
+	/**
+	 * Field situation.
+	 */
 	private Situation situation;
 
+	/**
+	 * Field id.
+	 */
 	private Long id;
 
 	/**
@@ -63,8 +96,8 @@ public class Marketplace implements GameConstants {
 	 * @param itemStock
 	 * @param itemBuyPrices
 	 * @param itemSellPrices
-	 * @throws JSONException
-	 */
+	
+	 * @throws JSONException */
 	public Marketplace(Long id, Integer lastDock, String itemStock,
 			String itemBuyPrices, String itemSellPrices) throws JSONException {
 		this.id = id;
@@ -142,7 +175,8 @@ public class Marketplace implements GameConstants {
 	 * Private method to get the buy price of a good
 	 * 
 	 * @param good
-	 * @return
+	
+	 * @return int
 	 */
 	private int getBuyPrice(TradeGood good) {
 		return getPrice(good, good.minTLProduce);
@@ -152,7 +186,8 @@ public class Marketplace implements GameConstants {
 	 * Private method to get the sell price of a good
 	 * 
 	 * @param good
-	 * @return
+	
+	 * @return int
 	 */
 	private int getSellPrice(TradeGood good) {
 		return getPrice(good, good.minTLUse);
@@ -164,7 +199,8 @@ public class Marketplace implements GameConstants {
 	 * 
 	 * @param good
 	 * @param minTL
-	 * @return
+	
+	 * @return int
 	 */
 	private int getPrice(TradeGood good, int minTL) {
 		if (level.ordinal() >= minTL) {
@@ -184,9 +220,9 @@ public class Marketplace implements GameConstants {
 	 * @param good
 	 * @param ship
 	 * @param money
-	 * @return
-	 * @throws Exception
-	 */
+
+	 * @return int
+	 * @throws Exception */
 	public int buyGood(TradeGood good, Ship ship, int money) throws Exception {
 		if (itemBuyPrices[good.ordinal()] > money) {
 			throw new Exception("We don't have enough money, captain!");
@@ -205,9 +241,9 @@ public class Marketplace implements GameConstants {
 	 * @param good
 	 * @param ship
 	 * @param money
-	 * @return
-	 * @throws Exception
-	 */
+
+	 * @return int
+	 * @throws Exception */
 	public int sellGood(TradeGood good, Ship ship, int money) throws Exception {
 		if (itemSellPrices[good.ordinal()] == 0) {
 			throw new Exception("They don't need that good, captain!");
@@ -218,6 +254,10 @@ public class Marketplace implements GameConstants {
 		}
 	}
 
+	/**
+	 * Method getStringItemStock.
+	 * @return String
+	 */
 	public String getStringItemStock() {
 		List<Integer> list = new ArrayList<Integer>();
 		for (int item : this.getItemStock())
@@ -226,6 +266,11 @@ public class Marketplace implements GameConstants {
 		return json.toString();
 	}
 
+	/**
+	 * Method setItemStock.
+	 * @param itemStock String
+	 * @throws JSONException
+	 */
 	public final void setItemStock(String itemStock) throws JSONException {
 		JSONArray jsonArray = new JSONArray(itemStock);
 		int[] stock = new int[GOODS.length];
@@ -235,6 +280,10 @@ public class Marketplace implements GameConstants {
 		this.itemStock = stock;
 	}
 
+	/**
+	 * Method getStringItemBuyPrices.
+	 * @return String
+	 */
 	public String getStringItemBuyPrices() {
 		List<Integer> list = new ArrayList<Integer>();
 		for (int item : this.getItemBuyPrices())
@@ -243,6 +292,11 @@ public class Marketplace implements GameConstants {
 		return json.toString();
 	}
 
+	/**
+	 * Method setItemBuyPrices.
+	 * @param itemBuyPrices String
+	 * @throws JSONException
+	 */
 	public final void setItemBuyPrices(String itemBuyPrices)
 			throws JSONException {
 		JSONArray jsonArray = new JSONArray(itemBuyPrices);
@@ -253,6 +307,10 @@ public class Marketplace implements GameConstants {
 		this.itemBuyPrices = buyPrices;
 	}
 
+	/**
+	 * Method getStringItemSellPrices.
+	 * @return String
+	 */
 	public String getStringItemSellPrices() {
 		List<Integer> list = new ArrayList<Integer>();
 		for (int item : this.getItemSellPrices())
@@ -261,6 +319,11 @@ public class Marketplace implements GameConstants {
 		return json.toString();
 	}
 
+	/**
+	 * Method setItemSellPrices.
+	 * @param itemSellPrices String
+	 * @throws JSONException
+	 */
 	public final void setItemSellPrices(String itemSellPrices)
 			throws JSONException {
 		JSONArray jsonArray = new JSONArray(itemSellPrices);
@@ -271,42 +334,83 @@ public class Marketplace implements GameConstants {
 		this.itemSellPrices = sellPrices;
 	}
 
+	/**
+	 * Method getSituation.
+	 * @return Situation
+	 */
 	public Situation getSituation() {
 		return situation;
 	}
 
+	/**
+	 * Method setSituation.
+	 * @param situation Situation
+	 */
 	public void setSituation(Situation situation) {
 		this.situation = situation;
 	}
 
+	/**
+	 * Method getItemStock.
+	 * @return int[]
+	 */
 	public int[] getItemStock() {
 		return itemStock;
 	}
 
+	/**
+	 * Method getItemBuyPrices.
+	 * @return int[]
+	 */
 	public int[] getItemBuyPrices() {
 		return itemBuyPrices;
 	}
 
+	/**
+	 * Method getItemSellPrices.
+	 * @return int[]
+	 */
 	public int[] getItemSellPrices() {
 		return itemSellPrices;
 	}
 
+	/**
+	 * Method getId.
+	 * @return Long
+	 */
 	public Long getId() {
 		return id;
 	}
 
+	/**
+	 * Method setId.
+	 * @param id Long
+	 */
 	public void setId(Long id) {
 		this.id = id;
 	}
 
+	/**
+	 * Method getLastDock.
+	 * @return Integer
+	 */
 	public Integer getLastDock() {
 		return lastDock;
 	}
 
+	/**
+	 * Method setLastDock.
+	 * @param lastDock Integer
+	 */
 	public void setLastDock(Integer lastDock) {
 		this.lastDock = lastDock;
 	}
 
+	/**
+	 * Method arrayToString.
+	 * @param array int[]
+	 * @return String
+	 */
 	public String arrayToString(int[] array) {
 		StringBuffer ret = new StringBuffer("[");
 		for (int i : array) {
@@ -315,6 +419,10 @@ public class Marketplace implements GameConstants {
 		return ret.toString() + "]\n";
 	}
 	
+	/**
+	 * Method toString.
+	 * @return String
+	 */
 	@Override
 	public String toString() {
 		return super.toString();
