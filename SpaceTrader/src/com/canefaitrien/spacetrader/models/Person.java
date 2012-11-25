@@ -24,7 +24,7 @@ public class Person {
 	/**
 	 * Constructor for Person
 	 */
-	public Person() {
+	public Person() { // $codepro.audit.disable emptyMethod
 	}
 
 	/**

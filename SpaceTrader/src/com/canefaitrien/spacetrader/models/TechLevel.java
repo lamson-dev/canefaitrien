@@ -18,6 +18,7 @@ public enum TechLevel {
 
 	/**
 	 * Constructor for TechLevel
+	 * 
 	 * @param name
 	 */
 	private TechLevel(String name) {
@@ -30,14 +31,18 @@ public enum TechLevel {
 
 	/**
 	 * Method which creates a TechLevel from a String of the name
+	 * 
 	 * @param name
 	 * @return TechLevel of the String
 	 */
 	public static TechLevel fromString(String name) {
-		if (name != null)
-			for (TechLevel level : TechLevel.values())
-				if (name.equalsIgnoreCase(level.NAME))
+		if (name != null) {
+			for (TechLevel level : TechLevel.values()) {
+				if (name.equalsIgnoreCase(level.NAME)) {
 					return level;
+				}
+			}
+		}
 		throw new IllegalArgumentException("No constant with name " + name
 				+ " found");
 	}

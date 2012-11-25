@@ -21,6 +21,7 @@ public enum Situation {
 
 	/**
 	 * Constructor for Situation
+	 * 
 	 * @param name
 	 */
 	private Situation(String name) {
@@ -33,14 +34,18 @@ public enum Situation {
 
 	/**
 	 * Method which creates a Situation from a String of the name
+	 * 
 	 * @param name
 	 * @return Situation of the String
 	 */
 	public static Situation fromString(String name) {
-		if (name != null)
-			for (Situation s : Situation.values())
-				if (name.equalsIgnoreCase(s.NAME))
+		if (name != null) {
+			for (Situation s : Situation.values()) {
+				if (name.equalsIgnoreCase(s.NAME)) {
 					return s;
+				}
+			}
+		}
 		throw new IllegalArgumentException("No constant with name " + name
 				+ " found");
 	}

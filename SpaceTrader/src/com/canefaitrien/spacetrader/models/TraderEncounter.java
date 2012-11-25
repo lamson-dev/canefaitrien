@@ -16,7 +16,7 @@ public class TraderEncounter implements Encounter {
 
 	private TradeGood[] goods = TradeGood.values();
 
-	private final int MIN_NUM_GOODS = 5, VARIANCE = 5;
+	private static final int MIN_NUM_GOODS = 5, VARIANCE = 5;
 
 	private static Random rand = new Random();
 

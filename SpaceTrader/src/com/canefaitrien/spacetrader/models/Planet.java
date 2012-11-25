@@ -58,7 +58,7 @@ public class Planet {
 	/**
 	 * Constructor for Planet
 	 */
-	public Planet() {
+	public Planet() { // $codepro.audit.disable emptyMethod
 	}
 
 	/**
@@ -160,7 +160,7 @@ public class Planet {
 	 * @param other Point to compare
 	 * @return distance
 	 */
-	public int distance(Point other) {
+	public int distance(Point other) { // $codepro.audit.disable overloadedMethods
 		int dx, dy;
 		dx = coordinates.x - other.x;
 		dy = coordinates.y - other.y;
@@ -256,7 +256,7 @@ public class Planet {
 		this.situation = situation;
 	}
 
-	public void setSituation(String situation) {
+	public void setSituation(String situation) { // $codepro.audit.disable overloadedMethods
 		this.situation = Situation.fromString(situation);
 	}
 
@@ -264,7 +264,7 @@ public class Planet {
 		this.level = TechLevel.fromString(techLevel);
 	}
 
-	public void setTechLevel(TechLevel level) {
+	public void setTechLevel(TechLevel level) { // $codepro.audit.disable overloadedMethods
 		this.level = level;
 	}
 
@@ -309,7 +309,7 @@ public class Planet {
 	}
 
 	/** called by internal mechanisms, do not call yourself. */
-	public void __setDaoSession(DaoSession daoSession) {
+	public void __setDaoSession(DaoSession daoSession) { // $codepro.audit.disable methodNamingConvention -->
 		this.daoSession = daoSession;
 		myDao = daoSession != null ? daoSession.getPlanetDao() : null;
 	}

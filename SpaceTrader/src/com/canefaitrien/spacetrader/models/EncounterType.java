@@ -1,4 +1,5 @@
 package com.canefaitrien.spacetrader.models;
+
 /**
  * Encounter Type
  * @author An Pham
@@ -8,19 +9,14 @@ package com.canefaitrien.spacetrader.models;
 import java.util.Random;
 
 public enum EncounterType {
-	
-	TRADER,
-	POLICE,
-	PIRATE,
-	NOTHING;
-	
 
-	
+	TRADER, POLICE, PIRATE, NOTHING;
+
 	public static EncounterType getEncounterType() {
-		if(new Random().nextDouble() > .65){
-			int pick = new Random().nextInt(EncounterType.values().length-1);
-		    return EncounterType.values()[pick];
-		}else{
+		if (new Random().nextDouble() > .65) {
+			int pick = new Random().nextInt(EncounterType.values().length - 1);
+			return EncounterType.values()[pick];
+		} else {
 			return EncounterType.NOTHING;
 		}
 	}

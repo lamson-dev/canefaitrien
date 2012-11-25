@@ -55,7 +55,7 @@ public class GameData {
 
 	private List<Planet> planets;
 
-	public GameData() {
+	public GameData() { // $codepro.audit.disable emptyMethod
 	}
 
 	public GameData(Long id) {
@@ -77,7 +77,7 @@ public class GameData {
 	}
 
 	/** called by internal mechanisms, do not call yourself. */
-	public void __setDaoSession(DaoSession daoSession) {
+	public void __setDaoSession(DaoSession daoSession) { // $codepro.audit.disable methodNamingConvention -->
 		this.daoSession = daoSession;
 		myDao = daoSession != null ? daoSession.getGameDataDao() : null;
 	}
@@ -121,8 +121,9 @@ public class GameData {
 	public int getCurrentPlanetIndex() {
 		for (Planet p : this.getPlanets()) {
 			Log.d(TAG, p.getName());
-			if (p.getName().equals(currentPlanet))
+			if (p.getName().equals(currentPlanet)) {
 				return this.getPlanets().indexOf(p);
+			}
 		}
 		return -1;
 	}
@@ -135,7 +136,8 @@ public class GameData {
 		this.currentPlanet = currentPlanet;
 	}
 
-	public void setCurrentPlanet(Planet location) {
+	public void setCurrentPlanet(Planet location) { // $codepro.audit.disable
+													// overloadedMethods
 		this.currentPlanet = location.getName();
 	}
 
@@ -235,8 +237,9 @@ public class GameData {
 
 	public Planet[] getUniverse() {
 		Planet[] universe = new Planet[this.getPlanets().size()];
-		for (int i = 0; i < universe.length; i++)
+		for (int i = 0; i < universe.length; i++) {
 			universe[i] = planets.get(i);
+		}
 		return universe;
 	}
 

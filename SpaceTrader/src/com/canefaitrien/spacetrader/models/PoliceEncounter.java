@@ -58,8 +58,9 @@ public class PoliceEncounter implements Encounter {
 		int bribeMoney = new Random().nextInt(currentMoney / 10);
 		if (amount < bribeMoney || amount > currentMoney) {
 			return false;
-		} else
+		} else {
 			data.setMoney(currentMoney - amount);
+		}
 		return true;
 	}
 

@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 package com.canefaitrien.spacetrader.models;
 
 import java.util.ArrayList;
@@ -41,11 +44,12 @@ public class Ship {
 	/**
 	 * Constructor for Ship
 	 */
-	public Ship() {
+	public Ship() { // $codepro.audit.disable emptyMethod
 	}
 
 	/**
 	 * Constructor for Ship
+	 * 
 	 * @param id
 	 */
 	public Ship(Long id) {
@@ -54,6 +58,7 @@ public class Ship {
 
 	/**
 	 * Constructor for Ship
+	 * 
 	 * @param id
 	 * @param type
 	 * @param hullStrength
@@ -82,6 +87,7 @@ public class Ship {
 
 	/**
 	 * Constructor for Ship
+	 * 
 	 * @param type
 	 */
 	public Ship(ShipType type) {
@@ -91,6 +97,7 @@ public class Ship {
 
 	/**
 	 * Constructor for Ship
+	 * 
 	 * @param type
 	 * @param hullStrength
 	 * @param currentCargoHold
@@ -139,7 +146,7 @@ public class Ship {
 			currentCargoHold--;
 		}
 	}
-	
+
 	public String getStringCargo() {
 		List<Integer> list = new ArrayList<Integer>();
 		for (int item : this.getCargo())
@@ -150,13 +157,11 @@ public class Ship {
 
 	public final void setCargo(String cargo) throws JSONException {
 		JSONArray jsonArray = new JSONArray(cargo);
-		if (jsonArray != null) {
-			int[] cargoArray = new int[TradeGood.values().length];
-			for (int i = 0; i < jsonArray.length(); i++) {
-				cargoArray[i] = jsonArray.getInt(i);
-			}
-			this.cargo = cargoArray;
+		int[] cargoArray = new int[TradeGood.values().length];
+		for (int i = 0; i < jsonArray.length(); i++) {
+			cargoArray[i] = jsonArray.getInt(i);
 		}
+		this.cargo = cargoArray;
 	}
 
 	public ShipType getType() {

@@ -41,7 +41,7 @@ public class Marketplace implements GameConstants {
 	/**
 	 * Constructor for Marketplace
 	 */
-	public Marketplace() {
+	public Marketplace() { // $codepro.audit.disable emptyMethod
 	}
 
 	/**
@@ -226,13 +226,11 @@ public class Marketplace implements GameConstants {
 
 	public final void setItemStock(String itemStock) throws JSONException {
 		JSONArray jsonArray = new JSONArray(itemStock);
-		if (jsonArray != null) {
-			int[] stock = new int[goods.length];
-			for (int i = 0; i < jsonArray.length(); i++) {
-				stock[i] = jsonArray.getInt(i);
-			}
-			this.itemStock = stock;
+		int[] stock = new int[goods.length];
+		for (int i = 0; i < jsonArray.length(); i++) {
+			stock[i] = jsonArray.getInt(i);
 		}
+		this.itemStock = stock;
 	}
 
 	public String getStringItemBuyPrices() {
@@ -246,13 +244,11 @@ public class Marketplace implements GameConstants {
 	public final void setItemBuyPrices(String itemBuyPrices)
 			throws JSONException {
 		JSONArray jsonArray = new JSONArray(itemBuyPrices);
-		if (jsonArray != null) {
-			int[] buyPrices = new int[goods.length];
-			for (int i = 0; i < jsonArray.length(); i++) {
-				buyPrices[i] = jsonArray.getInt(i);
-			}
-			this.itemBuyPrices = buyPrices;
+		int[] buyPrices = new int[goods.length];
+		for (int i = 0; i < jsonArray.length(); i++) {
+			buyPrices[i] = jsonArray.getInt(i);
 		}
+		this.itemBuyPrices = buyPrices;
 	}
 
 	public String getStringItemSellPrices() {
@@ -266,13 +262,11 @@ public class Marketplace implements GameConstants {
 	public final void setItemSellPrices(String itemSellPrices)
 			throws JSONException {
 		JSONArray jsonArray = new JSONArray(itemSellPrices);
-		if (jsonArray != null) {
-			int[] sellPrices = new int[goods.length];
-			for (int i = 0; i < jsonArray.length(); i++) {
-				sellPrices[i] = jsonArray.getInt(i);
-			}
-			this.itemSellPrices = sellPrices;
+		int[] sellPrices = new int[goods.length];
+		for (int i = 0; i < jsonArray.length(); i++) {
+			sellPrices[i] = jsonArray.getInt(i);
 		}
+		this.itemSellPrices = sellPrices;
 	}
 
 	public Situation getSituation() {
