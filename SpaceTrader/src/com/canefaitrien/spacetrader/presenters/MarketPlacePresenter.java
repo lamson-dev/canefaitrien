@@ -1,3 +1,7 @@
+// $codepro.audit.disable com.instantiations.assist.eclipse.analysis.audit.rule.effectivejava.alwaysOverridetoString.alwaysOverrideToString
+/**
+ * marketplace presenter
+ */
 package com.canefaitrien.spacetrader.presenters;
 
 import java.util.ArrayList;
@@ -20,29 +24,60 @@ import com.canefaitrien.spacetrader.models.Controller;
 import com.canefaitrien.spacetrader.models.Marketplace;
 import com.canefaitrien.spacetrader.models.TradeGood;
 
+/**
+ * @author Son Nguyen
+ * @version $Revision: 1.0 $
+ */
 public class MarketPlacePresenter {
 
+	/**
+	 * Field TAG. (value is ""MarketPresenter"")
+	 */
 	@SuppressWarnings("unused")
 	private static final String TAG = "MarketPresenter";
 
+	/**
+	 * Field mView.
+	 */
 	private IMarketPlaceView mView;
 
+	/**
+	 * Field mMarket.
+	 */
 	private Marketplace mMarket;
 
+	/**
+	 * Field controller.
+	 */
 	private Controller controller;
 
+	/**
+	 * Constructor for MarketPlacePresenter.
+	 * 
+	 * @param view
+	 *            IMarketPlaceView
+	 */
 	public MarketPlacePresenter(IMarketPlaceView view) {
 		mView = view;
 		controller = SpaceTrader.getController();
 	}
 
+	/**
+	 * Method populateStock.
+	 * 
+	 * @param list
+	 *            List<Map<String,String>>
+	 * 
+	 * @return List<Map<String,String>>
+	 */
 	public List<Map<String, String>> populateStock(
 			List<Map<String, String>> list) {
 
 		mMarket = controller.getLocation().getMarketplace1();
 		TradeGood[] goods = TradeGood.values();
 
-		list = new ArrayList<Map<String, String>>();
+		list = new ArrayList<Map<String, String>>(); // $codepro.audit.disable
+														// questionableAssignment
 
 		for (int i = 0; i < goods.length; i++) {
 
@@ -61,6 +96,9 @@ public class MarketPlacePresenter {
 
 	}
 
+	/**
+	 * Method displayMarket.
+	 */
 	public void displayMarket() {
 		updateStockList(mView.getStockList());
 
@@ -110,20 +148,45 @@ public class MarketPlacePresenter {
 
 	}
 
+	/**
+	 * Method buyItem.
+	 * 
+	 * @param pos
+	 *            int
+	 * 
+	 * @throws Exception
+	 */
 	public void buyItem(int pos) throws Exception {
 		controller.buyGood(TradeGood.values()[pos]);
 		updateStockList(mView.getStockList());
 	}
 
+	/**
+	 * Method sellItem.
+	 * 
+	 * @param pos
+	 *            int
+	 * 
+	 * @throws Exception
+	 */
 	public void sellItem(int pos) throws Exception {
 		controller.sellGood(TradeGood.values()[pos]);
 		updateStockList(mView.getStockList());
 	}
 
+	/**
+	 * Method updateStockList.
+	 * 
+	 * @param list
+	 *            List<Map<String,String>>
+	 */
 	public void updateStockList(List<Map<String, String>> list) {
 		mView.setStockList(this.populateStock(list));
 	}
 
+	/**
+	 * Method showOtherInfo.
+	 */
 	public void showOtherInfo() {
 		mView.displayMoney(String.valueOf(controller.getMoney()));
 		mView.displayCargo(mMarket.getId() + "/"

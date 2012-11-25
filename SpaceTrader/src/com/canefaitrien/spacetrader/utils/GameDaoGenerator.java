@@ -1,3 +1,4 @@
+// $codepro.audit.disable com.instantiations.assist.eclipse.analysis.audit.rule.effectivejava.alwaysOverridetoString.alwaysOverrideToString
 /*
  * Copyright (C) 2011 Markus Junginger, greenrobot (http://greenrobot.de)
  *
@@ -28,6 +29,7 @@ import de.greenrobot.daogenerator.ToOne;
  * Run it as a Java application (not Android).
  * 
  * @author Markus
+ * @version 2.0
  */
 public class GameDaoGenerator {
 
@@ -38,11 +40,13 @@ public class GameDaoGenerator {
 		// addGameData(schema);
 		// new DaoGenerator().generateAll(schema, "../DaoExample/src-gen");
 
-		Schema schema = new Schema(3, "");
+		Schema schema = new Schema(3, ""); // $codepro.audit.disable
+											// numericLiterals
 
 		addGameData(schema);
 
-		String path = "../../../../Dropbox/programming/github/canefaitrien/SpaceTrader/src-gen";
+		String path = "../../../../Dropbox/programming/github/canefaitrien/SpaceTrader/src-gen"; // $codepro.audit.disable
+																									// lineLength
 		new DaoGenerator().generateAll(schema, path);
 
 	}

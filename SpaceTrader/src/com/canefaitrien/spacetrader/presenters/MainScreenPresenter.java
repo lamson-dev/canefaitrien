@@ -1,3 +1,7 @@
+// $codepro.audit.disable com.instantiations.assist.eclipse.analysis.audit.rule.effectivejava.alwaysOverridetoString.alwaysOverrideToString
+/**
+ * mainscreen presenter
+ */
 package com.canefaitrien.spacetrader.presenters;
 
 import java.util.Date;
@@ -17,30 +21,62 @@ import com.canefaitrien.spacetrader.models.Person;
 import com.canefaitrien.spacetrader.models.Planet;
 import com.canefaitrien.spacetrader.models.Ship;
 
+/**
+ * @author Son Nguyen
+ * @version $Revision: 1.0 $
+ */
 public class MainScreenPresenter {
 
+	/**
+	 * Field TAG.
+	 * (value is ""MainScreenPresenter"")
+	 */
 	private static final String TAG = "MainScreenPresenter";
 
+	/**
+	 * Field mView.
+	 */
 	@SuppressWarnings("unused")
 	private IMainScreenView mView;
 
+	/**
+	 * Field gameDataDao.
+	 */
 	private GameDataDao gameDataDao;
 
+	/**
+	 * Field shipDao.
+	 */
 	private ShipDao shipDao;
 
+	/**
+	 * Field personDao.
+	 */
 	private PersonDao personDao;
 
+	/**
+	 * Field marketDao.
+	 */
 	private MarketplaceDao marketDao;
 
+	/**
+	 * Constructor for MainScreenPresenter.
+	 * @param view IMainScreenView
+	 */
 	public MainScreenPresenter(IMainScreenView view) {
 		mView = view;
 	}
 
+	/**
+	 * Method populateData.
+	 * @param rowId Long
+	 */
 	public void populateData(Long rowId) {
 
-		if (rowId == null)
+		if (rowId == null) {
 			throw new IllegalArgumentException(
 					"Can't populate data since rowId is null");
+		}
 		Log.d(TAG, "GameData ID is: " + String.valueOf(rowId));
 
 		gameDataDao = SpaceTrader.daoSession.getGameDataDao();
@@ -75,6 +111,9 @@ public class MainScreenPresenter {
 
 	}
 
+	/**
+	 * Method saveData.
+	 */
 	public void saveData() {
 
 		personDao = SpaceTrader.daoSession.getPersonDao();

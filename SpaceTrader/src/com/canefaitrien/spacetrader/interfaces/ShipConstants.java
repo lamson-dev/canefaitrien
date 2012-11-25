@@ -1,7 +1,15 @@
+// $codepro.audit.disable obsoleteModifierUsage, fieldJavadoc, com.instantiations.assist.eclipse.analysis.audit.rule.effectivejava.useInterfacesOnlyToDefineTypes
+/**
+ * store ship constants
+ */
 package com.canefaitrien.spacetrader.interfaces;
 
-
-
+/**
+ * 
+ * @author Son Nguyen
+ * 
+ * @version $Revision: 1.0 $
+ */
 public interface ShipConstants {
 
 	// SHIP
@@ -125,7 +133,7 @@ public interface ShipConstants {
 
 	// Number of good cabbages
 	public static final int N_GOOD_CABBAGES = 10;
-	
+
 	public static final int N_SUPER_CABBAGES = 2;
 
 	// Number of bad cabbages

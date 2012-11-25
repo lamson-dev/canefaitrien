@@ -1,3 +1,7 @@
+// $codepro.audit.disable com.instantiations.assist.eclipse.analysis.audit.rule.effectivejava.alwaysOverridetoString.alwaysOverrideToString
+/**
+ * configuration presenter
+ */
 package com.canefaitrien.spacetrader.presenters;
 
 import java.util.Date;
@@ -20,27 +24,45 @@ import com.canefaitrien.spacetrader.models.Person;
 import com.canefaitrien.spacetrader.models.Planet;
 import com.canefaitrien.spacetrader.models.Ship;
 
+/**
+ * 
+ * @author Son Nguyen
+ * @version $Revision: 1.0 $
+ */
 public class ConfigurationPresenter {
 
+	/**
+	 * Field TAG. (value is ""ConfigPresenter"")
+	 */
 	private static final String TAG = "ConfigPresenter";
 
+	/**
+	 * Field mView.
+	 */
 	@SuppressWarnings("unused")
 	private IConfigurationView mView;
 
+	/**
+	 * Constructor for ConfigurationPresenter.
+	 * 
+	 * @param view
+	 *            IConfigurationView
+	 */
 	public ConfigurationPresenter(IConfigurationView view) {
 		mView = view;
 	}
 
-	public void createNewGame(String name, int pilotPts, int fighterPts,
+	public void createNewGame(String name, int pilotPts, int fighterPts, // $codepro.audit.disable
+																			// largeNumberOfParameters
 			int traderPts, int engineerPts, String level) {
 
 		Log.d(TAG, "" + pilotPts + " " + traderPts + " " + engineerPts + " "
 				+ fighterPts);
 		Log.d(TAG, level);
 
-		Person person = new Person(null,// id
-				name,//
-				pilotPts, fighterPts,//
+		Person person = new Person(null, // id
+				name, //
+				pilotPts, fighterPts, //
 				traderPts, engineerPts);
 
 		Controller ctrl = new Controller(person, Difficulty.valueOf(level));
@@ -48,6 +70,9 @@ public class ConfigurationPresenter {
 
 	}
 
+	/**
+	 * Method storeNewGameData.
+	 */
 	public void storeNewGameData() {
 		Controller ctrl = SpaceTrader.getController();
 
@@ -71,24 +96,24 @@ public class ConfigurationPresenter {
 				ctrl.getLocation().getName(), //
 				ctrl.getTurn(), //
 				new Date(0), //
-				person.getId(),//
+				person.getId(), //
 				ship.getId());
 
 		gameDataDao.insert(data);
 		Log.d(TAG, "Inserted new GameData, ID: " + data.getId());
 
 		for (int i = 0; i < ctrl.getUniverse().length; i++) {
-			Planet p = ctrl.getUniverse()[i];
+			Planet planet = ctrl.getUniverse()[i];
 
-			Marketplace mk = p.getMarketplace1();
+			Marketplace mk = planet.getMarketplace1();
 
 			marketplaceDao.insert(mk);
 			// Log.d(TAG, "Inserted new Marketplace, ID: " + mk.getId());
 
-			p.setMarketId(mk.getId());
-			p.setDataId(data.getId());
+			planet.setMarketId(mk.getId());
+			planet.setDataId(data.getId());
 
-			planetDao.insert(p);
+			planetDao.insert(planet);
 			// Log.d(TAG, "Inserted new Planet, ID: " + p.getId());
 			// Log.d(TAG, "Inserted new Planet, data-ID: " + p.getDataId());
 			// Log.d(TAG, "Inserted new Planet, market-ID: " + p.getMarketId());
