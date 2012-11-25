@@ -34,7 +34,7 @@ public class UniverseTest {
 			//test that they don't overlap, ie their distance is greater than their radius
 			//crappy O^2 test
 			for(int j = i + 1;j<planets.length;j++){
-				assertTrue(planets[i].distance(planets[j])>Universe.MIN_DISTANCE);
+				assertTrue(planets[i].distance(planets[j])>=Universe.MIN_DISTANCE);
 			}
 		}
 	}

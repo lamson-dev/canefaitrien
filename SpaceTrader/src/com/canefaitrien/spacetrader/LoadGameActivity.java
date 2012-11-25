@@ -139,7 +139,8 @@ public class LoadGameActivity extends ListActivity {
 			public View getView(int pos, View convertView, ViewGroup parent) {
 				View v = convertView;
 				if (v == null) {
-					LayoutInflater vi = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+					LayoutInflater vi = (LayoutInflater) 
+							getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 					v = vi.inflate(R.layout.list_loadgame_data, null);
 				}
 

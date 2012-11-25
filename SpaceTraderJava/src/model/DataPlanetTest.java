@@ -1,5 +1,5 @@
 // $codepro.audit.disable logExceptions
-package com.canefaitrien.spacetrader.tests;
+package model;
 
 import java.util.Date;
 import java.util.List;
@@ -131,8 +131,9 @@ public class DataPlanetTest extends
 			// list of planets can't be retrieved
 			// since there is no connection
 			@SuppressWarnings("unused")
-			List<Planet> planets = data.getPlanets();
+			List<Planet> planets = data.getPlanets(); // $codepro.audit.disable variableUsage
 			fail("Should have thrown an exception for null daoSession, cannot retrieve data");
+			assertTrue("I don't know", planets == null);
 		} catch (Exception e) {
 			assertTrue("Threw an exception like expected", true);
 		}

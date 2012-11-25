@@ -1,5 +1,3 @@
-package com.canefaitrien.spacetrader.models;
-
 /**
  * TradeGoods to be bought and sold durring the game
  * 
@@ -7,11 +5,14 @@ package com.canefaitrien.spacetrader.models;
  * @version 1.0
  */
 
+package com.canefaitrien.spacetrader.models;
+
 public enum TradeGood{
 	
 	/*
 	 * Constructor format
-	 * Name(minTechLevelProduce|minTechLevelUse|techLevelTopProduce|basePrice|increasePerTechLevel|Var|increaseEvent|decreaseEventCR|
+	 * Name(minTechLevelProduce|minTechLevelUse|techLevelTopProduce
+	 * |basePrice|increasePerTechLevel|Var|increaseEvent|decreaseEventCR|
 	 * 	expensiveEvent|minTradePrice|maxTradePrice|name)
 	 */
 	WATER(0, 0, 2, 30, 3, 4, Situation.DROUGHT, Situation.LOTS_OF_WATER, 
@@ -47,63 +48,67 @@ public enum TradeGood{
 	;
 	
 	// TradeGood info
-	public final int MIN_TL_PRODUCE;
+	public final int minTLProduce;
 
-	public final int MIN_TL_USE;
+	public final int minTLUse;
 
-	public final int TL_TOP_PRODUCE;
+	public final int tLTopProduce;
 
-	public final int BASE_PRICE;
+	public final int basePrice;
 
-	public final int INCREASE_PER_TL;
+	public final int increasePerTL;
 
-	public final int VARIANCE;
+	public final int variance;
 
-	public final Situation INCREASE_SITUATION;
+	public final Situation increaseSituation;
 
-	public final Situation DECREASE_SITUATION;
+	public final Situation decreaseSituation;
 
-	public final Situation EXPENSIVE_SITUATION;
+	public final Situation expensiveSituation;
 
-	public final int MIN_TRADE_PRICE;
+	public final int minTradePrice;
 
-	public final int MAX_TRADE_PRICE;
+	public final int maxTradePrice;
 
-	public final String NAME;
+	public final String name;
 	
 	/**
 	 * Constructor for TradeGood
 	 * 
-	 * @param minTechLevelProduce Minimum Tech Level to Produce this resource (You can't buy on planets below this level)
-	 * @param minTechLevelUse Minimum Tech Level to Use this resource (You can't sell on planets below this level)
-     * @param techLevelTopProduce Tech Level which produces the most of this item
-     * @param increasePerTechLevel Price increase per tech level
-     * @param variance the maximum percentage that the price can vary above or below the base
-     * @param increaseSituation when this even happens on a planet, the price may increase astronomically
-     * @param decreaseSituation When this condition is present, the price of this resource is unusually low
-     * @param expensiveSituation When this condition is present, the resource is expensive
-     * @param minTradePrice Min price offered in space trade with random trader (not on a planet)
-     * @param maxTradePrice Max price offered in space trade with random trader (not on a planet)
+	 * @param minTechLevelProduce 
+	 * @param minTechLevelUse 
+     * @param techLevelTopProduce 
+     * @param increasePerTechLevel 
+     * @param variance 
+     * @param increaseSituation 
+     * @param decreaseSituation 
+     * @param expensiveSituation 
+     * @param minTradePrice 
+     * @param maxTradePrice 
      * @param name name of goods
 	 */
 	
-	private TradeGood(int minTechLevelProduce, int minTechLevelUse, int techLevelTopProduce, int basePrice, int increasePerTechLevel, int variance, 
-			Situation increaseSituation, Situation decreaseSituation, Situation expensiveSituation, int minTradePrice, int maxTradePrice, String name) {
-		MIN_TL_PRODUCE = minTechLevelProduce;
-		MIN_TL_USE = minTechLevelUse;
-		TL_TOP_PRODUCE = techLevelTopProduce;
-		BASE_PRICE = basePrice;
-		INCREASE_PER_TL = increasePerTechLevel;
-		VARIANCE = variance;
-		INCREASE_SITUATION = increaseSituation;
-		DECREASE_SITUATION = decreaseSituation;
-		EXPENSIVE_SITUATION = expensiveSituation;
-		MIN_TRADE_PRICE = minTradePrice;
-		MAX_TRADE_PRICE = maxTradePrice;
-		NAME = name;
+	private TradeGood(int minTechLevelProduce, int minTechLevelUse, 
+			int techLevelTopProduce, int basePrice, 
+			int increasePerTechLevel, int variance, 
+			Situation increaseSituation, Situation decreaseSituation, 
+			Situation expensiveSituation, int minTradePrice,
+			int maxTradePrice, String name) {
+		this.minTLProduce = minTechLevelProduce;
+		this.minTLUse = minTechLevelUse;
+		this.tLTopProduce = techLevelTopProduce;
+		this.basePrice = basePrice;
+		this.increasePerTL = increasePerTechLevel;
+		this.variance = variance;
+		this.increaseSituation = increaseSituation;
+		this.decreaseSituation = decreaseSituation;
+		this.expensiveSituation = expensiveSituation;
+		this.minTradePrice = minTradePrice;
+		this.maxTradePrice = maxTradePrice;
+		this.name = name;
 	}
 	
 	public String toString() {
-		return NAME;
+		return name;
 	}
 }

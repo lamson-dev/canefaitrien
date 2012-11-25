@@ -1,11 +1,12 @@
-package com.canefaitrien.spacetrader.models;
-
 /**
  * Person class for holding info on the Person
  * 
  * @author Andrew Duda
  * @version 1.0
  */
+
+package com.canefaitrien.spacetrader.models;
+
 public class Person {
 
 	private Long id;

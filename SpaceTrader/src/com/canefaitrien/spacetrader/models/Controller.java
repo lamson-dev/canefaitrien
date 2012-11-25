@@ -1,13 +1,14 @@
-package com.canefaitrien.spacetrader.models;
-
-import android.util.Log;
-
 /**
  * Controller class which allows interaction between the Model and the View
  * 
  * @author Andrew
  * @version 1.0
  */
+package com.canefaitrien.spacetrader.models;
+
+import android.util.Log;
+
+
 
 public class Controller {
 
@@ -52,7 +53,7 @@ public class Controller {
 		this.ship = ship;
 		this.currentPlanet = currentPlanet;
 		this.money = money;
-		this.universe = universe;
+		this.universe = universe.clone(); // will probably break the code
 		this.difficulty = difficulty;
 		this.turn = turn;
 	}
@@ -104,7 +105,7 @@ public class Controller {
 	 *             if not able to move, get the reason using .getMessage()
 	 */
 	public void move(Planet destination) throws Exception {
-		if (currentPlanet.distance(destination) > ship.getType().MAX_DISTANCE
+		if (currentPlanet.distance(destination) > ship.getType().maxDistance
 				* Ship.MPG) { // if planet is too far will need to change the
 								// max distance constants to be more reasonable
 			throw new Exception("That planet is too far, captain!");
@@ -152,5 +153,10 @@ public class Controller {
 
 	public void setMoney(int money) {
 		this.money = money;
+	}
+	
+	@Override
+	public String toString() {
+		return super.toString();
 	}
 }

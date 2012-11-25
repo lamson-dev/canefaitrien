@@ -1,9 +1,3 @@
-package com.canefaitrien.spacetrader.models;
-
-import java.util.Random;
-
-import android.graphics.Point;
-
 /**
  * Universe class to generate planets from a list of names with random
  * coordinates within the area of the map
@@ -12,19 +6,28 @@ import android.graphics.Point;
  * @version
  */
 
+package com.canefaitrien.spacetrader.models;
+
+import java.util.Random;
+
+import android.graphics.Point;
+
 public class Universe {
 
 	// Universe constants
 	public static final int WIDTH = 720, HEIGHT = 1150, SHUFFLE_AMT = 1000;
 
-	public static final int BORDER = 20; // Min distance from edge of screen
+	public static final int BORDER = 20, BORDERTWO = 40; // Min distance from edge of screen
+	
+	public static final int WMINBORDERTWO = WIDTH - BORDERTWO,
+			HMINBORDERTWO = HEIGHT - BORDERTWO;
 
 	public static final int MIN_DISTANCE = 5; // Min distance planet must be
 												// from another planet
 
 	public static final int TOTAL_PLANETS = 50; // Total planets to create
 
-	private static Random rand = new Random();
+	private static Random RAND = new Random();
 
 	// Array of planet names
 	private static final String PLANET_NAMES[] = { "Acamar", "Adahn", "Aldea",
@@ -58,8 +61,8 @@ public class Universe {
 		int ind1, ind2;
 		String temp;
 		for (int i = 0; i < SHUFFLE_AMT; i++) {
-			ind1 = rand.nextInt(PLANET_NAMES.length);
-			ind2 = rand.nextInt(PLANET_NAMES.length);
+			ind1 = RAND.nextInt(PLANET_NAMES.length);
+			ind2 = RAND.nextInt(PLANET_NAMES.length);
 			temp = planets[ind1];
 			planets[ind1] = planets[ind2];
 			planets[ind2] = temp;
@@ -80,11 +83,11 @@ public class Universe {
 		shuffle(PLANET_NAMES);
 		// creates planets with random coordinates
 		for (int i = 0; i < TOTAL_PLANETS; i++) {
-			x = rand.nextInt(WIDTH - 2 * BORDER) + BORDER;
-			y = rand.nextInt(HEIGHT - 2 * BORDER) + BORDER;
+			x = RAND.nextInt(WMINBORDERTWO) + BORDER;
+			y = RAND.nextInt(HMINBORDERTWO) + BORDER;
 			planets[i] = new Planet(PLANET_NAMES[i], new Point(x, y),
-					levels[rand.nextInt(levels.length)],
-					situations[rand.nextInt(situations.length)]);
+					levels[RAND.nextInt(levels.length)],
+					situations[RAND.nextInt(situations.length)]);
 		}
 		// moves planets that are too close to each other
 		validate(planets);
@@ -111,10 +114,8 @@ public class Universe {
 					// if too close, create new location
 					if (current.distance(planets[j]) < MIN_DISTANCE
 							+ current.getRadius() + planets[j].getRadius()) {
-						current.setCoordinates(new Point(rand.nextInt(WIDTH - 2
-								* BORDER)
-								+ BORDER, rand.nextInt(HEIGHT - 2 * BORDER)
-								+ BORDER));
+						current.setCoordinates(new Point(RAND.nextInt(WMINBORDERTWO)
+								+ BORDER, RAND.nextInt(HMINBORDERTWO) + BORDER));
 						movedPlanet = true;
 						break;
 					}
@@ -132,10 +133,15 @@ public class Universe {
 	}
 
 	public static String toString(Planet[] planets) {
-		String ret = "";
+		StringBuffer ret = new StringBuffer();
 		for (int i = 0; i < planets.length; i++) {
-			ret += planets[i].toString();
+			ret.append(planets[i].toString());
 		}
-		return ret;
+		return ret.toString();
+	}
+	
+	@Override
+	public String toString() {
+		return super.toString();
 	}
 }

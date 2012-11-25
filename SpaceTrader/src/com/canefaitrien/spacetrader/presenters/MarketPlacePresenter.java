@@ -34,7 +34,7 @@ public class MarketPlacePresenter {
 	 * Field TAG. (value is ""MarketPresenter"")
 	 */
 	@SuppressWarnings("unused")
-	private static final String TAG = "MarketPresenter";
+	//private static final String TAG = "MarketPresenter";
 
 	/**
 	 * Field mView.

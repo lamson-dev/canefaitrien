@@ -1,4 +1,11 @@
 // $codepro.audit.disable transientFieldInNonSerializable
+/**
+ * Class Planet Information holder for planet
+ * 
+ * @author AN PHAM
+ * @version 10/11/2012
+ */
+
 package com.canefaitrien.spacetrader.models;
 
 import java.util.Random;
@@ -12,13 +19,6 @@ import com.canefaitrien.spacetrader.dao.PlanetDao;
 
 import de.greenrobot.dao.AbstractDao;
 import de.greenrobot.dao.DaoException;
-
-/**
- * Class Planet Information holder for planet
- * 
- * @author AN PHAM
- * @version 10/11/2012
- */
 
 public class Planet {
 
@@ -43,7 +43,7 @@ public class Planet {
 
 	private Long marketId;
 
-	private Random randomColor = new Random();
+	private Random rand = new Random();
 
 	/** Used to resolve relations */
 	private transient DaoSession daoSession;
@@ -130,20 +130,20 @@ public class Planet {
 			Situation situation, Marketplace marketplace) {
 		// randomly generate a radius, occasionally making a giant planet.
 		if (new Random().nextDouble() < .98) {
-			this.radius = (int) (Math.random() * 15) + 15;// for now each planet
+			this.radius = rand.nextInt(15) + 15;// for now each planet
 															// will
 		} else {
-			this.radius = (int) (Math.random() * 15) + 60;
+			this.radius = rand.nextInt(15) + 60;
 		}
 		this.name = name;
 		this.coordinates = location;
 		this.level = level;
 		this.situation = situation;
 		this.marketplace = marketplace;
-		this.color = Color.argb(255, randomColor.nextInt(256),
-				randomColor.nextInt(256), randomColor.nextInt(256));
+		this.color = Color.argb(255, rand.nextInt(256),
+				rand.nextInt(256), rand.nextInt(256));
 		// randomly pick a planet image number
-		this.type = randomColor.nextInt(10);
+		this.type = rand.nextInt(10);
 	}
 
 	/**
@@ -164,7 +164,8 @@ public class Planet {
 		int dx, dy;
 		dx = coordinates.x - other.x;
 		dy = coordinates.y - other.y;
-		return (int) Math.sqrt(dx * dx + dy * dy);
+		Long l = Math.round(Math.sqrt(dx * dx + dy * dy));
+		return l.intValue();
 	}
 
 	/**
@@ -249,7 +250,7 @@ public class Planet {
 	}
 
 	public String getStringSituation() {
-		return situation.NAME;
+		return situation.name;
 	}
 
 	public void setSituation(Situation situation) {
@@ -273,7 +274,7 @@ public class Planet {
 	}
 
 	public String getStringTechLevel() {
-		return level.NAME;
+		return level.name;
 	}
 
 	public Integer getType() {

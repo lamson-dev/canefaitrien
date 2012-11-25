@@ -150,12 +150,12 @@ public class GalaxyMapActivity extends RootActivity implements OnTouchListener {
 				public void onClick(DialogInterface dialog, int which) {
 					switch (which) {
 					case 0:
-						pirate.pirateBattle();
+						pirate.canPirateBattle();
 						break;
 					case 1:
 						Toast.makeText(getApplicationContext(),
 								"Escaped Pirate", Toast.LENGTH_SHORT).show();
-						pirate.pirateFlee();
+						pirate.canPirateFlee();
 						break;
 					case 2:
 						pirate.takeGoods();
@@ -174,10 +174,10 @@ public class GalaxyMapActivity extends RootActivity implements OnTouchListener {
 				public void onClick(DialogInterface dialog, int which) {
 					switch (which) {
 					case 0:
-						police.policeBattle();
+						police.canPoliceBattle();
 						break;
 					case 1:
-						police.bribePolice(SpaceTrader.getController()
+						police.canBribePolice(SpaceTrader.getController()
 								.getMoney() / 10); // *.1
 						break;
 					case 2:
@@ -186,7 +186,7 @@ public class GalaxyMapActivity extends RootActivity implements OnTouchListener {
 					case 3:
 						Toast.makeText(getApplicationContext(),
 								"Escaped Police", Toast.LENGTH_SHORT).show();
-						police.policeFlee();
+						police.canPoliceFlee();
 						break;
 					default:
 						break;
@@ -202,7 +202,7 @@ public class GalaxyMapActivity extends RootActivity implements OnTouchListener {
 				public void onClick(DialogInterface dialog, int which) {
 					switch (which) {
 					case 0:
-						trader.traderBattle();
+						trader.canTraderBattle();
 						break;
 					case 1:
 						break;

@@ -229,7 +229,8 @@ public class MarketPlaceActivity extends ListActivity implements
 	 * @param adapter
 	 *            ListAdapter
 	 * 
-	 * @see com.canefaitrien.spacetrader.interfaces.IMarketPlaceView#setListAdapter(ListAdapter)
+	 * @see com.canefaitrien.spacetrader.interfaces.
+	 * IMarketPlaceView#setListAdapter(ListAdapter)
 	 */
 	@Override
 	public void setListAdapter(ListAdapter adapter) {

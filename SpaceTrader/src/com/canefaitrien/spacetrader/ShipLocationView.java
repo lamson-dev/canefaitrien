@@ -86,9 +86,9 @@ public class ShipLocationView extends View {
 		paint.setStyle(Paint.Style.STROKE);
 		paint.setColor(Color.WHITE);
 		Ship shippy = SpaceTrader.getController().getShip();
-		int drawDist = (shippy.getFuel() < shippy.getType().MAX_DISTANCE) ? shippy
+		int drawDist = (shippy.getFuel() < shippy.getType().maxDistance) ? shippy
 				.getFuel() * Ship.MPG
-				: shippy.getType().MAX_DISTANCE * Ship.MPG;
+				: shippy.getType().maxDistance * Ship.MPG;
 		c.drawCircle(ship_location.getXCoordinate(),
 				ship_location.getYCoordinate(), drawDist, paint);
 		// fuel text
@@ -98,9 +98,9 @@ public class ShipLocationView extends View {
 		wordTest.setAlpha(254);
 		wordTest.setTextSize(20);
 		int added = (SpaceTrader.getController().getLocation().getXCoordinate() > shippy
-				.getType().MAX_DISTANCE * Ship.MPG) ? 170 : 500;
+				.getType().maxDistance * Ship.MPG) ? 170 : 500;
 		int range = (drawDist < 50) ? -50 : -10;
 		c.drawTextOnPath("fuel: " + shippy.getFuel() + "/"
-				+ shippy.getType().MAX_DISTANCE, circle, added, range, wordTest);
+				+ shippy.getType().maxDistance, circle, added, range, wordTest);
 	}
 }

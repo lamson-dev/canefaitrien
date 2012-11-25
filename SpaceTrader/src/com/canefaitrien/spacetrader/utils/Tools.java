@@ -20,12 +20,12 @@ public class Tools {
 	/**
 	 * Field alertDialog.
 	 */
-	public static AlertDialog.Builder alertDialog;
+	public static AlertDialog.Builder ALERT_DIALOG;
 
 	/**
 	 * Field inflater.
 	 */
-	public static LayoutInflater inflater;
+	public static LayoutInflater INFLATOR;
 
 	/**
 	 * Method popUp.
@@ -33,17 +33,17 @@ public class Tools {
 	 * @param message String
 	 */
 	public static void popUp(Context context, String message) {
-		alertDialog = new AlertDialog.Builder(context);
-		alertDialog.setTitle("Heyyy!");
-		alertDialog.setMessage(message);
-		alertDialog.setPositiveButton("Ok",
+		ALERT_DIALOG = new AlertDialog.Builder(context);
+		ALERT_DIALOG.setTitle("Heyyy!");
+		ALERT_DIALOG.setMessage(message);
+		ALERT_DIALOG.setPositiveButton("Ok",
 				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int which) { // $codepro.audit.disable emptyMethod
 						// dismiss the dialog
 					}
 				});
-		alertDialog.setCancelable(true);
-		alertDialog.create().show();
+		ALERT_DIALOG.setCancelable(true);
+		ALERT_DIALOG.create().show();
 	}
 
 	/**
@@ -55,11 +55,11 @@ public class Tools {
 	 * @return View */
 	public static View inflater(Context context, int idChild,
 			ViewGroup parentView) {
-		inflater = (LayoutInflater) context
+		INFLATOR = (LayoutInflater) context
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
 		// ViewGroup parentView = (RelativeLayout) findViewById(idParent);
 
-		return inflater.inflate(idChild, parentView);
+		return INFLATOR.inflate(idChild, parentView);
 	}
 }

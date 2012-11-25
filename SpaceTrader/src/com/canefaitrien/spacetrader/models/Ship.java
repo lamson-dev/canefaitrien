@@ -91,8 +91,8 @@ public class Ship {
 	 * @param type
 	 */
 	public Ship(ShipType type) {
-		this(type, type.MAX_HULL_STRENGTH, 0,
-				new int[TradeGood.values().length], type.MAX_DISTANCE);
+		this(type, type.maxHullStrength, 0,
+				new int[TradeGood.values().length], type.maxDistance);
 	}
 
 	/**
@@ -109,7 +109,7 @@ public class Ship {
 		this.type = type;
 		this.hullStrength = hullStrength;
 		this.currentCargoHold = currentCargoHold;
-		this.cargo = cargo;
+		this.cargo = cargo.clone();
 		this.fuel = fuel;
 	}
 
@@ -122,7 +122,7 @@ public class Ship {
 	 *             if no room in cargo
 	 */
 	public void addGood(TradeGood good) throws Exception {
-		if (currentCargoHold == type.MAX_CARGO_HOLD) {
+		if (currentCargoHold == type.maxCargoHold) {
 			throw new Exception("No more room in the cargo, captain!");
 		} else {
 			cargo[good.ordinal()]++;
@@ -181,7 +181,7 @@ public class Ship {
 	}
 
 	public String getStringType() {
-		return type.NAME;
+		return type.name;
 	}
 
 	public void setType(String type) {
@@ -237,7 +237,11 @@ public class Ship {
 	}
 
 	public int getMaxSpeed() {
-		return type.MAX_DISTANCE;
+		return type.maxDistance;
 	}
 
+	@Override
+	public String toString() {
+		return super.toString();
+	}
 }

@@ -1,11 +1,11 @@
-package com.canefaitrien.spacetrader.models;
-
 /**
  * Contains all the situations related to planets
  * 
  * @author Andrew Duda
  * @version 1.0
  */
+
+package com.canefaitrien.spacetrader.models;
 
 public enum Situation {
 	LOTS_OF_WATER("Lots of Water"), RICH_FAUNA("Rich Fauna"), RICH_SOIL(
@@ -17,7 +17,7 @@ public enum Situation {
 			"Plague"), LACK_OF_WORKERS("Lack of Workers");
 
 	// Situation info
-	public final String NAME; // Needs a name to print out multi-word situations
+	public final String name; // Needs a name to print out multi-word situations
 
 	/**
 	 * Constructor for Situation
@@ -25,11 +25,11 @@ public enum Situation {
 	 * @param name
 	 */
 	private Situation(String name) {
-		NAME = name;
+		this.name = name;
 	}
 
 	public String toString() {
-		return NAME;
+		return name;
 	}
 
 	/**
@@ -41,7 +41,7 @@ public enum Situation {
 	public static Situation fromString(String name) {
 		if (name != null) {
 			for (Situation s : Situation.values()) {
-				if (name.equalsIgnoreCase(s.NAME)) {
+				if (name.equalsIgnoreCase(s.name)) {
 					return s;
 				}
 			}

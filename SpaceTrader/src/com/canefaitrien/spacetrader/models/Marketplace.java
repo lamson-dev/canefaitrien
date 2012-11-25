@@ -1,3 +1,11 @@
+/**
+ * Class for handling the amounts and prices of goods a Planet's marketplace can
+ * have. Also handles buying and selling goods
+ * 
+ * @author Andrew Duda
+ * @version 1.0
+ */
+
 package com.canefaitrien.spacetrader.models;
 
 import java.util.ArrayList;
@@ -9,19 +17,13 @@ import org.json.JSONException;
 
 import com.canefaitrien.spacetrader.interfaces.GameConstants;
 
-/**
- * Class for handling the amounts and prices of goods a Planet's marketplace can
- * have. Also handles buying and selling goods
- * 
- * @author Andrew Duda
- * @version 1.0
- */
+
 
 public class Marketplace implements GameConstants {
 
-	private static TradeGood[] goods = TradeGood.values();
+	private static TradeGood[] GOODS = TradeGood.values();
 
-	private static Random rand = new Random();
+	private static Random RAND = new Random();
 
 	// Marketplace info
 	private int lastDock;
@@ -82,8 +84,8 @@ public class Marketplace implements GameConstants {
 	 * @param situation
 	 */
 	public Marketplace(int lastDock, TechLevel level, Situation situation) {
-		this(lastDock, new int[goods.length], new int[goods.length],
-				new int[goods.length], level, situation);
+		this(lastDock, new int[GOODS.length], new int[GOODS.length],
+				new int[GOODS.length], level, situation);
 		updateStock();
 	}
 
@@ -100,9 +102,9 @@ public class Marketplace implements GameConstants {
 	public Marketplace(int lastDock, int[] itemStock, int[] itemBuyPrices,
 			int[] itemSellPrices, TechLevel level, Situation situation) {
 		this.lastDock = lastDock;
-		this.itemStock = itemStock;
-		this.itemBuyPrices = itemBuyPrices;
-		this.itemSellPrices = itemSellPrices;
+		this.itemStock = itemStock.clone();
+		this.itemBuyPrices = itemBuyPrices.clone();
+		this.itemSellPrices = itemSellPrices.clone();
 		this.level = level;
 		this.situation = situation;
 	}
@@ -123,13 +125,13 @@ public class Marketplace implements GameConstants {
 	 * Updates the good prices and the amount of goods
 	 */
 	public final void updateStock() {
-		for (TradeGood good : goods) {
+		for (TradeGood good : GOODS) {
 			itemBuyPrices[good.ordinal()] = getBuyPrice(good);
 			// situation modify
 			itemSellPrices[good.ordinal()] = getSellPrice(good);
 
 			if (itemBuyPrices[good.ordinal()] != 0) {
-				itemStock[good.ordinal()] = rand.nextInt(VARIANCE)
+				itemStock[good.ordinal()] = RAND.nextInt(VARIANCE)
 						+ MIN_NUM_GOODS;
 			}
 		}
@@ -143,7 +145,7 @@ public class Marketplace implements GameConstants {
 	 * @return
 	 */
 	private int getBuyPrice(TradeGood good) {
-		return getPrice(good, good.MIN_TL_PRODUCE);
+		return getPrice(good, good.minTLProduce);
 	}
 
 	/**
@@ -153,7 +155,7 @@ public class Marketplace implements GameConstants {
 	 * @return
 	 */
 	private int getSellPrice(TradeGood good) {
-		return (int) (0.8 * getPrice(good, good.MIN_TL_USE));
+		return getPrice(good, good.minTLUse);
 		// 0.8 makes sell values less than buy values
 	}
 
@@ -166,10 +168,10 @@ public class Marketplace implements GameConstants {
 	 */
 	private int getPrice(TradeGood good, int minTL) {
 		if (level.ordinal() >= minTL) {
-			int temp = good.BASE_PRICE + good.INCREASE_PER_TL
-					* (level.ordinal() - good.MIN_TL_PRODUCE); // price
-			temp += rand.nextBoolean() ? rand.nextInt(good.VARIANCE) : -rand
-					.nextInt(good.VARIANCE); // price + variance
+			int temp = good.basePrice + good.increasePerTL
+					* (level.ordinal() - good.minTLProduce); // price
+			temp += RAND.nextBoolean() ? RAND.nextInt(good.variance) : -RAND
+					.nextInt(good.variance); // price + variance
 			return temp;
 		} else {
 			return 0;
@@ -226,7 +228,7 @@ public class Marketplace implements GameConstants {
 
 	public final void setItemStock(String itemStock) throws JSONException {
 		JSONArray jsonArray = new JSONArray(itemStock);
-		int[] stock = new int[goods.length];
+		int[] stock = new int[GOODS.length];
 		for (int i = 0; i < jsonArray.length(); i++) {
 			stock[i] = jsonArray.getInt(i);
 		}
@@ -244,7 +246,7 @@ public class Marketplace implements GameConstants {
 	public final void setItemBuyPrices(String itemBuyPrices)
 			throws JSONException {
 		JSONArray jsonArray = new JSONArray(itemBuyPrices);
-		int[] buyPrices = new int[goods.length];
+		int[] buyPrices = new int[GOODS.length];
 		for (int i = 0; i < jsonArray.length(); i++) {
 			buyPrices[i] = jsonArray.getInt(i);
 		}
@@ -262,7 +264,7 @@ public class Marketplace implements GameConstants {
 	public final void setItemSellPrices(String itemSellPrices)
 			throws JSONException {
 		JSONArray jsonArray = new JSONArray(itemSellPrices);
-		int[] sellPrices = new int[goods.length];
+		int[] sellPrices = new int[GOODS.length];
 		for (int i = 0; i < jsonArray.length(); i++) {
 			sellPrices[i] = jsonArray.getInt(i);
 		}
@@ -306,10 +308,15 @@ public class Marketplace implements GameConstants {
 	}
 
 	public String arrayToString(int[] array) {
-		String ret = "[";
+		StringBuffer ret = new StringBuffer("[");
 		for (int i : array) {
-			ret += i + " ";
+			ret.append(i + " ");
 		}
-		return ret + "]\n";
+		return ret.toString() + "]\n";
+	}
+	
+	@Override
+	public String toString() {
+		return super.toString();
 	}
 }

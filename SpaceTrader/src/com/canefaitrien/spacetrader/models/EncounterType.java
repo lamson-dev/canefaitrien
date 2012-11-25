@@ -1,11 +1,12 @@
-package com.canefaitrien.spacetrader.models;
-
 /**
  * Encounter Type
  * @author An Pham
  * @Date 11/04/12
  * @version 1.0
  */
+
+package com.canefaitrien.spacetrader.models;
+
 import java.util.Random;
 
 public enum EncounterType {

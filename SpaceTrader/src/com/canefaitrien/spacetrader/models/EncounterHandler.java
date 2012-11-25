@@ -1,5 +1,3 @@
-package com.canefaitrien.spacetrader.models;
-
 /**
  * Encounter Handler
  * 
@@ -8,15 +6,13 @@ package com.canefaitrien.spacetrader.models;
  * @Version 1.0
  */
 
+package com.canefaitrien.spacetrader.models;
+
 public class EncounterHandler {
 	private Controller data;
 
 	public EncounterHandler(Controller data) {
 		this.data = data;
-	}
-
-	public void fleeFromPolice() {
-
 	}
 
 	/**
@@ -25,9 +21,9 @@ public class EncounterHandler {
 	 * @param amount
 	 * @return true upon successful, false otherwise
 	 */
-	public boolean bribePolice(int amount) {
+	public boolean canBribePolice(int amount) {
 		PoliceEncounter police = new PoliceEncounter(data);
-		return police.bribePolice(amount);
+		return police.canBribePolice(amount);
 	}
 
 	/**
@@ -37,7 +33,7 @@ public class EncounterHandler {
 	 * 
 	 * @return true if okay false otherwise
 	 */
-	public boolean submitPolice() {
+	public boolean canSubmitPolice() {
 		PoliceEncounter police = new PoliceEncounter(data);
 		int currentCredit = data.getMoney();
 		if (currentCredit == police.checkGoods()) {
@@ -47,20 +43,20 @@ public class EncounterHandler {
 		return false;
 	}
 
-	public boolean attackPolice() {
+	public boolean canAttackPolice() {
 		PoliceEncounter police = new PoliceEncounter(data);
-		return (police.policeBattle());
+		return (police.canPoliceBattle());
 	}
 
-	public boolean fleePolice() {
+	public boolean canFleePolice() {
 		PoliceEncounter police = new PoliceEncounter(data);
-		return (police.policeFlee());
+		return (police.canPoliceFlee());
 	}
 
 	/**
 	 * Surrender to pirate All goods in the cargo will be taken
 	 */
-	public void surrenderToPirate() {
+	public void canSurrenderToPirate() {
 		PirateEncounter pirate = new PirateEncounter(data);
 		pirate.takeGoods();
 	}
@@ -70,18 +66,23 @@ public class EncounterHandler {
 	 * 
 	 * @return true if get away false otherwise
 	 */
-	public boolean fleePirate() {
+	public boolean canFleePirate() {
 		PirateEncounter pirate = new PirateEncounter(data);
-		return (pirate.pirateFlee());
+		return (pirate.canPirateFlee());
 	}
 
-	public boolean attackPirate() {
+	public boolean canAttackPirate() {
 		PirateEncounter pirate = new PirateEncounter(data);
-		return (pirate.pirateFlee());
+		return (pirate.canPirateFlee());
 	}
 
-	public boolean attackTrader() {
+	public boolean canAttackTrader() {
 		TraderEncounter trader = new TraderEncounter(data);
-		return (trader.traderBattle());
+		return (trader.canTraderBattle());
+	}
+	
+	@Override
+	public String toString() {
+		return super.toString();
 	}
 }

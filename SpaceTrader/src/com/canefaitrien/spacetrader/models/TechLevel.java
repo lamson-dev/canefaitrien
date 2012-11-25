@@ -1,11 +1,11 @@
-package com.canefaitrien.spacetrader.models;
-
 /**
  * TechLevel enum for Planets
  * 
  * @author Andrew Duda
  * @version 1.0
  */
+
+package com.canefaitrien.spacetrader.models;
 
 public enum TechLevel {
 	PRE_AGRICULTURAL("PreAgricultural"), AGRICULTURAL("Agricultural"), MEDIEVAL(
@@ -14,7 +14,7 @@ public enum TechLevel {
 			"Post Industrial"), HI_TECH("HiTech");
 
 	// TechLevel info
-	public final String NAME; // Needs a name to print out multi-word situations
+	public final String name; // Needs a name to print out multi-word situations
 
 	/**
 	 * Constructor for TechLevel
@@ -22,11 +22,11 @@ public enum TechLevel {
 	 * @param name
 	 */
 	private TechLevel(String name) {
-		NAME = name;
+		this.name = name;
 	}
 
 	public String toString() {
-		return NAME;
+		return name;
 	}
 
 	/**
@@ -38,7 +38,7 @@ public enum TechLevel {
 	public static TechLevel fromString(String name) {
 		if (name != null) {
 			for (TechLevel level : TechLevel.values()) {
-				if (name.equalsIgnoreCase(level.NAME)) {
+				if (name.equalsIgnoreCase(level.name)) {
 					return level;
 				}
 			}

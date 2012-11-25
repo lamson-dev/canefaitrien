@@ -1,13 +1,13 @@
-package com.canefaitrien.spacetrader.models;
-
-import java.util.Random;
-
 /**
  * Create Ship type
  * 
  * @author apham9
  * @date 10/10/2012
  */
+
+package com.canefaitrien.spacetrader.models;
+
+import java.util.Random;
 
 public enum ShipType {
 	// speed of 14 parsecs, 1 weapon, 1 gadget, 15 cargo hold
@@ -36,23 +36,23 @@ public enum ShipType {
 	;
 	
 	// ShipType info
-	public final int MAX_WEAPONS_SLOTS;
+	public final int maxWeaponSlots;
 
-	public final int MAX_GADGETS_SLOTS;
+	public final int maxGadgetSlots;
 
-	public final int MAX_SHIELDS_SLOTS;
+	public final int maxShieldSlots;
 
-	public final int MAX_DISTANCE;
+	public final int maxDistance;
 
-	public final int MAX_CARGO_HOLD;
+	public final int maxCargoHold;
 
-	public final int MAX_CREW;
+	public final int maxCrew;
 
-	public final int MAX_MERCENARY;
+	public final int maxMercenary;
 
-	public final int MAX_HULL_STRENGTH;
+	public final int maxHullStrength;
 
-	public final String NAME;
+	public final String name;
 	
 	/**
 	 * Constructor for ShipType
@@ -70,19 +70,19 @@ public enum ShipType {
 			int maxWeaponSlots, int maxGadgetSlots, int maxShieldSlots,
 			int maxCargoHold, int maxCrewMembers, int maxMercernary, String name) {
 		
-		MAX_WEAPONS_SLOTS = maxWeaponSlots;
-		MAX_GADGETS_SLOTS = maxGadgetSlots;
-		MAX_SHIELDS_SLOTS = maxShieldSlots;
-		MAX_DISTANCE = maxDistance;
-		MAX_CARGO_HOLD = maxCargoHold;
-		MAX_CREW = maxCrewMembers;
-		MAX_MERCENARY = maxMercernary;
-		MAX_HULL_STRENGTH = maxHullStrength;
-		NAME = name;
+		this.maxWeaponSlots = maxWeaponSlots;
+		this.maxGadgetSlots = maxGadgetSlots;
+		this.maxShieldSlots = maxShieldSlots;
+		this.maxDistance = maxDistance;
+		this.maxCargoHold = maxCargoHold;
+		this.maxCrew = maxCrewMembers;
+		this.maxMercenary = maxMercernary;
+		this.maxHullStrength = maxHullStrength;
+		this.name = name;
 	}
 	
 	public String toString() {
-		return NAME;
+		return name;
 	}
 	
 	/**

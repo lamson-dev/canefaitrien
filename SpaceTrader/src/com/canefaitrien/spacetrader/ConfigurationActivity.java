@@ -75,7 +75,7 @@ public class ConfigurationActivity extends RootActivity implements
 	/**
 	 * Field difficulties.
 	 */
-	private Difficulty[] difficulties = Difficulty.values();
+	private final Difficulty[] difficulties = Difficulty.values();
 
 	/**
 	 * Field level.
@@ -85,7 +85,7 @@ public class ConfigurationActivity extends RootActivity implements
 	/**
 	 * Field totalPts.
 	 */
-	private int totalPts = NUM_MAX_SKILL_POINTS;
+	private final int totalPts = NUM_MAX_SKILL_POINTS;
 
 	/**
 	 * Field usedPts.

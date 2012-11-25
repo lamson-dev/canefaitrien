@@ -83,7 +83,7 @@ public class HubActivity extends RootActivity implements OnClickListener,
 		case R.id.btn_refill:
 			// note to subtract money
 			Ship ship = SpaceTrader.getController().getShip();
-			ship.setFuel(ship.getType().MAX_DISTANCE);// change this to not be
+			ship.setFuel(ship.getType().maxDistance);// change this to not be
 														// distance
 			break;
 		default:

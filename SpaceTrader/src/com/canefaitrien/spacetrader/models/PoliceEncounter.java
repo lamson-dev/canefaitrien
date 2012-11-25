@@ -1,11 +1,11 @@
-package com.canefaitrien.spacetrader.models;
-
 /**
  * Handling PoliceEncounter
  * @author An Pham
  * @Data 11/ 07/ 12
  * @Version 1.0
  */
+package com.canefaitrien.spacetrader.models;
+
 import java.util.Random;
 
 public class PoliceEncounter implements Encounter {
@@ -25,10 +25,6 @@ public class PoliceEncounter implements Encounter {
 		this.data = data;
 	}
 
-	public void encounter() {
-
-	}
-
 	/**
 	 * Check for illegal goods
 	 * 
@@ -40,7 +36,7 @@ public class PoliceEncounter implements Encounter {
 				&& goods[TradeGood.FIREARMS.ordinal()] == 0) {
 			return data.getMoney();
 		} else {
-			data.setMoney(data.getMoney() * 8 / 10);
+			data.setMoney(data.getMoney() << 3 / 10);
 			goods[TradeGood.NARCOTICS.ordinal()] = 0;
 			goods[TradeGood.FIREARMS.ordinal()] = 0;
 		}
@@ -53,7 +49,7 @@ public class PoliceEncounter implements Encounter {
 	 * @param amount
 	 * @return true upon successful, false otherwise
 	 */
-	public boolean bribePolice(int amount) {
+	public boolean canBribePolice(int amount) {
 		int currentMoney = data.getMoney();
 		int bribeMoney = new Random().nextInt(currentMoney / 10);
 		if (amount < bribeMoney || amount > currentMoney) {
@@ -67,7 +63,7 @@ public class PoliceEncounter implements Encounter {
 	/**
 	 * @Return true if survive false otherwise
 	 */
-	public boolean policeBattle() {
+	public boolean canPoliceBattle() {
 		return ((data.getShip().getHullStrength() - policeShip
 				.getHullStrength()) > 0);
 	}
@@ -75,7 +71,12 @@ public class PoliceEncounter implements Encounter {
 	/**
 	 * @Return true if get away false otherwise
 	 */
-	public boolean policeFlee() {
+	public boolean canPoliceFlee() {
 		return ((data.getShip().getMaxSpeed() - policeShip.getMaxSpeed()) > 0);
+	}
+	
+	@Override
+	public String toString() {
+		return super.toString();
 	}
 }

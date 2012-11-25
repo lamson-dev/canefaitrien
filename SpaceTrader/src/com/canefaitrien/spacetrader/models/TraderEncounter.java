@@ -1,12 +1,12 @@
-package com.canefaitrien.spacetrader.models;
-
-import java.util.Random;
-
 /**
  * @author An Pham
  * @Date 11/07/12
  * @Version 1.0
  */
+
+package com.canefaitrien.spacetrader.models;
+
+import java.util.Random;
 
 public class TraderEncounter implements Encounter {
 
@@ -18,7 +18,7 @@ public class TraderEncounter implements Encounter {
 
 	private static final int MIN_NUM_GOODS = 5, VARIANCE = 5;
 
-	private static Random rand = new Random();
+	private static Random RAND = new Random();
 
 	// Cargo hold info
 	private int[] itemStock = new int[TradeGood.values().length];
@@ -37,34 +37,25 @@ public class TraderEncounter implements Encounter {
 			itemSellPrices[good.ordinal()] = getSellPrice(good);
 
 			if (itemBuyPrices[good.ordinal()] != 0) {
-				itemStock[good.ordinal()] = rand.nextInt(VARIANCE)
+				itemStock[good.ordinal()] = RAND.nextInt(VARIANCE)
 						+ MIN_NUM_GOODS;
 			}
 		}
 	}
 
-	public void trade() {
-
-	}
-
-	public void encounter() {
-		// TODO Auto-generated method stub
-
-	}
-
 	/**
 	 * @Return true if survive false otherwise
 	 */
-	public boolean traderBattle() {
-		return ((data.getShip().getHullStrength() - type.MAX_HULL_STRENGTH) > 0);
+	public boolean canTraderBattle() {
+		return ((data.getShip().getHullStrength() - type.maxHullStrength) > 0);
 	}
 
 	private int getBuyPrice(TradeGood good) {
-		return getPrice(good, good.MIN_TL_PRODUCE);
+		return getPrice(good, good.minTLProduce);
 	}
 
 	private int getSellPrice(TradeGood good) {
-		return (int) (0.9 * getPrice(good, good.MIN_TL_USE)); // makes sell
+		return getPrice(good, good.minTLUse); // makes sell
 																// values less
 																// than buy
 																// values
@@ -72,10 +63,10 @@ public class TraderEncounter implements Encounter {
 
 	private int getPrice(TradeGood good, int minTL) {
 		if (level.ordinal() >= minTL) {
-			int temp = good.BASE_PRICE + good.INCREASE_PER_TL
-					* (level.ordinal() - good.MIN_TL_PRODUCE); // price
-			temp += rand.nextBoolean() ? rand.nextInt(good.VARIANCE) : -rand
-					.nextInt(good.VARIANCE); // price + variance
+			int temp = good.basePrice + good.increasePerTL
+					* (level.ordinal() - good.minTLProduce); // price
+			temp += RAND.nextBoolean() ? RAND.nextInt(good.variance) : -RAND
+					.nextInt(good.variance); // price + variance
 			return temp;
 		} else {
 			return 0;
@@ -113,5 +104,10 @@ public class TraderEncounter implements Encounter {
 			ret[i][4] = cargo[i] + "";
 		}
 		return ret;
+	}
+	
+	@Override
+	public String toString() {
+		return super.toString();
 	}
 }

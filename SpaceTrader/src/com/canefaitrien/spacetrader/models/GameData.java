@@ -1,4 +1,8 @@
 // $codepro.audit.disable transientFieldInNonSerializable
+/**
+ * Entity mapped to table GAME_DATA.
+ */
+
 package com.canefaitrien.spacetrader.models;
 
 import java.util.List;
@@ -14,9 +18,7 @@ import com.canefaitrien.spacetrader.dao.ShipDao;
 import de.greenrobot.dao.AbstractDao;
 import de.greenrobot.dao.DaoException;
 
-/**
- * Entity mapped to table GAME_DATA.
- */
+
 public class GameData {
 
 	private static final String TAG = "GameData";
@@ -283,5 +285,9 @@ public class GameData {
 		}
 		myDao.refresh(this);
 	}
-
+	
+	@Override
+	public String toString() {
+		return super.toString();
+	}
 }

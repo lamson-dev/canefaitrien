@@ -1,15 +1,12 @@
-package com.canefaitrien.spacetrader.models;
-
 /**
  * Encounter interface to make handling different types of encounters easier
  * 
  * @author Andrew Duda
  * @version 1.0
  */
+
+package com.canefaitrien.spacetrader.models;
+
 public interface Encounter {
 	
-	/**
-	 * Method which is to be called upon encountering this encounter
-	 */
-	public void encounter();
 }
