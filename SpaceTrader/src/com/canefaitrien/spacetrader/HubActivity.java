@@ -1,3 +1,4 @@
+// $codepro.audit.disable com.instantiations.assist.eclipse.analysis.audit.rule.effectivejava.alwaysOverridetoString.alwaysOverrideToString
 /**
  * Concrete View of Hub Screen
  */
@@ -16,13 +17,26 @@ import com.canefaitrien.spacetrader.models.Ship;
 import com.canefaitrien.spacetrader.presenters.MainScreenPresenter;
 import com.canefaitrien.spacetrader.utils.MusicManager;
 
+/**
+ * @author Son Nguyen
+ * @version $Revision: 1.0 $
+ */
 public class HubActivity extends RootActivity implements OnClickListener,
 		IMainScreenView {
 
+	/**
+	 * Field TAG. (value is ""Hub"")
+	 */
 	private static final String TAG = "Hub";
 
+	/**
+	 * Field mPresenter.
+	 */
 	private MainScreenPresenter mPresenter;
 
+	/**
+	 * Field continueMusic.
+	 */
 	private boolean continueMusic;
 
 	/**
@@ -34,6 +48,9 @@ public class HubActivity extends RootActivity implements OnClickListener,
 
 	/**
 	 * called when activity is created
+	 * 
+	 * @param savedInstanceState
+	 *            Bundle
 	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -52,6 +69,11 @@ public class HubActivity extends RootActivity implements OnClickListener,
 
 	/**
 	 * OnClick events for all Buttons
+	 * 
+	 * @param v
+	 *            View
+	 * 
+	 * @see android.view.View$OnClickListener#onClick(View)
 	 */
 	public void onClick(View v) {
 		switch (v.getId()) {
@@ -63,6 +85,8 @@ public class HubActivity extends RootActivity implements OnClickListener,
 			Ship ship = SpaceTrader.getController().getShip();
 			ship.setFuel(ship.getType().MAX_DISTANCE);// change this to not be
 														// distance
+			break;
+		default:
 			break;
 		}
 

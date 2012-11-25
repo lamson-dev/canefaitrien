@@ -1,3 +1,4 @@
+// $codepro.audit.disable com.instantiations.assist.eclipse.analysis.audit.rule.effectivejava.alwaysOverridetoString.alwaysOverrideToString
 /**
  * Concrete View of Main Navigation Screen
  */
@@ -20,15 +21,31 @@ import com.canefaitrien.spacetrader.interfaces.IMainScreenView;
 import com.canefaitrien.spacetrader.presenters.MainScreenPresenter;
 import com.canefaitrien.spacetrader.utils.MusicManager;
 
+/**
+ * @author Son Nguyen
+ * @version $Revision: 1.0 $
+ */
 @SuppressWarnings("deprecation")
 public class MainScreenActivity extends TabActivity implements IMainScreenView {
 
+	/**
+	 * Field TAG. (value is ""MainScreen"")
+	 */
 	private static final String TAG = "MainScreen";
 
+	/**
+	 * Field mPresenter.
+	 */
 	protected MainScreenPresenter mPresenter;
 
+	/**
+	 * Field mRowId.
+	 */
 	private long mRowId;
 
+	/**
+	 * Field continueMusic.
+	 */
 	private boolean continueMusic;
 
 	/**
@@ -38,6 +55,12 @@ public class MainScreenActivity extends TabActivity implements IMainScreenView {
 		mPresenter = new MainScreenPresenter(this);
 	}
 
+	/**
+	 * Method onCreate.
+	 * 
+	 * @param savedInstanceState
+	 *            Bundle
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -117,6 +140,14 @@ public class MainScreenActivity extends TabActivity implements IMainScreenView {
 		RootActivity.setAppFont(activityViewGroup, RootActivity.appFont);
 	}
 
+	/**
+	 * Method onCreateOptionsMenu.
+	 * 
+	 * @param menu
+	 *            Menu
+	 * 
+	 * @return boolean
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
@@ -124,6 +155,17 @@ public class MainScreenActivity extends TabActivity implements IMainScreenView {
 		return true;
 	}
 
+	/**
+	 * Method onMenuItemSelected.
+	 * 
+	 * @param featureId
+	 *            int
+	 * @param item
+	 *            MenuItem
+	 * 
+	 * @return boolean *
+	 * @see android.view.Window$Callback#onMenuItemSelected(int, MenuItem)
+	 */
 	@Override
 	public boolean onMenuItemSelected(int featureId, MenuItem item) {
 		switch (item.getItemId()) {
@@ -133,11 +175,16 @@ public class MainScreenActivity extends TabActivity implements IMainScreenView {
 		case R.id.menu_load:
 			// do something, load main menu?
 			return true;
+		default:
+			break;
 		}
 
 		return super.onMenuItemSelected(featureId, item);
 	}
 
+	/**
+	 * Method onStart.
+	 */
 	@Override
 	protected void onStart() {
 		super.onStart();
@@ -146,6 +193,9 @@ public class MainScreenActivity extends TabActivity implements IMainScreenView {
 		MusicManager.release();
 	}
 
+	/**
+	 * Method onPause.
+	 */
 	@Override
 	protected void onPause() {
 		super.onPause();
@@ -155,6 +205,9 @@ public class MainScreenActivity extends TabActivity implements IMainScreenView {
 		}
 	}
 
+	/**
+	 * Method onResume.
+	 */
 	@Override
 	protected void onResume() {
 		super.onResume();
@@ -165,6 +218,9 @@ public class MainScreenActivity extends TabActivity implements IMainScreenView {
 		mPresenter.populateData(mRowId);
 	}
 
+	/**
+	 * Method onStop.
+	 */
 	@Override
 	protected void onStop() {
 		super.onStop();
@@ -173,6 +229,9 @@ public class MainScreenActivity extends TabActivity implements IMainScreenView {
 		// finish();
 	}
 
+	/**
+	 * Method onRestart.
+	 */
 	@Override
 	protected void onRestart() {
 		super.onRestart();

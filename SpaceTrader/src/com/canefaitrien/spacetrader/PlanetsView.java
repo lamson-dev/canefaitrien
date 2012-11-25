@@ -1,3 +1,4 @@
+// $codepro.audit.disable com.instantiations.assist.eclipse.analysis.audit.rule.effectivejava.alwaysOverridetoString.alwaysOverrideToString
 /**
  * Custom View of GalaxyMap Screen, draw planets
  */
@@ -25,25 +26,50 @@ import android.view.View;
  * 
  * @author Daniel Xiao
  * 
+ * @version $Revision: 1.0 $
  */
 @SuppressLint("ViewConstructor")
 public class PlanetsView extends View {
 
+	/**
+	 * Field planets.
+	 */
 	private Planet[] planets;
 
+	/**
+	 * Field paint.
+	 */
 	private Paint paint = new Paint();// normal paint
 
+	/**
+	 * Field wordPaint.
+	 */
 	private Paint wordPaint = new Paint();// for text
 
+	/**
+	 * Field planetPaint.
+	 */
 	private Paint planetPaint = new Paint();// for simple planets
 
+	/**
+	 * Field rand.
+	 */
 	private Random rand = new Random();
 
+	/**
+	 * Field planetImage.
+	 */
 	private Bitmap planetImage;
 
+	/**
+	 * Field dst.
+	 */
 	private Rect dst;
 
-	private boolean simplePlanets;
+	/**
+	 * Field simplePlanets.
+	 */
+	private boolean simplePlanets; // $codepro.audit.disable com.instantiations.assist.eclipse.analysis.unassignedField
 
 	/**
 	 * Constructor that sets up the paint for text and other set ups
@@ -56,13 +82,14 @@ public class PlanetsView extends View {
 	public PlanetsView(Context context, Planet[] planets) {
 		super(context);
 		//
-		this.planets = planets;
+		this.planets = planets; // $codepro.audit.disable com.instantiations.assist.eclipse.arrayIsStoredWithoutCopying
 		wordPaint.setColor(Color.WHITE);
 		wordPaint.setTextAlign(Align.CENTER);
 	}
 
 	/**
 	 * Draw method called when created
+	 * @param canvas Canvas
 	 */
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);

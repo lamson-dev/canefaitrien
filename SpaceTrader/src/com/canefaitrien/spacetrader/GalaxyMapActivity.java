@@ -1,3 +1,4 @@
+// $codepro.audit.disable com.instantiations.assist.eclipse.analysis.audit.rule.effectivejava.alwaysOverridetoString.alwaysOverrideToString
 /**
  * Concrete View of GalaxyMap Screen
  */
@@ -30,13 +31,23 @@ import com.canefaitrien.spacetrader.utils.MusicManager;
  * 
  * @author Daniel Xiao
  * 
+ * @version $Revision: 1.0 $
  */
 public class GalaxyMapActivity extends RootActivity implements OnTouchListener {
 
+	/**
+	 * Field TAG. (value is ""GalaxyActivity"")
+	 */
 	private static final String TAG = "GalaxyActivity";
 
+	/**
+	 * Field galaxy.
+	 */
 	private ShipLocationView galaxy;
 
+	/**
+	 * Field planetsView.
+	 */
 	private PlanetsView planetsView;
 
 	/**
@@ -45,12 +56,18 @@ public class GalaxyMapActivity extends RootActivity implements OnTouchListener {
 	 */
 	private boolean continueMusic;
 
+	/**
+	 * Method onCreate.
+	 * 
+	 * @param savedInstanceState
+	 *            Bundle
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 
 		FrameLayout main = new FrameLayout(this);
-		main.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,
-				LayoutParams.MATCH_PARENT));
+		main.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, // $codepro.audit.disable staticMemberAccess
+				LayoutParams.MATCH_PARENT)); // $codepro.audit.disable staticMemberAccess
 		//
 		super.onCreate(savedInstanceState);
 		Log.d("Galaxy", "Created Galaxy");
@@ -72,7 +89,7 @@ public class GalaxyMapActivity extends RootActivity implements OnTouchListener {
 	 * @param planet
 	 *            Takes in the planet clicked on.
 	 */
-	public void onCreateDialog(Planet planet) {
+	public void onCreateDialog(Planet planet) { // $codepro.audit.disable overloadedMethods
 		final Planet thePlanet = planet;
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle("" + planet.getName());
@@ -143,6 +160,8 @@ public class GalaxyMapActivity extends RootActivity implements OnTouchListener {
 					case 2:
 						pirate.takeGoods();
 						break;
+					default:
+						break;
 					}
 				}
 			});
@@ -169,6 +188,8 @@ public class GalaxyMapActivity extends RootActivity implements OnTouchListener {
 								"Escaped Police", Toast.LENGTH_SHORT).show();
 						police.policeFlee();
 						break;
+					default:
+						break;
 					}
 				}
 			});
@@ -189,11 +210,15 @@ public class GalaxyMapActivity extends RootActivity implements OnTouchListener {
 						Toast.makeText(getApplicationContext(), "Left Trader",
 								Toast.LENGTH_SHORT).show();
 						break;
+					default:
+						break;
 					}
 				}
 			});
 			break;
 		case NOTHING:
+			break;
+		default:
 			break;
 		}
 		if (encounter != EncounterType.NOTHING) {// no encounter
@@ -206,16 +231,19 @@ public class GalaxyMapActivity extends RootActivity implements OnTouchListener {
 	 * Checks entire screen when pressed and sees if a planet contains those
 	 * coordinates
 	 * 
-	 * @param takes
-	 *            in a view and an event
-	 * @return returns true when the view is touched
+	 * @param v
+	 *            View
+	 * @param e
+	 *            MotionEvent
+	 * @return returns true when the view is touched * @see
+	 *         android.view.View$OnTouchListener#onTouch(View, MotionEvent)
 	 */
-	public boolean onTouch(View v, MotionEvent e) {
+	public boolean onTouch(View v, MotionEvent e) { // $codepro.audit.disable inconsistentUseOfOverride
 		if (e.getAction() == MotionEvent.ACTION_DOWN) {
 			Log.d("Galaxy",
-					"ActionDown" + (int) e.getRawX() + " " + (int) e.getRawY());
+					"ActionDown" + (int) e.getRawX() + " " + (int) e.getRawY()); // $codepro.audit.disable lossOfPrecisionInCast
 			for (Planet p : SpaceTrader.getController().getUniverse()) {
-				if (p.isClicked(new Point((int) e.getRawX(), (int) e.getRawY()))) {
+				if (p.isClicked(new Point((int) e.getRawX(), (int) e.getRawY()))) { // $codepro.audit.disable lossOfPrecisionInCast
 					// if(p!=SpaceTrader.getController().getLocation()){//is
 					// this the planet we're on
 					Log.d("Galaxy", "clicked " + p.getName());
@@ -228,6 +256,9 @@ public class GalaxyMapActivity extends RootActivity implements OnTouchListener {
 		return true;
 	}
 
+	/**
+	 * Method onPause.
+	 */
 	@Override
 	protected void onPause() {
 		super.onPause();
@@ -237,6 +268,9 @@ public class GalaxyMapActivity extends RootActivity implements OnTouchListener {
 		}
 	}
 
+	/**
+	 * Method onResume.
+	 */
 	@Override
 	protected void onResume() {
 		super.onResume();
@@ -247,12 +281,18 @@ public class GalaxyMapActivity extends RootActivity implements OnTouchListener {
 		galaxy.invalidate();
 	}
 
+	/**
+	 * Method onStart.
+	 */
 	@Override
 	protected void onStart() {
 		super.onStart();
 		Log.d(TAG, "onStart called.");
 	}
 
+	/**
+	 * Method onStop.
+	 */
 	@Override
 	protected void onStop() {
 		super.onStop();
@@ -260,6 +300,9 @@ public class GalaxyMapActivity extends RootActivity implements OnTouchListener {
 		// finish();
 	}
 
+	/**
+	 * Method onRestart.
+	 */
 	@Override
 	protected void onRestart() {
 		super.onRestart();

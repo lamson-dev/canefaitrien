@@ -1,3 +1,4 @@
+// $codepro.audit.disable com.instantiations.assist.eclipse.analysis.audit.rule.effectivejava.alwaysOverridetoString.alwaysOverrideToString
 /**
  * Application Launcher
  */
@@ -12,11 +13,20 @@ import android.util.Log;
 import com.canefaitrien.spacetrader.dao.DaoMaster;
 import com.canefaitrien.spacetrader.dao.DaoMaster.DevOpenHelper;
 
+/**
+ * @author Son Nguyen
+ * @version $Revision: 1.0 $
+ */
 public class LauncherActivity extends Activity {
+	/**
+	 * Field TAG.
+	 * (value is ""Launcher"")
+	 */
 	private static final String TAG = "Launcher";
 	
 	/**
 	 * open the database when application starts
+	 * @param savedInstanceState Bundle
 	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -26,9 +36,9 @@ public class LauncherActivity extends Activity {
 
 		DevOpenHelper helper = new DaoMaster.DevOpenHelper(this,
 				"spacetrader-db", null);
-		SpaceTrader.db = helper.getWritableDatabase();
-		SpaceTrader.daoMaster = new DaoMaster(SpaceTrader.db);
-		SpaceTrader.daoSession = SpaceTrader.daoMaster.newSession();
+		SpaceTrader.db = helper.getWritableDatabase(); // $codepro.audit.disable assignmentToNonFinalStatic
+		SpaceTrader.daoMaster = new DaoMaster(SpaceTrader.db); // $codepro.audit.disable assignmentToNonFinalStatic
+		SpaceTrader.daoSession = SpaceTrader.daoMaster.newSession(); // $codepro.audit.disable assignmentToNonFinalStatic
 
 		Intent intent = new Intent(LauncherActivity.this,
 				MainMenuActivity.class);

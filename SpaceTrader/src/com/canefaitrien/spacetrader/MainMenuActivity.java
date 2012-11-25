@@ -1,3 +1,4 @@
+// $codepro.audit.disable com.instantiations.assist.eclipse.analysis.audit.rule.effectivejava.alwaysOverridetoString.alwaysOverrideToString
 /**
  * Concrete View of MainMenu Screen
  */
@@ -14,12 +15,27 @@ import android.widget.Button;
 
 import com.canefaitrien.spacetrader.utils.MusicManager;
 
+/**
+ * @author Son Nguyen
+ * @version $Revision: 1.0 $
+ */
 public class MainMenuActivity extends RootActivity implements OnClickListener {
 
+	/**
+	 * Field TAG.
+	 * (value is ""MainMenu"")
+	 */
 	private static final String TAG = "MainMenu";
 
+	/**
+	 * Field continueMusic.
+	 */
 	private boolean continueMusic;
 
+	/**
+	 * Method onCreate.
+	 * @param savedInstanceState Bundle
+	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -27,7 +43,12 @@ public class MainMenuActivity extends RootActivity implements OnClickListener {
 		init();
 	}
 
-	public void onClick(View v) {
+	/**
+	 * Method onClick.
+	 * @param v View
+	
+	 * @see android.view.View$OnClickListener#onClick(View) */
+	public void onClick(View v) { // $codepro.audit.disable inconsistentUseOfOverride
 
 		Intent intent = null;
 		switch (v.getId()) {
@@ -41,11 +62,16 @@ public class MainMenuActivity extends RootActivity implements OnClickListener {
 		case R.id.btn_debugmode:
 			intent = new Intent(MainMenuActivity.this, GalaxyMapActivity.class);
 			break;
+		default:
+			break;
 		}
 		startActivity(intent);
 
 	}
 
+	/**
+	 * Method init.
+	 */
 	private void init() {
 		// Typeface font = Typeface.createFromAsset(getAssets(),
 		// "fonts/Street Corner.ttf");
@@ -76,12 +102,18 @@ public class MainMenuActivity extends RootActivity implements OnClickListener {
 		setAppFont(activityViewGroup, appFont);
 	}
 
+	/**
+	 * Method onStart.
+	 */
 	@Override
 	protected void onStart() {
 		super.onStart();
 		Log.d(TAG, "onStart called.");
 	}
 
+	/**
+	 * Method onPause.
+	 */
 	@Override
 	protected void onPause() {
 		super.onPause();
@@ -91,6 +123,9 @@ public class MainMenuActivity extends RootActivity implements OnClickListener {
 		}
 	}
 
+	/**
+	 * Method onResume.
+	 */
 	@Override
 	protected void onResume() {
 		super.onResume();
@@ -99,12 +134,18 @@ public class MainMenuActivity extends RootActivity implements OnClickListener {
 		MusicManager.start(this, MusicManager.MUSIC_MENU);
 	}
 
+	/**
+	 * Method onStop.
+	 */
 	@Override
 	protected void onStop() {
 		super.onStop();
 		Log.d(TAG, "onStop called.");
 	}
 
+	/**
+	 * Method onRestart.
+	 */
 	@Override
 	protected void onRestart() {
 		super.onRestart();

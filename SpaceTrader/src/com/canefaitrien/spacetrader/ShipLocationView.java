@@ -1,3 +1,4 @@
+// $codepro.audit.disable com.instantiations.assist.eclipse.analysis.audit.rule.effectivejava.alwaysOverridetoString.alwaysOverrideToString
 /**
  * Custom View of GalaxyMap Screen, draw ship and ship's fuel level
  */
@@ -25,15 +26,28 @@ import com.canefaitrien.spacetrader.models.Ship;
  * 
  * @author Daniel Xiao
  * 
+ * @version $Revision: 1.0 $
  */
 @SuppressLint("ViewConstructor")
 public class ShipLocationView extends View {
+	/**
+	 * Field paint.
+	 */
 	private Paint paint = new Paint();// normal paint
 
+	/**
+	 * Field wordTest.
+	 */
 	private Paint wordTest = new Paint(); // text paint
 
+	/**
+	 * Field ship_icon.
+	 */
 	private Bitmap ship_icon;
 
+	/**
+	 * Field c.
+	 */
 	private Canvas c;
 
 	/**
@@ -41,8 +55,7 @@ public class ShipLocationView extends View {
 	 * 
 	 * @param context
 	 *            takes in the application context
-	 * @param planets
-	 *            takes in an array of planets
+	
 	 */
 	public ShipLocationView(Context context) {
 		super(context);
@@ -65,8 +78,8 @@ public class ShipLocationView extends View {
 		// draw ship
 		Planet ship_location = SpaceTrader.getController().getLocation();
 		c.drawBitmap(ship_icon,
-				ship_location.getXCoordinate() - ship_icon.getWidth() / 2,
-				ship_location.getYCoordinate() - ship_icon.getHeight() / 2,
+				ship_location.getXCoordinate() - ship_icon.getWidth() >> 1, // divides by 2
+				ship_location.getYCoordinate() - ship_icon.getHeight() >> 1, // divides by 2
 				paint);
 
 		// draws a circle to indicate travelable distance

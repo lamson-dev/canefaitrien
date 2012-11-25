@@ -1,3 +1,4 @@
+// $codepro.audit.disable com.instantiations.assist.eclipse.analysis.audit.rule.effectivejava.alwaysOverridetoString.alwaysOverrideToString
 /**
  * Concrete View of Marketplace Screen
  */
@@ -5,7 +6,6 @@
 package com.canefaitrien.spacetrader;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -27,19 +27,41 @@ import com.canefaitrien.spacetrader.interfaces.IMarketPlaceView;
 import com.canefaitrien.spacetrader.presenters.MarketPlacePresenter;
 import com.canefaitrien.spacetrader.utils.MusicManager;
 
+/**
+ * @author Son Nguyen
+ * @version $Revision: 1.0 $
+ */
 public class MarketPlaceActivity extends ListActivity implements
 		IMarketPlaceView, OnClickListener {
 
+	/**
+	 * Field TAG. (value is ""MarketPlace"")
+	 */
 	private static final String TAG = "MarketPlace";
 
+	/**
+	 * Field mPresenter.
+	 */
 	protected MarketPlacePresenter mPresenter;
 
+	/**
+	 * Field stockList.
+	 */
 	private List<Map<String, String>> stockList = new ArrayList<Map<String, String>>();
 
+	/**
+	 * Field itemPos.
+	 */
 	private int itemPos = 0;
 
+	/**
+	 * Field continueMusic.
+	 */
 	private boolean continueMusic;
 
+	/**
+	 * Field tempView.
+	 */
 	private View tempView;
 
 	/**
@@ -49,6 +71,12 @@ public class MarketPlaceActivity extends ListActivity implements
 		mPresenter = new MarketPlacePresenter(this);
 	}
 
+	/**
+	 * Method onCreate.
+	 * 
+	 * @param savedInstanceState
+	 *            Bundle
+	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -72,29 +100,68 @@ public class MarketPlaceActivity extends ListActivity implements
 
 	/**
 	 * display money on screen
+	 * 
+	 * @param valueOf
+	 *            String
+	 * 
+	 * @see com.canefaitrien.spacetrader.interfaces.IMarketPlaceView#displayMoney(String)
 	 */
-	public void displayMoney(String valueOf) {
+	public void displayMoney(String valueOf) { // $codepro.audit.disable inconsistentUseOfOverride
 		TextView tv = (TextView) findViewById(R.id.tv_money);
 		tv.setText(valueOf);
 	}
 
 	/**
 	 * display cargo on screen
+	 * 
+	 * @param valueOf
+	 *            String
+	 * 
+	 * @see com.canefaitrien.spacetrader.interfaces.IMarketPlaceView#displayCargo(String)
 	 */
-	public void displayCargo(String valueOf) {
+	public void displayCargo(String valueOf) { // $codepro.audit.disable inconsistentUseOfOverride
 		TextView tv = (TextView) findViewById(R.id.tv_cargo);
 		tv.setText(valueOf);
 	}
 
-	public List<Map<String, String>> getStockList() {
+	/**
+	 * Method getStockList.
+	 * 
+	 * @return List<Map<String,String>> * @see
+	 *         com.canefaitrien.spacetrader.interfaces
+	 *         .IMarketPlaceView#getStockList()
+	 */
+	public List<Map<String, String>> getStockList() { // $codepro.audit.disable inconsistentUseOfOverride
 		return stockList;
 	}
 
-	public void setStockList(List<Map<String, String>> stockList) {
+	/**
+	 * Method setStockList.
+	 * 
+	 * @param stockList
+	 *            List<Map<String,String>>
+	 * 
+	 * @see 
+	 *      com.canefaitrien.spacetrader.interfaces.IMarketPlaceView#setStockList
+	 *      (List<Map<String,String>>)
+	 */
+	public void setStockList(List<Map<String, String>> stockList) { // $codepro.audit.disable inconsistentUseOfOverride
 		this.stockList = stockList;
 
 	}
 
+	/**
+	 * Method onListItemClick.
+	 * 
+	 * @param l
+	 *            ListView
+	 * @param v
+	 *            View
+	 * @param position
+	 *            int
+	 * @param id
+	 *            long
+	 */
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		// Do something when a list item is clicked
@@ -122,7 +189,15 @@ public class MarketPlaceActivity extends ListActivity implements
 
 	}
 
-	public void onClick(View v) {
+	/**
+	 * Method onClick.
+	 * 
+	 * @param v
+	 *            View
+	 * 
+	 * @see android.view.View$OnClickListener#onClick(View)
+	 */
+	public void onClick(View v) { // $codepro.audit.disable inconsistentUseOfOverride
 
 		switch (v.getId()) {
 		case R.id.btn_buy:
@@ -141,32 +216,65 @@ public class MarketPlaceActivity extends ListActivity implements
 				Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
 			}
 			break;
+		default:
+			break;
 		}
 		mPresenter.displayMarket();
 		mPresenter.showOtherInfo();
 	}
 
+	/**
+	 * Method setListAdapter.
+	 * 
+	 * @param adapter
+	 *            ListAdapter
+	 * 
+	 * @see com.canefaitrien.spacetrader.interfaces.IMarketPlaceView#setListAdapter(ListAdapter)
+	 */
 	@Override
 	public void setListAdapter(ListAdapter adapter) {
 		super.setListAdapter(adapter);
 		Log.d(TAG, "set list adapter");
 	}
 
-	public Context getContext() {
+	/**
+	 * Method getContext.
+	 * 
+	 * @return Context * @see
+	 *         com.canefaitrien.spacetrader.interfaces.IMarketPlaceView
+	 *         #getContext()
+	 */
+	public Context getContext() { // $codepro.audit.disable inconsistentUseOfOverride
 		return MarketPlaceActivity.this;
 	}
 
+	/**
+	 * Method getSystemService.
+	 * 
+	 * @param name
+	 *            String
+	 * 
+	 * @return Object * @see
+	 *         com.canefaitrien.spacetrader.interfaces.IMarketPlaceView
+	 *         #getSystemService(String)
+	 */
 	@Override
 	public Object getSystemService(String name) {
 		return super.getSystemService(name);
 	}
 
+	/**
+	 * Method applyFont.
+	 */
 	private void applyFont() {
 		ViewGroup activityViewGroup = (ViewGroup) findViewById(
 				android.R.id.content).getRootView();
 		RootActivity.setAppFont(activityViewGroup, RootActivity.appFont);
 	}
 
+	/**
+	 * Method onPause.
+	 */
 	@Override
 	protected void onPause() {
 		super.onPause();
@@ -176,6 +284,9 @@ public class MarketPlaceActivity extends ListActivity implements
 		}
 	}
 
+	/**
+	 * Method onResume.
+	 */
 	@Override
 	protected void onResume() {
 		super.onResume();
@@ -187,12 +298,18 @@ public class MarketPlaceActivity extends ListActivity implements
 		mPresenter.showOtherInfo();
 	}
 
+	/**
+	 * Method onStart.
+	 */
 	@Override
 	protected void onStart() {
 		super.onStart();
 		Log.d(TAG, "onStart called.");
 	}
 
+	/**
+	 * Method onStop.
+	 */
 	@Override
 	protected void onStop() {
 		super.onStop();

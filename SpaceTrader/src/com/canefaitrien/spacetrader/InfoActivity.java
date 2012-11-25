@@ -1,3 +1,4 @@
+// $codepro.audit.disable com.instantiations.assist.eclipse.analysis.audit.rule.effectivejava.alwaysOverridetoString.alwaysOverrideToString
 /**
  * Concrete View of Info Screen
  */
@@ -18,20 +19,35 @@ import com.canefaitrien.spacetrader.utils.MusicManager;
  * @author Son Nguyen
  * @author Daniel Xiao
  * 
+ * @version $Revision: 1.0 $
  */
 public class InfoActivity extends RootActivity {
 
+	/**
+	 * Field TAG.
+	 * (value is ""Info"")
+	 */
 	private static final String TAG = "Info";
 
+	/**
+	 * Field data.
+	 */
 	private Controller data;
 
+	/**
+	 * Field continueMusic.
+	 */
 	private boolean continueMusic;
 
+	/**
+	 * Field infoView.
+	 */
 	@SuppressWarnings("unused")
-	private InfoView infoView;
+	private InfoView infoView; // $codepro.audit.disable com.instantiations.assist.eclipse.analysis.unassignedField, unusedField
 
 	/**
 	 * Method called when creating the info page
+	 * @param savedInstanceState Bundle
 	 */
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -78,6 +94,9 @@ public class InfoActivity extends RootActivity {
 		money.setText("$" + String.valueOf(data.getMoney()));
 	}
 
+	/**
+	 * Method applyFont.
+	 */
 	public void applyFont() {
 		ViewGroup activityViewGroup = (ViewGroup) findViewById(
 				android.R.id.content).getRootView();

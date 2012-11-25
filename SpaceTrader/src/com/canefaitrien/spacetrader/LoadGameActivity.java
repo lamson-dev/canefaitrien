@@ -1,3 +1,4 @@
+// $codepro.audit.disable com.instantiations.assist.eclipse.analysis.audit.rule.effectivejava.alwaysOverridetoString.alwaysOverrideToString
 /*
  * Copyright (C) 2008 Google Inc.
  *
@@ -44,22 +45,49 @@ import com.canefaitrien.spacetrader.dao.GameDataDao;
 import com.canefaitrien.spacetrader.models.GameData;
 import com.canefaitrien.spacetrader.utils.MusicManager;
 
+/**
+ * @author Son Nguyen
+ * @version $Revision: 1.0 $
+ */
 public class LoadGameActivity extends ListActivity {
 
+	/**
+	 * Field TAG. (value is ""LoadGame"")
+	 */
 	private static final String TAG = "LoadGame";
 
+	/**
+	 * Field ACTIVITY_LOAD. (value is 1)
+	 */
 	private static final int ACTIVITY_LOAD = 1;
 
+	/**
+	 * Field DELETE_ID.
+	 */
 	private static final int DELETE_ID = Menu.FIRST;
 
+	/**
+	 * Field gameDataDao.
+	 */
 	private GameDataDao gameDataDao;
 
+	/**
+	 * Field cursor.
+	 */
 	@SuppressWarnings("unused")
 	private Cursor cursor;
 
+	/**
+	 * Field continueMusic.
+	 */
 	private boolean continueMusic;
 
-	/** Called when the activity is first created. */
+	/**
+	 * Called when the activity is first created.
+	 * 
+	 * @param savedInstanceState
+	 *            Bundle
+	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -136,6 +164,18 @@ public class LoadGameActivity extends ListActivity {
 
 	}
 
+	/**
+	 * Method onListItemClick.
+	 * 
+	 * @param l
+	 *            ListView
+	 * @param v
+	 *            View
+	 * @param position
+	 *            int
+	 * @param id
+	 *            long
+	 */
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 
@@ -149,6 +189,19 @@ public class LoadGameActivity extends ListActivity {
 		startActivityForResult(intent, ACTIVITY_LOAD);
 	}
 
+	/**
+	 * Method onCreateContextMenu.
+	 * 
+	 * @param menu
+	 *            ContextMenu
+	 * @param v
+	 *            View
+	 * @param menuInfo
+	 *            ContextMenuInfo
+	 * 
+	 * @see android.view.View$OnCreateContextMenuListener#onCreateContextMenu(ContextMenu,
+	 *      View, ContextMenuInfo)
+	 */
 	@Override
 	public void onCreateContextMenu(ContextMenu menu, View v,
 			ContextMenuInfo menuInfo) {
@@ -156,6 +209,14 @@ public class LoadGameActivity extends ListActivity {
 		menu.add(0, DELETE_ID, 0, R.string.delete_save);
 	}
 
+	/**
+	 * Method onContextItemSelected.
+	 * 
+	 * @param item
+	 *            MenuItem
+	 * 
+	 * @return boolean
+	 */
 	@Override
 	public boolean onContextItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
@@ -169,28 +230,42 @@ public class LoadGameActivity extends ListActivity {
 			// cursor.requery();
 			fillData();
 			return true;
+		default:
+			break;
 		}
 		return super.onContextItemSelected(item);
 	}
 
+	/**
+	 * Method applyFont.
+	 */
 	private void applyFont() {
 		ViewGroup activityViewGroup = (ViewGroup) findViewById(
 				android.R.id.content).getRootView();
 		RootActivity.setAppFont(activityViewGroup, RootActivity.appFont);
 	}
 
+	/**
+	 * Method onStart.
+	 */
 	@Override
 	protected void onStart() {
 		super.onStart();
 		Log.d(TAG, "onStart called.");
 	}
 
+	/**
+	 * Method onBackPressed.
+	 */
 	@Override
 	public void onBackPressed() {
 		super.onBackPressed();
 		continueMusic = true;
 	}
 
+	/**
+	 * Method onPause.
+	 */
 	@Override
 	protected void onPause() {
 		super.onPause();
@@ -200,6 +275,9 @@ public class LoadGameActivity extends ListActivity {
 		}
 	}
 
+	/**
+	 * Method onResume.
+	 */
 	@Override
 	protected void onResume() {
 		super.onResume();
@@ -208,6 +286,9 @@ public class LoadGameActivity extends ListActivity {
 		MusicManager.start(this, MusicManager.MUSIC_MENU);
 	}
 
+	/**
+	 * Method onStop.
+	 */
 	@Override
 	protected void onStop() {
 		super.onStop();
@@ -215,6 +296,9 @@ public class LoadGameActivity extends ListActivity {
 		finish();
 	}
 
+	/**
+	 * Method onRestart.
+	 */
 	@Override
 	protected void onRestart() {
 		super.onRestart();

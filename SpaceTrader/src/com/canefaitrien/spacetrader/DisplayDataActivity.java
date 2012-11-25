@@ -1,3 +1,4 @@
+// $codepro.audit.disable com.instantiations.assist.eclipse.analysis.audit.rule.effectivejava.alwaysOverridetoString.alwaysOverrideToString
 /**
  * Concrete View of Display Data Screen, for debugging
  */
@@ -21,11 +22,16 @@ import com.canefaitrien.spacetrader.models.TechLevel;
  * 
  * @author Son Nguyen
  * 
+ * @version $Revision: 1.0 $
  */
 public class DisplayDataActivity extends RootActivity {
 
 	// private boolean continueMusic;
 
+	/**
+	 * Method onCreate.
+	 * @param savedInstanceState Bundle
+	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -49,12 +55,22 @@ public class DisplayDataActivity extends RootActivity {
 
 	}
 
+	/**
+	 * Method onCreateOptionsMenu.
+	 * @param menu Menu
+	 * @return boolean
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.activity_display_data, menu);
 		return true;
 	}
 
+	/**
+	 * Method onOptionsItemSelected.
+	 * @param item MenuItem
+	 * @return boolean
+	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {

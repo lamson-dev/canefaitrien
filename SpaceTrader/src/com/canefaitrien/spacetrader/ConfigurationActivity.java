@@ -1,3 +1,4 @@
+// $codepro.audit.disable com.instantiations.assist.eclipse.analysis.audit.rule.effectivejava.alwaysOverridetoString.alwaysOverrideToString
 /**
  * Concrete View of Configuration Screen
  */
@@ -23,33 +24,90 @@ import com.canefaitrien.spacetrader.presenters.ConfigurationPresenter;
 import com.canefaitrien.spacetrader.utils.MusicManager;
 import com.canefaitrien.spacetrader.utils.Tools;
 
+/**
+ * @author Son Nguyen
+ * @version $Revision: 1.0 $
+ */
 public class ConfigurationActivity extends RootActivity implements
 		GameConstants, OnClickListener, OnSeekBarChangeListener,
 		IConfigurationView {
 
+	/**
+	 * Field TAG. (value is ""Configuration"")
+	 */
 	private static final String TAG = "Configuration";
 
+	/**
+	 * Field editName.
+	 */
 	private EditText editName;
 
+	/**
+	 * Field tvLevel.
+	 */
 	private TextView tvLevel;
 
+	/**
+	 * Field barEngineer.
+	 */
+	/**
+	 * Field barTrader.
+	 */
+	/**
+	 * Field barFighter.
+	 */
+	/**
+	 * Field barPilot.
+	 */
 	private SeekBar barPilot, barFighter, barTrader, barEngineer;
 
+	/**
+	 * Field btnStart.
+	 */
+	/**
+	 * Field btnMinus.
+	 */
+	/**
+	 * Field btnPlus.
+	 */
 	private Button btnPlus, btnMinus, btnStart;
 
+	/**
+	 * Field difficulties.
+	 */
 	private Difficulty[] difficulties = Difficulty.values();
 
+	/**
+	 * Field level.
+	 */
 	private int level = 0;
 
+	/**
+	 * Field totalPts.
+	 */
 	private int totalPts = NUM_MAX_SKILL_POINTS;
 
+	/**
+	 * Field usedPts.
+	 */
 	private int usedPts = 0;
 
+	/**
+	 * Field mPresenter.
+	 */
 	private ConfigurationPresenter mPresenter;
 
+	/**
+	 * Field progressDialog.
+	 */
 	@SuppressWarnings("unused")
-	private ProgressDialog progressDialog;
+	private ProgressDialog progressDialog; // $codepro.audit.disable
+											// com.instantiations.assist.eclipse.analysis.unassignedField,
+											// unusedField
 
+	/**
+	 * Field continueMusic.
+	 */
 	private boolean continueMusic;
 
 	/**
@@ -63,6 +121,9 @@ public class ConfigurationActivity extends RootActivity implements
 
 	/**
 	 * called when activity is created
+	 * 
+	 * @param savedInstanceState
+	 *            Bundle
 	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -113,6 +174,9 @@ public class ConfigurationActivity extends RootActivity implements
 		setRemainingPts(totalPts);
 	}
 
+	/**
+	 * Method applyFont.
+	 */
 	public void applyFont() {
 		ViewGroup activityViewGroup = (ViewGroup) findViewById(
 				android.R.id.content).getRootView();
@@ -195,6 +259,11 @@ public class ConfigurationActivity extends RootActivity implements
 
 	/**
 	 * OnClick events for all buttons
+	 * 
+	 * @param v
+	 *            View
+	 * 
+	 * @see android.view.View$OnClickListener#onClick(View)
 	 */
 	public void onClick(View v) {
 
@@ -230,6 +299,16 @@ public class ConfigurationActivity extends RootActivity implements
 
 	/**
 	 * OnProgressChanged events for all SeekBars
+	 * 
+	 * @param seekBar
+	 *            SeekBar
+	 * @param progress
+	 *            int
+	 * @param fromUser
+	 *            boolean
+	 * 
+	 * @see android.widget.SeekBar$OnSeekBarChangeListener#onProgressChanged(SeekBar,
+	 *      int, boolean)
 	 */
 	public void onProgressChanged(SeekBar seekBar, int progress,
 			boolean fromUser) {
@@ -254,7 +333,7 @@ public class ConfigurationActivity extends RootActivity implements
 			Log.d(TAG, "no idea which seekbar was changed");
 		}
 
-		if (rmPts >= 0) {
+		if (pt != null && rmPts >= 0) {
 			pt.setText(String.valueOf(progress));
 			setRemainingPts(rmPts);
 		} else {
@@ -266,6 +345,11 @@ public class ConfigurationActivity extends RootActivity implements
 	/**
 	 * OnStartTrackingTouch event for all SeekBars modify number of used points
 	 * on every touch so that View displays most updated data
+	 * 
+	 * @param seekBar
+	 *            SeekBar
+	 * 
+	 * @see android.widget.SeekBar$OnSeekBarChangeListener#onStartTrackingTouch(SeekBar)
 	 */
 	public void onStartTrackingTouch(SeekBar seekBar) {
 		usedPts -= seekBar.getProgress();
@@ -275,6 +359,11 @@ public class ConfigurationActivity extends RootActivity implements
 	/**
 	 * OnStopTrackingTouch event for all SeekBars modify number of used points
 	 * on every touch so that View displays most updated data
+	 * 
+	 * @param seekBar
+	 *            SeekBar
+	 * 
+	 * @see android.widget.SeekBar$OnSeekBarChangeListener#onStopTrackingTouch(SeekBar)
 	 */
 	public void onStopTrackingTouch(SeekBar seekBar) {
 		usedPts += seekBar.getProgress();
@@ -286,53 +375,152 @@ public class ConfigurationActivity extends RootActivity implements
 	// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 	/**
 	 * Getters/Setters for View elements
+	 * 
+	 * 
+	 * @return SeekBar
+	 * @see com.canefaitrien.spacetrader.interfaces.IConfigurationView
+	 *      #getBarPilot()
 	 */
 	public SeekBar getBarPilot() {
 		return (SeekBar) findViewById(R.id.bar_pilot);
 	}
 
+	/**
+	 * Method setBarPilot.
+	 * 
+	 * @param barPilot
+	 *            SeekBar
+	 * 
+	 * @see com.canefaitrien.spacetrader.interfaces.IConfigurationView
+	 *      #setBarPilot(SeekBar)
+	 */
 	public void setBarPilot(SeekBar barPilot) {
 		this.barPilot = barPilot;
 	}
 
+	/**
+	 * Method getBarFighter.
+	 * 
+	 * 
+	 * @return SeekBar
+	 * @see com.canefaitrien.spacetrader.interfaces.IConfigurationView
+	 *      #getBarFighter()
+	 */
 	public SeekBar getBarFighter() {
 		return (SeekBar) findViewById(R.id.bar_fighter);
 	}
 
+	/**
+	 * Method setBarFighter.
+	 * 
+	 * @param barFighter
+	 *            SeekBar
+	 * 
+	 * @see com.canefaitrien.spacetrader.interfaces.IConfigurationView
+	 *      #setBarFighter(SeekBar)
+	 */
 	public void setBarFighter(SeekBar barFighter) {
 		this.barFighter = barFighter;
 	}
 
+	/**
+	 * Method getBarTrader.
+	 * 
+	 * 
+	 * @return SeekBar
+	 * @see com.canefaitrien.spacetrader.interfaces.IConfigurationView
+	 *      #getBarTrader()
+	 */
 	public SeekBar getBarTrader() {
 		return (SeekBar) findViewById(R.id.bar_trader);
 	}
 
+	/**
+	 * Method setBarTrader.
+	 * 
+	 * @param barTrader
+	 *            SeekBar
+	 * 
+	 * @see com.canefaitrien.spacetrader.interfaces.IConfigurationView
+	 *      #setBarTrader(SeekBar)
+	 */
 	public void setBarTrader(SeekBar barTrader) {
 		this.barTrader = barTrader;
 	}
 
+	/**
+	 * Method getBarEngineer.
+	 * 
+	 * 
+	 * @return SeekBar
+	 * @see com.canefaitrien.spacetrader.interfaces.IConfigurationView
+	 *      #getBarEngineer()
+	 */
 	public SeekBar getBarEngineer() {
 		return (SeekBar) findViewById(R.id.bar_engineer);
 	}
 
+	/**
+	 * Method setBarEngineer.
+	 * 
+	 * @param barEngineer
+	 *            SeekBar
+	 * 
+	 * @see com.canefaitrien.spacetrader.interfaces.IConfigurationView
+	 *      #setBarEngineer(SeekBar)
+	 */
 	public void setBarEngineer(SeekBar barEngineer) {
 		this.barEngineer = barEngineer;
 	}
 
+	/**
+	 * Method getEditName.
+	 * 
+	 * 
+	 * @return EditText
+	 * @see com.canefaitrien.spacetrader.interfaces.IConfigurationView
+	 *      #getEditName()
+	 */
 	public EditText getEditName() {
 		editName = (EditText) findViewById(R.id.edit_name);
 		return editName;
 	}
 
+	/**
+	 * Method setEditName.
+	 * 
+	 * @param editName
+	 *            EditText
+	 * 
+	 * @see com.canefaitrien.spacetrader.interfaces.IConfigurationView
+	 *      #setEditName(EditText)
+	 */
 	public void setEditName(EditText editName) {
 		this.editName = editName;
 	}
 
+	/**
+	 * Method getTxtViewLevel.
+	 * 
+	 * 
+	 * @return TextView
+	 * @see com.canefaitrien.spacetrader.interfaces.IConfigurationView
+	 *      #getTxtViewLevel()
+	 */
 	public TextView getTxtViewLevel() {
 		tvLevel = (TextView) this.findViewById(R.id.txtview_level);
 		return tvLevel;
 	}
 
+	/**
+	 * Method setTxtViewLevel.
+	 * 
+	 * @param level
+	 *            TextView
+	 * 
+	 * @see com.canefaitrien.spacetrader.interfaces.IConfigurationView
+	 *      #setTxtViewLevel(TextView)
+	 */
 	public void setTxtViewLevel(TextView level) {
 		this.tvLevel = level;
 
@@ -383,6 +571,9 @@ public class ConfigurationActivity extends RootActivity implements
 		Log.d(TAG, "onStart called.");
 	}
 
+	/**
+	 * Method onStop.
+	 */
 	@Override
 	protected void onStop() {
 		super.onStop();
@@ -390,6 +581,9 @@ public class ConfigurationActivity extends RootActivity implements
 		finish();
 	}
 
+	/**
+	 * Method onRestart.
+	 */
 	@Override
 	protected void onRestart() {
 		super.onRestart();
