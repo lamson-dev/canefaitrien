@@ -5,7 +5,7 @@ package com.canefaitrien.spacetrader.models;
  * @author apham9
  * @version 1.0
  */
-public interface TradeGoodConstants {
+public class TradeGoodConstants {
 	// TradeGood info
 	/**
 	 * Water Trade Good

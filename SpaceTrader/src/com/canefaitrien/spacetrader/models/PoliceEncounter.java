@@ -21,12 +21,6 @@ public class PoliceEncounter implements Encounter {
 	// 30 cargo/ 2 weapons, 2 shield, 3 gadget, 3 crew, 15/tank
 	
 	/**
-	 * Decide the percentage of player's money will be taken away 
-	 * 		if he is caught transporting illegal good. 
-	 */
-	private final int FINE_CONSTANT = 3;// 3 for 30%
-	
-	/**
 	 * Field policeShip.
 	 */
 	private final Ship policeShip = new Ship(ShipType.HORNET);
