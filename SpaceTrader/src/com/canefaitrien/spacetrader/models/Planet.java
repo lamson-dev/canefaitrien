@@ -24,16 +24,40 @@ import de.greenrobot.dao.DaoException;
  */
 public class Planet {
 
+	/**
+	 * Field BIG_PLANET_RATE.
+	 * (value is 0.98)
+	 */
 	private static final double BIG_PLANET_RATE = .98;
 
+	/**
+	 * Field FIFTEEN.
+	 * (value is 15)
+	 */
 	private static final int FIFTEEN = 15;
 
+	/**
+	 * Field SIXTY.
+	 * (value is 60)
+	 */
 	private static final int SIXTY = 60;
 
+	/**
+	 * Field TWOFIVESIX.
+	 * (value is 256)
+	 */
 	private static final int TWOFIVESIX = 256;
 
+	/**
+	 * Field TWOFIVEFIVE.
+	 * (value is 255)
+	 */
 	private static final int TWOFIVEFIVE = 255;
 
+	/**
+	 * Field TEN.
+	 * (value is 10)
+	 */
 	private static final int TEN = 10;
 
 	// Instance variables
@@ -486,7 +510,7 @@ public class Planet {
 
 	/** called by internal mechanisms, do not call yourself.
 	 * @param daoSession DaoSession
-	 * @param daoSession DaoSession
+	
 	 */
 	public void __setDaoSession(DaoSession daoSession) { // $codepro.audit.disable
 															// methodNamingConvention
@@ -504,8 +528,8 @@ public class Planet {
 	}
 
 	/** To-one relationship, resolved on first access. 
-	 * @return Marketplace
-	 */
+	
+	 * @return Marketplace */
 	public Marketplace getMarketplace() {
 		if (marketplace__resolvedKey == null
 				|| !marketplace__resolvedKey.equals(marketId)) {

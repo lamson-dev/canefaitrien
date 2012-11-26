@@ -11,15 +11,24 @@ import java.util.Random;
  */
 public class PoliceEncounter implements Encounter {
 
+	/**
+	 * Field THREE.
+	 * (value is 3)
+	 */
 	private static final int THREE = 3;
 
+	/**
+	 * Field TEN.
+	 * (value is 10)
+	 */
 	private static final int TEN = 10;
 
+	/**
+	 * Field TWO.
+	 * (value is 2)
+	 */
 	private static final int TWO = 2;
 
-	// HORNET(16, 300, 3, 1, 2, 20, 0, 0, "Hornet"),
-	// 30 cargo/ 2 weapons, 2 shield, 3 gadget, 3 crew, 15/tank
-	
 	/**
 	 * Field policeShip.
 	 */
@@ -52,8 +61,8 @@ public class PoliceEncounter implements Encounter {
 	 * Check for illegal goods
 	 * 
 	 * 
-	 * @return money after fines
-	 */
+	
+	 * @return money after fines */
 	public int checkGoods() {
 		final int[] goods = data.getShip().getCargo();
 		if (goods[TradeGood.NARCOTICS.ordinal()] == 0
@@ -72,8 +81,8 @@ public class PoliceEncounter implements Encounter {
 	 * 
 	 * @param amount
 	 * 
-	 * @return true upon successful, false otherwise
-	 */
+	
+	 * @return true upon successful, false otherwise */
 	public boolean canBribePolice(int amount) {
 		final int currentMoney = data.getMoney();
 		final int bribeMoney = new Random().nextInt(currentMoney / TEN);
@@ -87,8 +96,8 @@ public class PoliceEncounter implements Encounter {
 
 	/**
 	 * 
-	 * @return boolean
-	 */
+	
+	 * @return boolean */
 	public boolean canPoliceBattle() {
 		return ((data.getShip().getHullStrength() - policeShip
 				.getHullStrength()) > 0);
@@ -96,8 +105,8 @@ public class PoliceEncounter implements Encounter {
 
 	/**
 	 * 
-	 * @return boolean
-	 */
+	
+	 * @return boolean */
 	public boolean canPoliceFlee() {
 		return ((data.getShip().getMaxSpeed() - policeShip.getMaxSpeed()) > 0);
 	}
@@ -105,8 +114,8 @@ public class PoliceEncounter implements Encounter {
 	/**
 	 * Method toString.
 	 * 
-	 * @return String
-	 */
+	
+	 * @return String */
 	@Override
 	public String toString() {
 		return super.toString();
