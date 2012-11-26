@@ -13,6 +13,13 @@ public class PoliceEncounter implements Encounter {
 
 	// HORNET(16, 300, 3, 1, 2, 20, 0, 0, "Hornet"),
 	// 30 cargo/ 2 weapons, 2 shield, 3 gadget, 3 crew, 15/tank
+	
+	/**
+	 * Decide the percentage of player's money will be taken away 
+	 * 		if he is caught transporting illegal good. 
+	 */
+	private final int FINE_CONSTANT = 3;// 3 for 30%
+	
 	/**
 	 * Field policeShip.
 	 */
@@ -48,12 +55,12 @@ public class PoliceEncounter implements Encounter {
 	 * @return money after fines
 	 */
 	public int checkGoods() {
-		int[] goods = data.getShip().getCargo();
+		final int[] goods = data.getShip().getCargo();
 		if (goods[TradeGood.NARCOTICS.ordinal()] == 0
 				&& goods[TradeGood.FIREARMS.ordinal()] == 0) {
 			return data.getMoney();
 		} else {
-			data.setMoney(data.getMoney() << 3 / 10);
+			data.setMoney((data.getMoney() * (10 - FINE_CONSTANT)) / 10);
 			goods[TradeGood.NARCOTICS.ordinal()] = 0;
 			goods[TradeGood.FIREARMS.ordinal()] = 0;
 		}
@@ -68,7 +75,7 @@ public class PoliceEncounter implements Encounter {
 	 * @return true upon successful, false otherwise
 	 */
 	public boolean canBribePolice(int amount) {
-		int currentMoney = data.getMoney();
+		final int currentMoney = data.getMoney();
 		int bribeMoney = new Random().nextInt(currentMoney / 10);
 		if (amount < bribeMoney || amount > currentMoney) {
 			return false;

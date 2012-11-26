@@ -100,8 +100,8 @@ public class Ship {
 	 * @param shields
 	 * @param gadgets
 	 * 
-	 * @throws JSONException
-	 */
+	
+	 * @throws JSONException */
 	public Ship(Long id, String type, Integer hullStrength,
 			Integer currentCargoHold, String cargo, Integer fuel,
 			String weapons, String shields, String gadgets)
@@ -151,9 +151,9 @@ public class Ship {
 	 * @param good
 	 *            good to add to cargo
 	 * 
+	
 	 * @throws Exception
-	 *             if no room in cargo
-	 */
+	 *             if no room in cargo */
 	public void addGood(TradeGood good) throws Exception {
 		if (currentCargoHold == type.maxCargoHold) {
 			throw new Exception("No more room in the cargo, captain!");
@@ -169,9 +169,9 @@ public class Ship {
 	 * @param good
 	 *            good to remove from cargo
 	 * 
+	
 	 * @throws Exception
-	 *             if no good in cargo
-	 */
+	 *             if no good in cargo */
 	public void removeGood(TradeGood good) throws Exception {
 		if (cargo[good.ordinal()] == 0) {
 			throw new Exception("No such item in the cargo, captain!");
@@ -184,8 +184,8 @@ public class Ship {
 	/**
 	 * Method getStringCargo.
 	 * 
-	 * @return String
-	 */
+	
+	 * @return String */
 	public String getStringCargo() {
 		List<Integer> list = new ArrayList<Integer>();
 		for (int item : this.getCargo())
@@ -199,8 +199,8 @@ public class Ship {
 	 * 
 	 * @param cargo
 	 *            String
-	 * @throws JSONException
-	 */
+	
+	 * @throws JSONException */
 	public final void setCargo(String cargo) throws JSONException {
 		JSONArray jsonArray = new JSONArray(cargo);
 		int[] cargoArray = new int[TradeGood.values().length];
@@ -213,8 +213,8 @@ public class Ship {
 	/**
 	 * Method getType.
 	 * 
-	 * @return ShipType
-	 */
+	
+	 * @return ShipType */
 	public ShipType getType() {
 		return type;
 	}
@@ -222,8 +222,8 @@ public class Ship {
 	/**
 	 * Method getCargo.
 	 * 
-	 * @return int[]
-	 */
+	
+	 * @return int[] */
 	public int[] getCargo() {
 		return cargo;
 	}
@@ -231,8 +231,8 @@ public class Ship {
 	/**
 	 * Method getId.
 	 * 
-	 * @return Long
-	 */
+	
+	 * @return Long */
 	public Long getId() {
 		return id;
 	}
@@ -250,8 +250,8 @@ public class Ship {
 	/**
 	 * Method getStringType.
 	 * 
-	 * @return String
-	 */
+	
+	 * @return String */
 	public String getStringType() {
 		return type.name;
 	}
@@ -269,8 +269,8 @@ public class Ship {
 	/**
 	 * Method getHullStrength.
 	 * 
-	 * @return Integer
-	 */
+	
+	 * @return Integer */
 	public Integer getHullStrength() {
 		return hullStrength;
 	}
@@ -288,8 +288,8 @@ public class Ship {
 	/**
 	 * Method getCurrentCargoHold.
 	 * 
-	 * @return Integer
-	 */
+	
+	 * @return Integer */
 	public Integer getCurrentCargoHold() {
 		return currentCargoHold;
 	}
@@ -307,8 +307,8 @@ public class Ship {
 	/**
 	 * Method getFuel.
 	 * 
-	 * @return Integer
-	 */
+	
+	 * @return Integer */
 	public Integer getFuel() {
 		return fuel;
 	}
@@ -326,8 +326,8 @@ public class Ship {
 	/**
 	 * Method getWeapons.
 	 * 
-	 * @return String
-	 */
+	
+	 * @return String */
 	public String getWeapons() {
 		return weapons;
 	}
@@ -345,8 +345,8 @@ public class Ship {
 	/**
 	 * Method getShields.
 	 * 
-	 * @return String
-	 */
+	
+	 * @return String */
 	public String getShields() {
 		return shields;
 	}
@@ -364,8 +364,8 @@ public class Ship {
 	/**
 	 * Method getGadgets.
 	 * 
-	 * @return String
-	 */
+	
+	 * @return String */
 	public String getGadgets() {
 		return gadgets;
 	}
@@ -383,8 +383,8 @@ public class Ship {
 	/**
 	 * Method getMaxSpeed.
 	 * 
-	 * @return int
-	 */
+	
+	 * @return int */
 	public int getMaxSpeed() {
 		return type.maxDistance;
 	}
@@ -392,8 +392,8 @@ public class Ship {
 	/**
 	 * Method toString.
 	 * 
-	 * @return String
-	 */
+	
+	 * @return String */
 	@Override
 	public String toString() {
 		return super.toString();
