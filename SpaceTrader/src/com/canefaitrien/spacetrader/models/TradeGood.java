@@ -1,4 +1,4 @@
-// $codepro.audit.disable largeNumberOfParameters
+// $codepro.audit.disable largeNumberOfParameters, numericLiterals
 /**
  * TradeGoods to be bought and sold durring the game
  * 
@@ -81,6 +81,98 @@ public enum TradeGood{
 	;
 	
 	// TradeGood info
+	/**
+	 * Water Trade Good
+	 */
+	public static final int
+	WATER_MIN_TECH_LEVEL_PRODUCE = 0, 
+	WATER_MIN_TECH_LEVEL_USE = 0, 
+	WATER_TOP_TECH_LEVEL_PRODUCE = 2, 
+	WATER_BASE_PRICE = 30, 
+	WATER_INCREASE_PER_TECH_LEVEL = 3, 
+	WATER_VARIANCE = 4, 
+	WATER_MIN_PRICE = 30, 
+	WATER_MAX_PRICE = 50;
+	
+	public static final Situation
+	WATER_PRICE_INCREASE_SITUATION = Situation.DROUGHT,
+	WATER_PRICE_DECREASE_SITUATION = Situation.LOTS_OF_WATER,
+	WATER_EXPENSIVE_SITUATION = Situation.DESERT;
+	
+	public static final String
+	WATER_NAME = "Water"; 
+	//WATER(0, 0, 2, 30, 3, 4, Situation.DROUGHT, Situation.LOTS_OF_WATER, 
+	//Situation.DESERT, 30, 50, "Water")
+	
+	/**
+	 * Fur Trade Good
+	 */
+	public static final int
+	FUR_MIN_TECH_LEVEL_PRODUCE = 0, 
+	FUR_MIN_TECH_LEVEL_USE = 0, 
+	FUR_TOP_TECH_LEVEL_PRODUCE = 0, 
+	FUR_BASE_PRICE = 250, 
+	FUR_INCREASE_PER_TECH_LEVEL = 10, 
+	FUR_VARIANCE = 10, 
+	FUR_MIN_PRICE = 230, 
+	FUR_MAX_PRICE = 280;
+	
+	public static final Situation
+	FUR_PRICE_INCREASE_SITUATION = Situation.COLD,
+	FUR_PRICE_DECREASE_SITUATION = Situation.RICH_FAUNA,
+	FUR_EXPENSIVE_SITUATION = Situation.LIFELESS;
+	
+	public static final String
+	FUR_NAME = "Fur"; 
+	//FUR(0, 0, 0, 250, 10, 10, Situation.COLD, Situation.RICH_FAUNA, 
+	// Situation.LIFELESS, 230, 280, "Fur"),
+	
+	/**
+	 * Food Trade Good
+	 */
+	public static final int
+	FOOD_MIN_TECH_LEVEL_PRODUCE = 1, 
+	FOOD_MIN_TECH_LEVEL_USE = 0, 
+	FOOD_TOP_TECH_LEVEL_PRODUCE = 1, 
+	FOOD_BASE_PRICE = 100, 
+	FOOD_INCREASE_PER_TECH_LEVEL = 5, 
+	FOOD_VARIANCE = 5, 
+	FOOD_MIN_PRICE = 90, 
+	FOOD_MAX_PRICE = 160;
+	
+	public static final Situation
+	FOOD_PRICE_INCREASE_SITUATION = Situation.CROP_FAIL,
+	FOOD_PRICE_DECREASE_SITUATION = Situation.RICH_SOIL,
+	FOOD_EXPENSIVE_SITUATION = Situation.POOR_SOIL;
+	
+	public static final String
+	FOOD_NAME = "Food"; 
+	//FOOD(1, 0, 1, 100, 5, 5, Situation.CROP_FAIL, Situation.RICH_SOIL, 
+	//Situation.POOR_SOIL, 90, 160, "Food"),
+	
+	/**
+	 * Ore Trade Good
+	 */
+	public static final int
+	ORE_MIN_TECH_LEVEL_PRODUCE = 1, 
+	ORE_MIN_TECH_LEVEL_USE = 0, 
+	ORE_TOP_TECH_LEVEL_PRODUCE = 1, 
+	ORE_BASE_PRICE = 100, 
+	ORE_INCREASE_PER_TECH_LEVEL = 5, 
+	ORE_VARIANCE = 5, 
+	ORE_MIN_PRICE = 90, 
+	ORE_MAX_PRICE = 160;
+	
+	public static final Situation
+	ORE_PRICE_INCREASE_SITUATION = Situation.CROP_FAIL,
+	ORE_PRICE_DECREASE_SITUATION = Situation.RICH_SOIL,
+	ORE_EXPENSIVE_SITUATION = Situation.POOR_SOIL;
+	
+	public static final String
+	ORE_NAME = "Ore"; 
+	//ORE(2, 2, 3, 350, 20, 10, Situation.WAR, Situation.MINERAL_RICH,
+	//Situation.MINERAL_POOR, 350, 420, "Ore"),
+	
 	/**
 	 * Field minTLProduce.
 	 */
