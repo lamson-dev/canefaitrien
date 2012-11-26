@@ -1,4 +1,4 @@
-// $codepro.audit.disable transientFieldInNonSerializable
+// $codepro.audit.disable transientFieldInNonSerializable, com.instantiations.assist.eclipse.analysis.unusedReturnValue
 /**
  * Entity mapped to table GAME_DATA.
  */
@@ -21,14 +21,13 @@ import de.greenrobot.dao.DaoException;
 /**
  * 
  * @author Son Nguyen
- *
+ * 
  * @version $Revision: 1.0 $
  */
 public class GameData {
 
 	/**
-	 * Field TAG.
-	 * (value is ""GameData"")
+	 * Field TAG. (value is ""GameData"")
 	 */
 	private static final String TAG = "GameData";
 
@@ -116,7 +115,9 @@ public class GameData {
 
 	/**
 	 * Constructor for GameData.
-	 * @param id Long
+	 * 
+	 * @param id
+	 *            Long
 	 */
 	public GameData(Long id) {
 		this.id = id;
@@ -124,17 +125,29 @@ public class GameData {
 
 	/**
 	 * Constructor for GameData.
-	 * @param id Long
-	 * @param name String
-	 * @param difficulty String
-	 * @param money Integer
-	 * @param currentPlanet String
-	 * @param turn Integer
-	 * @param date java.util.Date
-	 * @param personId Long
-	 * @param shipId Long
+	 * 
+	 * @param id
+	 *            Long
+	 * @param name
+	 *            String
+	 * @param difficulty
+	 *            String
+	 * @param money
+	 *            Integer
+	 * @param currentPlanet
+	 *            String
+	 * @param turn
+	 *            Integer
+	 * @param date
+	 *            java.util.Date
+	 * @param personId
+	 *            Long
+	 * @param shipId
+	 *            Long
 	 */
-	public GameData(Long id, String name, String difficulty, Integer money, // $codepro.audit.disable largeNumberOfParameters
+	// $codepro.audit.disable largeNumberOfParameters
+	public GameData(Long id, String name, String difficulty,
+			Integer money, 
 			String currentPlanet, Integer turn, java.util.Date date,
 			Long personId, Long shipId) {
 		this.id = id;
@@ -148,25 +161,33 @@ public class GameData {
 		this.shipId = shipId;
 	}
 
-	/** called by internal mechanisms, do not call yourself. 
-	 * @param daoSession DaoSession
+	/**
+	 * called by internal mechanisms, do not call yourself.
+	 * 
+	 * @param daoSession
+	 *            DaoSession
 	 */
-	public void __setDaoSession(DaoSession daoSession) { // $codepro.audit.disable methodNamingConvention -->
+	public void __setDaoSession(DaoSession daoSession) { // $codepro.audit.disable
+															// methodNamingConvention
+															// -->
 		this.daoSession = daoSession;
 		myDao = daoSession != null ? daoSession.getGameDataDao() : null;
 	}
 
 	/**
 	 * Method getId.
-	
-	 * @return Long */
+	 * 
+	 * @return Long
+	 */
 	public Long getId() {
 		return id;
 	}
 
 	/**
 	 * Method setId.
-	 * @param id Long
+	 * 
+	 * @param id
+	 *            Long
 	 */
 	public void setId(Long id) {
 		this.id = id;
@@ -174,15 +195,18 @@ public class GameData {
 
 	/**
 	 * Method getName.
-	
-	 * @return String */
+	 * 
+	 * @return String
+	 */
 	public String getName() {
 		return name;
 	}
 
 	/**
 	 * Method setName.
-	 * @param name String
+	 * 
+	 * @param name
+	 *            String
 	 */
 	public void setName(String name) {
 		this.name = name;
@@ -190,15 +214,18 @@ public class GameData {
 
 	/**
 	 * Method getDifficulty.
-	
-	 * @return String */
+	 * 
+	 * @return String
+	 */
 	public String getDifficulty() {
 		return difficulty;
 	}
 
 	/**
 	 * Method setDifficulty.
-	 * @param difficulty String
+	 * 
+	 * @param difficulty
+	 *            String
 	 */
 	public void setDifficulty(String difficulty) {
 		this.difficulty = difficulty;
@@ -206,15 +233,18 @@ public class GameData {
 
 	/**
 	 * Method getMoney.
-	
-	 * @return Integer */
+	 * 
+	 * @return Integer
+	 */
 	public Integer getMoney() {
 		return money;
 	}
 
 	/**
 	 * Method setMoney.
-	 * @param money Integer
+	 * 
+	 * @param money
+	 *            Integer
 	 */
 	public void setMoney(Integer money) {
 		this.money = money;
@@ -222,16 +252,18 @@ public class GameData {
 
 	/**
 	 * Method getStringCurrentPlanet.
-	
-	 * @return String */
+	 * 
+	 * @return String
+	 */
 	public String getStringCurrentPlanet() {
 		return currentPlanet;
 	}
 
 	/**
 	 * Method getCurrentPlanetIndex.
-	
-	 * @return int */
+	 * 
+	 * @return int
+	 */
 	public int getCurrentPlanetIndex() {
 		for (Planet p : this.getPlanets()) {
 			Log.d(TAG, p.getName());
@@ -244,15 +276,18 @@ public class GameData {
 
 	/**
 	 * Method getCurrentPlanet.
-	
-	 * @return Planet */
+	 * 
+	 * @return Planet
+	 */
 	public Planet getCurrentPlanet() {
 		return this.getPlanets().get(getCurrentPlanetIndex());
 	}
 
 	/**
 	 * Method setCurrentPlanet.
-	 * @param currentPlanet String
+	 * 
+	 * @param currentPlanet
+	 *            String
 	 */
 	public void setCurrentPlanet(String currentPlanet) {
 		this.currentPlanet = currentPlanet;
@@ -265,15 +300,18 @@ public class GameData {
 
 	/**
 	 * Method getTurn.
-	
-	 * @return Integer */
+	 * 
+	 * @return Integer
+	 */
 	public Integer getTurn() {
 		return turn;
 	}
 
 	/**
 	 * Method setTurn.
-	 * @param turn Integer
+	 * 
+	 * @param turn
+	 *            Integer
 	 */
 	public void setTurn(Integer turn) {
 		this.turn = turn;
@@ -281,15 +319,18 @@ public class GameData {
 
 	/**
 	 * Method getDate.
-	
-	 * @return java.util.Date */
+	 * 
+	 * @return java.util.Date
+	 */
 	public java.util.Date getDate() {
 		return date;
 	}
 
 	/**
 	 * Method setDate.
-	 * @param date java.util.Date
+	 * 
+	 * @param date
+	 *            java.util.Date
 	 */
 	public void setDate(java.util.Date date) {
 		this.date = date;
@@ -297,15 +338,18 @@ public class GameData {
 
 	/**
 	 * Method getPersonId.
-	
-	 * @return Long */
+	 * 
+	 * @return Long
+	 */
 	public Long getPersonId() {
 		return personId;
 	}
 
 	/**
 	 * Method setPersonId.
-	 * @param personId Long
+	 * 
+	 * @param personId
+	 *            Long
 	 */
 	public void setPersonId(Long personId) {
 		this.personId = personId;
@@ -313,21 +357,26 @@ public class GameData {
 
 	/**
 	 * Method getShipId.
-	
-	 * @return Long */
+	 * 
+	 * @return Long
+	 */
 	public Long getShipId() {
 		return shipId;
 	}
 
 	/**
 	 * Method setShipId.
-	 * @param shipId Long
+	 * 
+	 * @param shipId
+	 *            Long
 	 */
 	public void setShipId(Long shipId) {
 		this.shipId = shipId;
 	}
 
-	/** To-one relationship, resolved on first access. 
+	/**
+	 * To-one relationship, resolved on first access.
+	 * 
 	 * @return Person
 	 */
 	public Person getPerson() {
@@ -345,7 +394,9 @@ public class GameData {
 
 	/**
 	 * Method setPerson.
-	 * @param person Person
+	 * 
+	 * @param person
+	 *            Person
 	 */
 	public void setPerson(Person person) {
 		this.person = person;
@@ -353,7 +404,9 @@ public class GameData {
 		person__resolvedKey = personId;
 	}
 
-	/** To-one relationship, resolved on first access. 
+	/**
+	 * To-one relationship, resolved on first access.
+	 * 
 	 * @return Ship
 	 */
 	public Ship getShip() {
@@ -370,7 +423,9 @@ public class GameData {
 
 	/**
 	 * Method setShip.
-	 * @param ship Ship
+	 * 
+	 * @param ship
+	 *            Ship
 	 */
 	public void setShip(Ship ship) {
 		this.ship = ship;
@@ -382,8 +437,9 @@ public class GameData {
 	 * To-many relationship, resolved on first access (and after reset). Changes
 	 * to to-many relations are not persisted, make changes to the target
 	 * entity.
-	
-	 * @return List<Planet> */
+	 * 
+	 * @return List<Planet>
+	 */
 	public synchronized List<Planet> getPlanets() {
 		if (planets == null) {
 			if (daoSession == null) {
@@ -407,8 +463,9 @@ public class GameData {
 
 	/**
 	 * Method getUniverse.
-	
-	 * @return Planet[] */
+	 * 
+	 * @return Planet[]
+	 */
 	public Planet[] getUniverse() {
 		final Planet[] universe = new Planet[this.getPlanets().size()];
 		for (int i = 0; i < universe.length; i++) {
@@ -457,11 +514,12 @@ public class GameData {
 		}
 		myDao.refresh(this);
 	}
-	
+
 	/**
 	 * Method toString.
-	
-	 * @return String */
+	 * 
+	 * @return String
+	 */
 	@Override
 	public String toString() {
 		return super.toString();

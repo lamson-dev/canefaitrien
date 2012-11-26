@@ -159,7 +159,8 @@ public class Controller {
 			ship.setFuel(ship.getFuel() - currentPlanet.distance(destination)
 					/ Ship.MPG);
 			currentPlanet = destination;
-			Log.d(TAG, currentPlanet.getName() + "/" + destination.getName());
+			// $codepro.audit.disable com.instantiations.assist.eclipse.analysis.unusedReturnValue
+			Log.d(TAG, currentPlanet.getName() + "/" + destination.getName()); 
 			currentPlanet.dock(++turn); // update turn and dock to update
 										// marketplace
 		}

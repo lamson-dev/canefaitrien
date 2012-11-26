@@ -102,14 +102,14 @@ public class Universe {
 	 *            planet array
 	 */
 	public static void shuffle(String[] planets) {
-		int ind1, ind2;
+		int index1, index2;
 		String temp;
 		for (int i = 0; i < SHUFFLE_AMT; i++) {
-			ind1 = RAND.nextInt(PLANET_NAMES.length);
-			ind2 = RAND.nextInt(PLANET_NAMES.length);
-			temp = planets[ind1];
-			planets[ind1] = planets[ind2];
-			planets[ind2] = temp;
+			index1 = RAND.nextInt(PLANET_NAMES.length);
+			index2 = RAND.nextInt(PLANET_NAMES.length);
+			temp = planets[index1];
+			planets[index1] = planets[index2];
+			planets[index2] = temp;
 		}
 	}
 

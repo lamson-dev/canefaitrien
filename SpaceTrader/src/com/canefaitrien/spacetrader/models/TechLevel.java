@@ -14,30 +14,27 @@ public enum TechLevel {
 	 * Field PRE_AGRICULTURAL.
 	 */
 	PRE_AGRICULTURAL("PreAgricultural"), /**
-  * Field AGRICULTURAL.
-  */
- AGRICULTURAL("Agricultural"), /**
-  * Field MEDIEVAL.
-  */
- MEDIEVAL(
-			"Medieval"), /**
-  * Field RENAISSANCE.
-  */
- RENAISSANCE("Renaissance"), /**
-  * Field EARLY_INDUSTRIAL.
-  */
- EARLY_INDUSTRIAL(
-			"Early Industrial"), /**
-  * Field INDUSTRIAL.
-  */
- INDUSTRIAL("Industrial"), /**
-  * Field POST_INDUSTRIAL.
-  */
- POST_INDUSTRIAL(
-			"Post Industrial"), /**
-  * Field HI_TECH.
-  */
- HI_TECH("HiTech");
+	 * Field AGRICULTURAL.
+	 */
+	AGRICULTURAL("Agricultural"), /**
+	 * Field MEDIEVAL.
+	 */
+	MEDIEVAL("Medieval"), /**
+	 * Field RENAISSANCE.
+	 */
+	RENAISSANCE("Renaissance"), /**
+	 * Field EARLY_INDUSTRIAL.
+	 */
+	EARLY_INDUSTRIAL("Early Industrial"), /**
+	 * Field INDUSTRIAL.
+	 */
+	INDUSTRIAL("Industrial"), /**
+	 * Field POST_INDUSTRIAL.
+	 */
+	POST_INDUSTRIAL("Post Industrial"), /**
+	 * Field HI_TECH.
+	 */
+	HI_TECH("HiTech");
 
 	// TechLevel info
 	/**
@@ -50,12 +47,13 @@ public enum TechLevel {
 	 * 
 	 * @param name
 	 */
-	public TechLevel(String name) {
+	private TechLevel(String name) {
 		this.name = name;
 	}
 
 	/**
 	 * Method toString.
+	 * 
 	 * @return String
 	 */
 	public String toString() {
@@ -66,8 +64,9 @@ public enum TechLevel {
 	 * Method which creates a TechLevel from a String of the name
 	 * 
 	 * @param name
-	
-	 * @return TechLevel of the String */
+	 * 
+	 * @return TechLevel of the String
+	 */
 	public static TechLevel fromString(String name) {
 		if (name != null) {
 			for (TechLevel level : TechLevel.values()) {
