@@ -229,7 +229,7 @@ public enum ShipType {
 	 * @param maxMercernary
 	 * @param name
 	 */
-	private ShipType (int maxDistance, int maxHullStrength, 
+	public ShipType (int maxDistance, int maxHullStrength, 
 			int maxWeaponSlots, int maxGadgetSlots, int maxShieldSlots,
 			int maxCargoHold, int maxCrewMembers, int maxMercernary, String name) {
 		
