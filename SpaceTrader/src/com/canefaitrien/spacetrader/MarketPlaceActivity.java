@@ -253,9 +253,6 @@ public class MarketPlaceActivity extends ListActivity implements
 	 * @param adapter
 	 *            ListAdapter
 	 * 
-	 * 
-	 * @see com.canefaitrien.spacetrader.interfaces.IMarketPlaceView#setListAdapter(ListAdapter)
-	 *      <!-- // $codepro.audit.disable lineLength -->
 	 */
 	@Override
 	public void setListAdapter(ListAdapter adapter) {
