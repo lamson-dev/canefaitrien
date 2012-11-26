@@ -89,7 +89,7 @@ public enum Situation {
 	 * 
 	 * @param name
 	 */
-	private Situation(String name) {
+	public Situation(String name) {
 		this.name = name;
 	}
 

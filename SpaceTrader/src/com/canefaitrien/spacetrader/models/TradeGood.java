@@ -158,7 +158,7 @@ public enum TradeGood{
 	 * @param basePrice int
 	 */
 	
-	private TradeGood(int minTechLevelProduce, int minTechLevelUse, 
+	public TradeGood(int minTechLevelProduce, int minTechLevelUse, 
 			int techLevelTopProduce, int basePrice, 
 			int increasePerTechLevel, int variance, 
 			Situation increaseSituation, Situation decreaseSituation, 

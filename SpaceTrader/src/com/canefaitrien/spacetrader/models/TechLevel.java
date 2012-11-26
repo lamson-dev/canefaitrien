@@ -50,7 +50,7 @@ public enum TechLevel {
 	 * 
 	 * @param name
 	 */
-	private TechLevel(String name) {
+	public TechLevel(String name) {
 		this.name = name;
 	}
 
