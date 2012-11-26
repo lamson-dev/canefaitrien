@@ -19,6 +19,13 @@ public class PoliceEncounter implements Encounter {
 
 	// HORNET(16, 300, 3, 1, 2, 20, 0, 0, "Hornet"),
 	// 30 cargo/ 2 weapons, 2 shield, 3 gadget, 3 crew, 15/tank
+	
+	/**
+	 * Decide the percentage of player's money will be taken away 
+	 * 		if he is caught transporting illegal good. 
+	 */
+	private final int FINE_CONSTANT = 3;// 3 for 30%
+	
 	/**
 	 * Field policeShip.
 	 */

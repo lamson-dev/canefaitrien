@@ -1,4 +1,11 @@
-// $codepro.audit.disable
+
+// $codepro.audit.disable logExceptions
+/**
+ * test method getPlanets in GameData.java
+ * 
+ * @author Son Nguyen
+ * 
+ */
 
 
 import java.util.Date;
@@ -19,12 +26,7 @@ import com.canefaitrien.spacetrader.models.TechLevel;
 
 import de.greenrobot.dao.test.AbstractDaoSessionTest;
 
-/**
- * test method getPlanets in GameData.java
- * 
- * @author Son Nguyen
- * 
- */
+
 
 public class DataPlanetTest extends
 		AbstractDaoSessionTest<Application, DaoMaster, DaoSession> {
