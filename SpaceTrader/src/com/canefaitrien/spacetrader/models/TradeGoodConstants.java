@@ -1,3 +1,6 @@
+/**
+ * constants
+ */
 package com.canefaitrien.spacetrader.models;
 /**
  * TradeGoodConstant for easy edit
@@ -20,11 +23,24 @@ public interface TradeGoodConstants {
 	WATER_MIN_PRICE = 30, 
 	WATER_MAX_PRICE = 50;
 
+	/**
+	 * Field WATER_EXPENSIVE_SITUATION.
+	 */
+	/**
+	 * Field WATER_PRICE_DECREASE_SITUATION.
+	 */
+	/**
+	 * Field WATER_PRICE_INCREASE_SITUATION.
+	 */
 	public static final Situation
 	WATER_PRICE_INCREASE_SITUATION = Situation.DROUGHT,
 	WATER_PRICE_DECREASE_SITUATION = Situation.LOTS_OF_WATER,
 	WATER_EXPENSIVE_SITUATION = Situation.DESERT;
 
+	/**
+	 * Field WATER_NAME.
+	 * (value is ""Water"")
+	 */
 	public static final String
 	WATER_NAME = "Water"; 
 	//WATER(0, 0, 2, 30, 3, 4, Situation.DROUGHT, Situation.LOTS_OF_WATER, 
@@ -43,11 +59,24 @@ public interface TradeGoodConstants {
 	FUR_MIN_PRICE = 230, 
 	FUR_MAX_PRICE = 280;
 
+	/**
+	 * Field FUR_EXPENSIVE_SITUATION.
+	 */
+	/**
+	 * Field FUR_PRICE_DECREASE_SITUATION.
+	 */
+	/**
+	 * Field FUR_PRICE_INCREASE_SITUATION.
+	 */
 	public static final Situation
 	FUR_PRICE_INCREASE_SITUATION = Situation.COLD,
 	FUR_PRICE_DECREASE_SITUATION = Situation.RICH_FAUNA,
 	FUR_EXPENSIVE_SITUATION = Situation.LIFELESS;
 
+	/**
+	 * Field FUR_NAME.
+	 * (value is ""Fur"")
+	 */
 	public static final String
 	FUR_NAME = "Fur"; 
 	//FUR(0, 0, 0, 250, 10, 10, Situation.COLD, Situation.RICH_FAUNA, 
@@ -66,11 +95,24 @@ public interface TradeGoodConstants {
 	FOOD_MIN_PRICE = 90, 
 	FOOD_MAX_PRICE = 160;
 
+	/**
+	 * Field FOOD_EXPENSIVE_SITUATION.
+	 */
+	/**
+	 * Field FOOD_PRICE_DECREASE_SITUATION.
+	 */
+	/**
+	 * Field FOOD_PRICE_INCREASE_SITUATION.
+	 */
 	public static final Situation
 	FOOD_PRICE_INCREASE_SITUATION = Situation.CROP_FAIL,
 	FOOD_PRICE_DECREASE_SITUATION = Situation.RICH_SOIL,
 	FOOD_EXPENSIVE_SITUATION = Situation.POOR_SOIL;
 
+	/**
+	 * Field FOOD_NAME.
+	 * (value is ""Food"")
+	 */
 	public static final String
 	FOOD_NAME = "Food"; 
 	//FOOD(1, 0, 1, 100, 5, 5, Situation.CROP_FAIL, Situation.RICH_SOIL, 
@@ -89,11 +131,24 @@ public interface TradeGoodConstants {
 	ORE_MIN_PRICE = 90, 
 	ORE_MAX_PRICE = 160;
 
+	/**
+	 * Field ORE_EXPENSIVE_SITUATION.
+	 */
+	/**
+	 * Field ORE_PRICE_DECREASE_SITUATION.
+	 */
+	/**
+	 * Field ORE_PRICE_INCREASE_SITUATION.
+	 */
 	public static final Situation
 	ORE_PRICE_INCREASE_SITUATION = Situation.CROP_FAIL,
 	ORE_PRICE_DECREASE_SITUATION = Situation.RICH_SOIL,
 	ORE_EXPENSIVE_SITUATION = Situation.POOR_SOIL;
 
+	/**
+	 * Field ORE_NAME.
+	 * (value is ""Ore"")
+	 */
 	public static final String
 	ORE_NAME = "Ore"; 
 	//ORE(2, 2, 3, 350, 20, 10, Situation.WAR, Situation.MINERAL_RICH,
@@ -112,11 +167,24 @@ public interface TradeGoodConstants {
 	GAMES_MIN_PRICE = 160, 
 	GAMES_MAX_PRICE = 270;
 
+	/**
+	 * Field GAMES_EXPENSIVE_SITUATION.
+	 */
+	/**
+	 * Field GAMES_PRICE_DECREASE_SITUATION.
+	 */
+	/**
+	 * Field GAMES_PRICE_INCREASE_SITUATION.
+	 */
 	public static final Situation
 	GAMES_PRICE_INCREASE_SITUATION = Situation.BOREDOM,
 	GAMES_PRICE_DECREASE_SITUATION = Situation.ARTISTIC,
 	GAMES_EXPENSIVE_SITUATION = Situation.NEVER;
 
+	/**
+	 * Field GAMES_NAME.
+	 * (value is ""Games"")
+	 */
 	public static final String
 	GAMES_NAME = "Games"; 
 	//GAMES(3, 1, 6, 250, -10, 5, Situation.BGAMESDOM, Situation.ARTISTIC, 
@@ -135,11 +203,24 @@ public interface TradeGoodConstants {
 	FIREARMS_MIN_PRICE = 600, 
 	FIREARMS_MAX_PRICE = 1100;
 
+	/**
+	 * Field FIREARMS_EXPENSIVE_SITUATION.
+	 */
+	/**
+	 * Field FIREARMS_PRICE_DECREASE_SITUATION.
+	 */
+	/**
+	 * Field FIREARMS_PRICE_INCREASE_SITUATION.
+	 */
 	public static final Situation
 	FIREARMS_PRICE_INCREASE_SITUATION = Situation.WAR,
 	FIREARMS_PRICE_DECREASE_SITUATION = Situation.WARLIKE,
 	FIREARMS_EXPENSIVE_SITUATION = Situation.NEVER;
 
+	/**
+	 * Field FIREARMS_NAME.
+	 * (value is ""Fire Arms"")
+	 */
 	public static final String
 	FIREARMS_NAME = "Fire Arms"; 
 	//FIREARMS(3, 1, 5, 1250, -75, 100, Situation.WAR, Situation.WARLIKE,
@@ -158,11 +239,24 @@ public interface TradeGoodConstants {
 	MEDICINE_MIN_PRICE = 400, 
 	MEDICINE_MAX_PRICE = 700;
 
+	/**
+	 * Field MEDICINE_EXPENSIVE_SITUATION.
+	 */
+	/**
+	 * Field MEDICINE_PRICE_DECREASE_SITUATION.
+	 */
+	/**
+	 * Field MEDICINE_PRICE_INCREASE_SITUATION.
+	 */
 	public static final Situation
 	MEDICINE_PRICE_INCREASE_SITUATION = Situation.PLAGUE,
 	MEDICINE_PRICE_DECREASE_SITUATION = Situation.LOTS_OF_HERBS,
 	MEDICINE_EXPENSIVE_SITUATION = Situation.NEVER;
 
+	/**
+	 * Field MEDICINE_NAME.
+	 * (value is ""Medicine"")
+	 */
 	public static final String
 	MEDICINE_NAME = "Medicine"; 
 	//MEDICINE(4, 1, 6, 650, -20, 10, Situation.PLAGUE, Situation.LOTS_OF_HERBS,
@@ -181,11 +275,24 @@ public interface TradeGoodConstants {
 	MACHINES_MIN_PRICE = 600, 
 	MACHINES_MAX_PRICE = 800;
 
+	/**
+	 * Field MACHINES_EXPENSIVE_SITUATION.
+	 */
+	/**
+	 * Field MACHINES_PRICE_DECREASE_SITUATION.
+	 */
+	/**
+	 * Field MACHINES_PRICE_INCREASE_SITUATION.
+	 */
 	public static final Situation
 	MACHINES_PRICE_INCREASE_SITUATION = Situation.LACK_OF_WORKERS,
 	MACHINES_PRICE_DECREASE_SITUATION = Situation.NEVER,
 	MACHINES_EXPENSIVE_SITUATION = Situation.NEVER;
 
+	/**
+	 * Field MACHINES_NAME.
+	 * (value is ""Machines"")
+	 */
 	public static final String
 	MACHINES_NAME = "Machines"; 
 	//MACHINES(4, 3, 5, 900, -30, 5, Situation.LACK_OF_WORKERS, Situation.NEVER,
@@ -204,11 +311,24 @@ public interface TradeGoodConstants {
 	NARCOTICS_MIN_PRICE = 2000, 
 	NARCOTICS_MAX_PRICE = 3000;
 
+	/**
+	 * Field NARCOTICS_EXPENSIVE_SITUATION.
+	 */
+	/**
+	 * Field NARCOTICS_PRICE_DECREASE_SITUATION.
+	 */
+	/**
+	 * Field NARCOTICS_PRICE_INCREASE_SITUATION.
+	 */
 	public static final Situation
 	NARCOTICS_PRICE_INCREASE_SITUATION = Situation.BOREDOM,
 	NARCOTICS_PRICE_DECREASE_SITUATION = Situation.WEIRD_MUSHROOMS,
 	NARCOTICS_EXPENSIVE_SITUATION = Situation.NEVER;
 
+	/**
+	 * Field NARCOTICS_NAME.
+	 * (value is ""Narcotics"")
+	 */
 	public static final String
 	NARCOTICS_NAME = "Narcotics"; 
 	//NARCOTICS(5, 0, 5, 3500, -125, 150, Situation.BOREDOM, Situation.WEIRD_MUSHROOMS,
@@ -227,11 +347,24 @@ public interface TradeGoodConstants {
 	ROBOTICS_MIN_PRICE = 3500, 
 	ROBOTICS_MAX_PRICE = 5000;
 
+	/**
+	 * Field ROBOTICS_EXPENSIVE_SITUATION.
+	 */
+	/**
+	 * Field ROBOTICS_PRICE_DECREASE_SITUATION.
+	 */
+	/**
+	 * Field ROBOTICS_PRICE_INCREASE_SITUATION.
+	 */
 	public static final Situation
 	ROBOTICS_PRICE_INCREASE_SITUATION = Situation.LACK_OF_WORKERS,
 	ROBOTICS_PRICE_DECREASE_SITUATION = Situation.NEVER,
 	ROBOTICS_EXPENSIVE_SITUATION = Situation.NEVER;
 
+	/**
+	 * Field ROBOTICS_NAME.
+	 * (value is ""Robotics"")
+	 */
 	public static final String
 	ROBOTICS_NAME = "Robotics"; 
 	//ROBOTICS(6, 4, 7, 5000, -150, 100, Situation.LACK_OF_WORKERS, Situation.NEVER,

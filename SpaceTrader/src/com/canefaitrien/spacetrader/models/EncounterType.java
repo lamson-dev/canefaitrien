@@ -10,6 +10,8 @@ package com.canefaitrien.spacetrader.models;
 import java.util.Random;
 
 /**
+ * @author koojin
+ * @version $Revision: 1.0 $
  */
 public enum EncounterType {
 
@@ -28,13 +30,17 @@ public enum EncounterType {
 	NOTHING;
 
 	
+	/**
+	 * Field ENCOUNTER_RATE.
+	 * (value is 0.65)
+	 */
 	private static final double ENCOUNTER_RATE = .65;
 
 	/**
 	 * Method getEncounterType.
 	 * 
-	 * @return EncounterType
-	 */
+	
+	 * @return EncounterType */
 	public static EncounterType getEncounterType() {
 		if (new Random().nextDouble() > ENCOUNTER_RATE) {
 			final int pick = new Random()
