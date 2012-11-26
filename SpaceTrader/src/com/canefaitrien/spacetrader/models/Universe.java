@@ -101,7 +101,7 @@ public class Universe {
 	 * @param planets
 	 *            planet array
 	 */
-	private static void shuffle(String[] planets) {
+	public static void shuffle(String[] planets) {
 		int ind1, ind2;
 		String temp;
 		for (int i = 0; i < SHUFFLE_AMT; i++) {
