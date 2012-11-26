@@ -1,4 +1,3 @@
-
 // $codepro.audit.disable logExceptions
 /**
  * test method getPlanets in GameData.java
@@ -6,7 +5,6 @@
  * @author Son Nguyen
  * 
  */
-
 
 import java.util.Date;
 import java.util.List;
@@ -26,15 +24,21 @@ import com.canefaitrien.spacetrader.models.TechLevel;
 
 import de.greenrobot.dao.test.AbstractDaoSessionTest;
 
-
-
+/**
+ */
 public class DataPlanetTest extends
 		AbstractDaoSessionTest<Application, DaoMaster, DaoSession> {
 
+	/**
+	 * Constructor for DataPlanetTest.
+	 */
 	public DataPlanetTest() {
 		super(DaoMaster.class);
 	}
 
+	/**
+	 * Field ctrl.
+	 */
 	private Controller ctrl;
 
 	/**
@@ -54,12 +58,12 @@ public class DataPlanetTest extends
 		addPlanetToData(data);
 
 		List<Planet> planets = null;
-		//try {
-			// get all planets of a specific data out
+		// try {
+		// get all planets of a specific data out
 		planets = data.getPlanets();
-		//} catch (Exception e) {
-			//fail("this should not fail!");
-		//}
+		// } catch (Exception e) {
+		// fail("this should not fail!");
+		// }
 
 		// planets should not be null since it is added
 		assertNotNull(planets);
@@ -92,8 +96,8 @@ public class DataPlanetTest extends
 		final List<Planet> planets = data.getPlanets();
 
 		// add an extra planet to database
-		final Planet planet = new Planet("name", new Point(0, 0), TechLevel.HI_TECH,
-				Situation.ARTISTIC);
+		final Planet planet = new Planet("name", new Point(0, 0),
+				TechLevel.HI_TECH, Situation.ARTISTIC);
 		planet.setDataId(data.getId());
 		daoSession.insert(planet);
 
@@ -133,7 +137,8 @@ public class DataPlanetTest extends
 			// list of planets can't be retrieved
 			// since there is no connection
 			@SuppressWarnings("unused")
-			final List<Planet> planets = data.getPlanets(); // $codepro.audit.disable variableUsage
+			final List<Planet> planets = data.getPlanets(); // $codepro.audit.disable
+															// variableUsage
 			fail("Should have thrown an exception for null daoSession, cannot retrieve data");
 			assertTrue("I don't know", planets == null);
 		} catch (Exception e) {

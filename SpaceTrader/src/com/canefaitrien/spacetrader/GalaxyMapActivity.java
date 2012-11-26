@@ -40,6 +40,21 @@ public class GalaxyMapActivity extends RootActivity implements OnTouchListener {
 	 */
 	private static final String TAG = "GalaxyActivity";
 
+	/**
+	 * Field TEN. (value is 10)
+	 */
+	/**
+	 * Field THREE. (value is 3)
+	 */
+	/**
+	 * Field TWO. (value is 2)
+	 */
+	/**
+	 * Field ONE. (value is 1)
+	 */
+	/**
+	 * Field ZERO. (value is 0)
+	 */
 	protected static final int ZERO = 0, ONE = 1, TWO = 2, THREE = 3, TEN = 10;
 
 	/**
@@ -68,8 +83,10 @@ public class GalaxyMapActivity extends RootActivity implements OnTouchListener {
 	protected void onCreate(Bundle savedInstanceState) {
 
 		final FrameLayout main = new FrameLayout(this);
-		main.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, // $codepro.audit.disable staticMemberAccess
-				LayoutParams.MATCH_PARENT)); // $codepro.audit.disable staticMemberAccess
+		main.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, // $codepro.audit.disable
+																			// staticMemberAccess
+				LayoutParams.MATCH_PARENT)); // $codepro.audit.disable
+												// staticMemberAccess
 		//
 		super.onCreate(savedInstanceState);
 		Log.d("Galaxy", "Created Galaxy");
@@ -91,7 +108,8 @@ public class GalaxyMapActivity extends RootActivity implements OnTouchListener {
 	 * @param planet
 	 *            Takes in the planet clicked on.
 	 */
-	public void onCreateDialog(Planet planet) { // $codepro.audit.disable overloadedMethods
+	public void onCreateDialog(Planet planet) { // $codepro.audit.disable
+												// overloadedMethods
 		final Planet thePlanet = planet;
 		final AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle("" + planet.getName());
@@ -152,15 +170,16 @@ public class GalaxyMapActivity extends RootActivity implements OnTouchListener {
 				public void onClick(DialogInterface dialog, int which) {
 					switch (which) {
 					case ZERO:
-						if(pirate.canPirateBattle()) {
+						if (pirate.canPirateBattle()) {
 							Toast.makeText(getApplicationContext(),
-									"There was a battlz", Toast.LENGTH_SHORT).show();
+									"There was a battlz", Toast.LENGTH_SHORT)
+									.show();
 						}
 						break;
 					case ONE:
 						Toast.makeText(getApplicationContext(),
 								"Escaped Pirate", Toast.LENGTH_SHORT).show();
-						if(pirate.canPirateFlee()) {
+						if (pirate.canPirateFlee()) {
 							Toast.makeText(getApplicationContext(),
 									"You got away", Toast.LENGTH_SHORT).show();
 						}
@@ -182,28 +201,31 @@ public class GalaxyMapActivity extends RootActivity implements OnTouchListener {
 				public void onClick(DialogInterface dialog, int which) {
 					switch (which) {
 					case ZERO:
-						if(police.canPoliceBattle()) {
+						if (police.canPoliceBattle()) {
 							Toast.makeText(getApplicationContext(),
-									"There was a battle", Toast.LENGTH_SHORT).show();
+									"There was a battle", Toast.LENGTH_SHORT)
+									.show();
 						}
 						break;
 					case ONE:
-						if(police.canBribePolice(SpaceTrader.getController()
+						if (police.canBribePolice(SpaceTrader.getController()
 								.getMoney() / TEN)) {
 							Toast.makeText(getApplicationContext(),
-									"Bribe successful", Toast.LENGTH_SHORT).show();
+									"Bribe successful", Toast.LENGTH_SHORT)
+									.show();
 						}
 						break;
 					case TWO:
-						if(police.checkGoods() == 0) {
+						if (police.checkGoods() == 0) {
 							Toast.makeText(getApplicationContext(),
-									"No goods taken", Toast.LENGTH_SHORT).show();
+									"No goods taken", Toast.LENGTH_SHORT)
+									.show();
 						}
 						break;
 					case THREE:
-						if(police.canPoliceFlee()) {
-							Toast.makeText(getApplicationContext(),
-									"Escaped", Toast.LENGTH_SHORT).show();
+						if (police.canPoliceFlee()) {
+							Toast.makeText(getApplicationContext(), "Escaped",
+									Toast.LENGTH_SHORT).show();
 						}
 						break;
 					default:
@@ -220,9 +242,10 @@ public class GalaxyMapActivity extends RootActivity implements OnTouchListener {
 				public void onClick(DialogInterface dialog, int which) {
 					switch (which) {
 					case ZERO:
-						if(trader.canTraderBattle()) {
+						if (trader.canTraderBattle()) {
 							Toast.makeText(getApplicationContext(),
-									"There was a battle", Toast.LENGTH_SHORT).show();
+									"There was a battle", Toast.LENGTH_SHORT)
+									.show();
 						}
 						break;
 					case ONE:
@@ -256,15 +279,20 @@ public class GalaxyMapActivity extends RootActivity implements OnTouchListener {
 	 *            View
 	 * @param e
 	 *            MotionEvent
+	 * 
 	 * @return returns true when the view is touched * @see
+	 *         android.view.View$OnTouchListener#onTouch(View, MotionEvent) * @see
 	 *         android.view.View$OnTouchListener#onTouch(View, MotionEvent)
 	 */
-	public boolean onTouch(View v, MotionEvent e) { // $codepro.audit.disable inconsistentUseOfOverride
+	public boolean onTouch(View v, MotionEvent e) { // $codepro.audit.disable
+													// inconsistentUseOfOverride
 		if (e.getAction() == MotionEvent.ACTION_DOWN) {
 			Log.d("Galaxy",
-					"ActionDown" + (int) e.getRawX() + " " + (int) e.getRawY()); // $codepro.audit.disable lossOfPrecisionInCast
+					"ActionDown" + (int) e.getRawX() + " " + (int) e.getRawY()); // $codepro.audit.disable
+																					// lossOfPrecisionInCast
 			for (Planet p : SpaceTrader.getController().getUniverse()) {
-				if (p.isClicked(new Point((int) e.getRawX(), (int) e.getRawY()))) { // $codepro.audit.disable lossOfPrecisionInCast
+				if (p.isClicked(new Point((int) e.getRawX(), (int) e.getRawY()))) { // $codepro.audit.disable
+																					// lossOfPrecisionInCast
 					// if(p!=SpaceTrader.getController().getLocation()){//is
 					// this the planet we're on
 					Log.d("Galaxy", "clicked " + p.getName());

@@ -28,6 +28,10 @@ public class DisplayDataActivity extends RootActivity {
 
 	// private boolean continueMusic;
 
+	/**
+	 * Field TWENTY.
+	 * (value is 20)
+	 */
 	private static final int TWENTY = 20;
 
 	/**
@@ -60,8 +64,8 @@ public class DisplayDataActivity extends RootActivity {
 	/**
 	 * Method onCreateOptionsMenu.
 	 * @param menu Menu
-	 * @return boolean
-	 */
+	
+	 * @return boolean */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.activity_display_data, menu);
@@ -71,8 +75,8 @@ public class DisplayDataActivity extends RootActivity {
 	/**
 	 * Method onOptionsItemSelected.
 	 * @param item MenuItem
-	 * @return boolean
-	 */
+	
+	 * @return boolean */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {

@@ -53,33 +53,6 @@ public interface ShipConstants {
 
 	public static final int WASP_CARGO_CAP = 35;
 
-	/**
-	 * Field GNAT_MERCENARY. (value is 0)
-	 */
-	/**
-	 * Field GNAT_CREW. (value is 0)
-	 */
-	/**
-	 * Field GNAT_CARGO_HOLD. (value is 15)
-	 */
-	/**
-	 * Field GNAT_SHIELD_SLOTS. (value is 0)
-	 */
-	/**
-	 * Field GNAT_GADGET_SLOTS. (value is 1)
-	 */
-	/**
-	 * Field GNAT_WEAPON_SLOTS. (value is 1)
-	 */
-	/**
-	 * Field GNAT_HULL_STRENGTH. (value is 100)
-	 */
-	/**
-	 * Field GNAT_DISTANCE. (value is 14)
-	 */
-	;
-
-	// Ship constants fill out and move to ShipConstants.java
 	public static final int GNAT_DISTANCE = 14, GNAT_HULL_STRENGTH = 100,
 			GNAT_WEAPON_SLOTS = 1, GNAT_GADGET_SLOTS = 1,
 			GNAT_SHIELD_SLOTS = 0, GNAT_CARGO_HOLD = 15, GNAT_CREW = 0,

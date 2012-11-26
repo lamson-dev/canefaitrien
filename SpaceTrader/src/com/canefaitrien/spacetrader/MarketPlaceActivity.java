@@ -39,7 +39,17 @@ public class MarketPlaceActivity extends ListActivity implements
 	 */
 	private static final String TAG = "MarketPlace";
 
-	private static final int COLOR_ONE = 0x28, COLOR_TWO = 0X3C, COLOR_THREE = 0X4F;
+	/**
+	 * Field COLOR_THREE.
+	 */
+	/**
+	 * Field COLOR_TWO.
+	 */
+	/**
+	 * Field COLOR_ONE.
+	 */
+	private static final int COLOR_ONE = 0x28, COLOR_TWO = 0X3C,
+			COLOR_THREE = 0X4F;
 
 	/**
 	 * Field mPresenter.
@@ -106,9 +116,11 @@ public class MarketPlaceActivity extends ListActivity implements
 	 * @param valueOf
 	 *            String
 	 * 
+	 * 
 	 * @see com.canefaitrien.spacetrader.interfaces.IMarketPlaceView#displayMoney(String)
 	 */
-	public void displayMoney(String valueOf) { // $codepro.audit.disable inconsistentUseOfOverride
+	public void displayMoney(String valueOf) { // $codepro.audit.disable
+												// inconsistentUseOfOverride
 		final TextView tv = (TextView) findViewById(R.id.tv_money);
 		tv.setText(valueOf);
 	}
@@ -119,9 +131,11 @@ public class MarketPlaceActivity extends ListActivity implements
 	 * @param valueOf
 	 *            String
 	 * 
+	 * 
 	 * @see com.canefaitrien.spacetrader.interfaces.IMarketPlaceView#displayCargo(String)
 	 */
-	public void displayCargo(String valueOf) { // $codepro.audit.disable inconsistentUseOfOverride
+	public void displayCargo(String valueOf) { // $codepro.audit.disable
+												// inconsistentUseOfOverride
 		final TextView tv = (TextView) findViewById(R.id.tv_cargo);
 		tv.setText(valueOf);
 	}
@@ -129,11 +143,15 @@ public class MarketPlaceActivity extends ListActivity implements
 	/**
 	 * Method getStockList.
 	 * 
+	 * 
 	 * @return List<Map<String,String>> * @see
 	 *         com.canefaitrien.spacetrader.interfaces
-	 *         .IMarketPlaceView#getStockList()
+	 *         .IMarketPlaceView#getStockList() * @see
+	 *         com.canefaitrien.spacetrader
+	 *         .interfaces.IMarketPlaceView#getStockList()
 	 */
-	public List<Map<String, String>> getStockList() { // $codepro.audit.disable inconsistentUseOfOverride
+	public List<Map<String, String>> getStockList() { // $codepro.audit.disable
+														// inconsistentUseOfOverride
 		return stockList;
 	}
 
@@ -143,11 +161,13 @@ public class MarketPlaceActivity extends ListActivity implements
 	 * @param stockList
 	 *            List<Map<String,String>>
 	 * 
+	 * 
 	 * @see 
 	 *      com.canefaitrien.spacetrader.interfaces.IMarketPlaceView#setStockList
 	 *      (List<Map<String,String>>)
 	 */
-	public void setStockList(List<Map<String, String>> stockList) { // $codepro.audit.disable inconsistentUseOfOverride
+	public void setStockList(List<Map<String, String>> stockList) { // $codepro.audit.disable
+																	// inconsistentUseOfOverride
 		this.stockList = stockList;
 
 	}
@@ -197,9 +217,11 @@ public class MarketPlaceActivity extends ListActivity implements
 	 * @param v
 	 *            View
 	 * 
+	 * 
 	 * @see android.view.View$OnClickListener#onClick(View)
 	 */
-	public void onClick(View v) { // $codepro.audit.disable inconsistentUseOfOverride
+	public void onClick(View v) { // $codepro.audit.disable
+									// inconsistentUseOfOverride
 
 		switch (v.getId()) {
 		case R.id.btn_buy:
@@ -231,7 +253,9 @@ public class MarketPlaceActivity extends ListActivity implements
 	 * @param adapter
 	 *            ListAdapter
 	 * 
-	 * @see com.canefaitrien.spacetrader.interfaces.IMarketPlaceView#setListAdapter(ListAdapter) <!-- // $codepro.audit.disable lineLength -->
+	 * 
+	 * @see com.canefaitrien.spacetrader.interfaces.IMarketPlaceView#setListAdapter(ListAdapter)
+	 *      <!-- // $codepro.audit.disable lineLength -->
 	 */
 	@Override
 	public void setListAdapter(ListAdapter adapter) {
@@ -242,11 +266,15 @@ public class MarketPlaceActivity extends ListActivity implements
 	/**
 	 * Method getContext.
 	 * 
+	 * 
 	 * @return Context * @see
+	 *         com.canefaitrien.spacetrader.interfaces.IMarketPlaceView
+	 *         #getContext() * @see
 	 *         com.canefaitrien.spacetrader.interfaces.IMarketPlaceView
 	 *         #getContext()
 	 */
-	public Context getContext() { // $codepro.audit.disable inconsistentUseOfOverride
+	public Context getContext() { // $codepro.audit.disable
+									// inconsistentUseOfOverride
 		return MarketPlaceActivity.this;
 	}
 
@@ -256,9 +284,12 @@ public class MarketPlaceActivity extends ListActivity implements
 	 * @param name
 	 *            String
 	 * 
+	 * 
 	 * @return Object * @see
 	 *         com.canefaitrien.spacetrader.interfaces.IMarketPlaceView
-	 *         #getSystemService(String)
+	 *         #getSystemService(String) * @see
+	 *         com.canefaitrien.spacetrader.interfaces
+	 *         .IMarketPlaceView#getSystemService(String)
 	 */
 	@Override
 	public Object getSystemService(String name) {
