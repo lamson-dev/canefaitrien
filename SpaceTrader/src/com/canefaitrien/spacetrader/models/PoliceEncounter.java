@@ -11,22 +11,28 @@ import java.util.Random;
  */
 public class PoliceEncounter implements Encounter {
 
+	private static final int THREE = 3;
+
+	private static final int TEN = 10;
+
+	private static final int TWO = 2;
+
 	// HORNET(16, 300, 3, 1, 2, 20, 0, 0, "Hornet"),
 	// 30 cargo/ 2 weapons, 2 shield, 3 gadget, 3 crew, 15/tank
 	/**
 	 * Field policeShip.
 	 */
-	private Ship policeShip = new Ship(ShipType.HORNET);
+	private final Ship policeShip = new Ship(ShipType.HORNET);
 
 	/**
 	 * Field illegalTradeGood.
 	 */
-	private TradeGood[] illegalTradeGood;
+	private final TradeGood[] illegalTradeGood;
 
 	/**
 	 * Field data.
 	 */
-	private Controller data;
+	private final Controller data;
 
 	/**
 	 * Constructor for PoliceEncounter.
@@ -35,7 +41,7 @@ public class PoliceEncounter implements Encounter {
 	 *            Controller
 	 */
 	public PoliceEncounter(Controller data) {
-		illegalTradeGood = new TradeGood[2];
+		illegalTradeGood = new TradeGood[TWO];
 		illegalTradeGood[0] = TradeGood.NARCOTICS;
 		illegalTradeGood[1] = TradeGood.FIREARMS;
 		this.data = data;
@@ -48,12 +54,12 @@ public class PoliceEncounter implements Encounter {
 	 * @return money after fines
 	 */
 	public int checkGoods() {
-		int[] goods = data.getShip().getCargo();
+		final int[] goods = data.getShip().getCargo();
 		if (goods[TradeGood.NARCOTICS.ordinal()] == 0
 				&& goods[TradeGood.FIREARMS.ordinal()] == 0) {
 			return data.getMoney();
 		} else {
-			data.setMoney(data.getMoney() << 3 / 10);
+			data.setMoney((data.getMoney() << THREE) / TEN);
 			goods[TradeGood.NARCOTICS.ordinal()] = 0;
 			goods[TradeGood.FIREARMS.ordinal()] = 0;
 		}
@@ -68,8 +74,8 @@ public class PoliceEncounter implements Encounter {
 	 * @return true upon successful, false otherwise
 	 */
 	public boolean canBribePolice(int amount) {
-		int currentMoney = data.getMoney();
-		int bribeMoney = new Random().nextInt(currentMoney / 10);
+		final int currentMoney = data.getMoney();
+		final int bribeMoney = new Random().nextInt(currentMoney / TEN);
 		if (amount < bribeMoney || amount > currentMoney) {
 			return false;
 		} else {

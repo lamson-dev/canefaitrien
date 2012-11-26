@@ -40,6 +40,8 @@ public class GalaxyMapActivity extends RootActivity implements OnTouchListener {
 	 */
 	private static final String TAG = "GalaxyActivity";
 
+	protected static final int ZERO = 0, ONE = 1, TWO = 2, THREE = 3, TEN = 10;
+
 	/**
 	 * Field galaxy.
 	 */
@@ -65,7 +67,7 @@ public class GalaxyMapActivity extends RootActivity implements OnTouchListener {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 
-		FrameLayout main = new FrameLayout(this);
+		final FrameLayout main = new FrameLayout(this);
 		main.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, // $codepro.audit.disable staticMemberAccess
 				LayoutParams.MATCH_PARENT)); // $codepro.audit.disable staticMemberAccess
 		//
@@ -91,9 +93,9 @@ public class GalaxyMapActivity extends RootActivity implements OnTouchListener {
 	 */
 	public void onCreateDialog(Planet planet) { // $codepro.audit.disable overloadedMethods
 		final Planet thePlanet = planet;
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		final AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle("" + planet.getName());
-		Planet location = SpaceTrader.getController().getLocation();
+		final Planet location = SpaceTrader.getController().getLocation();
 		builder.setMessage("Tech Level: " + planet.getStringTechLevel()
 				+ "\nSituation: " + planet.getStringSituation()
 				+ "\nFuel needed to travel: " + planet.distance(location)
@@ -127,7 +129,7 @@ public class GalaxyMapActivity extends RootActivity implements OnTouchListener {
 						}
 					});
 		}
-		AlertDialog alert = builder.create();
+		final AlertDialog alert = builder.create();
 		alert.show();
 	}
 
@@ -135,9 +137,9 @@ public class GalaxyMapActivity extends RootActivity implements OnTouchListener {
 	 * Creates a dialog for when an encounter appears
 	 */
 	public void listDialog() {
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		final AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-		EncounterType encounter = EncounterType.getEncounterType();
+		final EncounterType encounter = EncounterType.getEncounterType();
 		builder.setTitle("Encounter: " + encounter.name());
 		String[] strs;
 
@@ -149,15 +151,21 @@ public class GalaxyMapActivity extends RootActivity implements OnTouchListener {
 			builder.setItems(strs, new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog, int which) {
 					switch (which) {
-					case 0:
-						pirate.canPirateBattle();
+					case ZERO:
+						if(pirate.canPirateBattle()) {
+							Toast.makeText(getApplicationContext(),
+									"There was a battlz", Toast.LENGTH_SHORT).show();
+						}
 						break;
-					case 1:
+					case ONE:
 						Toast.makeText(getApplicationContext(),
 								"Escaped Pirate", Toast.LENGTH_SHORT).show();
-						pirate.canPirateFlee();
+						if(pirate.canPirateFlee()) {
+							Toast.makeText(getApplicationContext(),
+									"You got away", Toast.LENGTH_SHORT).show();
+						}
 						break;
-					case 2:
+					case TWO:
 						pirate.takeGoods();
 						break;
 					default:
@@ -173,20 +181,30 @@ public class GalaxyMapActivity extends RootActivity implements OnTouchListener {
 			builder.setItems(strs, new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog, int which) {
 					switch (which) {
-					case 0:
-						police.canPoliceBattle();
+					case ZERO:
+						if(police.canPoliceBattle()) {
+							Toast.makeText(getApplicationContext(),
+									"There was a battle", Toast.LENGTH_SHORT).show();
+						}
 						break;
-					case 1:
-						police.canBribePolice(SpaceTrader.getController()
-								.getMoney() / 10); // *.1
+					case ONE:
+						if(police.canBribePolice(SpaceTrader.getController()
+								.getMoney() / TEN)) {
+							Toast.makeText(getApplicationContext(),
+									"Bribe successful", Toast.LENGTH_SHORT).show();
+						}
 						break;
-					case 2:
-						police.checkGoods();
+					case TWO:
+						if(police.checkGoods() == 0) {
+							Toast.makeText(getApplicationContext(),
+									"No goods taken", Toast.LENGTH_SHORT).show();
+						}
 						break;
-					case 3:
-						Toast.makeText(getApplicationContext(),
-								"Escaped Police", Toast.LENGTH_SHORT).show();
-						police.canPoliceFlee();
+					case THREE:
+						if(police.canPoliceFlee()) {
+							Toast.makeText(getApplicationContext(),
+									"Escaped", Toast.LENGTH_SHORT).show();
+						}
 						break;
 					default:
 						break;
@@ -201,12 +219,15 @@ public class GalaxyMapActivity extends RootActivity implements OnTouchListener {
 			builder.setItems(strs, new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog, int which) {
 					switch (which) {
-					case 0:
-						trader.canTraderBattle();
+					case ZERO:
+						if(trader.canTraderBattle()) {
+							Toast.makeText(getApplicationContext(),
+									"There was a battle", Toast.LENGTH_SHORT).show();
+						}
 						break;
-					case 1:
+					case ONE:
 						break;
-					case 2:
+					case TWO:
 						Toast.makeText(getApplicationContext(), "Left Trader",
 								Toast.LENGTH_SHORT).show();
 						break;
@@ -222,7 +243,7 @@ public class GalaxyMapActivity extends RootActivity implements OnTouchListener {
 			break;
 		}
 		if (encounter != EncounterType.NOTHING) {// no encounter
-			AlertDialog alert = builder.create();
+			final AlertDialog alert = builder.create();
 			alert.show();
 		}
 	}

@@ -32,7 +32,7 @@ public class HubActivity extends RootActivity implements OnClickListener,
 	/**
 	 * Field mPresenter.
 	 */
-	private MainScreenPresenter mPresenter;
+	private final MainScreenPresenter mPresenter;
 
 	/**
 	 * Field continueMusic.
@@ -57,8 +57,8 @@ public class HubActivity extends RootActivity implements OnClickListener,
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_hub);
 
-		Button saveGame = (Button) findViewById(R.id.btn_savegame);
-		Button refill = (Button) findViewById(R.id.btn_refill);
+		final Button saveGame = (Button) findViewById(R.id.btn_savegame);
+		final Button refill = (Button) findViewById(R.id.btn_refill);
 
 		saveGame.setOnClickListener(this);
 		refill.setOnClickListener(this);
@@ -82,7 +82,7 @@ public class HubActivity extends RootActivity implements OnClickListener,
 			break;
 		case R.id.btn_refill:
 			// note to subtract money
-			Ship ship = SpaceTrader.getController().getShip();
+			final Ship ship = SpaceTrader.getController().getShip();
 			ship.setFuel(ship.getType().maxDistance);// change this to not be
 														// distance
 			break;
@@ -96,7 +96,7 @@ public class HubActivity extends RootActivity implements OnClickListener,
 	 * Recursively set font for every TextView in the activity
 	 */
 	public void applyFont() {
-		ViewGroup activityViewGroup = (ViewGroup) findViewById(
+		final ViewGroup activityViewGroup = (ViewGroup) findViewById(
 				android.R.id.content).getRootView();
 		setAppFont(activityViewGroup, appFont);
 	}

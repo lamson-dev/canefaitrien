@@ -16,7 +16,7 @@ public class EncounterHandler {
 	/**
 	 * Field data.
 	 */
-	private Controller data;
+	private final Controller data;
 
 	/**
 	 * Constructor for EncounterHandler.
@@ -33,7 +33,7 @@ public class EncounterHandler {
 	
 	 * @return true upon successful, false otherwise */
 	public boolean canBribePolice(int amount) {
-		PoliceEncounter police = new PoliceEncounter(data);
+		final PoliceEncounter police = new PoliceEncounter(data);
 		return police.canBribePolice(amount);
 	}
 
@@ -45,8 +45,8 @@ public class EncounterHandler {
 	
 	 * @return true if okay false otherwise */
 	public boolean canSubmitPolice() {
-		PoliceEncounter police = new PoliceEncounter(data);
-		int currentCredit = data.getMoney();
+		final PoliceEncounter police = new PoliceEncounter(data);
+		final int currentCredit = data.getMoney();
 		if (currentCredit == police.checkGoods()) {
 			return true;
 		}
@@ -59,7 +59,7 @@ public class EncounterHandler {
 	 * @return boolean
 	 */
 	public boolean canAttackPolice() {
-		PoliceEncounter police = new PoliceEncounter(data);
+		final PoliceEncounter police = new PoliceEncounter(data);
 		return (police.canPoliceBattle());
 	}
 
@@ -68,7 +68,7 @@ public class EncounterHandler {
 	 * @return boolean
 	 */
 	public boolean canFleePolice() {
-		PoliceEncounter police = new PoliceEncounter(data);
+		final PoliceEncounter police = new PoliceEncounter(data);
 		return (police.canPoliceFlee());
 	}
 
@@ -76,7 +76,7 @@ public class EncounterHandler {
 	 * Surrender to pirate All goods in the cargo will be taken
 	 */
 	public void canSurrenderToPirate() {
-		PirateEncounter pirate = new PirateEncounter(data);
+		final PirateEncounter pirate = new PirateEncounter(data);
 		pirate.takeGoods();
 	}
 
@@ -86,7 +86,7 @@ public class EncounterHandler {
 	
 	 * @return true if get away false otherwise */
 	public boolean canFleePirate() {
-		PirateEncounter pirate = new PirateEncounter(data);
+		final PirateEncounter pirate = new PirateEncounter(data);
 		return (pirate.canPirateFlee());
 	}
 
@@ -95,7 +95,7 @@ public class EncounterHandler {
 	 * @return boolean
 	 */
 	public boolean canAttackPirate() {
-		PirateEncounter pirate = new PirateEncounter(data);
+		final PirateEncounter pirate = new PirateEncounter(data);
 		return (pirate.canPirateFlee());
 	}
 
@@ -104,7 +104,7 @@ public class EncounterHandler {
 	 * @return boolean
 	 */
 	public boolean canAttackTrader() {
-		TraderEncounter trader = new TraderEncounter(data);
+		final TraderEncounter trader = new TraderEncounter(data);
 		return (trader.canTraderBattle());
 	}
 

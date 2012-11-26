@@ -187,10 +187,10 @@ public class Ship {
 	 * @return String
 	 */
 	public String getStringCargo() {
-		List<Integer> list = new ArrayList<Integer>();
+		final List<Integer> list = new ArrayList<Integer>();
 		for (int item : this.getCargo())
 			list.add(item);
-		JSONArray json = new JSONArray(list);
+		final JSONArray json = new JSONArray(list);
 		return json.toString();
 	}
 
@@ -202,8 +202,8 @@ public class Ship {
 	 * @throws JSONException
 	 */
 	public final void setCargo(String cargo) throws JSONException {
-		JSONArray jsonArray = new JSONArray(cargo);
-		int[] cargoArray = new int[TradeGood.values().length];
+		final JSONArray jsonArray = new JSONArray(cargo);
+		final int[] cargoArray = new int[TradeGood.values().length];
 		for (int i = 0; i < jsonArray.length(); i++) {
 			cargoArray[i] = jsonArray.getInt(i);
 		}

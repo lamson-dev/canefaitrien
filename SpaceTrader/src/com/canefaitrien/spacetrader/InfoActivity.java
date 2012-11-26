@@ -73,11 +73,11 @@ public class InfoActivity extends RootActivity {
 	private void populateData() {
 
 		//
-		TextView nameView = (TextView) findViewById(R.id.tv_name);
-		TextView pilotPts = (TextView) findViewById(R.id.tv_pilot);
-		TextView fighterPts = (TextView) findViewById(R.id.tv_fighter);
-		TextView traderPts = (TextView) findViewById(R.id.tv_trader);
-		TextView engineerPts = (TextView) findViewById(R.id.tv_engineer);
+		final TextView nameView = (TextView) findViewById(R.id.tv_name);
+		final TextView pilotPts = (TextView) findViewById(R.id.tv_pilot);
+		final TextView fighterPts = (TextView) findViewById(R.id.tv_fighter);
+		final TextView traderPts = (TextView) findViewById(R.id.tv_trader);
+		final TextView engineerPts = (TextView) findViewById(R.id.tv_engineer);
 
 		nameView.setText(" " + data.getPlayer().getName());
 		pilotPts.setText(" " + data.getPlayer().getPilotPts());
@@ -85,8 +85,8 @@ public class InfoActivity extends RootActivity {
 		traderPts.setText(" " + data.getPlayer().getTraderPts());
 		engineerPts.setText(" " + data.getPlayer().getEngineerPts());
 
-		TextView currentPlanet = (TextView) findViewById(R.id.tv_planet);
-		TextView money = (TextView) findViewById(R.id.tv_money);
+		final TextView currentPlanet = (TextView) findViewById(R.id.tv_planet);
+		final TextView money = (TextView) findViewById(R.id.tv_money);
 
 		currentPlanet.setText("Current planet: " + data.getLocation().getName()
 				+ "\nTech Level: " + data.getLocation().getStringTechLevel()
@@ -98,7 +98,7 @@ public class InfoActivity extends RootActivity {
 	 * Method applyFont.
 	 */
 	public void applyFont() {
-		ViewGroup activityViewGroup = (ViewGroup) findViewById(
+		final ViewGroup activityViewGroup = (ViewGroup) findViewById(
 				android.R.id.content).getRootView();
 		setAppFont(activityViewGroup, appFont);
 	}

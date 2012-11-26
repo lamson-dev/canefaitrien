@@ -15,17 +15,17 @@ public class TraderEncounter implements Encounter {
 	/**
 	 * Field data.
 	 */
-	private Controller data;
+	private final Controller data;
 
 	/**
 	 * Field type.
 	 */
-	private ShipType type = ShipType.getAShip();
+	private final ShipType type = ShipType.getAShip();
 
 	/**
 	 * Field goods.
 	 */
-	private TradeGood[] goods = TradeGood.values();
+	private final TradeGood[] goods = TradeGood.values();
 
 	/**
 	 * Field VARIANCE. (value is 5)
@@ -38,28 +38,28 @@ public class TraderEncounter implements Encounter {
 	/**
 	 * Field RAND.
 	 */
-	private static Random RAND = new Random();
+	private static final Random RAND = new Random();
 
 	// Cargo hold info
 	/**
 	 * Field itemStock.
 	 */
-	private int[] itemStock = new int[TradeGood.values().length];
+	private final int[] itemStock = new int[TradeGood.values().length];
 
 	/**
 	 * Field itemBuyPrices.
 	 */
-	private int[] itemBuyPrices = new int[TradeGood.values().length];
+	private final int[] itemBuyPrices = new int[TradeGood.values().length];
 
 	/**
 	 * Field itemSellPrices.
 	 */
-	private int[] itemSellPrices = new int[TradeGood.values().length];
+	private final int[] itemSellPrices = new int[TradeGood.values().length];
 
 	/**
 	 * Field level.
 	 */
-	private TechLevel level = TechLevel.HI_TECH;
+	private final TechLevel level = TechLevel.HI_TECH;
 
 	/**
 	 * Constructor for TraderEncounter.
@@ -143,8 +143,8 @@ public class TraderEncounter implements Encounter {
 	 * @return String[]
 	 */
 	public String[] getBuyView(Ship ship) {
-		String[] ret = new String[itemStock.length];
-		int[] cargo = ship.getCargo();
+		final String[] ret = new String[itemStock.length];
+		final int[] cargo = ship.getCargo();
 		for (int i = 0; i < itemStock.length; i++) {
 			ret[i] = goods[i].toString() + ": Price " + itemBuyPrices[i]
 					+ ", Available:" + itemStock[i] + ", In Cargo " + cargo[i];
@@ -160,8 +160,8 @@ public class TraderEncounter implements Encounter {
 	 * @return String[]
 	 */
 	public String[] getSellView(Ship ship) {
-		String[] ret = new String[itemStock.length];
-		int[] cargo = ship.getCargo();
+		final String[] ret = new String[itemStock.length];
+		final int[] cargo = ship.getCargo();
 		for (int i = 0; i < itemStock.length; i++) {
 			ret[i] = goods[i].toString() + ": Price " + itemSellPrices[i]
 					+ ", Available:" + itemStock[i] + ", In Cargo " + cargo[i];
@@ -177,8 +177,8 @@ public class TraderEncounter implements Encounter {
 	 * @return String[][]
 	 */
 	public String[][] getView(Ship ship) {
-		String[][] ret = new String[itemStock.length][5];
-		int[] cargo = ship.getCargo();
+		final String[][] ret = new String[itemStock.length][5];
+		final int[] cargo = ship.getCargo();
 		for (int i = 0; i < ret.length; i++) {
 			ret[i][0] = goods[i].toString();
 			ret[i][1] = itemBuyPrices[i] + "";

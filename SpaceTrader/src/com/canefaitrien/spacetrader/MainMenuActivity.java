@@ -80,9 +80,9 @@ public class MainMenuActivity extends RootActivity implements OnClickListener {
 
 		applyFont();
 
-		Button btnNewGame = (Button) findViewById(R.id.btn_newgame);
-		Button btnLoadGame = (Button) findViewById(R.id.btn_loadgame);
-		Button btnDebug = (Button) findViewById(R.id.btn_debugmode);
+		final Button btnNewGame = (Button) findViewById(R.id.btn_newgame);
+		final Button btnLoadGame = (Button) findViewById(R.id.btn_loadgame);
+		final Button btnDebug = (Button) findViewById(R.id.btn_debugmode);
 
 		btnNewGame.setOnClickListener(this);
 		btnLoadGame.setOnClickListener(this);
@@ -97,7 +97,7 @@ public class MainMenuActivity extends RootActivity implements OnClickListener {
 	 * recursively set font for all textview
 	 */
 	public void applyFont() {
-		ViewGroup activityViewGroup = (ViewGroup) findViewById(
+		final ViewGroup activityViewGroup = (ViewGroup) findViewById(
 				android.R.id.content).getRootView();
 		setAppFont(activityViewGroup, appFont);
 	}

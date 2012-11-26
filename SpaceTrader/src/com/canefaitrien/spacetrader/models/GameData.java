@@ -134,7 +134,7 @@ public class GameData {
 	 * @param personId Long
 	 * @param shipId Long
 	 */
-	public GameData(Long id, String name, String difficulty, Integer money,
+	public GameData(Long id, String name, String difficulty, Integer money, // $codepro.audit.disable largeNumberOfParameters
 			String currentPlanet, Integer turn, java.util.Date date,
 			Long personId, Long shipId) {
 		this.id = id;
@@ -336,7 +336,7 @@ public class GameData {
 			if (daoSession == null) {
 				throw new DaoException("Entity is detached from DAO context");
 			}
-			PersonDao targetDao = daoSession.getPersonDao();
+			final PersonDao targetDao = daoSession.getPersonDao();
 			person = targetDao.load(personId);
 			person__resolvedKey = personId;
 		}
@@ -361,7 +361,7 @@ public class GameData {
 			if (daoSession == null) {
 				throw new DaoException("Entity is detached from DAO context");
 			}
-			ShipDao targetDao = daoSession.getShipDao();
+			final ShipDao targetDao = daoSession.getShipDao();
 			ship = targetDao.load(shipId);
 			ship__resolvedKey = shipId;
 		}
@@ -389,7 +389,7 @@ public class GameData {
 			if (daoSession == null) {
 				throw new DaoException("Entity is detached from DAO context");
 			}
-			PlanetDao targetDao = daoSession.getPlanetDao();
+			final PlanetDao targetDao = daoSession.getPlanetDao();
 			planets = targetDao._queryGameData_Planets(id);
 
 			loadMarketplaceInAllPlanets();
@@ -410,7 +410,7 @@ public class GameData {
 	
 	 * @return Planet[] */
 	public Planet[] getUniverse() {
-		Planet[] universe = new Planet[this.getPlanets().size()];
+		final Planet[] universe = new Planet[this.getPlanets().size()];
 		for (int i = 0; i < universe.length; i++) {
 			universe[i] = planets.get(i);
 		}

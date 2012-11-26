@@ -28,6 +28,8 @@ public class DisplayDataActivity extends RootActivity {
 
 	// private boolean continueMusic;
 
+	private static final int TWENTY = 20;
+
 	/**
 	 * Method onCreate.
 	 * @param savedInstanceState Bundle
@@ -42,12 +44,12 @@ public class DisplayDataActivity extends RootActivity {
 		// .getStringExtra(ConfigurationActivity.EXTRA_MESSAGE);
 
 		setContentView(R.layout.activity_display_data);
-		TextView textView = (TextView) findViewById(R.id.tv_data);
+		final TextView textView = (TextView) findViewById(R.id.tv_data);
 
 		// Create the text view
 		// TextView textView = new TextView(this);
-		textView.setTextSize(20);
-		Marketplace mp = new Marketplace(0, TechLevel.HI_TECH,
+		textView.setTextSize(TWENTY);
+		final Marketplace mp = new Marketplace(0, TechLevel.HI_TECH,
 				Situation.ARTISTIC);
 		textView.setText(mp.toString());
 		// Set the text view as the activity layout

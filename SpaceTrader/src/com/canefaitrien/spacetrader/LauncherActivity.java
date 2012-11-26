@@ -34,13 +34,13 @@ public class LauncherActivity extends Activity {
 
 		// do something for app
 
-		DevOpenHelper helper = new DaoMaster.DevOpenHelper(this,
+		final DevOpenHelper helper = new DaoMaster.DevOpenHelper(this,
 				"spacetrader-db", null);
 		SpaceTrader.db = helper.getWritableDatabase(); // $codepro.audit.disable assignmentToNonFinalStatic
 		SpaceTrader.daoMaster = new DaoMaster(SpaceTrader.db); // $codepro.audit.disable assignmentToNonFinalStatic
 		SpaceTrader.daoSession = SpaceTrader.daoMaster.newSession(); // $codepro.audit.disable assignmentToNonFinalStatic
 
-		Intent intent = new Intent(LauncherActivity.this,
+		final Intent intent = new Intent(LauncherActivity.this,
 				MainMenuActivity.class);
 		startActivity(intent);
 		Log.d(TAG, "open database");

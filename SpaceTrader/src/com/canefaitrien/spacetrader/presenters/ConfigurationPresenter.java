@@ -40,7 +40,7 @@ public class ConfigurationPresenter {
 	 * Field mView.
 	 */
 	@SuppressWarnings("unused")
-	private IConfigurationView mView;
+	private final IConfigurationView mView;
 
 	/**
 	 * Constructor for ConfigurationPresenter.
@@ -60,12 +60,12 @@ public class ConfigurationPresenter {
 				+ fighterPts);
 		Log.d(TAG, level);
 
-		Person person = new Person(null, // id
+		final Person person = new Person(null, // id
 				name, //
 				pilotPts, fighterPts, //
 				traderPts, engineerPts);
 
-		Controller ctrl = new Controller(person, Difficulty.valueOf(level));
+		final Controller ctrl = new Controller(person, Difficulty.valueOf(level));
 		SpaceTrader.setController(ctrl);
 
 	}
@@ -74,23 +74,23 @@ public class ConfigurationPresenter {
 	 * Method storeNewGameData.
 	 */
 	public void storeNewGameData() {
-		Controller ctrl = SpaceTrader.getController();
+		final Controller ctrl = SpaceTrader.getController();
 
-		DaoSession daoSession = SpaceTrader.daoSession;
-		PersonDao personDao = daoSession.getPersonDao();
-		PlanetDao planetDao = daoSession.getPlanetDao();
-		MarketplaceDao marketplaceDao = daoSession.getMarketplaceDao();
-		GameDataDao gameDataDao = daoSession.getGameDataDao();
-		ShipDao shipDao = daoSession.getShipDao();
+		final DaoSession daoSession = SpaceTrader.daoSession;
+		final PersonDao personDao = daoSession.getPersonDao();
+		final PlanetDao planetDao = daoSession.getPlanetDao();
+		final MarketplaceDao marketplaceDao = daoSession.getMarketplaceDao();
+		final GameDataDao gameDataDao = daoSession.getGameDataDao();
+		final ShipDao shipDao = daoSession.getShipDao();
 
-		Person person = ctrl.getPlayer();
+		final Person person = ctrl.getPlayer();
 		personDao.insert(person);
 		Log.d(TAG, "Inserted new Person, ID: " + person.getId());
 
-		Ship ship = ctrl.getShip();
+		final Ship ship = ctrl.getShip();
 		shipDao.insert(ship);
 
-		GameData data = new GameData(null, person.getName(), //
+		final GameData data = new GameData(null, person.getName(), //
 				ctrl.getDifficulty().name(), //
 				ctrl.getMoney(), //
 				ctrl.getLocation().getName(), //

@@ -33,6 +33,11 @@ import de.greenrobot.daogenerator.ToOne;
  */
 public class GameDaoGenerator {
 
+	/**
+	 * Method main.
+	 * @param args String[]
+	 * @throws Exception
+	 */
 	public static void main(String[] args) throws Exception {
 		// Schema schema = new Schema(3, "de.greenrobot.daoexample");
 		// addNote(schema);
@@ -51,9 +56,13 @@ public class GameDaoGenerator {
 
 	}
 
+	/**
+	 * Method addGameData.
+	 * @param schema Schema
+	 */
 	private static void addGameData(Schema schema) {
 		// data
-		Entity data = schema.addEntity("GameData");
+		final Entity data = schema.addEntity("GameData");
 		data.addIdProperty().autoincrement().primaryKey();
 		data.addStringProperty("name");
 		data.addStringProperty("difficulty");
@@ -63,19 +72,19 @@ public class GameDaoGenerator {
 		data.addDateProperty("date");
 
 		// person
-		Entity person = schema.addEntity("Person");
+		final Entity person = schema.addEntity("Person");
 		person.addIdProperty().autoincrement().primaryKey();
 		person.addStringProperty("name");
 		person.addIntProperty("pilotPts");
 		person.addIntProperty("fighterPts");
 		person.addIntProperty("traderPts");
 		person.addIntProperty("engineerPts");
-		Property personId = data.addLongProperty("personId").getProperty();
-		ToOne dataToPerson = data.addToOne(person, personId);
+		final Property personId = data.addLongProperty("personId").getProperty();
+		final ToOne dataToPerson = data.addToOne(person, personId);
 		dataToPerson.setName("person");
 
 		// ship
-		Entity ship = schema.addEntity("Ship");
+		final Entity ship = schema.addEntity("Ship");
 		ship.addIdProperty().autoincrement().primaryKey();
 		ship.addStringProperty("type");
 		ship.addIntProperty("hullStrength");
@@ -85,12 +94,12 @@ public class GameDaoGenerator {
 		ship.addStringProperty("weapons");
 		ship.addStringProperty("shields");
 		ship.addStringProperty("gadgets");
-		Property shipId = data.addLongProperty("shipId").getProperty();
-		ToOne dataToShip = data.addToOne(ship, shipId);
+		final Property shipId = data.addLongProperty("shipId").getProperty();
+		final ToOne dataToShip = data.addToOne(ship, shipId);
 		dataToShip.setName("ship");
 
 		// planets
-		Entity planet = schema.addEntity("Planet");
+		final Entity planet = schema.addEntity("Planet");
 		planet.setTableName("PLANETS"); // "ORDER" is a reserved keyword
 		planet.addIdProperty().autoincrement();
 		planet.addStringProperty("name");
@@ -102,19 +111,19 @@ public class GameDaoGenerator {
 		// for Daniel testing
 		planet.addIntProperty("xOffset");
 		planet.addIntProperty("yOffset");
-		Property dataId = planet.addLongProperty("dataId").getProperty();
-		ToMany dataToPlanets = data.addToMany(planet, dataId);
+		final Property dataId = planet.addLongProperty("dataId").getProperty();
+		final ToMany dataToPlanets = data.addToMany(planet, dataId);
 		dataToPlanets.setName("planets");
 
 		// market
-		Entity market = schema.addEntity("Marketplace");
+		final Entity market = schema.addEntity("Marketplace");
 		market.addIdProperty().autoincrement().primaryKey();
 		market.addIntProperty("lastDock");
 		market.addStringProperty("itemStock");
 		market.addStringProperty("itemBuyPrices"); // JSON data
 		market.addStringProperty("itemSellPrices");
-		Property marketId = planet.addLongProperty("marketId").getProperty();
-		ToOne planetToMarket = planet.addToOne(market, marketId);
+		final Property marketId = planet.addLongProperty("marketId").getProperty();
+		final ToOne planetToMarket = planet.addToOne(market, marketId);
 		planetToMarket.setName("marketplace");
 	}
 

@@ -34,27 +34,27 @@ public class PlanetsView extends View {
 	/**
 	 * Field planets.
 	 */
-	private Planet[] planets;
+	private final Planet[] planets;
 
 	/**
 	 * Field paint.
 	 */
-	private Paint paint = new Paint();// normal paint
+	private final Paint paint = new Paint();// normal paint
 
 	/**
 	 * Field wordPaint.
 	 */
-	private Paint wordPaint = new Paint();// for text
+	private final Paint wordPaint = new Paint();// for text
 
 	/**
 	 * Field planetPaint.
 	 */
-	private Paint planetPaint = new Paint();// for simple planets
+	private final Paint planetPaint = new Paint();// for simple planets
 
 	/**
 	 * Field rand.
 	 */
-	private Random rand = new Random();
+	private final Random rand = new Random();
 
 	/**
 	 * Field planetImage.
@@ -94,7 +94,7 @@ public class PlanetsView extends View {
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
 
-		int[] planetImgs = new int[] { R.drawable.planet_a_small,
+		final int[] planetImgs = new int[] { R.drawable.planet_a_small,
 				R.drawable.planet_b_small, R.drawable.planet_c_small,
 				R.drawable.planet_d, R.drawable.planet_e, R.drawable.planet_f,
 				R.drawable.planet_g, R.drawable.planet_h, R.drawable.planet_i,

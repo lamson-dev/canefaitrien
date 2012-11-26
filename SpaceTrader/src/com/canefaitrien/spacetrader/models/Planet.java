@@ -24,6 +24,18 @@ import de.greenrobot.dao.DaoException;
  */
 public class Planet {
 
+	private static final double BIG_PLANET_RATE = .98;
+
+	private static final int FIFTEEN = 15;
+
+	private static final int SIXTY = 60;
+
+	private static final int TWOFIVESIX = 256;
+
+	private static final int TWOFIVEFIVE = 255;
+
+	private static final int TEN = 10;
+
 	// Instance variables
 	/**
 	 * Field id.
@@ -78,7 +90,7 @@ public class Planet {
 	/**
 	 * Field rand.
 	 */
-	private Random rand = new Random();
+	private final Random rand = new Random();
 
 	/** Used to resolve relations */
 	private transient DaoSession daoSession;
@@ -173,21 +185,22 @@ public class Planet {
 	public Planet(String name, Point location, TechLevel level,
 			Situation situation, Marketplace marketplace) {
 		// randomly generate a radius, occasionally making a giant planet.
-		if (new Random().nextDouble() < .98) {
-			this.radius = rand.nextInt(15) + 15;// for now each planet
+		if (new Random().nextDouble() < BIG_PLANET_RATE) {
+			this.radius = rand.nextInt(FIFTEEN) + FIFTEEN;// for now each planet
 												// will
 		} else {
-			this.radius = rand.nextInt(15) + 60;
+			this.radius = rand.nextInt(FIFTEEN) + SIXTY;
 		}
 		this.name = name;
 		this.coordinates = location;
 		this.level = level;
 		this.situation = situation;
 		this.marketplace = marketplace;
-		this.color = Color.argb(255, rand.nextInt(256), rand.nextInt(256),
-				rand.nextInt(256));
+		this.color = Color.argb(TWOFIVEFIVE, 
+				rand.nextInt(TWOFIVESIX), rand.nextInt(TWOFIVESIX),
+				rand.nextInt(TWOFIVESIX));
 		// randomly pick a planet image number
-		this.type = rand.nextInt(10);
+		this.type = rand.nextInt(TEN);
 	}
 
 	/**
@@ -210,10 +223,10 @@ public class Planet {
 	 * @return distance */
 	public int distance(Point other) { // $codepro.audit.disable
 										// overloadedMethods
-		int dx, dy;
+		final int dx, dy;
 		dx = coordinates.x - other.x;
 		dy = coordinates.y - other.y;
-		Long l = Math.round(Math.sqrt(dx * dx + dy * dy));
+		final Long l = Math.round(Math.sqrt(dx * dx + dy * dy));
 		return l.intValue();
 	}
 
@@ -471,7 +484,8 @@ public class Planet {
 		this.marketId = marketId;
 	}
 
-	/** called by internal mechanisms, do not call yourself. * @param daoSession DaoSession
+	/** called by internal mechanisms, do not call yourself.
+	 * @param daoSession DaoSession
 	 * @param daoSession DaoSession
 	 */
 	public void __setDaoSession(DaoSession daoSession) { // $codepro.audit.disable
@@ -499,7 +513,7 @@ public class Planet {
 				throw new DaoException(
 						"Marketplace is detached from DAO context");
 			}
-			MarketplaceDao targetDao = daoSession.getMarketplaceDao();
+			final MarketplaceDao targetDao = daoSession.getMarketplaceDao();
 			marketplace = targetDao.load(marketId);
 			marketplace__resolvedKey = marketId;
 		}

@@ -33,12 +33,12 @@ public class ShipLocationView extends View {
 	/**
 	 * Field paint.
 	 */
-	private Paint paint = new Paint();// normal paint
+	private final Paint paint = new Paint();// normal paint
 
 	/**
 	 * Field wordTest.
 	 */
-	private Paint wordTest = new Paint(); // text paint
+	private final Paint wordTest = new Paint(); // text paint
 
 	/**
 	 * Field ship_icon.
@@ -76,7 +76,7 @@ public class ShipLocationView extends View {
 				R.drawable.ship_model_a_small);
 		c = canvas;
 		// draw ship
-		Planet ship_location = SpaceTrader.getController().getLocation();
+		final Planet ship_location = SpaceTrader.getController().getLocation();
 		c.drawBitmap(ship_icon,
 				ship_location.getXCoordinate() - ship_icon.getWidth() >> 1, // divides by 2
 				ship_location.getYCoordinate() - ship_icon.getHeight() >> 1, // divides by 2
@@ -85,21 +85,21 @@ public class ShipLocationView extends View {
 		// draws a circle to indicate travelable distance
 		paint.setStyle(Paint.Style.STROKE);
 		paint.setColor(Color.WHITE);
-		Ship shippy = SpaceTrader.getController().getShip();
-		int drawDist = (shippy.getFuel() < shippy.getType().maxDistance) ? shippy
+		final Ship shippy = SpaceTrader.getController().getShip();
+		final int drawDist = (shippy.getFuel() < shippy.getType().maxDistance) ? shippy
 				.getFuel() * Ship.MPG
 				: shippy.getType().maxDistance * Ship.MPG;
 		c.drawCircle(ship_location.getXCoordinate(),
 				ship_location.getYCoordinate(), drawDist, paint);
 		// fuel text
-		Path circle = new Path();
+		final Path circle = new Path();
 		circle.addCircle(ship_location.getXCoordinate(),
 				ship_location.getYCoordinate(), drawDist, Direction.CW);
 		wordTest.setAlpha(254);
 		wordTest.setTextSize(20);
-		int added = (SpaceTrader.getController().getLocation().getXCoordinate() > shippy
-				.getType().maxDistance * Ship.MPG) ? 170 : 500;
-		int range = (drawDist < 50) ? -50 : -10;
+		final int added = (SpaceTrader.getController().getLocation().getXCoordinate() > 
+				shippy.getType().maxDistance * Ship.MPG) ? 170 : 500;
+		final int range = (drawDist < 50) ? -50 : -10;
 		c.drawTextOnPath("fuel: " + shippy.getFuel() + "/"
 				+ shippy.getType().maxDistance, circle, added, range, wordTest);
 	}

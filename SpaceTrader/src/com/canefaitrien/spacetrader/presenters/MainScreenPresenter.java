@@ -37,7 +37,7 @@ public class MainScreenPresenter {
 	 * Field mView.
 	 */
 	@SuppressWarnings("unused")
-	private IMainScreenView mView;
+	private final IMainScreenView mView;
 
 	/**
 	 * Field gameDataDao.
@@ -81,29 +81,29 @@ public class MainScreenPresenter {
 
 		gameDataDao = SpaceTrader.daoSession.getGameDataDao();
 
-		GameData game = gameDataDao.loadByRowId(rowId);
+		final GameData game = gameDataDao.loadByRowId(rowId);
 		// Log.d(TAG, "loaded game " + game.getName());
 		// Log.d(TAG, "loaded game " + game.getMoney());
 		// Log.d(TAG, "current planet " + game.getStringCurrentPlanet());
 
-		Person player = game.getPerson();
+		final Person player = game.getPerson();
 		// Log.d(TAG, "loaded person" + player.getName());
 
-		Ship ship = game.getShip();
+		final Ship ship = game.getShip();
 		// Log.d(TAG, "loaded ship" + ship.getStringType());
-		int money = game.getMoney();
-		int turn = game.getTurn();
+		final int money = game.getMoney();
+		final int turn = game.getTurn();
 		// Log.d(TAG, "loaded turn " + String.valueOf(turn));
 
-		Planet[] universe = game.getUniverse();
+		final Planet[] universe = game.getUniverse();
 
-		Planet currentPlanet = game.getCurrentPlanet();
+		final Planet currentPlanet = game.getCurrentPlanet();
 		// Log.d(TAG, "loaded currentPlanet: " + currentPlanet.getName());
 		// Log.d(TAG, "loaded difficulty " + game.getDifficulty());
 
-		Difficulty difficulty = Difficulty.valueOf(game.getDifficulty());
+		final Difficulty difficulty = Difficulty.valueOf(game.getDifficulty());
 
-		Controller ctrl = new Controller(player, ship, currentPlanet, money,
+		final Controller ctrl = new Controller(player, ship, currentPlanet, money,
 				universe, difficulty, turn);
 
 		SpaceTrader.setController(ctrl);
@@ -120,16 +120,16 @@ public class MainScreenPresenter {
 		shipDao = SpaceTrader.daoSession.getShipDao();
 		marketDao = SpaceTrader.daoSession.getMarketplaceDao();
 
-		Controller ctrl = SpaceTrader.getController();
-		GameData data = SpaceTrader.getData();
+		final Controller ctrl = SpaceTrader.getController();
+		final GameData data = SpaceTrader.getData();
 
-		Person person = ctrl.getPlayer();
-		Ship ship = ctrl.getShip();
-		Planet currentPlanet = ctrl.getLocation();
-		int money = ctrl.getMoney();
+		final Person person = ctrl.getPlayer();
+		final Ship ship = ctrl.getShip();
+		final Planet currentPlanet = ctrl.getLocation();
+		final int money = ctrl.getMoney();
 		Log.d(TAG, "money left: " + String.valueOf(money));
-		int turn = ctrl.getTurn();
-		Date date = new Date();
+		final int turn = ctrl.getTurn();
+		final Date date = new Date();
 
 		data.setPerson(person);
 		data.setShip(ship);
@@ -145,7 +145,7 @@ public class MainScreenPresenter {
 		// should do something so that
 		// it only update the "modified" planets & marketplace
 		// don't update the whole thing, too long
-		Planet[] universe = ctrl.getUniverse();
+		final Planet[] universe = ctrl.getUniverse();
 		for (Planet p : universe) {
 			marketDao.update(p.getMarketplace1());
 			p.update();

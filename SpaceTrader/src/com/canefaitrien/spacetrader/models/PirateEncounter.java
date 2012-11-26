@@ -15,12 +15,12 @@ public class PirateEncounter implements Encounter {
 	/**
 	 * Field data.
 	 */
-	private Controller data;
+	private final Controller data;
 
 	/**
 	 * Field type.
 	 */
-	private ShipType type = ShipType.getAShip();
+	private final ShipType type = ShipType.getAShip();
 
 	/**
 	 * Constructor for PirateEncounter.
@@ -37,7 +37,7 @@ public class PirateEncounter implements Encounter {
 	 */
 	public void takeGoods() {
 
-		int[] cargo = data.getShip().getCargo();
+		final int[] cargo = data.getShip().getCargo();
 		for (int i = 0; i < cargo.length; i++) {
 			cargo[i] = 0;
 		}

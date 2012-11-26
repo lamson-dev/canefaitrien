@@ -113,13 +113,13 @@ public class LoadGameActivity extends ListActivity {
 		cursor = SpaceTrader.db.query(gameDataDao.getTablename(),
 				gameDataDao.getAllColumns(), null, null, null, null, null);
 
-		String[] from = { idCol, nameCol, planetCol, moneyCol, dateCol };
-		int[] to = { R.id.tv_entry_id, R.id.tv_entry_name,
+		final String[] from = { idCol, nameCol, planetCol, moneyCol, dateCol };
+		final int[] to = { R.id.tv_entry_id, R.id.tv_entry_name,
 				R.id.tv_entry_planet, R.id.tv_entry_money, R.id.tv_entry_date };
 
 		// SimpleCursorAdapter adapter = new SimpleCursorAdapter(this,
 		// R.layout.list_loadgame_data, cursor, from, to, 0);
-		List<GameData> saves = gameDataDao.loadAll();
+		final List<GameData> saves = gameDataDao.loadAll();
 		final List<Map<String, String>> entries = new ArrayList<Map<String, String>>();
 
 		for (GameData data : saves) {
@@ -133,13 +133,13 @@ public class LoadGameActivity extends ListActivity {
 			entries.add(entry);
 		}
 
-		SimpleAdapter adapter = new SimpleAdapter(LoadGameActivity.this,
+		final SimpleAdapter adapter = new SimpleAdapter(LoadGameActivity.this,
 				entries, R.layout.list_loadgame_data, from, to) {
 			@Override
 			public View getView(int pos, View convertView, ViewGroup parent) {
 				View v = convertView;
 				if (v == null) {
-					LayoutInflater vi = (LayoutInflater) 
+					final LayoutInflater vi = (LayoutInflater) 
 							getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 					v = vi.inflate(R.layout.list_loadgame_data, null);
 				}
@@ -183,7 +183,7 @@ public class LoadGameActivity extends ListActivity {
 		super.onListItemClick(l, v, position, id);
 		Log.d(TAG, "clicked id: " + String.valueOf(id));
 		Log.d(TAG, "position id: " + String.valueOf(position));
-		Intent intent = new Intent(LoadGameActivity.this,
+		final Intent intent = new Intent(LoadGameActivity.this,
 				MainScreenActivity.class);
 		intent.putExtra(GameDataDao.Properties.Id.columnName, id + 1);
 		intent.putExtra("New Game", false);
@@ -222,7 +222,7 @@ public class LoadGameActivity extends ListActivity {
 	public boolean onContextItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case DELETE_ID:
-			AdapterContextMenuInfo info = (AdapterContextMenuInfo) item
+			final AdapterContextMenuInfo info = (AdapterContextMenuInfo) item
 					.getMenuInfo();
 			Log.d(TAG, "Delete row ID: " + String.valueOf(info.id + 1));
 			gameDataDao.deleteByKey(info.id + 1);
@@ -241,7 +241,7 @@ public class LoadGameActivity extends ListActivity {
 	 * Method applyFont.
 	 */
 	private void applyFont() {
-		ViewGroup activityViewGroup = (ViewGroup) findViewById(
+		final ViewGroup activityViewGroup = (ViewGroup) findViewById(
 				android.R.id.content).getRootView();
 		RootActivity.setAppFont(activityViewGroup, RootActivity.appFont);
 	}

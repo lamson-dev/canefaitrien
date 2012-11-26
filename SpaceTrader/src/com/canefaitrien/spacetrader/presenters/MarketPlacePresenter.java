@@ -39,7 +39,7 @@ public class MarketPlacePresenter {
 	/**
 	 * Field mView.
 	 */
-	private IMarketPlaceView mView;
+	private final IMarketPlaceView mView;
 
 	/**
 	 * Field mMarket.
@@ -49,7 +49,7 @@ public class MarketPlacePresenter {
 	/**
 	 * Field controller.
 	 */
-	private Controller controller;
+	private final Controller controller;
 
 	/**
 	 * Constructor for MarketPlacePresenter.
@@ -74,7 +74,7 @@ public class MarketPlacePresenter {
 			List<Map<String, String>> list) {
 
 		mMarket = controller.getLocation().getMarketplace1();
-		TradeGood[] goods = TradeGood.values();
+		final TradeGood[] goods = TradeGood.values();
 
 		list = new ArrayList<Map<String, String>>(); // $codepro.audit.disable
 														// questionableAssignment
@@ -102,21 +102,21 @@ public class MarketPlacePresenter {
 	public void displayMarket() {
 		updateStockList(mView.getStockList());
 
-		String[] from = new String[] { "name", "price", "sellprice", "owned",
+		final String[] from = new String[] { "name", "price", "sellprice", "owned",
 				"stock" };
-		int[] to = new int[] { R.id.good_name, R.id.good_price,
+		final int[] to = new int[] { R.id.good_name, R.id.good_price,
 				R.id.good_sell_price, R.id.good_owned, R.id.good_stock };
 		// SimpleAdapter adapter = new SimpleAdapter(mView.getContext(),
 		// mView.getStockList(), R.layout.list_item_market, from, to);
 
 		final List<Map<String, String>> entries = mView.getStockList();
-		SimpleAdapter adapter = new SimpleAdapter(mView.getContext(), entries,
+		final SimpleAdapter adapter = new SimpleAdapter(mView.getContext(), entries,
 				R.layout.list_item_market, from, to) {
 			@Override
 			public View getView(int pos, View convertView, ViewGroup parent) {
 				View v = convertView;
 				if (v == null) {
-					LayoutInflater vi = (LayoutInflater) mView
+					final LayoutInflater vi = (LayoutInflater) mView
 							.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 					v = vi.inflate(R.layout.list_item_market, null);
 				}

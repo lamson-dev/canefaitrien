@@ -30,12 +30,12 @@ public class Marketplace implements GameConstants {
 	/**
 	 * Field GOODS.
 	 */
-	private static TradeGood[] GOODS = TradeGood.values();
+	private static final TradeGood[] GOODS = TradeGood.values();
 
 	/**
 	 * Field RAND.
 	 */
-	private static Random RAND = new Random();
+	private static final Random RAND = new Random();
 
 	// Marketplace info
 	/**
@@ -259,10 +259,10 @@ public class Marketplace implements GameConstants {
 	 * @return String
 	 */
 	public String getStringItemStock() {
-		List<Integer> list = new ArrayList<Integer>();
+		final List<Integer> list = new ArrayList<Integer>();
 		for (int item : this.getItemStock())
 			list.add(item);
-		JSONArray json = new JSONArray(list);
+		final JSONArray json = new JSONArray(list);
 		return json.toString();
 	}
 
@@ -272,8 +272,8 @@ public class Marketplace implements GameConstants {
 	 * @throws JSONException
 	 */
 	public final void setItemStock(String itemStock) throws JSONException {
-		JSONArray jsonArray = new JSONArray(itemStock);
-		int[] stock = new int[GOODS.length];
+		final JSONArray jsonArray = new JSONArray(itemStock);
+		final int[] stock = new int[GOODS.length];
 		for (int i = 0; i < jsonArray.length(); i++) {
 			stock[i] = jsonArray.getInt(i);
 		}
@@ -285,10 +285,10 @@ public class Marketplace implements GameConstants {
 	 * @return String
 	 */
 	public String getStringItemBuyPrices() {
-		List<Integer> list = new ArrayList<Integer>();
+		final List<Integer> list = new ArrayList<Integer>();
 		for (int item : this.getItemBuyPrices())
 			list.add(item);
-		JSONArray json = new JSONArray(list);
+		final JSONArray json = new JSONArray(list);
 		return json.toString();
 	}
 
@@ -299,8 +299,8 @@ public class Marketplace implements GameConstants {
 	 */
 	public final void setItemBuyPrices(String itemBuyPrices)
 			throws JSONException {
-		JSONArray jsonArray = new JSONArray(itemBuyPrices);
-		int[] buyPrices = new int[GOODS.length];
+		final JSONArray jsonArray = new JSONArray(itemBuyPrices);
+		final int[] buyPrices = new int[GOODS.length];
 		for (int i = 0; i < jsonArray.length(); i++) {
 			buyPrices[i] = jsonArray.getInt(i);
 		}
@@ -312,10 +312,10 @@ public class Marketplace implements GameConstants {
 	 * @return String
 	 */
 	public String getStringItemSellPrices() {
-		List<Integer> list = new ArrayList<Integer>();
+		final List<Integer> list = new ArrayList<Integer>();
 		for (int item : this.getItemSellPrices())
 			list.add(item);
-		JSONArray json = new JSONArray(list);
+		final JSONArray json = new JSONArray(list);
 		return json.toString();
 	}
 
@@ -326,8 +326,8 @@ public class Marketplace implements GameConstants {
 	 */
 	public final void setItemSellPrices(String itemSellPrices)
 			throws JSONException {
-		JSONArray jsonArray = new JSONArray(itemSellPrices);
-		int[] sellPrices = new int[GOODS.length];
+		final JSONArray jsonArray = new JSONArray(itemSellPrices);
+		final int[] sellPrices = new int[GOODS.length];
 		for (int i = 0; i < jsonArray.length(); i++) {
 			sellPrices[i] = jsonArray.getInt(i);
 		}
@@ -412,7 +412,7 @@ public class Marketplace implements GameConstants {
 	 * @return String
 	 */
 	public String arrayToString(int[] array) {
-		StringBuffer ret = new StringBuffer("[");
+		final StringBuffer ret = new StringBuffer("[");
 		for (int i : array) {
 			ret.append(i + " ");
 		}

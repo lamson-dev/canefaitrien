@@ -39,6 +39,8 @@ public class MarketPlaceActivity extends ListActivity implements
 	 */
 	private static final String TAG = "MarketPlace";
 
+	private static final int COLOR_ONE = 0x28, COLOR_TWO = 0X3C, COLOR_THREE = 0X4F;
+
 	/**
 	 * Field mPresenter.
 	 */
@@ -83,8 +85,8 @@ public class MarketPlaceActivity extends ListActivity implements
 
 		setContentView(R.layout.activity_marketplace);
 
-		Button btnBuy = (Button) findViewById(R.id.btn_buy);
-		Button btnSell = (Button) findViewById(R.id.btn_sell);
+		final Button btnBuy = (Button) findViewById(R.id.btn_buy);
+		final Button btnSell = (Button) findViewById(R.id.btn_sell);
 		btnBuy.setOnClickListener(this);
 		btnSell.setOnClickListener(this);
 
@@ -107,7 +109,7 @@ public class MarketPlaceActivity extends ListActivity implements
 	 * @see com.canefaitrien.spacetrader.interfaces.IMarketPlaceView#displayMoney(String)
 	 */
 	public void displayMoney(String valueOf) { // $codepro.audit.disable inconsistentUseOfOverride
-		TextView tv = (TextView) findViewById(R.id.tv_money);
+		final TextView tv = (TextView) findViewById(R.id.tv_money);
 		tv.setText(valueOf);
 	}
 
@@ -120,7 +122,7 @@ public class MarketPlaceActivity extends ListActivity implements
 	 * @see com.canefaitrien.spacetrader.interfaces.IMarketPlaceView#displayCargo(String)
 	 */
 	public void displayCargo(String valueOf) { // $codepro.audit.disable inconsistentUseOfOverride
-		TextView tv = (TextView) findViewById(R.id.tv_cargo);
+		final TextView tv = (TextView) findViewById(R.id.tv_cargo);
 		tv.setText(valueOf);
 	}
 
@@ -170,7 +172,7 @@ public class MarketPlaceActivity extends ListActivity implements
 		l.setFocusable(true);
 		l.setSelected(true);
 		// CHANGE COLOR OF SELECTED ROW HERE
-		v.setBackgroundColor(Color.rgb(0x28, 0x3C, 0x4F));
+		v.setBackgroundColor(Color.rgb(COLOR_ONE, COLOR_TWO, COLOR_THREE));
 
 		// selectedId = (int) id;
 
@@ -229,7 +231,7 @@ public class MarketPlaceActivity extends ListActivity implements
 	 * @param adapter
 	 *            ListAdapter
 	 * 
-	 * @see com.canefaitrien.spacetrader.interfaces.IMarketPlaceView#setListAdapter(ListAdapter)
+	 * @see com.canefaitrien.spacetrader.interfaces.IMarketPlaceView#setListAdapter(ListAdapter) <!-- // $codepro.audit.disable lineLength -->
 	 */
 	@Override
 	public void setListAdapter(ListAdapter adapter) {
@@ -267,7 +269,7 @@ public class MarketPlaceActivity extends ListActivity implements
 	 * Method applyFont.
 	 */
 	private void applyFont() {
-		ViewGroup activityViewGroup = (ViewGroup) findViewById(
+		final ViewGroup activityViewGroup = (ViewGroup) findViewById(
 				android.R.id.content).getRootView();
 		RootActivity.setAppFont(activityViewGroup, RootActivity.appFont);
 	}

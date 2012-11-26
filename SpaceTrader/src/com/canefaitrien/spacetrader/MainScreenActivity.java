@@ -66,13 +66,13 @@ public class MainScreenActivity extends TabActivity implements IMainScreenView {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_mainscreen);
 
-		boolean isNewGame = getIntent().getExtras().getBoolean("New Game");
+		final boolean isNewGame = getIntent().getExtras().getBoolean("New Game");
 
 		// if not new game then load game
 		if (isNewGame) {
 			mRowId = SpaceTrader.getData().getId();
 		} else {
-			Bundle extras = getIntent().getExtras();
+			final Bundle extras = getIntent().getExtras();
 			mRowId = extras.getLong(GameDataDao.Properties.Id.columnName);
 		}
 		mPresenter.populateData(mRowId);
@@ -84,7 +84,7 @@ public class MainScreenActivity extends TabActivity implements IMainScreenView {
 	 */
 	private void init() {
 
-		TabHost tabhost = getTabHost();
+		final TabHost tabhost = getTabHost();
 
 		addTab("Map", GalaxyMapActivity.class, tabhost);
 		addTab("Info", InfoActivity.class, tabhost);
@@ -123,10 +123,10 @@ public class MainScreenActivity extends TabActivity implements IMainScreenView {
 	 *            tabhost
 	 */
 	private void addTab(String tag, Class<?> c, TabHost th) {
-		TabSpec spec = th.newTabSpec(tag);
+		final TabSpec spec = th.newTabSpec(tag);
 		// specs.setIndicator("Market",R.drawable.tab_market);
 		spec.setIndicator(tag);
-		Intent intent = new Intent(MainScreenActivity.this, c);
+		final Intent intent = new Intent(MainScreenActivity.this, c);
 		spec.setContent(intent);
 		th.addTab(spec);
 	}
@@ -135,7 +135,7 @@ public class MainScreenActivity extends TabActivity implements IMainScreenView {
 	 * recursively set font for all app
 	 */
 	private void applyFont() {
-		ViewGroup activityViewGroup = (ViewGroup) findViewById(
+		final ViewGroup activityViewGroup = (ViewGroup) findViewById(
 				android.R.id.content).getRootView();
 		RootActivity.setAppFont(activityViewGroup, RootActivity.appFont);
 	}
@@ -150,7 +150,7 @@ public class MainScreenActivity extends TabActivity implements IMainScreenView {
 	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		MenuInflater inflater = getMenuInflater();
+		final MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.menu_mainscreen, menu);
 		return true;
 	}

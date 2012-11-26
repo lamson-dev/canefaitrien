@@ -95,7 +95,7 @@ public class ConfigurationActivity extends RootActivity implements
 	/**
 	 * Field mPresenter.
 	 */
-	private ConfigurationPresenter mPresenter;
+	private final ConfigurationPresenter mPresenter;
 
 	/**
 	 * Field progressDialog.
@@ -178,7 +178,7 @@ public class ConfigurationActivity extends RootActivity implements
 	 * Method applyFont.
 	 */
 	public void applyFont() {
-		ViewGroup activityViewGroup = (ViewGroup) findViewById(
+		final ViewGroup activityViewGroup = (ViewGroup) findViewById(
 				android.R.id.content).getRootView();
 		setAppFont(activityViewGroup, appFont);
 	}
@@ -190,7 +190,7 @@ public class ConfigurationActivity extends RootActivity implements
 	 *            number of remaining points
 	 */
 	private void setRemainingPts(int pts) {
-		TextView rmPts = (TextView) findViewById(R.id.txtview_rm_pt);
+		final TextView rmPts = (TextView) findViewById(R.id.txtview_rm_pt);
 		rmPts.setText(String.valueOf(pts));
 	}
 
@@ -201,7 +201,7 @@ public class ConfigurationActivity extends RootActivity implements
 	public void startGame() {
 
 		boolean isGoodInput = true;
-		String editName = ((EditText) findViewById(R.id.edit_name)).getText()
+		final String editName = ((EditText) findViewById(R.id.edit_name)).getText()
 				.toString();
 
 		String message = "";
@@ -251,7 +251,7 @@ public class ConfigurationActivity extends RootActivity implements
 		// }
 		// }).start();
 
-		Intent intent = new Intent(ConfigurationActivity.this,
+		final Intent intent = new Intent(ConfigurationActivity.this,
 				MainScreenActivity.class);
 		intent.putExtra("New Game", true);
 		startActivity(intent);
@@ -313,7 +313,7 @@ public class ConfigurationActivity extends RootActivity implements
 	public void onProgressChanged(SeekBar seekBar, int progress, // $codepro.audit.disable inconsistentUseOfOverride
 			boolean fromUser) {
 
-		int rmPts = totalPts - usedPts - progress;
+		final int rmPts = totalPts - usedPts - progress;
 		TextView pt = null;
 
 		switch (seekBar.getId()) {

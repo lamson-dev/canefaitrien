@@ -18,7 +18,7 @@ public class InfoView extends View {
 	 * Field paint.
 	 */
 	@SuppressWarnings("unused")
-	private Paint paint = new Paint();// normal paint // $codepro.audit.disable unusedField
+	private final Paint paint = new Paint();// normal paint // $codepro.audit.disable unusedField
 
 	/**
 	 * Constructor for InfoView.

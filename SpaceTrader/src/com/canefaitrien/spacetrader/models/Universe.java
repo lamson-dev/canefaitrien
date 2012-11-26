@@ -68,7 +68,7 @@ public class Universe {
 	/**
 	 * Field RAND.
 	 */
-	private static Random RAND = new Random();
+	private static final Random RAND = new Random();
 
 	// Array of planet names
 	/**
@@ -119,10 +119,10 @@ public class Universe {
 	
 	 * @return array of planets */
 	public static Planet[] generate() {
-		Planet[] planets = new Planet[TOTAL_PLANETS];
+		final Planet[] planets = new Planet[TOTAL_PLANETS];
 		int x, y;
-		TechLevel[] levels = TechLevel.values();
-		Situation[] situations = Situation.values();
+		final TechLevel[] levels = TechLevel.values();
+		final Situation[] situations = Situation.values();
 		// shuffles the planet names
 		shuffle(PLANET_NAMES);
 		// creates planets with random coordinates
@@ -183,7 +183,7 @@ public class Universe {
 	 * @return String
 	 */
 	public static String toString(Planet[] planets) {
-		StringBuffer ret = new StringBuffer();
+		final StringBuffer ret = new StringBuffer();
 		for (int i = 0; i < planets.length; i++) {
 			ret.append(planets[i].toString());
 		}
