@@ -22,8 +22,7 @@ import com.canefaitrien.spacetrader.utils.MusicManager;
 public class MainMenuActivity extends RootActivity implements OnClickListener {
 
 	/**
-	 * Field TAG.
-	 * (value is ""MainMenu"")
+	 * Field TAG. (value is ""MainMenu"")
 	 */
 	private static final String TAG = "MainMenu";
 
@@ -34,7 +33,9 @@ public class MainMenuActivity extends RootActivity implements OnClickListener {
 
 	/**
 	 * Method onCreate.
-	 * @param savedInstanceState Bundle
+	 * 
+	 * @param savedInstanceState
+	 *            Bundle
 	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -45,10 +46,14 @@ public class MainMenuActivity extends RootActivity implements OnClickListener {
 
 	/**
 	 * Method onClick.
-	 * @param v View
-	
-	 * @see android.view.View$OnClickListener#onClick(View) */
-	public void onClick(View v) { // $codepro.audit.disable inconsistentUseOfOverride
+	 * 
+	 * @param v
+	 *            View
+	 * 
+	 * @see android.view.View$OnClickListener#onClick(View)
+	 */
+	public void onClick(View v) { // $codepro.audit.disable
+									// inconsistentUseOfOverride
 
 		Intent intent = null;
 		switch (v.getId()) {

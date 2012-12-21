@@ -69,7 +69,8 @@ public class PlanetsView extends View {
 	/**
 	 * Field simplePlanets.
 	 */
-	private boolean simplePlanets; // $codepro.audit.disable com.instantiations.assist.eclipse.analysis.unassignedField
+	private boolean simplePlanets; // $codepro.audit.disable
+									// com.instantiations.assist.eclipse.analysis.unassignedField
 
 	/**
 	 * Constructor that sets up the paint for text and other set ups
@@ -82,14 +83,23 @@ public class PlanetsView extends View {
 	public PlanetsView(Context context, Planet[] planets) {
 		super(context);
 		//
-		this.planets = planets; // $codepro.audit.disable com.instantiations.assist.eclipse.arrayIsStoredWithoutCopying
+		this.planets = planets; // $codepro.audit.disable
+								// com.instantiations.assist.eclipse.arrayIsStoredWithoutCopying
 		wordPaint.setColor(Color.WHITE);
 		wordPaint.setTextAlign(Align.CENTER);
 	}
 
+	private static final int ALPHA = 200;
+
+	private static final int COLOR = 256;
+
+	private static final int TEXT_SIZE = 16;
+
 	/**
 	 * Draw method called when created
-	 * @param canvas Canvas
+	 * 
+	 * @param canvas
+	 *            Canvas
 	 */
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
@@ -103,8 +113,8 @@ public class PlanetsView extends View {
 		for (int i = 0; i < planets.length; i++) {
 			Planet planet = planets[i];
 			if (simplePlanets) {
-				planetPaint.setARGB(200, rand.nextInt(256), rand.nextInt(256),
-						rand.nextInt(256));
+				planetPaint.setARGB(ALPHA, rand.nextInt(COLOR),
+						rand.nextInt(COLOR), rand.nextInt(COLOR));
 				canvas.drawCircle(planets[i].getCoordinates().x,
 						planets[i].getCoordinates().y, planets[i].getRadius(),
 						planetPaint);
@@ -117,8 +127,8 @@ public class PlanetsView extends View {
 						planet.getXCoordinate() + planet.getRadius(),
 						planet.getYCoordinate() + planet.getRadius());
 				canvas.drawBitmap(planetImage, null, dst, paint);
-				wordPaint.setAlpha(200);
-				wordPaint.setTextSize(16);
+				wordPaint.setAlpha(ALPHA);
+				wordPaint.setTextSize(TEXT_SIZE);
 				canvas.drawText(planets[i].getName(),
 						planets[i].getCoordinates().x,
 						planets[i].getCoordinates().y, wordPaint);

@@ -264,11 +264,8 @@ public class MarketPlaceActivity extends ListActivity implements
 	 * Method getContext.
 	 * 
 	 * 
-	 * @return Context * @see
-	 *         com.canefaitrien.spacetrader.interfaces.IMarketPlaceView
-	 *         #getContext() * @see
-	 *         com.canefaitrien.spacetrader.interfaces.IMarketPlaceView
-	 *         #getContext()
+	 * @return Context *
+	 * 
 	 */
 	public Context getContext() { // $codepro.audit.disable
 									// inconsistentUseOfOverride
@@ -282,11 +279,8 @@ public class MarketPlaceActivity extends ListActivity implements
 	 *            String
 	 * 
 	 * 
-	 * @return Object * @see
-	 *         com.canefaitrien.spacetrader.interfaces.IMarketPlaceView
-	 *         #getSystemService(String) * @see
-	 *         com.canefaitrien.spacetrader.interfaces
-	 *         .IMarketPlaceView#getSystemService(String)
+	 * @return Object
+	 * 
 	 */
 	@Override
 	public Object getSystemService(String name) {

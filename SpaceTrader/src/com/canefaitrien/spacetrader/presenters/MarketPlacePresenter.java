@@ -30,25 +30,10 @@ import com.canefaitrien.spacetrader.models.TradeGood;
  */
 public class MarketPlacePresenter {
 
-	/**
-	 * Field TAG. (value is ""MarketPresenter"")
-	 */
-	@SuppressWarnings("unused")
-	//private static final String TAG = "MarketPresenter";
-
-	/**
-	 * Field mView.
-	 */
 	private final IMarketPlaceView mView;
 
-	/**
-	 * Field mMarket.
-	 */
 	private Marketplace mMarket;
 
-	/**
-	 * Field controller.
-	 */
 	private final Controller controller;
 
 	/**
@@ -102,16 +87,16 @@ public class MarketPlacePresenter {
 	public void displayMarket() {
 		updateStockList(mView.getStockList());
 
-		final String[] from = new String[] { "name", "price", "sellprice", "owned",
-				"stock" };
+		final String[] from = new String[] { "name", "price", "sellprice",
+				"owned", "stock" };
 		final int[] to = new int[] { R.id.good_name, R.id.good_price,
 				R.id.good_sell_price, R.id.good_owned, R.id.good_stock };
 		// SimpleAdapter adapter = new SimpleAdapter(mView.getContext(),
 		// mView.getStockList(), R.layout.list_item_market, from, to);
 
 		final List<Map<String, String>> entries = mView.getStockList();
-		final SimpleAdapter adapter = new SimpleAdapter(mView.getContext(), entries,
-				R.layout.list_item_market, from, to) {
+		final SimpleAdapter adapter = new SimpleAdapter(mView.getContext(),
+				entries, R.layout.list_item_market, from, to) {
 			@Override
 			public View getView(int pos, View convertView, ViewGroup parent) {
 				View v = convertView;
